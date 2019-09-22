@@ -1,0 +1,161 @@
+\begin{thebibliography}{30}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+
+\bibitem[{Arnouts and Goos(2012)}]{Arnouts2012staggered}
+Arnouts, H. and Goos, P. (2012) Staggered-level designs for experiments with
+  more than one hard-to-change factor.
+\newblock \emph{Technometrics}, \textbf{54}, 355--366.
+
+\bibitem[{Arnouts and Goos(2015)}]{Arnouts2015staggered}
+Arnouts, H. and Goos, P. (2015) Staggered-level designs for response surface
+  modeling.
+\newblock \emph{Journal of Quality Technology}, \textbf{47}, 156.
+
+\bibitem[{Atkinson \emph{et~al.}(2007)Atkinson, Donev and
+  Tobias}]{Atkinson2007}
+Atkinson, A.~C., Donev, A.~N. and Tobias, R.~D. (2007) \emph{Optimum
+  Experimental Designs, with SAS}.
+\newblock Oxford University Press.
+
+\bibitem[{Bailey(2008)}]{Bailey2008design}
+Bailey, R.~A. (2008) \emph{Design of Comparative Experiments}, vol.~25.
+\newblock Cambridge University Press.
+
+\bibitem[{Box and Draper(1987)}]{Box1987empirical}
+Box, G.~E.~P. and Draper, N.~R. (1987) \emph{Empirical Model-Building and
+  Response Surfaces}.
+\newblock John Wiley \& Sons.
+
+\bibitem[{Box and Wilson(1951)}]{Box1951Roy}
+Box, G.~E.~P. and Wilson, K.~B. (1951) On the experimental attainment of
+  optimum conditions (with discussion).
+\newblock \emph{Journal of the Royal Statistical Society, Series B},
+  \textbf{13}, 1--45.
+
+\bibitem[{Cornell(2011)}]{Cornell2011Mixtures}
+Cornell, J.~A. (2011) \emph{Experiments with Mixtures: Designs, Models, and the
+  Analysis of Mixture Data}.
+\newblock John Wiley \& Sons.
+
+\bibitem[{Cox(1958)}]{Cox1958planning}
+Cox, D.~R. (1958) \emph{Planning of Experiments}.
+\newblock John Wiley \& Sons.
+
+\bibitem[{Draper and Smith(1998)}]{Draper1998}
+Draper, N.~R. and Smith, H. (1998) \emph{Applied Regression Analysis, 3rd edn}.
+\newblock John Wiley \& Sons.
+
+\bibitem[{DuMouchel and Jones(1994)}]{DuMouchel1994}
+DuMouchel, W. and Jones, B. (1994) A simple {B}ayesian modification of
+  {D}-optimal designs to reduce dependence on an assumed model.
+\newblock \emph{Technometrics}, \textbf{36}, 37--47.
+
+\bibitem[{Gilmour and Goos(2009)}]{Gilmour2009analysis}
+Gilmour, S.~G. and Goos, P. (2009) Analysis of data from non-orthogonal
+  multistratum designs in industrial experiments.
+\newblock \emph{Journal of the Royal Statistical Society: Series C},
+  \textbf{58}, 467--484.
+
+\bibitem[{Gilmour and Trinca(2000)}]{Gilmour2000PErsm}
+Gilmour, S.~G. and Trinca, L.~A. (2000) Some practical advice on polynomial
+  regression analysis from blocked response surface designs.
+\newblock \emph{Communications in Statistics-Theory and Methods}, \textbf{29},
+  2157--2180.
+
+\bibitem[{Gilmour and Trinca(2012)}]{GilmourTrinca2012}
+Gilmour, S.~G. and Trinca, L.~A. (2012) Optimum design of experiments for
+  statistical inference (with discussion).
+\newblock \emph{Journal of the Royal Statistical Society: Series C},
+  \textbf{61}, 345--401.
+
+\bibitem[{Goos and Gilmour(2012)}]{Goos2012Hasse}
+Goos, P. and Gilmour, S.~G. (2012) A general strategy for analyzing data from
+  split-plot and multistratum experimental designs.
+\newblock \emph{Technometrics}, \textbf{54}, 340--354.
+
+\bibitem[{Goos and Vandebroek(2001)}]{Goos2001Doptimal}
+Goos, P. and Vandebroek, M. (2001) D-optimal response surface designs in the
+  presence of random block effects.
+\newblock \emph{Computational Statistics \& Data Analysis}, \textbf{37},
+  433--453.
+
+\bibitem[{Goos and Vandebroek(2003)}]{Goos2003Doptimal}
+Goos, P. and Vandebroek, M. (2003) D-optimal split-plot designs with given
+  numbers and sizes of whole plots.
+\newblock \emph{Technometrics}, \textbf{45}, 235--245.
+
+\bibitem[{Harville(2006)}]{Harville2006matrix}
+Harville, D.~A. (2006) \emph{Matrix Algebra From a Statistician's Perspective}.
+\newblock Springer New York.
+
+\bibitem[{Jones and Goos(2007)}]{Jones2007candidate}
+Jones, B. and Goos, P. (2007) A candidate-set-free algorithm for generating
+  {D}-optimal split-plot designs.
+\newblock \emph{Journal of the Royal Statistical Society: Series C},
+  \textbf{56}, 347--364.
+
+\bibitem[{Jones and Goos(2009)}]{Jones2009Doptimal}
+Jones, B. and Goos, P. (2009) D-optimal design of split-split-plot experiments.
+\newblock \emph{Biometrika}, \textbf{96}, 67--82.
+
+\bibitem[{Koch(2007)}]{Koch2007introduction}
+Koch, K.~R. (2007) \emph{Introduction to Bayesian Statistics}.
+\newblock Springer, 2nd edn.
+
+\bibitem[{Lu \emph{et~al.}(2011)Lu, Anderson-Cook and
+  Robinson}]{Lu2011optimization}
+Lu, L., Anderson-Cook, C.~M. and Robinson, T.~J. (2011) Optimization of
+  designed experiments based on multiple criteria utilizing a {P}areto
+  frontier.
+\newblock \emph{Technometrics}, \textbf{53}, 353--365.
+
+\bibitem[{Mead \emph{et~al.}(2012)Mead, Gilmour and Mead}]{MeadGilmour2012}
+Mead, R., Gilmour, S.~G. and Mead, A. (2012) \emph{Statistical Principles for
+  the Design of Experiments: Applications to Real Experiments}.
+\newblock Cambridge University Press.
+
+\bibitem[{Montepiedra and Fedorov(1997)}]{FedorovMontepiedra1997}
+Montepiedra, G. and Fedorov, V.~V. (1997) Minimum bias designs with
+  constraints.
+\newblock \emph{Journal of Statistical Planning and Inference}, \textbf{63},
+  97--111.
+
+\bibitem[{Mylona \emph{et~al.}(2014)Mylona, Goos and Jones}]{Mylona2014optimal}
+Mylona, K., Goos, P. and Jones, B. (2014) Optimal design of blocked and
+  split-plot experiments for fixed effects and variance component estimation.
+\newblock \emph{Technometrics}, \textbf{56}, 132--144.
+
+\bibitem[{Nelder(1965)}]{Nelder1965analysis}
+Nelder, J.~A. (1965) The analysis of randomized experiments with orthogonal
+  block structure. i. block structure and the null analysis of variance.
+\newblock \emph{Proceedings of the Royal Society of London, Series A},
+  \textbf{283}, 147--162.
+
+\bibitem[{Rudin(1987)}]{Rudin1987real}
+Rudin, W. (1987) \emph{Real and Complex Analysis}.
+\newblock Tata McGraw-Hill Education.
+
+\bibitem[{Stallings and Morgan(2015)}]{Stallings2015general}
+Stallings, J.~W. and Morgan, J.~P. (2015) General weighted optimality of
+  designed experiments.
+\newblock \emph{Biometrika},  1--11.
+
+\bibitem[{Trinca and Gilmour(2001)}]{Trinca2001multistratum}
+Trinca, L.~A. and Gilmour, S.~G. (2001) Multistratum response surface designs.
+\newblock \emph{Technometrics}, \textbf{43}, 25--33.
+
+\bibitem[{Trinca and Gilmour(2015)}]{Trinca2015improved}
+Trinca, L.~A. and Gilmour, S.~G. (2015) Improved split-plot and multistratum
+  designs.
+\newblock \emph{Technometrics}, \textbf{57}, 145--154.
+
+\bibitem[{Trinca and Gilmour(2017)}]{Trinca2016SPinference}
+Trinca, L.~A. and Gilmour, S.~G. (2017) Split-plot and multi-stratum designs
+  for statistical inference.
+\newblock \emph{Technometrics}.
+\newblock In press.
+
+\end{thebibliography}

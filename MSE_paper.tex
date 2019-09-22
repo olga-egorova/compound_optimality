@@ -1,0 +1,191 @@
+\documentclass[11pt]{article}
+
+%%%%%%%%%%%%      PACKAGES        %%%%%%%%%%%%
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue]{hyperref}
+\usepackage{setspace}
+\onehalfspacing
+%\doublespacing
+\usepackage{fancyhdr,afterpage}
+\usepackage{lscape}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{textcomp,latexsym}
+\usepackage{parskip}
+\usepackage[round]{natbib}
+\usepackage{adjustbox,lipsum}
+\usepackage[titletoc]{appendix}
+    
+\usepackage[round]{natbib}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{gensymb}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{slashbox}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsfonts}
+\usepackage{enumerate}
+\usepackage{amssymb}
+\usepackage{multirow}
+\usepackage{bm}
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\usepackage[a4paper,inner=4.2cm,outer=2.3cm,top=2.5cm,bottom=2.5cm,pdftex]{geometry} % MARGINS
+
+
+\begin{document}
+\section{Abstract}
+
+\section{Introduction}
+
+Most experiments are conducted in order to gain understanding of the impact that different parameters of interest make on the outcome; the quantitative measure of this impact allows comparisons as well as making interpretable conclusions regarding the scale and the pattern of the relationships between process parameters and measured output. 
+%% Polynomial models
+While the exact true nature of that relationship remains unknown, we need to have some form of approximation. Polynomial functions are well known to be able to provide an approximation of any required precision for functions from a certain class of differentiability \citep{Rudin1987real}: obviously, higher desirable precision would require a polynomial of a higher order and, therefore, more experimental effort. Response Surface Methodology (RSM) that was first introduced by \cite{Box1951Roy} is aimed at optimising the response by fitting a second order polynomial to the data obtained after an experiment on the points within the experimental region of interest has been performed. The response measured at each of $n$ experimental runs would then be presented as a linear combination of experimental factors' values, their interactions and corresponding quadratic terms; of course, some of the terms might be excluded, but, unless stated otherwise, we will consider a full second-order polynomial model with $1+2k+\frac{k(k-1)}{2}$ parameters (including the intercept), where $k$ is the number of factors. Together with the fixed polynomial part, the error term here would stand for all the variation in data that has not been captured by the model. 
+%% Experimental design
+At the stage of experimental planning, when there is little, if any, prior knowledge and no data available, there is still a lot that can and should be done to make sure the results of the experimentation and the following analysis are credible.
+
+The design construction usually depends on the model in several ways. Firstly, the interest in the properties of the model parameters' estimation leads to the development of various optimality criteria (e.g.~so-called `alphabetic criteria'). Secondly, the fact of the model-dependence of the majority of the criteria implies the necessity of taking into account the possible lack-of-fit as well as the desirability of obtaining error variance estimates from replicated observations (model-independent, `pure' error). The latter two are also in the list of the properties of what would be considered as a `good design' (summarised by \cite{Box1987empirical}, Chapter $14$): it should ``make it possible to detect lack of fit'' and ``provide an internal estimate of error from replication''.
+
+It is obvious that all the individual criteria are not interchangeable and can possibly be contradictory, however, they all are desired to be accounted for. There are a few ways of combining them, and here we will be working with the notion of a compound optimality criterion which is basically a weighted combination of the elementary criteria, where weights are generally arbitrary, and are expected to be chosen in accordance with the experimenter's beliefs and intentions. 
+
+We will focus in this work on factorial experiments with a relatively small number of runs and the fitted model being a polynomial regression. We work here with exact designs: for each run we are to provide a point as a combination of the treatment factors' levels; therefore, finding the corresponding optimal design is essentially a matrix optimisation problem, i.e. searching for a design maximising (minimising) the criterion function. When considering examples of different compound criteria with various weight allocations, we will examine the resulting optimal designs in terms of their performances with respect to individual components. This would allow evaluating how much is ``lost'' when achieving a compromise, what component criteria contradict each others' performances, and how they are affected by changes of weight allocations.
+
+The first and main objective of the research presented is to develop a methodology for combining several desirable data inference properties in compound optimality criteria for factorial experiments. The properties are to correspond to the precision of inference based on the primary model and to the possibility of the specified model contamination presence; the components are aimed to comply with the `pure error' strategy, where it is feasible.
+
+The obvious following objective is to investigate the relationships between the individual components of the introduced criteria and, by considering some examples, provide some empirical recommendations for complex experimentation research that would benefit from applying these methods.
+
+The criteria will also be adapted to be applied within experimental frameworks with restricted randomisation: blocked and multistratum experiments.
+
+\section{Background}
+
+Recall the polynomial regression model (\ref{eq::back_model}) for the unblocked experiment, containing initial factors, their powers and interactions is used as a good approximation to the relation between the variables:  
+
+\begin{equation}
+\label{eq::back_model}
+\bm{Y}=\bm{X\beta}+\bm{\varepsilon}.
+\end{equation} 
+
+Here $\bm{X}$ is the $n\times p$ model matrix, $\bm{Y}$ is the $n\times 1$ vector of responses; $\bm{\beta}$ is the $p\times 1$ vector of parameters corresponding to the model terms and $\bm{\varepsilon}$ are independent normally distributed random error terms with constant variance, i.e. $\bm{\varepsilon}\sim \mathcal{N}(\bm{0},\sigma^{2}\bm{I}_{n})$.
+
+\subsection{Pure error}
+The error variance estimation can be obtained in two ways. The first one is the mean square error: $\hat{\sigma}^2_{mse}=\mbox{Residual SS}/(n-p)$, i.e. the residual sum of squares divided by the corresponding number of degrees of freedom (obtained from the ANOVA decomposition, the details can be found in \cite{Draper1998}). This estimator obviously depends on the model and on the number of its parameters. The other one is model-independent `pure' error, derived from the further decomposition of the residual sum of squares into the `pure' error and `lack-of-fit' components: $\hat{\sigma}^2_{PE}=\mbox{Pure error SS}/(n-t)$, where $t$ is the number of unique treatments applied and $d=n-t$ is the pure error degrees of freedom, i.e. the number of replicated points. In other words, the error is estimated by fitting the full treatment model:
+
+\begin{equation}
+\label{eq::back_trnt}
+\bm{Y}=\bm{X_{t}\mu_{t}}+\bm{\varepsilon},
+\end{equation} 
+
+where $\bm{X_{t}}$ is the $n\times t$ full treatment model matrix, in which the $(i,j)^{th}$ element is equal to $1$ if treatment $j$ is applied to the $i^{th}$ unit, otherwise it is set to $0$. Then the elements of the $t$-dimensional vector $\bm{\mu_{t}}$ are the mean effects of each treatment. The vector of errors $\bm{\varepsilon}$ comprises the between-unit variation, such that $\mbox{E}(\bm{\varepsilon})=\bm{0}$, $\mbox{Var}(\bm{\varepsilon})=\sigma^2\bm{I}_{n}$.
+
+Many authors advocate the use of the `pure' error estimate of $\sigma^2$ instead of the one pooled with the lack-of-fit part from the model (\ref{eq::back_model}): \cite{Cox1958planning} recommends using it for the estimation unless there are no replicate treatments, while \cite{Draper1998} argue for the reliability of `pure' error and recommend aiming for the presence of replicates at the stage of planning. \cite{Atkinson2007} also state that ``If lack-of-fit of the model is of potential interest, $\sigma^{2}$ is better estimated from replicate observations'' (page 22). For response surface experiments in blocks \cite{Gilmour2000PErsm} explicated the definition of pure error and its estimate which are compatible with the unblocked case: from replicates but also taking into account  block effects additive to treatment effects. Finally, the work by \cite{GilmourTrinca2012} that inspired this research, comprises a thorough analysis in favour of estimating the error from the full treatment model which is true regardless of what function is used to approximate the relationship of interest.
+
+
+\subsection{Combining criteria}
+
+The concept of the compound criteria is based on the notion of design efficiency, which can be defined for any design matrix and any criterion. For example, the $D$-efficiency of design $\bm{X}$ is
+\begin{equation}
+\label{eq::D_eff}
+\mbox{Eff}_{D}(X)=\left[\frac{\vert \bm{X}'\bm{X}\vert}{\vert \bm{X}'_{*}\bm{X}_{*}\vert}\right]^{1/p},
+\end{equation}   
+where $\bm{X}_{*}$ is the $D$-optimum design. In this definition the power $1/p$ brings the efficiency to the scale of variances of model coefficients $\bm{\beta}_{i}, i=1\ldots p.$ It is obvious that the efficiency value may vary from $0$ to $1$ and is equal to $1$ if and only if the design is optimal according to the criterion of interest.
+
+The final criterion function to be maximised among all the possible designs is obtained by combining the efficiencies for the component criteria $\mbox{Eff}_{1},\ldots, \mbox{Eff}_{m}$ with the corresponding weights $\kappa_{1},\ldots ,\kappa_{m}$ such that each $\kappa_{k}>0$ and $\sum_{k=1}^{m}\kappa_{k}=1:$
+
+\begin{equation}
+\label{eq::compound}
+\mbox{Eff}^{\kappa_{1}}_{1}(\bm{X})\times\mbox{Eff}^{\kappa_{2}}_{2}(\bm{X})\times\ldots\times\mbox{Eff}^{\kappa_{m}}_{m}(\bm{X})\rightarrow \underset{\bm{X}}\max.
+\end{equation}
+
+The choice of weights is an arbitrary decision, made relying on both prior knowledge of the experimenter, the objectives of a specific experiment and the interpretation of the criterion components. The most general and intuitively sensible recommendation would be to obtain optimal designs with respect to several weight allocations, and then, after examining them, choose the one to be applied. Throughout the course of this research, when considering the examples of experiments layouts, we chose a set of weight allocations. Most of these sets were essentially classical design schemes for experiments with mixtures \citep{Cornell2011Mixtures}. For example, if the criterion consists of three elements, we would first obtain designs with all the weight on each component, then all combinations of distributing it equally between two components, and finally put equal weights on all of the components. Some additional schemes are included when examining particular cases.  
+
+Some of the alternative approaches of considering several objectives would include the Pareto frontier approach, thoroughly described, for example, by \cite{Lu2011optimization}. When there are $l$ individual criterion functions $\phi_1(\bm{X}),\ldots\phi_{l}(\bm{X})$ to be maximised, the Pareto optimal set is generated so that for each of the designs from this set there is no other possible design that provides better criterion values for all the criteria (or, as it was defined, the Pareto optimal set is formed of designs that are not ``dominated'' by any other design).
+
+Another approach was presented by \cite{Stallings2015general}: the authors developed methodology for generalising eigenvalue-based criteria (e.g. $A$- and $E$-optimality) in a way that allows differing interest (expressed through the weights) among any set of estimable functions of the fitted model parameters. The introduced strategy reflects the aims of experimentation that are not traditionally accounted for but definitely are of interest.
+
+\section{Component criteria construction}
+\label{ch::compound_criteria}
+\input{compound_criterion}
+
+\section{Examples}
+\label{ch::compound_examples}
+\input{compound_examples}
+
+\section{Criteria for blocked experiments}
+\label{ch::compound_blocked}
+\input{compound_blocked}
+
+\subsection{Example}
+[A usual example or the case-study?]
+\section{Future work}
+\subsection{Multistratum experiments}
+In a large number of industrial, engineering and laboratory-based experiments, either the nature of the process under study or certain technical restrictions result in the necessity of considering a multi-level unit structure. For example, a chemical process consisting of applying treatments to the material batches of different sizes at each stage;  or one or several experimental factors' values can be changed only once per a certain amount of runs whereas values of other factors are varied between runs. Therefore, different factors are applied at different levels, and randomisation is performed at each level, thus the whole process of allocating treatments to experimental units should be amended accordingly \citep{MeadGilmour2012}.
+
+Experiments comprising a hierarchical structure of experimental units and treatments are referred to as multistratum experiments, and each stratum is defined as a level in the unit structure. Units are grouped into whole-plots, each of them divided into sub-plots, which contain a certain number of sub-sub-plots, and so on up to the smallest units --- runs of the experiment. The corresponding factors are often called ``very-hard-to-change'', ``hard-to-change'', ``easy-to-change'', ``very-easy-to-change'' factors; these labels are quite arbitrary and certainly determined by a particular experimental framework. In the case of two strata, we deal with what is called a ``split-plot'' experiment, in case of three strata a ``split-split-plot'' experiment. The names come from the terminology of agricultural experiments where such setups were originally implemented. \cite{Nelder1965analysis} introduced the notion of simple orthogonal block structures, comprising `chains' of nested and/or crossed experimental units together with the corresponding factors. Sometimes the ``split'' notation is used exceptionally for orthogonal block design structures, however, we employ it for general nested unit structures where the orthogonality property does not necessarily hold.
+%\cite{Speed1982class}
+
+Some visualisation tools allowing a comprehensive presentation of the outline of such experiments can be found in \cite{Goos2012Hasse}: Hasse diagrams, that were described extensively and in great detail by \cite{Bailey2008design}. Hasse diagrams are graphs containing the information about the experimental units, factors applied at every stratum, together with a scheme of the available degrees of freedom allocation, so that they appear to be a much useful tool providing a full and clear picture of a complicated structured experiment. 
+
+A generalised example of a multistratum experiment with a simple nested unit structure is presented in Figure \ref{Fig::Hasse}. Each node of the graph corresponds to a blocking factor and edges are drawn from one factor to another that is nested within it. The ``universe'' node U stands for the whole experiment.
+
+From here onwards we will be considering experiments with $s$ strata in total, stratum $i$ being nested within units of the stratum $i-1$, and stratum $0$ will be seen as the whole experiment (following the notation set by \citet{Trinca2015improved}). The number of units in stratum $i$ within every unit in stratum $i-1$ is denoted by $n_i$, such that $m_{j}=\prod_{i=1}^{j}n_{i}$ is the number of units in stratum $j$ and, therefore,  $n=m_{s}=\prod_{i=1}^{s}n_{i}$ is the total number of runs.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[scale=0.85]{Hasse.jpg}      %width=\textwidth
+\caption{Hasse diagram for factors}
+\label{Fig::Hasse}
+\end{center}
+\end{figure} 
+ 
+Recall the expression for the linear polynomial hierarchical model from (\ref{eq::intro_ms}):
+\begin{equation}
+\label{eq::back_ms}
+\bm{Y}=\bm{X}\bm{\beta}+\sum_{i=1}^{s}\bm{Z}_{i}\bm{\varepsilon}_{i},
+\end{equation} 
+where the first part $\bm{X\beta}$ contains the fixed effects, and $\sum_{i=1}^{s}\bm{Z}_{i}\bm{\varepsilon}_{i}$ stands for the random part, i.e.~it comprises information on variation occurring at each level of randomisation. All of the errors are assumed to be independent, having zero means and constant variances $\sigma^2_{i}$ and, as seen from the model formulation, additive.
+
+In this case the fixed effects coefficients, $\bm{\beta}$ are usually estimated using the Generalised Least Square (GLS) formula:
+\begin{equation}
+\label{eq::back_gls}
+\bm{\hat{\beta}}=(\bm{X}'\bm{VX})^{-1}\bm{X}'\bm{V}^{-1}Y,
+\end{equation}
+so that the variance of the estimators is
+\begin{equation}
+\label{eq::back_glsvar}
+Var(\bm{\hat{\beta}})=(\bm{X}'\bm{VX})^{-1},
+\end{equation}
+where $\bm{V}$ is the variance-covariance matrix of the (normally distributed) responses, has a block-diagonal structure, and can be presented as:
+\begin{equation}
+\label{eq::back_glsV}
+\bm{V}=\sum_{i=1}^{s}\sigma^2_{i}\bm{Z}_{i}\bm{Z}'_{i}=\sigma^{2}_{s}\left(\bm{I}_{n}+\sum_{i=1}^{s-1}\eta_{i}\bm{Z}_{i}\bm{Z}'_{i}\right).
+\end{equation}
+Here $\eta_{i}=\sigma^{2}_{i}/\sigma^{2}_{s}$ is defined as a variance ratio, denoting the magnitude of variability occurring at higher strata scaled with respect to the between-run variance.
+
+At the analysis stage, as the variance components are unknown, their estimates are obtained and substituted in (\ref{eq::back_glsvar}) to obtain an estimated variance-covariance matrix of the parameters' estimators, $\bm{\hat{V}(\hat{\beta})}$; the estimation methods are discussed in more detail in Chapter \ref{ch::mse_ms}.
+
+However, when an experiment is being planned, and none of the $\eta_{i}$ or $\sigma^2_{s}$ are known, there are two main approaches to deal with it. The first one is to search for designs assuming some point prior values of the $\eta$ parameter and, for these, evaluate the variance-based criteria, considering all strata simultaneously.
+
+The case of split-plot experiments, with two strata, $\sigma^2_{s}=\sigma^2$ and $\eta=\sigma^2_{1}/\sigma^2$, has been extensively considered in the literature. \cite{Goos2001Doptimal} considered the three cases when D-optimal designs for split-plot experiments do not depend on the value of $\eta$; in other practical cases an estimate of the variance ratio is to be provided. \cite{Goos2003Doptimal} and \cite{Jones2007candidate} developed algorithms for finding $D$-optimal split-plot designs and for some examples demonstrated the robustness to the different values of $\eta$. An algorithm for constructing $D$-optimal split-split-plot designs can be found in the paper by \cite{Jones2009Doptimal}. 
+%\cite{Goos2007tailor} -- split-plot for mixture experiments  
+
+The Bayesian alternative to the `exhaustive search' approach across the unknown parameter space allows specifying a prior distribution on the unknown parameters, and then evaluating the criteria by integrating over that prior. \cite{Arnouts2012staggered} presented a coordinate-exchange algorithm for constructing D-optimal designs for a staggered experimental structure (i.e. values of hard-to-change factors' are changed at different time points), with log-normal prior distributions being put on the variance ratios. Later \cite{Arnouts2015staggered} studied the staggered structured designs in the context of response surface modelling, and considered a few examples of D- and I-optimal designs.
+ 
+\cite{Mylona2014optimal} introduced a composite criterion, combining $D$-optimality for the fixed and variance components; in such an approach both the criterion formula and the form of the prior distributions define the way of evaluation the criterion function, which often leads to the necessity of choosing a computationally efficient numerical methodology. \cite{Gilmour2009analysis} proposed an appropriate Bayesian analysis strategy of data from multistratum experiments, that is robust to designs non-orthogonality and is shown to be more reliable than REML approach.  
+
+However, in the general case a lot of computational effort might be required in order to be confident in the goodness of the design obtained by choosing from a set of assumed possible values of $\eta_i$, either using point priors or adapting general Bayesian strategy, especially when there are more than two strata and, therefore, the range of unknown parameters becomes multi-dimensional. The stratum-by-stratum approach (as first suggested by \cite{Trinca2001multistratum} and more recently improved by \cite{Trinca2015improved}) implies going from the highest stratum to the lowest, at each level choosing the set of treatments, and the units of higher level being treated as fixed block effects. Such methodology allows `protecting' against the case of large higher level variances, and eliminates the need for any prior information on unknown parameters. The authors later adapted the stratum-by-stratum  strategy for the inference criteria \citep{Trinca2016SPinference}, providing tools for constructing efficient designs for relatively small experiments in the presence of restricted randomisation.
+\section{Acknowledgements}
+
+%%% Bibliography
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Bibliography} 
+%\bibliographystyle{apalike}
+\bibliographystyle{rss}
+\bibliography{thesis_bib}
+
+\end{document}
