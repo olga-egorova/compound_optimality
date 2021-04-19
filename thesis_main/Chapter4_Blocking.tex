@@ -1,0 +1,224 @@
+%% Generalised criteria for blocked experiments 
+\subsection{Generalised criteria}
+In order to adapt the generalised criteria (\ref{eq::GDP_eff}) and (\ref{eq::GLP_eff}) for blocked experiments, we need to consider each component taking into account that each potential design point as a set of factors' values is now also included in one of the blocks.
+
+Reviewing the full model for a blocked experiment from Section \ref{sec::back_blocked}, equation (\ref{eq::blocked_model})
+\begin{align*}
+\bm{Y}=\bm{Z\beta}_{B}+\bm{X}_{1}\bm{\beta}_{1}+\bm{X}_{2}\bm{\beta}_{2}+\bm{\varepsilon},
+\end{align*}
+denote the $n\times(b+p)$ model matrix of the block and primary terms: 
+$\tilde{\bm{X}}_{1}=[\bm{Z},\bm{X}_{1}]$, where  columns of $\bm{Z}$ contain block indicators, and columns of $\bm{X}_{1}$ correspond to primary terms. $\bm{\beta}_{B}$ is the vector of fixed block effects, and $\bm{\beta}_1$ and $\bm{\beta}_2$ contain, as before, primary and potential model terms.
+
+It was shown in (\ref{eq::DPs_blocked}) and (\ref{eq::LPs_blocked}) how the $DP$- and $LP$-criteria are evaluated due to the adjustments:
+\begin{align*}
+DP_S: \mbox{minimise } &(F_{p-1,d_B;1-\alpha_{DP}})^{p-1}\vert (\bm{X}'_{1}\bm{Q}\bm{X}_{1})^{-1}\vert,\notag\\
+LP_S: \mbox{minimise } &F_{1,d_B;1-\alpha_{LP}}\mbox{tr}\{\bm{W}(\bm{X}'_{1}\bm{Q}\bm{X}_{1})^{-1}\}.
+\end{align*}
+As was outlined before, the number of pure error degrees of freedom is now $d_B=n-\mbox{rank}(\bm{Z}:\bm{T})$, where $\bm{T}$ is the treatment matrix, i.e. the number of replicates adjusted for the inter-block comparisons.
+
+We can construct the amended posterior information matrix (up to a multiple of $\sigma^2)$:
+\begin{align*}
+\bm{M_B}=
+\begin{pmatrix}
+\bm{Z}'\bm{Z} & \bm{Z}'\bm{X}_{1} & \bm{Z}'\bm{X}_{2}\\
+\bm{X}'_{1}\bm{Z} & \bm{X}'_{1}\bm{X}_{1} & \bm{X}'_{1}\bm{X}_{2}\\
+\bm{X}'_{2}\bm{Z} & \bm{X}'_{2}\bm{X}_{1} & \bm{X}'_{2}\bm{X}_{2}+\bm{I}_{q}/\tau^2
+\end{pmatrix}
+=
+\begin{pmatrix}
+\bm{\tilde{X}}'_{1}\bm{\tilde{X}}_{1} & \bm{\tilde{X}}'_{1}\bm{X}_{2}\\
+\bm{X}'_{2}\bm{\tilde{X}}_{1} & \bm{X}'_{2}\bm{X}_{2}+\bm{I}_{q}/\tau^2
+\end{pmatrix}_{.}
+\end{align*} 
+
+For the lack-of-fit components the submatrix of the posterior variance-covariance matrix corresponding to the potential terms, $\bm{\tilde{\Sigma}}_{22}=\sigma^2[\bm{M}^{-1}_B]_{22},$ needs to be derived: 
+\begin{align*}
+\bm{\tilde{\Sigma}}_{22}&=\sigma^2([\bm{M_B}]_{22}-[\bm{M_B}]_{21}([\bm{M_B}]_{11})^{-1}[\bm{M_B}]_{12})^{-1}\\
+&=\sigma^2(\bm{X}'_{2}\bm{X}_{2}+\bm{I}_{q}/\tau^2-\bm{X}'_{2}\bm{\tilde{X}}_{1}(\bm{\tilde{X}}'_{1}\bm{\tilde{X}}_{1})^{-1}\bm{\tilde{X}}'_{1}\bm{X}_{2})^{-1}\\&=\sigma^2\left(\bm{\tilde{L}}+\frac{\bm{I}_{q}}{\tau^2}\right), \mbox{ where }\bm{\tilde{L}}=\bm{X}'_{2}\bm{X}_{2}-\bm{X}'_{2}\bm{\tilde{X}}_{1}(\bm{\tilde{X}}'_{1}\bm{\tilde{X}}_{1})^{-1}\bm{\tilde{X}}'_{1}\bm{X}_{2}.
+\end{align*}
+
+Therefore, these components can be adjusted for blocked experiments by replacing the primary terms matrix $\bm{X}_{1}$ by the extended matrix $\bm{\tilde{X}}_{1}$ and the dispersion matrix $\bm{L}$ -- by $\bm{\tilde{L}}$ as obtained above. 
+
+In order to adapt the criterion component corresponding to the prediction bias, we need to state a clear notion of a point at which a prediction can be made; particularly, in the context of a blocked experiment a careful definition of what it means for any design point to be included in one of the blocks is required. 
+
+Treating the blocks formed in the experiment as a sample from a certain population of blocks, for any combination of factor settings $\bm{x}_1$ (which is essentially a design point), we can define a vector $\bm{x}_0$. The $i$-th element of $\bm{x}_0$ is a random variable -- `indicator that this point $\bm{x}_1$ is in the $i$-th block', $\bm{x}_0=(x_{o1},...,x_{0b})'$. The expectation of such a random variable is $\textbf{E}(x_{0i})=1/b.$ Also denote $\tilde{\bm{x}}'_{1}=c(\bm{x}'_0,\bm{x}'_1)$ and $\tilde{\bm{\beta}}'_{1}=c(\bm{\beta}'_B,\bm{\beta}'_1).$
+
+The true relationship of interest represented according to the `full' model form is
+\begin{equation*}
+\eta(\bm{x})=\bm{x}'_0\bm{\beta}_{B}+\bm{x}'_1\bm{\beta}_{1}+\bm{x}'_2\bm{\beta}_{2}=\tilde{\bm{x}}'_1\tilde{\bm{\beta}}_{1}+\bm{x}'_2\bm{\beta}_{2}.
+\end{equation*}
+The fitted value at $x_{1}$ and its expectation with respect to the error distribution are 
+\begin{equation*}
+\hat{y}(\bm{x}_1)=\tilde{\bm{x}}'_{1}\tilde{\bm{\beta}}_{1}=\tilde{\bm{x}}'_{1}(\tilde{\bm{X}}'_{1}\tilde{\bm{X}}_{1})^{-1}\tilde{\bm{X}}'_{1}\bm{Y} \\
+\end{equation*}
+and
+\begin{equation*}
+\textbf{E}_{\varepsilon}[\hat{y}(\bm{x}_1)]=\tilde{\bm{x}}'_1(\tilde{\bm{X}}'_{1}\tilde{\bm{X}}_{1})^{-1}\tilde{\bm{X}}'_{1}\textbf{E}_{\varepsilon}\bm{Y}=\tilde{\bm{x}}'_1(\tilde{\bm{X}}'_{1}\tilde{\bm{X}}_{1})^{-1}\tilde{\bm{X}}'_{1}(\tilde{\bm{X}}_{1}\tilde{\bm{\beta}}_{1}+\bm{X}_{2}\bm{\beta}_{2}).
+\end{equation*}
+Therefore, the bias component of the integrated mean squared error (\ref{eq::IMSE}) is 
+\begin{equation*}
+\textbf{E}_{\mu}\{\textbf{E}_{\varepsilon}[\eta(\bm{x})-\textbf{E}_{\varepsilon}[\hat{y}(\bm{x}_1)]]^2\}=\textbf{E}_{\mu}[\bm{x}'_2\bm{\beta}_{2}-\tilde{\bm{x}}'_{1}\tilde{\bm{A}}\bm{\beta}_{2}]^2,
+\end{equation*}
+where
+\begin{equation*}
+\tilde{\bm{A}}=(\tilde{\bm{X}}'_{1}\tilde{\bm{X}}_{1})^{-1}\tilde{\bm{X}}'_{1}\bm{X}_{2}.
+\end{equation*}
+Further:
+\begin{align}
+\label{eq::blocks_bias}
+\textbf{E}_{\mu}[\bm{x}'_2\bm{\beta}_{2}-\tilde{\bm{x}}'_{1}\tilde{\bm{A}}\bm{\beta}_{2}]^2=&  \bm{\beta}'_{2}\textbf{E}_{\mu}[(\bm{x}'_{2}-\tilde{\bm{x}}'_{1}\tilde{\bm{A}})'(\bm{x}'_{2}-\tilde{\bm{x}}'_{1}\tilde{\bm{A}})]\bm{\beta}_{2}\notag \\=& \bm{\beta}'_{2}[\tilde{\bm{A}}'\bm{\mu_{11}}\tilde{\bm{A}}-\tilde{\bm{A}}'\bm{\mu_{12}}-\bm{\mu_{21}}\tilde{\bm{A}}+\bm{\mu_{22}}]\bm{\beta}_{2}\notag\\=& \bm{\beta}'_{2}[\tilde{\bm{A}}'\tilde{\bm{A}}+\bm{I}_{q}]\bm{\beta}_{2}.
+\end{align}
+The last transition takes place when columns of the full candidate matrix are orthonormalised: $\bm{\mu_{12}}=\bm{\mu_{21}}=\bm{0}$, $\bm{\mu_{11}}=\bm{I}_{p}$, $\bm{\mu_{22}}=\bm{I}_{q}$. That is equivalent to orthonormalising $[\bm{X}_{1},\bm{X}_{2}]$ as in the unblocked case and normalising the columns of the candidate matrix which correspond to blocks, i.e. setting non-zero elements to $1/\sqrt{N}$, where $N$ is the number of candidate points; the total number of rows in the `blocked' candidate matrix is equal to $N	\times b$.
+
+Summarising all the components in the respective criteria, and presenting them in conformity with the notion of efficiency, we get the following generalised criteria:
+
+Generalised $D$-criterion:
+\begin{align}
+\label{eq::GD_eff_blocks}
+\mbox{ minimise } \vert (\bm{X}'_{1}\bm{Q}\bm{X}_{1})^{-1}\vert^{\frac{\kappa_D}{p}}\times \left|\left(\bm{\tilde{L}}+\frac{\bm{I}_{q}}{\tau^{2}}\right)^{-1}\right|^{\frac{\kappa_{LoF}}{q}}\times |\bm{\tilde{A}}'\bm{\tilde{A}}+\bm{I}_{q}|^{\frac{\kappa_{bias}}{q}};
+\end{align}
+Generalised $L$-criterion:
+\begin{multline}
+\label{eq::GL_eff_blocks}
+\mbox{minimise } \left[\frac{1}{p}\mbox{trace}(\bm{W}\bm{X}'_{1}\bm{Q}\bm{X}_{1})^{-1}\right]^{\kappa_{L}}\times \left[\frac{1}{q}\mbox{trace}\left(\bm{\tilde{L}}+\frac{\bm{I}_{q}}{\tau^{2}}\right)^{-1}\right]^{\kappa_{LoF}}\times\\ \left[\frac{1}{q}\mbox{trace}(\bm{\tilde{A}}'\bm{\tilde{A}}+\bm{I}_{q})\right]^{\kappa_{bias}};
+\end{multline}
+Generalised $DP$-criterion:
+\begin{multline}
+\label{eq::GDP_eff_blocks}
+\mbox{minimise } \vert (\bm{X}'_{1}\bm{Q}\bm{X}_{1})^{-1}\vert^{\frac{\kappa_D}{p}}\times \left[\left|(\bm{X}'_{1}\bm{Q}\bm{X}_{1})^{-1}\right|^{1/p}F_{p,d_B;1-\alpha_{DP}}\right]^{\kappa_{DP}} \times \\ \left[\left|\bm{\tilde{L}}+\frac{\bm{I}_{q}}{\tau^{2}}\right|^{-1/q}F_{q,d_B;1-\alpha_{LoF}}\right]^{\kappa_{LoF}} \times |\bm{\tilde{A}}'\bm{\tilde{A}}+\bm{I}_{q}|^{\frac{\kappa_{bias}}{q}};
+\end{multline}
+Generalised $LP$-criterion:
+\begin{multline}
+\label{eq::GLP_eff_blocks}
+\mbox{minimise } \left[\frac{1}{p}\mbox{trace}(\bm{WX}'_{1}\bm{Q}\bm{X}_{1})^{-1}\right]^{\kappa_{L}}\times\left[\frac{1}{p}\mbox{trace}(\bm{WX}'_{1}\bm{Q}\bm{X}_{1})^{-1}F_{1,d_B;1-\alpha_{LP}}\right]^{\kappa_{LP}}\times \\ \left[\frac{1}{q}\mbox{trace}\left(\bm{\tilde{L}}+\frac{\bm{I}_{q}}{\tau^{2}}\right)^{-1}F_{1,d_B;1-\alpha_{LoF}}\right]^{\kappa_{LoF}}\times\left[\frac{1}{q}\mbox{trace}(\bm{\tilde{A}}'\bm{\tilde{A}}+\bm{I}_{q})\right]^{\kappa_{bias}}_{.}
+\end{multline}
+The non-negative weights $\kappa$ in each criterion are chosen such that the sum is equal to $1$. Significance levels $\alpha_{LP}$ and $\alpha_{LoF}$ in Generalised $LP$-criterion are corrected for multiple testing, as was described in (\ref{eq::Sidak}). Matrix $\bm{W}$ comprising weights for the $L$-criteria is the same as in the unblocked case (see Section \ref{seq::primary_criteria}, page \pageref{W_matrix}).
+
+\subsection{Example}
+
+We continue studying the example introduced earlier: five three-level factors in $40$ runs, the fitted model is the full quadratic polynomial, with no intercept due to the presence of block effects, so that the number of primary terms is $p=20$. Now we assume that the experimental units are organised into $b=5$ blocks of equal size, that is $8$ units per block. Therefore, the total number of available degrees of freedom is $n-(p+b)=15$ (as the intercept is not included in the fitted model). The potential model misspecification is represented by all third-order terms: linear-by-linear-by-linear terms and quadratic-by-linear; there are $q=30$ of them in total. The variance scaling parameter $\tau^2$ is set to be equal to $1$. The implemented point exchange algorithm with $200$ random starts took $5$--$11$ hours to provide the (near)-optimal designs. 
+
+As in the unblocked case, $GD$- and $GL$-optimal designs have no pure error degrees of freedom (the designs' efficiencies are given in Table \ref{tab::GD_b}); what is notable is that the $D$-optimal design is also $L$-optimal, the $LoF(D)$-optimal design is also $LoF(L)$-optimal and the same equality holds for bias-optimality in terms of determinant- and trace-based criteria. Allocating all of the weight to lack-of-fit and bias components only results in the lowest $D$- and $L$-efficiencies (around $55\%$ and $10\%$ accordingly), which indicates quite strong conflict between the `primary' and `potential' parts of the compound criteria.
+
+\begin{table}[h]
+\caption{Properties of generalised D- and L-optimal blocked designs}
+\label{tab::GD_b}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{rrrrrrrrrrrr}
+   & \multicolumn{3}{l}{\textbf{Criteria}} & \multicolumn{2}{l}{\textbf{DoF}} & \multicolumn{6}{l}{\textbf{Efficiency,\%}}                               \\
+   & \textbf{D}       & \textbf{LoF(D)}    & \textbf{Bias(D)}   & \textbf{PE}        & \textbf{LoF}        & \textbf{D}   & \textbf{LoF(D)}   & \textbf{Bias(D)}  & \textbf{L}       & \textbf{LoF(L)}   & \textbf{Bias(L)}  \\
+1 & 1 & 0 & 0 & \multicolumn{1}{|r}{0} & 15 & \multicolumn{1}{|r}{100.00} & 96.29 & 59.23 & \multicolumn{1}{|r}{100.00} & 95.78 & 41.20 \\
+2 & 0 & 1 & 0 & \multicolumn{1}{|r}{0} & 15 & \multicolumn{1}{|r}{86.09} & 100.00 & 85.72 & \multicolumn{1}{|r}{79.93} & 100.00 & 79.61 \\
+3 & 0 & 0 & 1 & \multicolumn{1}{|r}{0} & 15 & \multicolumn{1}{|r}{59.16} & 99.41 & 100.00 & \multicolumn{1}{|r}{10.41} & 99.34 & 100.00 \\
+4 & 0.5 & 0.5 & 0 & \multicolumn{1}{|r}{0} & 15 & \multicolumn{1}{|r}{99.22} & 96.67 & 59.91 & \multicolumn{1}{|r}{99.16} & 96.20 & 41.40 \\
+5 & 0.5 & 0 & 0.5 & \multicolumn{1}{|r}{0} & 15 & \multicolumn{1}{|r}{86.83} & 99.94 & 85.36 & \multicolumn{1}{|r}{78.05} & 99.94 & 60.24 \\
+6 & 0 & 0.5 & 0.5 & \multicolumn{1}{|r}{0} & 15 & \multicolumn{1}{|r}{55.17} & 97.89 & 90.89 & \multicolumn{1}{|r}{13.54} & 97.84 & 79.45 \\
+7 & 1/3 & 1/3 & 1/3 & \multicolumn{1}{|r}{0} & 15 & \multicolumn{1}{|r}{85.74} & 99.17 & 81.43 & \multicolumn{1}{|r}{75.57} & 99.17 & 60.48 \\
+8 & 0.5 & 0.25 & 0.25 & \multicolumn{1}{|r}{0} & 15 & \multicolumn{1}{|r}{92.99} & 99.53 & 76.52 & \multicolumn{1}{|r}{88.36} & 99.48 & 51.42 \\
+9 & 0.25 & 0.5 & 0.25 & \multicolumn{1}{|r}{0} & 15 & \multicolumn{1}{|r}{86.48} & 99.06 & 81.97 & \multicolumn{1}{|r}{78.29} & 99.11 & 51.69 \\
+ &  &  &  &  &  &  &  &  &  &  &  \\
+ & \multicolumn{3}{l}{\textbf{Criteria}} & \multicolumn{2}{l}{\textbf{DoF}} & \multicolumn{6}{l}{\textbf{Efficiency,\%}}                               \\
+   & \textbf{L}       & \textbf{LoF(L)}    & \textbf{Bias(L)}   & \textbf{PE}        & \textbf{LoF}        & \textbf{D}   & \textbf{LoF(D)}   & \textbf{Bias(D)}  & \textbf{L}       & \textbf{LoF(L)}   & \textbf{Bias(L)}  \\
+1 & 1 & 0 & 0 & \multicolumn{1}{|r}{0} & 15 & \multicolumn{1}{|r}{98.88} & 96.52 & 58.39 & \multicolumn{1}{|r}{100.00} & 96.01 & 40.44 \\
+2 & 0 & 1 & 0 & \multicolumn{1}{|r}{0} & 15 & \multicolumn{1}{|r}{86.09} & 100.00 & 85.72 & \multicolumn{1}{|r}{79.93} & 100.00 & 79.61 \\
+3 & 0 & 0 & 1 & \multicolumn{1}{|r}{0} & 15 & \multicolumn{1}{|r}{59.16} & 99.41 & 100.00 & \multicolumn{1}{|r}{10.41} & 99.34 & 100.00 \\
+4 & 0.5 & 0.5 & 0 & \multicolumn{1}{|r}{0} & 15 & \multicolumn{1}{|r}{98.23} & 96.65 & 58.27 & \multicolumn{1}{|r}{99.07} & 96.22 & 38.07 \\
+5 & 0.5 & 0 & 0.5 & \multicolumn{1}{|r}{0} & 15 & \multicolumn{1}{|r}{85.71} & 99.53 & 83.49 & \multicolumn{1}{|r}{79.37} & 99.43 & 76.25 \\
+6 & 0 & 0.5 & 0.5 & \multicolumn{1}{|r}{0} & 15 & \multicolumn{1}{|r}{51.20} & 98.19 & 97.44 & \multicolumn{1}{|r}{17.93} & 98.04 & 95.82 \\
+7 & 1/3 & 1/3 & 1/3 & \multicolumn{1}{|r}{0} & 15 & \multicolumn{1}{|r}{86.47} & 98.54 & 77.00 & \multicolumn{1}{|r}{78.36} & 98.31 & 67.41 \\
+8 & 0.5 & 0.25 & 0.25 & \multicolumn{1}{|r}{0} & 15 & \multicolumn{1}{|r}{93.09} & 97.62 & 66.27 & \multicolumn{1}{|r}{91.01} & 97.30 & 55.44 \\
+9 & 0.25 & 0.5 & 0.25 & \multicolumn{1}{|r}{0} & 15 & \multicolumn{1}{|r}{86.09} & 100.00 & 85.72 & \multicolumn{1}{|r}{79.93} & 100.00 & 79.61
+\end{tabular}
+}
+\end{table}
+
+Some of the $GD$- and $GL$-optimal designs are similar in terms of efficiencies, which is true to some extent: e.g. designs \#$4$, \#$5$, \#$7$ and \#$8$ are alike, but their bias$(L)$-efficiency values tend to differ quite substantially. Again, as was previously observed, the designs that were obtained by assigning most of the weight to either bias or lack-of-fit parts are at least moderately bias-efficient.
+
+As for $GDP$- and $GLP$-optimal designs, we can see designs which have all degrees of freedom allocated to the pure error: $GDP$-optimal designs \#$8$ and \#$12$ and $LoF(LP)$-optimal design in Table \ref{tab::GDP_b}. The first two are also $100\%$ $LoF(LP)$-efficient and at the same time they perform much better with respect to the other primary criteria ($D$, $L$, $DP$, $LP$) than the design that was obtained with all the weight put on the $LoF(LP)$-component. The latter is presented in Table \ref{tab::LoFLPB_design}: its points seem to be scattered around the experimental region without any particular pattern, more replicates occur between rather than within blocks; besides that there is not anything particular in this design's appearance that would suggest its poor performance with respect to both $L$/$LP$ and bias trace-based components.
+
+%% GD- and GL-optimal designs
+
+%%%%%%%%%
+
+%GDP- and GLP-optimal designs, blocked
+\begin{landscape}
+\begin{table}[p]
+\caption{Properties of generalised DP- and LP-optimal blocked designs}
+\label{tab::GDP_b}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{rrrrrrrrrrrrrrrrr}
+\multicolumn{1}{l}{} & \multicolumn{4}{l}{{\bf Criteria}} & \multicolumn{2}{l}{{\bf DoF}} & \multicolumn{10}{l}{{\bf Efficiency,\%}} \\
+\multicolumn{1}{l}{} & \multicolumn{1}{r}{{\bf D}} & \multicolumn{1}{r}{{\bf DP}} & \multicolumn{1}{r}{{\bf LoF(DP)}} & \multicolumn{1}{r}{{\bf Bias(D)}} & \multicolumn{1}{r}{{\bf PE}} & \multicolumn{1}{r}{{\bf LoF}} & \multicolumn{1}{r}{{\bf D}} & \multicolumn{1}{r}{{\bf DP}} & \multicolumn{1}{r}{{\bf LoF(D)}} & \multicolumn{1}{r}{{\bf LoF(DP)}} & \multicolumn{1}{r}{{\bf Bias(D)}} & \multicolumn{1}{r}{{\bf L}} & \multicolumn{1}{r}{{\bf LP}} & \multicolumn{1}{r}{{\bf LoF(L)}} & \multicolumn{1}{r}{{\bf LoF(LP)}} & \multicolumn{1}{r}{{\bf Bias(L)}} \\
+1 & 1 & 0 & 0 & 0 & \multicolumn{1}{|r}{0} & 15 & \multicolumn{1}{|r}{100.00} & 0.00 & 96.29 & 0.00 & 59.23 & \multicolumn{1}{|r}{100.00} & 0.00 & 95.78 & 0.00 & 41.20 \\
+2 & 0 & 1 & 0 & 0 & \multicolumn{1}{|r}{15} & 0 & \multicolumn{1}{|r}{89.58} & 100.00 & 87.68 & 97.66 & 47.71 & \multicolumn{1}{|r}{5.08} & 6.04 & 86.62 & 97.57 & 31.31 \\
+3 & 0 & 0 & 1 & 0 & \multicolumn{1}{|r}{14} & 1 & \multicolumn{1}{|r}{38.44} & 42.92 & 89.78 & 100.00 & 39.17 & \multicolumn{1}{|r}{9.58} & 11.38 & 90.14 & 98.99 & 9.31 \\
+4 & 0 & 0 & 0 & 1 & \multicolumn{1}{|r}{0} & 15 & \multicolumn{1}{|r}{59.16} & 0.00 & 99.41 & 0.00 & 100.00 & \multicolumn{1}{|r}{10.41} & 0.00 & 99.34 & 0.00 & 100.00 \\
+5 & 0.5 & 0.5 & 0 & 0 & \multicolumn{1}{|r}{12} & 3 & \multicolumn{1}{|r}{92.03} & 96.45 & 88.53 & 92.29 & 47.90 & \multicolumn{1}{|r}{85.86} & 96.14 & 87.52 & 91.25 & 32.97 \\
+6 & 0.5 &  & 0.5 & 0 & \multicolumn{1}{|r}{14} & 1 & \multicolumn{1}{|r}{89.10} & 99.47 & 87.43 & 97.39 & 48.66 & \multicolumn{1}{|r}{83.01} & 99.99 & 86.34 & 97.32 & 32.98 \\
+7 & 0.5 & 0 & 0 & 0.5 & \multicolumn{1}{|r}{0} & 15 & \multicolumn{1}{|r}{86.83} & 0.00 & 99.94 & 0.00 & 85.36 & \multicolumn{1}{|r}{78.05} & 0.00 & 99.94 & 0.00 & 60.24 \\
+8 & 0 & 0.5 & 0.5 & 0 & \multicolumn{1}{|r}{15} & 0 & \multicolumn{1}{|r}{84.20} & 96.43 & 87.18 & 99.76 & 44.23 & \multicolumn{1}{|r}{74.02} & 91.64 & 86.08 & 100.00 & 25.84 \\
+9 & 0 & 0.5 & 0 & 0.5 & \multicolumn{1}{|r}{12} & 3 & \multicolumn{1}{|r}{81.14} & 85.04 & 89.82 & 93.64 & 55.47 & \multicolumn{1}{|r}{68.42} & 76.89 & 89.10 & 92.32 & 40.58 \\
+10 & 0 & 0 & 0.5 & 0.5 & \multicolumn{1}{|r}{11} & 4 & \multicolumn{1}{|r}{48.84} & 49.19 & 90.72 & 90.74 & 60.53 & \multicolumn{1}{|r}{28.70} & 30.83 & 90.12 & 88.65 & 41.99 \\
+11 & 0.25 & 0.25 & 0.25 & 0.25 & \multicolumn{1}{|r}{14} & 1 & \multicolumn{1}{|r}{86.25} & 96.29 & 87.68 & 97.67 & 51.04 & \multicolumn{1}{|r}{77.57} & 93.44 & 86.62 & 97.57 & 36.50 \\
+12 & 1/3 & 1/3 & 1/3 & 0 & \multicolumn{1}{|r}{15} & 0 & \multicolumn{1}{|r}{86.92} & 99.55 & 87.18 & 99.76 & 44.00 & \multicolumn{1}{|r}{76.98} & 95.30 & 86.08 & 100.00 & 24.36 \\
+13 & 1/3 & 1/3 & 0 & 1/3 & \multicolumn{1}{|r}{11} & 4 & \multicolumn{1}{|r}{89.39} & 90.04 & 89.42 & 89.44 & 54.63 & \multicolumn{1}{|r}{85.34} & 91.68 & 88.52 & 87.62 & 41.18 \\
+14 & 0 & 1/3 & 1/3 & 1/3 & \multicolumn{1}{|r}{14} & 1 & \multicolumn{1}{|r}{83.78} & 93.53 & 87.91 & 97.92 & 52.55 & \multicolumn{1}{|r}{75.06} & 90.41 & 86.90 & 97.78 & 35.73 \\
+ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\multicolumn{1}{l}{} & \multicolumn{4}{l}{{\bf Criteria}} & \multicolumn{2}{l}{{\bf DoF}} & \multicolumn{10}{l}{{\bf Efficiency,\%}} \\
+\multicolumn{1}{l}{} & \multicolumn{1}{r}{{\bf L}} & \multicolumn{1}{r}{{\bf LP}} & \multicolumn{1}{r}{{\bf LoF(LP)}} & \multicolumn{1}{r}{{\bf Bias(L)}}  & \multicolumn{1}{r}{{\bf PE}} & \multicolumn{1}{r}{{\bf LoF}} & \multicolumn{1}{r}{{\bf D}} & \multicolumn{1}{r}{{\bf DP}} & \multicolumn{1}{r}{{\bf LoF(D)}} & \multicolumn{1}{r}{{\bf LoF(DP)}} & \multicolumn{1}{r}{{\bf Bias(D)}} & \multicolumn{1}{r}{{\bf L}} & \multicolumn{1}{r}{{\bf LP}} & \multicolumn{1}{r}{{\bf LoF(L)}} & \multicolumn{1}{r}{{\bf LoF(LP)}} & \multicolumn{1}{r}{{\bf Bias(L)}} \\
+1 & 1 & 0 & 0 & 0 & \multicolumn{1}{|r}{0} & 15 & \multicolumn{1}{|r}{98.88} & 0.00 & 96.52 & 0.00 & 58.39 & \multicolumn{1}{|r}{100.00} & 0.00 & 96.01 & 0.00 & 40.44 \\
+2 & 0 & 1 & 0 & 0 & \multicolumn{1}{|r}{14} & 1 & \multicolumn{1}{|r}{88.89} & 99.23 & 87.67 & 97.65 & 48.12 & \multicolumn{1}{|r}{84.20} & 100.00 & 86.61 & 97.56 & 32.66 \\
+3 & 0 & 0 & 1 & 0 & \multicolumn{1}{|r}{15} & 0 & \multicolumn{1}{|r}{38.54} & 44.14 & 87.18 & 99.76 & 34.55 & \multicolumn{1}{|r}{0.09} & 0.11 & 86.08 & 100.00 & 0.07 \\
+4 & 0 & 0 & 0 & 1 & \multicolumn{1}{|r}{0} & 15 & \multicolumn{1}{|r}{59.16} & 0.00 & 99.41 & 0.00 & 100.00 & \multicolumn{1}{|r}{10.41} & 0.00 & 99.34 & 0.00 & 100.00 \\
+5 & 0.5 & 0.5 & 0 & 0 & \multicolumn{1}{|r}{11} & 4 & \multicolumn{1}{|r}{92.17} & 92.84 & 89.06 & 89.08 & 47.96 & \multicolumn{1}{|r}{90.02} & 95.23 & 88.09 & 87.34 & 34.03 \\
+6 & 0.5 & 0 & 0.5 & 0 & \multicolumn{1}{|r}{14} & 1 & \multicolumn{1}{|r}{88.89} & 99.23 & 87.67 & 97.65 & 48.12 & \multicolumn{1}{|r}{84.20} & 100.00 & 86.61 & 97.56 & 32.66 \\
+7 & 0.5 & 0 & 0 & 0.5 & \multicolumn{1}{|r}{0} & 15 & \multicolumn{1}{|r}{85.71} & 0.00 & 99.53 & 0.00 & 83.49 & \multicolumn{1}{|r}{79.37} & 0.00 & 99.43 & 0.00 & 76.25 \\
+8 & 0 & 0.5 & 0.5 & 0 & \multicolumn{1}{|r}{14} & 1 & \multicolumn{1}{|r}{85.56} & 95.51 & 87.61 & 97.58 & 49.86 & \multicolumn{1}{|r}{77.64} & 92.21 & 86.54 & 97.50 & 32.65 \\
+9 & 0 & 0.5 & 0 & 0.5 & \multicolumn{1}{|r}{11} & 4 & \multicolumn{1}{|r}{88.14} & 88.79 & 89.66 & 89.68 & 55.44 & \multicolumn{1}{|r}{82.72} & 87.51 & 88.82 & 87.82 & 45.28 \\
+10 & 0 & 0 & 0.5 & 0.5 & \multicolumn{1}{|r}{11} & 4 & \multicolumn{1}{|r}{54.30} & 54.69 & 89.67 & 89.69 & 59.52 & \multicolumn{1}{|r}{36.23} & 38.32 & 88.80 & 87.85 & 50.37 \\
+11 & 0.25 & 0.25 & 0.25 & 0.25 & \multicolumn{1}{|r}{12} & 3 & \multicolumn{1}{|r}{87.86} & 92.08 & 88.77 & 92.54 & 51.53 & \multicolumn{1}{|r}{83.55} & 92.50 & 87.82 & 91.45 & 40.57 \\
+12 & 1/3 & 1/3 & 1/3 & 0 & \multicolumn{1}{|r}{14} & 1 & \multicolumn{1}{|r}{88.77} & 99.10 & 87.45 & 97.41 & 48.66 & \multicolumn{1}{|r}{83.71} & 99.41 & 86.36 & 97.34 & 31.81 \\
+13 & 1/3 & 1/3 & 0 & 1/3 & \multicolumn{1}{|r}{10} & 5 & \multicolumn{1}{|r}{93.24} & 89.60 & 89.43 & 85.17 & 52.39 & \multicolumn{1}{|r}{91.31} & 91.39 & 88.48 & 82.56 & 41.53 \\
+14 & 0 & 1/3 & 1/3 & 1/3 & \multicolumn{1}{|r}{12} & 3 & \multicolumn{1}{|r}{82.16} & 81.65 & 89.11 & 92.90 & 55.21 & \multicolumn{1}{|r}{65.70} & 72.74 & 88.20 & 91.75 & 44.54
+\end{tabular}
+}
+\end{table}
+\end{landscape}
+In general, we observe a more unbalanced distribution of available degrees of freedom (especially in $GDP$-optimal designs); the overall $D$- and $L$-efficiencies are certainly lower than for the same weight allocations in the previous examples, e.g. $D$-efficiency is around $80-85\%$ in comparison to $90-95\%$ in Example 1 (Table \ref{tab::GDP_ex11}). Bias efficiencies slightly decreased as well; with lack-of-fit components no such tendency has been noticed. 
+
+
+\begin{table}[h]
+\centering
+\caption{LoF(LP)-optimal blocked design}
+\label{tab::LoFLPB_design}
+\scalebox{0.8}{
+\begin{tabular}{rrrrrr|r|rrrrrr}
+1  & -1 & 1  & 0  & 0  & -1 &  & 25 & -1 & -1 & -1 & 1  & -1 \\
+2  & 0  & 1  & -1 & 1  & 0  &  & 26 & -1 & -1 & -1 & 1  & -1 \\
+3  & 0  & 1  & -1 & 1  & 0  &  & 27 & -1 & 1  & 0  & 0  & -1 \\
+4  & 0  & 1  & 1  & 1  & -1 &  & 28 & -1 & 1  & 0  & 1  & 1  \\
+5  & 0  & 1  & 1  & 1  & -1 &  & 29 & 0  & 0  & -1 & -1 & -1 \\
+6  & 0  & 1  & 1  & 1  & -1 &  & 30 & 0  & 1  & -1 & 1  & 0  \\
+7  & 1  & 1  & 1  & -1 & -1 &  & 31 & 1  & 1  & -1 & -1 & 1  \\
+8  & 1  & 1  & 1  & -1 & -1 &  & 32 & 1  & 1  & 1  & -1 & -1 \\ \cline{1-6}\cline{8-13}
+9  & -1 & -1 & -1 & 1  & -1 &  & 33 & -1 & -1 & 1  & 0  & 1  \\
+10 & -1 & -1 & -1 & 1  & 1  &  & 34 & -1 & 0  & 0  & 1  & 0  \\
+11 & -1 & 0  & 1  & 0  & 0  &  & 35 & 0  & 1  & 0  & 0  & 1  \\
+12 & -1 & 1  & 0  & 1  & 1  &  & 36 & 1  & -1 & -1 & 1  & -1 \\
+13 & 0  & -1 & -1 & -1 & 0  &  & 37 & 1  & -1 & 0  & -1 & -1 \\
+14 & 0  & 1  & -1 & 1  & 0  &  & 38 & 1  & -1 & 1  & 1  & -1 \\
+15 & 1  & 0  & 0  & 1  & 1  &  & 39 & 1  & -1 & 1  & 1  & -1 \\
+16 & 1  & 1  & -1 & -1 & 1  &  & 40 & 1  & 1  & 1  & 1  & 1  \\ \cline{1-6} 
+17 & -1 & -1 & 1  & -1 & -1 &  &    &    &    &    &    &    \\
+18 & -1 & 0  & 0  & 1  & 0  &  &    &    &    &    &    &    \\
+19 & -1 & 1  & 0  & -1 & 0  &  &    &    &    &    &    &    \\
+20 & 0  & 1  & 0  & 0  & 1  &  &    &    &    &    &    &    \\
+21 & 1  & -1 & 0  & -1 & -1 &  &    &    &    &    &    &    \\
+22 & 1  & -1 & 1  & 1  & -1 &  &    &    &    &    &    &    \\
+23 & 1  & 0  & 1  & -1 & 1  &  &    &    &    &    &    &    \\
+24 & 1  & 1  & 1  & 1  & 1  &  &    &    &    &    &    &   
+\end{tabular}
+}
+\end{table}
+
+

@@ -1,0 +1,219 @@
+\documentclass[titlepage,twoside,openright,final,11pt]{report}
+
+%%%%%%%%%%%%      PACKAGES        %%%%%%%%%%%%
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue]{hyperref}
+\usepackage{setspace}
+\onehalfspacing
+%\doublespacing
+\usepackage{fancyhdr,afterpage}
+\usepackage{lscape}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{textcomp,latexsym}
+\usepackage{parskip}
+\usepackage[round]{natbib}
+\usepackage{adjustbox,lipsum}
+\usepackage[titletoc]{appendix}
+    
+\usepackage[round]{natbib}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{gensymb}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{slashbox}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsfonts}
+\usepackage{enumerate}
+\usepackage{amssymb}
+\usepackage{multirow}
+\usepackage{bm}
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\usepackage[a4paper,inner=4.2cm,outer=2.3cm,top=2.5cm,bottom=2.5cm,pdftex]{geometry} % MARGINS
+
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
+
+\begin{document}
+
+%%% Title page
+\begin{titlepage}
+
+\begin{center}
+
+% Title
+\huge \bfseries  UNIVERSITY OF SOUTHAMPTON\\
+
+\vspace{0.8cm}
+\Large FACULTY OF SOCIAL, HUMAN AND MATHEMATICAL SCIENCES\\
+\Large  Mathematical Sciences
+
+\vspace{6cm}
+
+\Large Optimal Design of Experiments for Multiple Objectives \\
+
+\vspace{1cm}
+\large by \\
+
+\vspace{1cm}
+\Large Olga Egorova \\
+
+\vspace{8cm}
+ \Large Thesis submitted for the degree of Doctor of Philosophy \\
+\Large March 2017
+\end{center}
+\afterpage{\blankpage}
+\end{titlepage}
+
+\renewcommand{\abstractname}{\vspace{-\baselineskip}}
+ \begin{abstract}
+\begin{center}
+ UNIVERSITY OF SOUTHAMPTON \\
+ \vspace{0.3cm}
+
+ \underline{ABSTRACT} \\
+ \vspace{0.3cm}
+
+ FACULTY OF SOCIAL, HUMAN AND MATHEMATICAL SCIENCES\\
+ \vspace{0.2cm}
+ Mathematical Sciences \\
+  \vspace{0.3cm}
+
+ \underline{Doctor of Philosophy}\\
+ OPTIMAL DESIGN OF EXPERIMENTS FOR MULTIPLE OBJECTIVES\\
+ by Olga Egorova
+ \end{center}
+%The main purpose of carrying out an experiment is gaining reliable conclusions from the data collected, and it is usually expressed in more than one design objective. 
+The focus of this work is on developing optimality criteria corresponding to multiple inference objectives and combining them in compound criteria allowing for finding compromises between different components, especially in the cases of relatively small experiments.
+
+In the framework of response surface factorial experiments we take into account the assumption of a potential model misspecification that is expressed in the form of extra polynomial terms that cannot be estimated. Along with obtaining quality estimates of the fitted model parameters, the contamination arising from the model disturbance is desired to be minimised. In addition, in the case of model uncertainty, the model-independent approach of making inference based on `pure error' is to be incorporated.
+
+We first present Generalised $DP$ and $LP$ criteria, the components of which correspond to maximising the precision of the fitted model estimates, minimising the joint effect of potentially missed terms and minimising the prediction bias; we also adapt the criteria for use in blocked experiments. 
+
+In Chapter \ref{ch::mse} we develop the Mean Square Error based criteria which, instead of the prediction bias component, include the component minimising the bias of the fitted model parameters that might occur due to the model misspecification. We also provide an alternative way of estimating its value for cases where the originally suggested simulations would be too computationally expensive. 
+ 
+An example of a real-life blocked experiment is studied, and we present a set of optimal designs that satisfied the aims of the experimenters and the restrictions of the experimental setup. Finally, we explore the framework of multistratum experiments; together with adaptation of the MSE-based criteria we provide a flexible design construction and analysis scheme.
+
+All of the criteria and experimental settings are accompanied by illustrative examples in order to explore the possible relationship patterns between the criterion components and optimal designs' characteristics, and produce some general practical recommendations. 
+
+ \afterpage{\blankpage}
+ \end{abstract}
+
+\pagenumbering{roman}
+
+%%% TOC
+\tableofcontents
+
+%% Lists of figures and tables
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Tables}
+\listoftables
+
+\chapter*{Declaration of Authorship}
+
+I, Olga Egorova, declare that the thesis entitled ``Optimal Design of Experiments for Multiple Objectives" and the work presented in the thesis are both my own, and have been generated by me as the result of my own original research. I confirm that:
+\begin{itemize}
+\item this work was done wholly or mainly while in candidature for a research degree at this University;
+\item where any part of this thesis has previously been submitted for a degree or any other qualification at this University or any other institution, this has been clearly stated;
+\item where I have consulted the published work of others, this is always clearly attributed;
+\item where I have quoted from the work of others, the source is always given. With the
+exception of such quotations, this thesis is entirely my own work;
+\item  I have acknowledged all main sources of help;
+\item where the thesis is based on work done by myself jointly with others, I have made clear exactly what was done by others and what I have contributed myself;
+\item none of this work has been published before submission.
+\end{itemize}
+\vspace{1cm}
+Signed: \\
+
+Date:
+\addcontentsline{toc}{chapter}{Declaration of Authorship}
+
+\chapter*{Acknowledgements}
+
+%\afterpage{\blankpage}
+\addcontentsline{toc}{chapter}{Acknowledgements}
+
+This work was supported by studentship funding from Mathematical Sciences at the University of Southampton.
+
+First of all I would like to thank my supervisor, Prof. Steven Gilmour, for his invaluable guidance, advice and inspiration throughout all these years. It has been a great pleasure and privilege to work with Steve, and I am very grateful for this experience.
+
+My special thank-you goes to my secondary supervisors, Kalliopi Mylona and Ben Parker, and to the whole `design' academic family in Southampton Statistical Sciences Research Institute, for their continuous support and encouragement. 
+
+I would also like to thank all my friends and loved ones for being by my side, every step of the way, no matter how far we were from each other.
+
+Last but not least, I would like to thank my incredible parents, Tatiana and Sergey, for all their unconditional love, motivation, encouragement, and for always having faith in me.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{chapter}{0}
+\chapter{Introduction}
+\pagenumbering{arabic}
+\input{introduction}
+
+\chapter{Background and Related Work}
+\label{ch::background}
+\input{Chapter2_Background}
+
+\chapter{Compound Criteria. Some Amendments}
+\label{ch::compound}
+\input{Chapter3}
+
+\chapter{Generalised Compound Criteria}
+\label{ch::generalised}
+\input{Chapter4_Generalised}
+
+\chapter{MSE-based Criteria}
+\label{ch::mse}
+\input{Chapter5_MSE}
+
+\chapter{MSE-based Criteria for Blocked Experiments}
+\label{ch::mse_blocked}
+\input{Chapter6_Blocked}  
+
+\chapter{MSE-based Criteria for Multistratum Experiments}
+\label{ch::mse_ms}
+\input{Chapter7_MS}
+
+\chapter{Conclusions and Future Work}
+\label{ch::conclusions}
+\input{conclusions}
+
+\chapter*{Appendix}
+\setcounter{section}{0}
+\renewcommand{\thesection}{\Alph{section}}
+
+\setcounter{figure}{0} 
+\renewcommand{\thefigure}{A.\arabic{figure}}
+
+\setcounter{equation}{0} 
+\renewcommand{\theequation}{A.\arabic{equation}}
+
+\setcounter{table}{0} 
+\addcontentsline{toc}{chapter}{Appendix}
+\input{Appendix}
+
+%%% Bibliography
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Bibliography} 
+%\bibliographystyle{apalike}
+\bibliographystyle{rss}
+\bibliography{thesis_bib}
+
+
+\end{document}

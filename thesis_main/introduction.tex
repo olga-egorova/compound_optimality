@@ -1,0 +1,89 @@
+The aim of most experiments is to investigate the relationship between a set of various characteristics influencing the process under study and the final outcome value  measuring the result of the experiment. The type of experiment is defined by the questions of interest. Comparative studies are carried out to make conclusions regarding the differences between the effects of various interventions on the population/units of interest, and experimental investigations are planned to describe the causal relationship between the process's parameters and the measured outputs while other conditions are controlled for. In both cases natural variation among the population units affects the observed outcomes, and therefore, the statistical approach appears to be the most sensible foundation of the data collection and analysis planning tailored to the particular experiment's purposes. The theory of optimal design of experiments allows the most to be made out of the available resources by providing methods and techniques for obtaining designs which are best in terms of satisfying the aims of the experimenter and at the same time meet the existing constraints. 
+
+The process of interest can be presented as a series of interventions applied to the experimental units. In order to describe the true (and unknown) form of the relationship between the parameters of the interventions and the final response value a certain model is chosen that is believed to give a sensible and interpretable reflection of the properties and influences of interest. With this model in mind, the experimenter might have different objectives regarding the statistical analysis following the data collection; many of these aims can be reflected in optimality criterion functions. 
+
+Starting with the suggestions that were presented in the discussion of the paper by \cite{GilmourTrinca2012}, we investigate the approach of combining several desirable properties in a compound criterion. Our main focus is on the objective functions that arise when experimenters allow for the possibility of model misspecification, which is a common case in many experiments especially when the available number of runs or other restrictions do not allow for estimating all the parameters that might be substantial. We examine how the components of the criteria corresponding to various objectives overlap with or, on the contrary, contradict each other so that a certain compromise has to be achieved. We also consider the case when experimental units are formed in a hierarchical structure and by adapting existing search algorithms, construct the designs optimal with respect to the criteria developed. 
+
+\section{Motivation and Preliminaries}
+%\subsection{Response Surface Methodology}
+%\subsection{Experimental Unit Structures}
+
+Generally speaking, most experiments are conducted in order to gain understanding of the impact that different parameters of interest make on the outcome; the quantitative measure of this impact allows comparisons as well as making interpretable conclusions regarding the scale and the pattern of the relationships between process parameters and measured output. 
+
+While the exact true nature of that relationship remains unknown, we need to have some form of approximation. Polynomial functions are well known to be able to provide an approximation of any required precision for functions from a certain class of differentiability \citep{Rudin1987real}: obviously, higher desirable precision would require a polynomial of a higher order and, therefore, more experimental effort. Response Surface Methodology (RSM) that was first introduced by \cite{Box1951Roy} is aimed at optimising the response by fitting a second order polynomial to the data obtained after an experiment on the points within the experimental region of interest has been performed. The response measured at each of $n$ experimental runs would then be presented as a linear combination of experimental factors' values, their interactions and corresponding quadratic terms; of course, some of the terms might be excluded, but, unless stated otherwise, we will consider a full second-order polynomial model with $1+2k+\frac{k(k-1)}{2}$ parameters (including the intercept), where $k$ is the number of factors. Together with the fixed polynomial part, the error term here would stand for all the variation in data that has not been captured by the model. 
+
+In matrix notation, where all responses are put in an $n$-dimensional vector $\bm{Y}$, and the corresponding vectors of model terms in the $n\times p$ model matrix $\bm{X}$, the model is
+
+\begin{equation}
+\label{eq::intro_model}
+\bm{Y}=\bm{X}\bm{\beta}+\bm{\varepsilon}.
+\end{equation} 	
+
+Here $\bm{\beta}$ is the vector of $p$ model parameters, and $\bm{\varepsilon}$ contains the errors; one of the most common assumptions is the independence, normality and constant variance of error terms ($\bm{\varepsilon}  \sim \mathcal{N}(\bm{0},\sigma^{2}\bm{I}_{n})$), the latter, however, is not always essential.
+
+We will also deal with the cases of restricted randomisation, often occurring due to technical restrictions in the course of the experiment, e.g.~the units are being treated in groups and the response would be affected by that grouping, or some of the treatment factors are hard to change for each run, so their values are kept constant for a series of runs. When experimental units are arranged in blocks of equal size or in a hierarchical structure such that units of smaller sizes are nested within larger ones (also in equal numbers), then each level of such unit/factor grouping introduces an extra source of variation that needs to be taken into account, and therefore we get the following model with a general hierarchical error-structure (more details are given in Chapters \ref{ch::background} and \ref{ch::mse_ms}):
+\begin{equation}
+\label{eq::intro_ms}
+\bm{Y}=\bm{X}\bm{\beta}+\sum_{i=1}^{s}\bm{Z}_{i}\bm{\varepsilon}_{i},
+\end{equation}
+where $s$ is the total number of strata or, in other words, levels of randomisation. Each matrix $\bm{Z}_{i}$ consists of indicators of the allocation of runs to the units of stratum $i$: its $(j,k)^{th}$ element is equal to $1$ if the $j^{th}$ run lies within the unit $k$ of stratum $i$. As the lowest stratum $s$ corresponds to the between-run randomisation level, $\bm{Z}_{s}$ is essentially the identity matrix. The case of blocked experiments is further introduced and considered in detail in Section \ref{sec::gen_blocked} of this thesis.	
+
+For the purposes of drawing reliable conclusions from the data by fitting the model, there are two essential requirements that might be facilitated by the optimal experimental planning: the quality of the model parameters' estimates and the overall appropriateness of the model, i.e. how well it fits the data. The first one can be expressed as maximising the precision which depends on the model matrix and error parameter estimates; we advocate the use of an error estimation approach based purely on the replicates (which is described in Chapter \ref{ch::background}, Section \ref{seq::primary_criteria}), as, due to being model-independent, it is evidently the most appropriate in the situation of any uncertainty regarding the quality of model fit. 
+
+As for the goodness of the model fit, we will consider the framework in which the ``true'' model giving the best data representation is the expansion of the fitted model ((\ref{eq::intro_model}) or (\ref{eq::intro_ms})), containing extra, so-called potential (polynomial) terms which the experimenter is not able or not willing to estimate due to restrictions of various nature, e.g.~unavailability of a sufficient amount of runs. With the possibility of these terms affecting the inference, it is desirable to develop design methodology allowing for detecting the significance of their presence and minimising their impact on the estimates of the fitted model's parameters and, perhaps, the prediction based on them. 
+
+\section{Optimal Experimental Design}
+%\subsection{Model-Dependent Optimality Criteria}
+%\subsection{Model Misspecification. Compound Criteria}
+
+At the stage of experimental planning, when there is little, if any, prior knowledge and no data available, there is still a lot that can and should be done to make sure the results of the experimentation and the following analysis are credible.
+
+The design construction usually depends on the model in several ways. Firstly, the interest in the properties of the model parameters' estimation leads to the development of various optimality criteria (e.g.~so-called `alphabetic criteria'). Secondly, the fact of the model-dependence of the majority of the criteria implies the necessity of taking into account the possible lack-of-fit as well as the desirability of obtaining error variance estimates from replicated observations (model-independent, `pure' error). The latter two are also in the list of the properties of what would be considered as a `good design' (summarised by \cite{Box1987empirical}, Chapter $14$): it should ``make it possible to detect lack of fit'' and ``provide an internal estimate of error from replication''.
+
+It is obvious that all the individual criteria are not interchangeable and can possibly be contradictory, however, they all are desired to be accounted for. There are a few ways of combining them, and here we will be working with the notion of a compound optimality criterion which is basically a weighted combination of the elementary criteria, where weights are generally arbitrary, and are expected to be chosen in accordance with the experimenter's beliefs and intentions. 
+
+We will focus in this work on factorial experiments with a relatively small number of runs and the fitted model being a polynomial regression. We work here with exact designs: for each run we are to provide a point as a combination of the treatment factors' levels; therefore, finding the corresponding optimal design is essentially a matrix optimisation problem, i.e. searching for a design maximising (minimising) the criterion function. When considering examples of different compound criteria with various weight allocations, we will examine the resulting optimal designs in terms of their performances with respect to individual components. This would allow evaluating how much is ``lost'' when achieving a compromise, what component criteria contradict each others' performances, and how they are affected by changes of weight allocations.
+
+\section{Aims and Objectives}
+
+The first and main objective of the research presented in this thesis is to develop a methodology for combining several desirable data inference properties in compound optimality criteria for factorial experiments. The properties are to correspond to the precision of inference based on the primary model and to the possibility of the specified model contamination presence; the components are aimed to comply with the `pure error' strategy, where it is feasible.
+
+The obvious following objective is to investigate the relationships between the individual components of the introduced criteria and, by considering some examples, provide some empirical recommendations for complex experimentation research that would benefit from applying these methods.
+
+The criteria will also be adapted to be applied within experimental frameworks with restricted randomisation: blocked and multistratum experiments.
+
+\section{Thesis Outline}
+
+We start by providing some background and describing in detail the general experimental framework we will be working with in Chapter \ref{ch::background}. 
+
+Chapter \ref{ch::compound} contains the expansion of the criteria developed by \cite{GilmourTrinca2012}, that was suggested in the Discussion of the paper and is implemented by including a component that might contribute to preventing the impossibility of testing for the model lack of fit. We also explore the usage of desirability functions in the compound criteria.
+
+In Chapter \ref{ch::generalised} we amend and extend the composite criteria suggested by \cite{Goos2005model} by treating the components from a `pure error' perspective and derive Generalised $DP$- and $LP$- criteria. They comprise components corresponding to the variance of the primary coefficients' estimators as well as the posterior variance of the potentially missed terms; the prediction bias component from the original criteria was also taken into account. Their adaptation to blocked experiments is presented in the second half of the chapter.  
+
+In order to measure the deviation of the parameters' estimates in case of potential model misspecification in a pre-assumed direction, we consider mean squared error (MSE) as the expected squared norm of the discrepancy between the `true' and estimated values of the primary model coefficients. We obtained criteria allowing for minimisation of such bias together with variance and lack-of-fit minimisation components. Chapter \ref{ch::mse} provides the main theoretical layout of the approach together with some examples and discussion on computational matters.
+
+Chapter \ref{ch::mse_blocked} comprises the adaptation of the MSE-based criteria for the blocked experiments followed by a real-life experiment with some additional restrictions. We apply the criteria, explore the resulting optimal designs and their properties and provide some recommendations. 
+
+In Chapter \ref{ch::mse_ms} we move to more complicated hierarchical structures of the experimental units; we investigate the possible approaches to applying the criteria and constructing the corresponding optimal designs so that it agrees with the appropriate analysis strategies. As before, some examples are also considered in order to study the characteristics of the resulting designs and any patterns of the relationships between the criteria components.
+
+Chapter \ref{ch::conclusions} summarises the main outcomes and results of the research presented in this thesis and describes possible directions for future work.
+
+Supplementary material provided online contains the R code files and the resulting optimal designs that have been obtained and discussed in this work.
+
+\vspace*{\fill}
+\textit{The author acknowledges the use of the IRIDIS High Performance Computing Facility, and associated support services at the University of Southampton, in the completion of this work. }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      

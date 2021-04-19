@@ -1,0 +1,83 @@
+\contentsline {chapter}{List of Figures}{v}{section*.2}
+\contentsline {chapter}{List of Tables}{vii}{section*.4}
+\contentsline {chapter}{Declaration of Authorship}{ix}{chapter*.6}
+\contentsline {chapter}{Acknowledgements}{xi}{chapter*.7}
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Motivation and Preliminaries}{2}{section.1.1}
+\contentsline {section}{\numberline {1.2}Optimal Experimental Design}{3}{section.1.2}
+\contentsline {section}{\numberline {1.3}Aims and Objectives}{4}{section.1.3}
+\contentsline {section}{\numberline {1.4}Thesis Outline}{5}{section.1.4}
+\contentsline {chapter}{\numberline {2}Background and Related Work}{7}{chapter.2}
+\contentsline {section}{\numberline {2.1}Basic Concepts of Optimal Experimental Design}{7}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Primary criteria}{9}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Combining design objectives}{11}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}Blocked experiments}{12}{subsection.2.1.3}
+\contentsline {section}{\numberline {2.2}Multistratum Experiments}{13}{section.2.2}
+\contentsline {section}{\numberline {2.3}Accounting for Model Misspecification}{16}{section.2.3}
+\contentsline {section}{\numberline {2.4}Search Implementation: Point-Exchange Algorithm}{18}{section.2.4}
+\contentsline {chapter}{\numberline {3}Compound Criteria. Some Amendments}{19}{chapter.3}
+\contentsline {section}{\numberline {3.1}Extra F-quantile}{19}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Optimal designs accounting for the model lack-of-fit}{22}{subsection.3.1.1}
+\contentsline {section}{\numberline {3.2}Desirability Function}{25}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Example of a smoothing function}{26}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Optimal designs}{27}{subsection.3.2.2}
+\contentsline {section}{\numberline {3.3}Conclusions}{29}{section.3.3}
+\contentsline {chapter}{\numberline {4}Generalised Compound Criteria}{31}{chapter.4}
+\contentsline {section}{\numberline {4.1}Model-Robust and Model-Sensitive Approach}{31}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Model-robust approach}{32}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Model-sensitive approach}{33}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}Generalised and compound criteria: example}{35}{subsection.4.1.3}
+\contentsline {section}{\numberline {4.2}Generalised Determinant- and Trace-based Criteria}{36}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Generalised DP-criterion}{37}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Generalised LP-criterion}{39}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Examples}{40}{subsection.4.2.3}
+\contentsline {subsubsection}{\numberline {4.2.3.1}Example 1}{40}{subsubsection.4.2.3.1}
+\contentsline {paragraph}{Example 1.1. $\tau ^2=1/q$}{45}{section*.26}
+\contentsline {paragraph}{Example 1.2}{49}{section*.31}
+\contentsline {subsubsection}{\numberline {4.2.3.2}Example 2}{53}{subsubsection.4.2.3.2}
+\contentsline {section}{\numberline {4.3}Blocked Experiments}{58}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Generalised criteria}{58}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Example}{60}{subsection.4.3.2}
+\contentsline {section}{\numberline {4.4}Conclusions}{63}{section.4.4}
+\contentsline {chapter}{\numberline {5}MSE-based Criteria}{65}{chapter.5}
+\contentsline {section}{\numberline {5.1}Mean Square Error Matrix}{65}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}MSE determinant-based criterion}{67}{subsection.5.1.1}
+\contentsline {subsubsection}{\numberline {5.1.1.1}MC error evaluation}{68}{subsubsection.5.1.1.1}
+\contentsline {subsubsection}{\numberline {5.1.1.2}Point prior estimates of the MSE(D)-component}{69}{subsubsection.5.1.1.2}
+\contentsline {subsection}{\numberline {5.1.2}MSE trace-based criterion}{70}{subsection.5.1.2}
+\contentsline {section}{\numberline {5.2}Example}{71}{section.5.2}
+\contentsline {section}{\numberline {5.3}Conclusions and Discussion}{76}{section.5.3}
+\contentsline {chapter}{\numberline {6}MSE-based Criteria for Blocked Experiments}{77}{chapter.6}
+\contentsline {section}{\numberline {6.1}MSE-Based Criteria Adapted for Blocked Experiments}{77}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Determinant-based criterion}{79}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}Trace-based criterion}{80}{subsection.6.1.2}
+\contentsline {subsection}{\numberline {6.1.3}Example}{81}{subsection.6.1.3}
+\contentsline {section}{\numberline {6.2}Case Study Experiment}{85}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}The experimental framework, aims and limitations}{85}{subsection.6.2.1}
+\contentsline {subsection}{\numberline {6.2.2}Design search}{85}{subsection.6.2.2}
+\contentsline {subsection}{\numberline {6.2.3}Results}{87}{subsection.6.2.3}
+\contentsline {section}{\numberline {6.3}Conclusions}{91}{section.6.3}
+\contentsline {chapter}{\numberline {7}MSE-based Criteria for Multistratum Experiments}{93}{chapter.7}
+\contentsline {section}{\numberline {7.1}Response-Surface Methodology for Multistratum Designs}{93}{section.7.1}
+\contentsline {section}{\numberline {7.2}REML Methodology}{94}{section.7.2}
+\contentsline {section}{\numberline {7.3}Full Treatment Model}{95}{section.7.3}
+\contentsline {subsection}{\numberline {7.3.1}Pure-error REML}{95}{subsection.7.3.1}
+\contentsline {subsection}{\numberline {7.3.2}Yates' procedure}{96}{subsection.7.3.2}
+\contentsline {section}{\numberline {7.4}Design Construction for MSE-based Optimality Criteria}{97}{section.7.4}
+\contentsline {subsection}{\numberline {7.4.1}Construction procedure}{98}{subsection.7.4.1}
+\contentsline {subsection}{\numberline {7.4.2}Allocation of degrees of freedom}{101}{subsection.7.4.2}
+\contentsline {section}{\numberline {7.5}Examples}{104}{section.7.5}
+\contentsline {subsection}{\numberline {7.5.1}Example 1}{105}{subsection.7.5.1}
+\contentsline {subsection}{\numberline {7.5.2}Example 2}{107}{subsection.7.5.2}
+\contentsline {subsection}{\numberline {7.5.3}Example 3}{108}{subsection.7.5.3}
+\contentsline {section}{\numberline {7.6}Conclusions}{111}{section.7.6}
+\contentsline {subsection}{\numberline {7.6.1}Discussion}{111}{subsection.7.6.1}
+\contentsline {subsection}{\numberline {7.6.2}Some practical recommendations}{111}{subsection.7.6.2}
+\contentsline {chapter}{\numberline {8}Conclusions and Future Work}{113}{chapter.8}
+\contentsline {section}{\numberline {8.1}Conclusions}{113}{section.8.1}
+\contentsline {section}{\numberline {8.2}Some Directions for Future Work}{114}{section.8.2}
+\contentsline {chapter}{Appendix}{117}{chapter*.65}
+\contentsline {section}{\numberline {A}Example 2: Optimal designs with respect to criteria with an extra F-quantile}{117}{section.8.1}
+\contentsline {section}{\numberline {B}Example 2: Optimal designs in terms of criteria constructed with desirability functions}{118}{section.8.2}
+\contentsline {section}{\numberline {C}Case-study: MSE(D)-optimal designs with the DPs lack-of-fit component}{119}{section.8.3}
+\contentsline {chapter}{Bibliography}{121}{section*.71}

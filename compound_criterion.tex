@@ -1,4 +1,6 @@
-Standard design optimality theory is developed under the assumption that the fitted model represents the true relationship of interest and that there is no misspecification. However, it is obviously quite a strong belief and in reality we need to take into account at least the possibility that the model might not provide a good fit to the data. In Section \ref{sec::back_misspecification} a brief overview of various types of model misspecification is presented. 
+Standard design optimality theory is developed under the assumption that the fitted model represents the true relationship of interest and that there is no misspecification. However, it is obviously quite a strong belief and in reality we need to take into account at least the possibility that the model might not provide a good fit to the data. 
+%In Section \ref{sec::back_misspecification} a brief overview of various types of model misspecification is presented. 
+?? Other types of model misspecification (in background)
 
 In this chapter we consider the case when the fitted polynomial model is nested within a larger model that is assumed to provide a better fit for the data:
 \begin{equation}
@@ -7,16 +9,16 @@ In this chapter we consider the case when the fitted polynomial model is nested 
 \end{equation}
 where $\bm{X}_2$ is an $n\times q$ is an extension of the initial model matrix representing those extra $q$ potential terms that might represent the fitted model disturbance. The vector $\bm{\beta}_2$ denotes the corresponding parameters. This larger model has $p+q$ parameters in total and not all of them are estimable when the experiment is relatively small: $n<p+q$; this is the case we consider here.
 \subsection{Lack-of-fit criterion}
-We consider the Generalised criterion presented by Goos et al.: [more details?]
-\begin{equation*}
-\mbox{minimise }|\bm{X}'_{1}\bm{X}_1|^{-\frac{\kappa_{D}}{p}}\times \left|\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right|^{-\frac{\kappa_{LoF}}{q}} \times |\bm{A}'\bm{A}+\bm{I}_{q}|.^{\frac{\kappa_{bias}}{q}},
-\end{equation*}
-where $\bm{L}$ is known in literature as dispersion matrix, and the matrix $\bm{L}+\bm{I}_{q}/\tau^{2}$ in the second component is essentially the inverse posterior variance-covariance matrix of the vector of potential terms (up to a factor of $\sigma^2$).
+%We consider the Generalised criterion presented by Goos et al.: [more details?]
+%\begin{equation*}
+%\mbox{minimise }|\bm{X}'_{1}\bm{X}_1|^{-\frac{\kappa_{D}}{p}}\times \left|\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right|^{-\frac{\kappa_{LoF}}{q}} \times |\bm{A}'\bm{A}+\bm{I}_{q}|.^{\frac{\kappa_{bias}}{q}},
+%\end{equation*}
+%where $\bm{L}$ is known in literature as dispersion matrix, and the matrix $\bm{L}+\bm{I}_{q}/\tau^{2}$ in the second component is essentially the inverse posterior variance-covariance matrix of the vector of potential terms (up to a factor of $\sigma^2$).
 
  ** Derivation first or the Generalised criterion
 
-A diffuse prior shall be put on primary terms (as was done by \cite{DuMouchel1994}) -- an arbitrary mean and a variance going to infinity, and the prior on potential terms is the one specified before: $\bm{\beta}_2\sim\mathcal{N}(0,\bm{\Sigma}_{0})$,
-$\bm{\Sigma}_{0}=\sigma^{2}\tau^{2}\bm{I}_{q}$, then the posterior
+To be able to control the scope of the potential terms, we adapt Bayesian approach:  diffuse prior shall be put on primary terms (as was done by \cite{DuMouchel1994}) -- an arbitrary mean and a variance going to infinity, and the prior on potential terms is a normal distribution: $\bm{\beta}_2\sim\mathcal{N}(0,\bm{\Sigma}_{0})$, with the prior variance scaled with respect to the error variation:
+$\bm{\Sigma}_{0}=\sigma^{2}\tau^{2}\bm{I}_{q}$. Then the posterior
 distribution of the coefficients is (as in \cite{Koch2007introduction} and \cite{DuMouchel1994}):
 $$\bm{\beta}|\bm{Y}\sim \mathcal{N}(\bm{b},\bm{\Sigma}),\mbox{ where }\bm{b}=\bm{\Sigma X}'\bm{Y}, \bm{X}=[\bm{X}_1, \bm{X}_2],$$
 $$\bm{\Sigma}=\left[\frac{\bm{K}}{\sigma^{2}\tau^{2}}+\sigma^{-2}(\bm{X'X})\right]^{-1}=\sigma^{2}[\bm{K}/\tau^{2}+\bm{X'}\bm{X}],^{-1}$$
@@ -52,7 +54,7 @@ and $$(\bm{\Sigma}_{22})^{-1}=\frac{1}{\sigma^{2}}\left(\bm{L}+\frac{\bm{I}_{q}}
 Therefore, the $(1-\alpha)\times100\%$ confidence region for the potential terms over the posterior distribution, when $\sigma^2$ is estimated by $s^2$ on $\nu$ degrees of freedom, is given by \citep{Draper1998}:
 
 $$(\bm{\beta}_{2}-\bm{b}_{2})^{'}(\bm{L}+\bm{I}_{q}/\tau^{2})(\bm{\beta}_{2}-\bm{b}_{2})\leq qs^{2}F_{q,\nu;1-\alpha},$$
-where $\mathrm{F}(q,\nu,\alpha)$ is the $\alpha$-quantile of F-distribution with $q$ and $\nu$ degrees of freedom.\\ 
+where $\mathrm{F}(q,\nu,\alpha)$ is the $\alpha$-quantile of F-distribution with $q$ and $\nu$ degrees of freedom. Then, similarly, to $DP$-optimality, minimsing the volumeof this confidence region is equivalent to minimising $\left|\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right|^{-1/q}F_{q,d;1-\alpha_{LoF}}$. The matrix is directly related to the lack-of-fit component in the Generalised criteria developed by Goos et al. (2005) -- in case the error estimate does not depend on the design.
 
 \subsection{MSE-based bias criterion}
 From the inference point of view, in the case of potential model contamination the bias in the parameters' estimates would be of substantial interest. A natural way of evaluating the quality of $\bm{\hat{\beta}}_{1}$, as noted by \citet{FedorovMontepiedra1997} is the matrix of  mean square error, which is the $\bm{L}_2$-distance between the true and estimated values with respect to the probability distribution measure of $\bm{Y}$ under the assumption of model (\ref{eq::full_m}):
@@ -96,7 +98,7 @@ To sum up, the resulting criterion function comprising the $DP$-criterion and th
 Here $\bm{\tilde{\beta}}_{2i}$, $i=1..N$ -- independent random vectors sampled from $\mathcal{N}(\bm{0},\tau^{2}\sigma^{2}\bm{I}_{q})$.
 
 \subsubsection{Point-based estimate}
-
+?? Should this Section be much shorter
 One of the alternatives to the MC approach we would be willing to consider is to use the point prior for $\bm{\beta}_2$, that is $\bm{\beta}_2=\sigma\tau\bm{1}_q$ (where $\bm{1}_q$ is a $q$-dimensional vector with all components being equal to $1$), which is the standard deviation  of the initial (normal) prior. Therefore, $\bm{\tilde{\beta}}_2=\tau\bm{1}_q$, and the MSE(D)-part is
 \begin{align*}
 &|\bm{X}'_{1}\bm{X}_{1}|^{-1}(1+\bm{\tilde{\beta}}_{2}'\bm{X}_2^{'}\bm{X}_1\bm{M}^{-1}\bm{X}_1^{'}\bm{X}_2\bm{\tilde{\beta}}_{2})\\=&|\bm{X}'_{1}\bm{X}_{1}|^{-1}(1+\tau^2\bm{1}'_q\bm{X}_2^{'}\bm{X}_1\bm{M}^{-1}\bm{X}_1^{'}\bm{X}_2\bm{1}_q)\\=&|\bm{X}'_{1}\bm{X}_{1}|^{-1}\left(1+\tau^2\sum_{i,j=1}^{q}[\bm{X}_2^{'}\bm{X}_1\bm{M}^{-1}\bm{X}_1^{'}\bm{X}_2]_{(i,j)}\right),

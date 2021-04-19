@@ -1,0 +1,171 @@
+%%%%% MSE criteria derivation
+
+In the previous chapter we considered optimality criteria comprising components corresponding to various optimisation aims, including that responsible for minimising the prediction bias averaged across the experimentation region. However, from the inference point of view, in the case of potential model contamination the bias in the parameters' estimates would be of substantial interest.
+
+In this chapter we develop the corresponding elementary criteria based on the Mean Square Error (MSE) Matrix, in accordance with both determinant- and trace-based approaches as employed before. The compound criteria examined here, and from here on referred to as MSE-based criteria, contain three parts that are responsible for the following optimisation features:
+\begin{itemize}
+\item Minimising the size of the confidence region (its volume or (weighted) average of the sizes of confidence intervals) for the fitted model parameters' estimators ($DP$- or $LP$-optimality),
+\item Minimising the size of the posterior confidence region (its volume or average axes length) for the potentially missed model terms ($LoF(DP)$- or $LoF(LP)$-optimality),
+\item Simultaneous minimisation of the variance and bias of the estimators of terms in the primary model. 
+\end{itemize}
+
+The derivation of the first two has been presented earlier, the MSE-components are developed in Section \ref{sec::mse_criteria}, together with an example explored in Section \ref{sec::mse_example}. 
+
+\section{Mean Square Error Matrix}
+\label{sec::mse_criteria}
+
+In the generalised criteria the representation of the bias component was derived from the expectation of the integrated mean square error (\ref{eq::IMSE}), i.e. the bias arising from the expected error in the predicted response. 
+
+Recalling the assumption that a better fit for the data might be provided by the `full' model: 
+\begin{equation}
+\label{eq::full_m}
+\bm{Y}=\bm{X}_{1}\bm{\beta}_{1}+\bm{X}_{2}\bm{\beta}_{2}+\bm{\varepsilon},
+\end{equation}
+whereas the fitted model:
+\begin{equation*}
+\bm{Y}=\bm{X}_{1}\bm{\beta}_{1}+\bm{\varepsilon}
+\end{equation*}
+is nested within it, and $\bm{\hat{\beta}}_{1}=(\bm{X}'_{1}\bm{X}_{1})^{-1}\bm{X}'_{1}\bm{Y}$ is the least squares estimators of the primary model coefficients.
+
+So instead of the prediction bias in many practical applications the interest is in minimising the bias of the fitted model parameter estimates $\bm{\hat{\beta}}_{1}$.
+
+A natural way of evaluating the quality of $\bm{\hat{\beta}}_{1}$, as noted by \citet{FedorovMontepiedra1997} is the matrix of  mean square error, which is the $\bm{L}_2$-distance between the true and estimated values with respect to the probability distribution measure of $\bm{Y}$ under the assumption of model (\ref{eq::full_m}):
+\begin{align}
+\label{eq::MSE}
+\mbox{MSE}(\bm{\hat{\beta}}_1|\bm{\beta})=&\mathtt{E}_{\bm{Y}|\bm{\beta}}[(\bm{\hat{\beta}}_1-\bm{\beta}_1)(\bm{\hat{\beta}}_1-\bm{\beta}_1)']\notag\\=&\sigma^2(\bm{X}_1^{'}\bm{X}_1)^{-1}+\bm{A}\bm{\beta}_2\bm{\beta}_2'\bm{A}', 
+\end{align}
+where, as before, $\bm{A}=(\bm{X}_1^{'}\bm{X}_1)^{-1}\bm{X}_1^{'}\bm{X}_2$ is the alias matrix.
+
+\citet{Fedorov1998optimal} presented the $\bm{D}_R$-optimality criterion that minimises the logarithm of the MSE (risk) matrix determinant. The ``model validity range'' concept introduced allows for determining the designs robust to a certain contamination in the sense of the chosen optimality criterion and vice versa, i.e. discovering the range of contamination effects that would not worsen the criterion values of the designs beyond a set threshold. However, the fact that the contamination effect remains unknown leads to the necessity of using prior information which we will incorporate either by applying the Bayesian approach or by considering local designs only.
+
+When constructing optimality criteria for obtaining model-robust minimum bias designs \citet{jones2011efficient} worked with the variance and bias components in (\ref{eq::MSE}) separately. With the constraint put on the $D$-efficiency (i.e.~variance) the criterion minimises the expectation of the squared norm of the bias.   
+   
+Although such separation allows compromising between maximising the precision of the primary terms' estimators and minimising the bias, putting a threshold on the $D$-component might result in settling for a good design in terms of bias minimisation, but not the best possible in terms of $D$-efficiency, as a relatively small gain in the bias component might lead to a larger loss in $D$-efficiency.
+
+Here we decided to keep the MSE matrix as a whole and consider the expectation of the logarithm of its determinant with respect to the prior distribution of the `true' model parameters (hence we shall refer to such an approach as ``pseudo-Bayesian''), which is essentially the expected logarithm of the volume of the region outlined by the expected squared deviations between the `true' and the estimated values of the elements of $\bm{\beta}_1$. Minimising the expected trace of the mean square error matrix is then equivalent to minimising the average expected $\bm{L}_2$-distance between $\bm{\beta}_1$ and $\bm{\hat{\beta}}_1$. The detailed derivations of these criteria are given in Sections \ref{sec::msed} and \ref{sec::msel}.
+
+\subsection{MSE determinant-based criterion}
+\label{sec::msed}
+The determinant-based criterion function is minimising
+\begin{equation}
+\label{eq::MSE_det}
+\mathtt{E}_{\beta}\log(\det[\mbox{MSE}(\bm{\hat{\beta}}_1|\bm{\beta})]),
+\end{equation}
+where by $\bm{\beta}$ we denote the joint vector of primary and potential model parameters: $\bm{\beta}=[\bm{\beta}_1, \bm{\beta}_2]$.
+Using the matrix determinant lemma \citep{Harville2006matrix}
+\begin{equation*}
+\det[\bm{P}+\bm{uv}']=\det[\bm{P}]\det[1+\bm{v'}\bm{P}^{-1}\bm{u}], 
+\end{equation*}
+where $\bm{P}$ is an invertible square matrix and $\bm{u}$, $\bm{v}$ are column vectors, the determinant in (\ref{eq::MSE_det}) can be decomposed:
+\begin{align}
+\label{eq::mse_det_dec}
+&\det[\mbox{MSE}(\bm{\hat{\beta}}_1|\bm{\beta}_2)]\notag\\&=\det[\sigma^2\bm{M}^{-1}+\bm{M}^{-1}\bm{X}_1^{'}\bm{X}_2\bm{\beta}_2\bm{\beta}_2'\bm{X}_2^{'}\bm{X}_1\bm{M}^{-1}]\notag\\&=\sigma^{2p}\det[\bm{M}^{-1}+\bm{M}^{-1}\bm{X}_1^{'}\bm{X}_2\bm{\tilde{\beta}}_2\bm{\tilde{\beta}}_2'\bm{X}_2^{'}\bm{X}_1\bm{M}^{-1}]\notag\\&=\sigma^{2p}\det[\bm{M}^{-1}]\det[1+\bm{\tilde{\beta}}_2'\bm{X}_2^{'}\bm{X}_1\bm{M}^{-1}\bm{M}\bm{M}^{-1}\bm{X}_1^{'}\bm{X}_2\bm{\tilde{\beta}}_2]\notag\\&=\sigma^{2p}\det[\bm{M}^{-1}](1+\bm{\tilde{\beta}}_2'\bm{X}_2^{'}\bm{X}_1\bm{M}^{-1}\bm{X}_1^{'}\bm{X}_2\bm{\tilde{\beta}}_2),\\
+&\mbox{where } \bm{M}=\bm{X}_1^{'}\bm{X}_1 \mbox{ and }\bm{\tilde{\beta}}_2=\bm{\beta}_2/\sigma. \notag
+\end{align}
+Applying the logarithm function gives us the following sum:
+\begin{align*}
+&\log(\det[\mbox{MSE}(\bm{\hat{\beta}}_1|\bm{\beta}_2)])\\&=p\log\sigma^2+\log(\det[\bm{M}^{-1}])+\log(1+\bm{\tilde{\beta}}_2'\bm{X}_2^{'}\bm{X}_1\bm{M}^{-1}\bm{X}_1^{'}\bm{X}_2\bm{\tilde{\beta}}_2). 
+\end{align*}
+The first summand does not depend on the design, so it will not be included in the criterion; the second one is the $D$-optimality component. Therefore, (\ref{eq::MSE_det}) is replaced by
+\begin{equation*}
+\log(\det[\bm{M}^{-1}])+\mathtt{E}_{\bm{\tilde{\beta}}_2}\log(1+\bm{\tilde{\beta}}_2'\bm{X}_2^{'}\bm{X}_1\bm{M}^{-1}\bm{X}_1^{'}\bm{X}_2\bm{\tilde{\beta}}_2).
+\end{equation*}
+
+The second term needs to be evaluated numerically due to the obvious lack of information regarding the potential terms' coefficients. Note that as $\bm{\beta}_2 \sim \mathcal{N}(\bm{0},\tau^{2}\sigma^{2}\bm{I}_{q})$, then $\bm{\tilde{\beta}}_2 \sim \mathcal{N}(\bm{0},\tau^{2}\bm{I}_{q})$ and its prior distribution does not depend on the unknown $\sigma^2$.
+
+The first naive possible approach would be to consider using a Taylor series approximation. However, it is only valid if $|\bm{\tilde{\beta}}_2'\bm{X}_2^{'}\bm{X}_1\bm{M}^{-1}\bm{X}_1^{'}\bm{X}_2\bm{\tilde{\beta}}_2|<1$, which is not necessarily true and, as simulations demonstrated, is indeed not for some realistic parameter values.
+
+As the number of potential terms in the full model and, hence, the number of dimensions in question might be quite large (e.g. $20$, $30$, etc.), numerical methods involving stochastic techniques are expected to provide the best results in a reasonable time. 
+
+Spherical-radial methodology was presented by  \citet{Monahan1997spherical} as a mixture of random and deterministic  approaches for calculating expectations of functions of random vectors over computationally complicated posterior distributions. The spherical-radial transformation of the variables leads to the partition of the initial $m$-dimensional integral into the integration over the $m$-dimensional unit sphere and along the one-dimensional radius. We implemented a mixed method suggested by the authors which involves a randomised integration over the sphere and quadrature (Simpson's rule) on the radius. Although it was shown to demonstrate better performance in comparison to purely randomised methods, the high dimensionality of our problem requires infeasible time and computational resources for obtaining accurate results. 
+
+\citet{Yu2008comparing} considered several sampling approaches for numerical approximations of such integrals and came to the conclusion that ``the Gaussian-Hermite quadrature and $SR$ approaches are not practical when the dimensions become large.'' They suggested using the Extensible Shifted Lattice Points ($ELSP$) set with Baker's transformation used in Quasi-Monte Carlo methods. Here we will use Pseudo Monte Carlo samples which is a reliable approach in the case of large dimensions and at the same time can be easily implemented and provides good accuracy when the number of random draws is not small. The next section contains some discussion regarding how large the samples should be.
+
+To sum up, the resulting criterion function comprising the $DP$-criterion and the $LoF(DP)$-component from the generalised $DP$-criterion as well as the MSE-based part, all brought to the scale of efficiencies, is
+\begin{align}
+\label{eq::MSE_D}
+\mbox{minimise }&\left[\left|\bm{X}'_{1}\bm{X}_{1}\right|^{-1/p}F_{p,d;1-\alpha_{DP}}\right]^{\kappa_{DP}} \times \notag \\ &\left[\left|\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right|^{-1/q}F_{q,d;1-\alpha_{LoF}}\right]^{\kappa_{LoF}}\times \notag\\ & \left[|\bm{X}'_{1}\bm{X}_{1}|^{-1}\exp\left(\frac{1}{N}\sum_{i=1}^{N}\log(1+\bm{\tilde{\beta}}_{2i}'\bm{X}_2^{'}\bm{X}_1\bm{M}^{-1}\bm{X}_1^{'}\bm{X}_2\bm{\tilde{\beta}}_{2i})\right)\right]_{.}^{\kappa_{MSE}/p}
+\end{align}
+Here $\bm{\tilde{\beta}}_{2i}$, $i=1..N$ -- independent random vectors sampled from $\mathcal{N}(\bm{0},\tau^{2}\sigma^{2}\bm{I}_{q})$.
+
+\subsubsection{MC error evaluation}
+
+In the situation when we need to estimate an expectation of a function $f$ of a random vector $\xi$, $f(\xi): \mathbb{R}^q \rightarrow \mathbb{R}$, the (Pseudo) Monte Carlo estimate based on a sample of independent identical $\xi_1,\ldots,\xi_N$ is constructed as
+\begin{equation*}
+\widehat{\mathtt{E}(f(\xi))}=\frac{1}{N}\sum_{i=1}^{N}f(\xi_{i}),
+\end{equation*}
+which, by the law of large numbers, converges to $\mathtt{E}(f(\xi))$ as $N\rightarrow\infty$.
+
+To evaluate the variability and the inaccuracy of such an estimate of 
+\begin{equation*}
+\mathtt{E}_{\bm{\tilde{\beta}}_2}f(\bm{X}_1,\bm{X}_2)=\mathtt{E}_{\bm{\tilde{\beta}}_2}\log(1+\bm{\tilde{\beta}}_2'\bm{X}_2^{'}\bm{X}_1\bm{M}^{-1}\bm{X}_1^{'}\bm{X}_2\bm{\tilde{\beta}}_2), 
+\end{equation*}
+we simulated $10^3$ random designs from Example $1$ and calculated the maximum ratios between the MC errors and the MC estimates for different values of $\tau^2$ and numbers of draws $n$. The MC estimation error of the expectation of the function $f$ with respect to the probability measure $p$ is calculated as
+\begin{equation*}
+\frac{1}{N}\sqrt{\sum_{i=1}^{N}\left(\frac{f_i}{p_i}\right)^{2}-\frac{1}{N}\left(\sum_{i=1}^{N}\frac{f_i}{p_i}\right)^{2}},
+\end{equation*}  
+where $f_i$ and $p_i$ are the values of $f$ and $p$ at the randomly drawn points from the distribution defined by $p$. In our case, it is $\mathcal{N}(\bm{0},\tau^{2}\bm{I}_{q})$ --- a $q$-dimensional Normal distribution with variances being equal to the scaling parameter $\tau^2$. The results of the simulations are summarised in Table \ref{table::MC_error}.
+\begin{table}[h]
+\centering
+\caption{Relative MC error}
+\label{table::MC_error}
+\begin{tabular}{|c|l|l|l|}
+\hline
+\multirow{2}{*}{$\tau^2$} & \multicolumn{3}{l|}{Number of draws, $N$} \\ \cline{2-4} 
+  & 100     & 500     & 1000    \\ \hline
+$1$ & 1.1\% & 0.45\% & 0.34\% \\ \hline
+$1/q$ & 2.4\% & 1.08\% & 0.70\% \\ \hline
+$1/q^2$ & 6.0\% & 2.30\% & 1.62\% \\ \hline
+\end{tabular}
+\end{table}
+  
+It can be easily seen that smaller variation of the potential terms' effects corresponds to larger relative error. Therefore, decreasing $\tau^2$ implies the use of more draws in MC simulations in order to maintain similar relative MC errors. For $\tau^2$ equal to $1$ we will use at least $n=100$ draws, $n=500$ shall be used for smaller $\tau^2=1/q$, and for $\tau^2$, for example, as small as $1/q^2$, more than $1000$ draws might be needed. 
+
+\subsubsection{Point prior estimates of the MSE(D)-component}
+\label{sec::mse_point}
+One of the alternatives to the MC approach we would be willing to consider is to use the point prior for $\bm{\beta}_2$, that is $\bm{\beta}_2=\sigma\tau\bm{1}_q$ (where $\bm{1}_q$ is a $q$-dimensional vector with all components being equal to $1$), which is the standard deviation  of the initial (normal) prior. Therefore, $\bm{\tilde{\beta}}_2=\tau\bm{1}_q$, and the MSE(D)-part is
+\begin{align*}
+&|\bm{X}'_{1}\bm{X}_{1}|^{-1}(1+\bm{\tilde{\beta}}_{2}'\bm{X}_2^{'}\bm{X}_1\bm{M}^{-1}\bm{X}_1^{'}\bm{X}_2\bm{\tilde{\beta}}_{2})\\=&|\bm{X}'_{1}\bm{X}_{1}|^{-1}(1+\tau^2\bm{1}'_q\bm{X}_2^{'}\bm{X}_1\bm{M}^{-1}\bm{X}_1^{'}\bm{X}_2\bm{1}_q)\\=&|\bm{X}'_{1}\bm{X}_{1}|^{-1}\left(1+\tau^2\sum_{i,j=1}^{q}[\bm{X}_2^{'}\bm{X}_1\bm{M}^{-1}\bm{X}_1^{'}\bm{X}_2]_{(i,j)}\right),
+\end{align*}
+so essentially the last part of the equation is the summation of matrix elements, which obviously takes less computational time even for large dimensions $q$. 
+
+The normal prior for $\bm{\beta}_2$ shall be preserved in the lack-of-fit component in (\ref{eq::MSE_D}), and so the criterion with the point prior estimate of the MSE(D)-component is the following function:
+\begin{align}
+\label{eq::MSE_D_point}
+\mbox{minimise }&\left[\left|\bm{X}'_{1}\bm{X}_{1}\right|^{-1/p}F_{p,d;1-\alpha_{DP}}\right]^{\kappa_{DP}} \times \notag \\ &\left[\left|\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right|^{-1/q}F_{q,d;1-\alpha_{LoF}}\right]^{\kappa_{LoF}}\times \notag\\ & \left[|\bm{X}'_{1}\bm{X}_{1}|^{-1}\left(1+\tau^2\sum_{i,j=1}^{q}[\bm{X}_2^{'}\bm{X}_1\bm{M}^{-1}\bm{X}_1^{'}\bm{X}_2]_{(i,j)}\right)\right]_{.}^{\kappa_{MSE}/p}
+\end{align}
+
+Later we will refer to this as the ``MSE(D)P''-criterion, and in Section \ref{sec::mse_example} we will explore how much efficiency is lost when it is used instead of the computationally expensive original MSE(D)-based criterion (\ref{eq::MSE_D}).
+
+\subsection{MSE trace-based criterion}
+\label{sec::msel}
+The pseudo-Bayesian approach to calculating the trace function of the MSE matrix (\ref{eq::MSE}) results in the following criterion function: 
+\begin{align*}
+\mathtt{E}_{\beta_2}\mbox{trace}[\mbox{MSE}(\bm{\hat{\beta}}_1|\bm{\beta}_2)]&=\mbox{trace}[\mathtt{E}_{\beta_2}\mbox{MSE}(\bm{\hat{\beta}}_1|\bm{\beta}_2)]=\\&=\mbox{trace}[\sigma^2(\bm{X}_1^{'}\bm{X}_1)^{-1} + \mathtt{E}_{\bm{\beta}_2}(\bm{A}\bm{\beta}_2\bm{\beta}_2'\bm{A}')]=\\&=\mbox{trace}[\sigma^2(\bm{X}_1^{'}\bm{X}_1)^{-1}+\sigma^2\tau^2\bm{A}\bm{A}']=\\&=\sigma^2\mbox{trace}[(\bm{X}_1^{'}\bm{X}_1)^{-1}+\tau^2\bm{A}\bm{A}']\\&=\sigma^2[\mbox{trace}\{(\bm{X}_1^{'}\bm{X}_1)^{-1}\}+\tau^2\mbox{trace}\bm{A}\bm{A}'].
+\end{align*}
+
+The transitions above are possible due to commutativity of the operations of trace and expectation. The main advantage is the absence of the necessity of any additional numerical evaluations, and in this case of the trace-based criterion using the point prior for $\bm{\beta}_2$ defined earlier would lead to the same function. By minimising the whole function the sum of primary terms' variance and the expected squared norm of the bias vector in the direction of the potential terms are minimised simultaneously. The second part here contains the scaling parameter $\tau^2$ which regulates the magnitude of the potential terms' variation relatively to the error variance. 
+
+Joining up the derived criterion function, the $LP$-criterion and the $LoF(LP)$-component from the generalised $LP$-criterion (\ref{eq::GLP_eff}), we obtain the compound criterion:
+\begin{align}
+\label{eq::MSE_L}
+\mbox{minimise} &\left[\frac{1}{p}\mbox{trace}(\bm{WX}'_{1}\bm{X}_{1})^{-1}F_{1,d;1-\alpha_{LP}}\right]^{\kappa_{LP}}\times \notag\\& \left[\frac{1}{q}\mbox{trace}\left(\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right)^{-1}F_{1,d;1-\alpha_{LoF}}\right]^{\kappa_{LoF}}\times 
+\notag\\& \left[\frac{1}{p}\mbox{trace}\{(\bm{X}'_{1}\bm{X}_{1})^{-1}+\tau^2\bm{A}\bm{A}'\}\right]^{\kappa_{MSE}}_{.}
+\end{align}
+\section{Example}
+\label{sec::mse_example}
+\input{Chapter5_Examples}
+
+\section{Conclusions and Discussion}
+
+In this chapter we introduced the compound criteria (in determinant- and trace-based forms), components of which correspond to optimising towards the minimisation of the primary model parameters' variances, their bias arising from the potential model contamination, and the posterior variances of the potential terms that is ensuring that the resulting designs would allow for the lack-of-fit test in a known direction of model misspecification.
+
+Computationally, the determinant version of the criterion is quite costly due to the necessity of the numerical evaluation of the $MSE(D)$-component; and in the case of Monte Carlo sampling the time required for the optimal design search increases with the decrease of the value of the variance scaling parameter $\tau^2$ when the relative MC error is desired to be kept consistently small. It is quite possible that improvement of the algorithm used here might be further investigated; the high dimensionality of the problem though will likely restrict the search to the stochastic estimation methods. 
+
+As an alternative, in the example considered here, we tried the point prior $\bm{\beta}_2=\sigma\tau\bm{1}_q$ for the $MSE(D)$-component evaluation, and it was seen that the optimal designs are very similar to the designs obtained with the original normal prior $\mathcal{N}(\bm{0},\tau^{2}\sigma^{2}\bm{I}_{q})$, that is this approach might be a good option in the presence of restrictions on the design search time.
+
+We also observed some tendencies in the relationships between the criterion components, and how they are affected by the change of the scaling parameter value $\tau^2$ (i.e. the magnitude of the potential terms' impact). It seems that a sensible compromise between the three elementary criteria can be found, especially in the case of smaller $\tau^2$. However, as was also seen in the case of generalised criteria, the determinant- and trace-based criteria do not always provide interchangeable (in terms of performance) designs, and it is quite important to make a choice between the two. 
+
+Unlike in the case of the previous criteria, at any step of the MSE-based criteria (\ref{eq::MSE_D}) and (\ref{eq::MSE_L}) derivation it was not required to orthonormalise the matrices of the candidate points and, hence, one can work with usual matrices containing candidate treatments as combinations of factors scaled to $[-1,1]$ and products of their powers. This does not only mean that the computational complexity is reduced, but also that the application of these criteria could be extended to the cases of hierarchical structures of the experimental units, which will be demonstrated in Chapter \ref{ch::mse_ms}.
+
+%%%\subsection{Discussion}

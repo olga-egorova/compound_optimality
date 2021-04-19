@@ -1,0 +1,64 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Example 1. Properties of optimal designs with respect to determinant-based compound criteria with an extra F-quantile\relax }}{22}{table.caption.10}
+\contentsline {table}{\numberline {3.2}{\ignorespaces Example 1. D-optimal design (\#$1$ and \#$4$)\relax }}{23}{table.caption.11}
+\contentsline {table}{\numberline {3.3}{\ignorespaces Example 1. Optimal design with respect to the determinant based-criteria \#$7$ and \#$10$\relax }}{24}{table.caption.12}
+\contentsline {table}{\numberline {3.4}{\ignorespaces Example 1. Properties of optimal designs with respect to trace-based compound criteria with an extra F-quantile\relax }}{24}{table.caption.13}
+\contentsline {table}{\numberline {3.5}{\ignorespaces Example 1. Optimal design with respect to the trace based-criterion \#$12$\relax }}{25}{table.caption.14}
+\contentsline {table}{\numberline {3.6}{\ignorespaces Example 1. Properties of optimal designs in terms of determinant-based compound criteria constructed with desirability functions\relax }}{28}{table.caption.16}
+\contentsline {table}{\numberline {3.7}{\ignorespaces Example 1. Properties of optimal designs in terms of trace-based compound criteria constructed with desirability functions\relax }}{29}{table.caption.17}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces GD-efficiencies of designs optimal in terms of determinant-based compound criteria\relax }}{36}{table.caption.18}
+\contentsline {table}{\numberline {4.2}{\ignorespaces GL-efficiencies of designs optimal in terms of trace-based compound criteria\relax }}{36}{table.caption.19}
+\contentsline {table}{\numberline {4.3}{\ignorespaces Example 1.1. Properties of generalised D- and L-optimal designs. $\tau ^2=1$\relax }}{41}{table.caption.20}
+\contentsline {table}{\numberline {4.4}{\ignorespaces Example 1. LoF(D)- and LoF(L)-optimal design (\#$2$, \#$7$ and \#$8$)\relax }}{42}{table.caption.21}
+\contentsline {table}{\numberline {4.5}{\ignorespaces Example 1. Bias(D)- and Bias(L)-optimal design \#$3$\relax }}{42}{table.caption.22}
+\contentsline {table}{\numberline {4.6}{\ignorespaces Example 1. Properties of generalised DP- and LP-optimal designs. $\tau ^2=1$\relax }}{43}{table.caption.23}
+\contentsline {table}{\numberline {4.7}{\ignorespaces Example 1. DP-optimal design \#$2$\relax }}{44}{table.caption.24}
+\contentsline {table}{\numberline {4.8}{\ignorespaces Example 1. LoF(DP)-optimal design \#$3$\relax }}{45}{table.caption.25}
+\contentsline {table}{\numberline {4.9}{\ignorespaces Example 1.1. Properties of generalised D- and L-optimal designs. $\tau ^2=1/q$\relax }}{46}{table.caption.27}
+\contentsline {table}{\numberline {4.10}{\ignorespaces Example 1.1. LoF(D)- and LoF(L)-optimal design \#$2$ ($\tau ^2=1/q$)\relax }}{47}{table.caption.28}
+\contentsline {table}{\numberline {4.11}{\ignorespaces Example 1.1. Bias(D)- and Bias(L)-optimal design \#$3$ ($\tau ^2=1/q$)\relax }}{47}{table.caption.29}
+\contentsline {table}{\numberline {4.12}{\ignorespaces Example 1.1. Properties of generalised DP- and LP-optimal designs. $\tau ^2=1/q$\relax }}{48}{table.caption.30}
+\contentsline {table}{\numberline {4.13}{\ignorespaces Example 1.2. Properties of generalised D and L-optimal designs\relax }}{50}{table.caption.32}
+\contentsline {table}{\numberline {4.14}{\ignorespaces Example 1.2. LoF- and Bias-optimal design \#$2$ and \#$3$\relax }}{50}{table.caption.33}
+\contentsline {table}{\numberline {4.15}{\ignorespaces Example 1.2. Properties of generalised DP- and LP-optimal designs\relax }}{51}{table.caption.34}
+\contentsline {table}{\numberline {4.16}{\ignorespaces Example 1.2. GDP-optimal design \#$9$, \#$11$ and \#$13$\relax }}{52}{table.caption.35}
+\contentsline {table}{\numberline {4.17}{\ignorespaces Example 2. Properties of generalised D- and L-optimal designs. $\tau ^2=1$\relax }}{54}{table.caption.36}
+\contentsline {table}{\numberline {4.18}{\ignorespaces Example 2. LoF(D)-optimal (left) and LoF(L)-optimal (right) designs\relax }}{55}{table.caption.37}
+\contentsline {table}{\numberline {4.19}{\ignorespaces Example 2. Properties of generalised DP- and LP-optimal designs. $\tau ^2=1$\relax }}{56}{table.caption.38}
+\contentsline {table}{\numberline {4.20}{\ignorespaces Example 2. LoF(DP)- and LoF(LP)-optimal design\relax }}{57}{table.caption.39}
+\contentsline {table}{\numberline {4.21}{\ignorespaces Properties of generalised D- and L-optimal blocked designs\relax }}{61}{table.caption.40}
+\contentsline {table}{\numberline {4.22}{\ignorespaces Properties of generalised DP- and LP-optimal blocked designs\relax }}{62}{table.caption.41}
+\contentsline {table}{\numberline {4.23}{\ignorespaces LoF(LP)-optimal blocked design\relax }}{63}{table.caption.42}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces Relative MC error\relax }}{69}{table.caption.43}
+\contentsline {table}{\numberline {5.2}{\ignorespaces Properties of MSE(D)-optimal designs\relax }}{73}{table.caption.44}
+\contentsline {table}{\numberline {5.3}{\ignorespaces MSE(D)-criterion, DP-optimal design\relax }}{73}{table.caption.45}
+\contentsline {table}{\numberline {5.4}{\ignorespaces Properties of MSE(L)-optimal designs\relax }}{74}{table.caption.46}
+\contentsline {table}{\numberline {5.5}{\ignorespaces Properties of MSE(D)-optimal designs, with point prior\relax }}{75}{table.caption.47}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {6.1}{\ignorespaces Properties of MSE(D)-optimal designs for blocked experiment\relax }}{82}{table.caption.48}
+\contentsline {table}{\numberline {6.2}{\ignorespaces Properties of MSE(L)-optimal designs for blocked experiment\relax }}{83}{table.caption.49}
+\contentsline {table}{\numberline {6.3}{\ignorespaces Properties of MSE(D)-optimal designs for blocked experiment, with point prior\relax }}{83}{table.caption.50}
+\contentsline {table}{\numberline {6.4}{\ignorespaces LoF(DP)-optimal designs for blocked experiment, \#$2$ and \#$8$\relax }}{84}{table.caption.51}
+\contentsline {table}{\numberline {6.5}{\ignorespaces Case-study. Properties of MSE(D)-optimal blocked designs\relax }}{88}{table.caption.52}
+\contentsline {table}{\numberline {6.6}{\ignorespaces Case-study. Properties of MSE(D)-optimal blocked designs, with two centre points per block\relax }}{89}{table.caption.53}
+\contentsline {table}{\numberline {6.7}{\ignorespaces Case-study. MSE(D)-optimal design \#$1$ with two centre points, $\tau ^2=1$\relax }}{89}{table.caption.54}
+\contentsline {table}{\numberline {6.8}{\ignorespaces Case-study. Properties of ``Full'' MSE(D)-optimal blocked designs, with two centre points per block\relax }}{91}{table.caption.56}
+\contentsline {table}{\numberline {6.9}{\ignorespaces Case-study. Designs \#$1$ from Table \ref {tab::MSE(D)_caseCPLoF}, $\tau ^2=1$ (left) and $\tau ^2=1/q$ (right)\relax }}{91}{table.caption.57}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {7.1}{\ignorespaces Split-split-plot design\relax }}{104}{table.caption.58}
+\contentsline {table}{\numberline {7.2}{\ignorespaces Example 1. Properties of MSE(D)-optimal designs\relax }}{105}{table.caption.59}
+\contentsline {table}{\numberline {7.3}{\ignorespaces Example 1. Properties of MSE(L)-optimal designs\relax }}{106}{table.caption.60}
+\contentsline {table}{\numberline {7.4}{\ignorespaces Example 2. Properties of MSE(D)-optimal designs\relax }}{107}{table.caption.61}
+\contentsline {table}{\numberline {7.5}{\ignorespaces Example 2. Properties of MSE(L)-optimal designs\relax }}{108}{table.caption.62}
+\contentsline {table}{\numberline {7.6}{\ignorespaces Example 3. Properties of MSE(D)-optimal designs\relax }}{109}{table.caption.63}
+\contentsline {table}{\numberline {7.7}{\ignorespaces Example 3. Properties of MSE(L)-optimal designs\relax }}{110}{table.caption.64}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {A.1}{\ignorespaces Example 2. Properties of optimal designs with respect to determinant-based compound criteria with an extra F-quantile\relax }}{117}{table.caption.66}
+\contentsline {table}{\numberline {A.2}{\ignorespaces Example 2. Properties of optimal designs with respect to trace-based compound criteria with an extra F-quantile\relax }}{117}{table.caption.67}
+\contentsline {table}{\numberline {B.1}{\ignorespaces Example 2. Properties of optimal designs with respect to determinant-based compound criteria constructed with desirability functions\relax }}{118}{table.caption.68}
+\contentsline {table}{\numberline {B.2}{\ignorespaces Example 2. Properties of optimal designs with respect to trace-based compound criteria constructed with desirability functions\relax }}{118}{table.caption.69}
+\contentsline {table}{\numberline {C.1}{\ignorespaces Case-study. Properties of ``Full'' MSE(D)-optimal blocked designs, without two centre points per block\relax }}{119}{table.caption.70}

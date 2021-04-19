@@ -1,0 +1,29 @@
+\begin{thebibliography}{4}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+
+\bibitem[{Arnouts and Goos(2012)}]{Arnouts2012staggered}
+Arnouts, H. and Goos, P. (2012) Staggered-level designs for experiments with
+  more than one hard-to-change factor.
+\newblock \emph{Technometrics}, \textbf{54}, 355--366.
+
+\bibitem[{DuMouchel and Jones(1994)}]{DuMouchel1994}
+DuMouchel, W. and Jones, B. (1994) A simple {B}ayesian modification of
+  {D}-optimal designs to reduce dependence on an assumed model.
+\newblock \emph{Technometrics}, \textbf{36}, 37--47.
+
+\bibitem[{Goos and Vandebroek(2001)}]{Goos2001Doptimal}
+Goos, P. and Vandebroek, M. (2001) D-optimal response surface designs in the
+  presence of random block effects.
+\newblock \emph{Computational statistics \& data analysis}, \textbf{37},
+  433--453.
+
+\bibitem[{{\v{S}}id{\'a}k(1967)}]{vsidak1967rectangular}
+{\v{S}}id{\'a}k, Z. (1967) Rectangular confidence regions for the means of
+  multivariate normal distributions.
+\newblock \emph{Journal of the American Statistical Association}, \textbf{62},
+  626--633.
+
+\end{thebibliography}

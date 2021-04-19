@@ -1,3 +1,46 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: MSE_paper.aux
+This is BibTeX, Version 0.99d (TeX Live 2018)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: MSE_paper.aux
 The style file: rss.bst
 Database file #1: thesis_bib.bib
+You've used 26 entries,
+            2668 wiz_defined-function locations,
+            738 strings with 8308 characters,
+and the built_in function-call counts, 11945 in all, are:
+= -- 1165
+> -- 468
+< -- 22
++ -- 187
+- -- 156
+* -- 1002
+:= -- 2166
+add.period$ -- 52
+call.type$ -- 26
+change.case$ -- 175
+chr.to.int$ -- 25
+cite$ -- 26
+duplicate$ -- 576
+empty$ -- 904
+format.name$ -- 250
+if$ -- 2349
+int.to.chr$ -- 2
+int.to.str$ -- 1
+missing$ -- 34
+newline$ -- 111
+num.names$ -- 104
+pop$ -- 249
+preamble$ -- 1
+purify$ -- 156
+quote$ -- 0
+skip$ -- 352
+stack$ -- 0
+substring$ -- 627
+swap$ -- 138
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 204
+warning$ -- 0
+while$ -- 108
+width$ -- 0
+write$ -- 307

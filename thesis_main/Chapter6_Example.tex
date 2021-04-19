@@ -1,0 +1,170 @@
+%% MSE Blocked, Example 
+In this section we recall the experimental framework we considered in Chapter \ref{ch::generalised}, Section \ref{sec::generalised_example}: a factorial experiment with five three-level factors, and $40$ runs grouped into $5$ equal-sized blocks, i.e. $8$ runs per block. The full second-order polynomial model is to be fitted ($p=20$), and the potential model misspecification is presented in the form of all quadratic-by-linear and linear-by-linear-by-linear interactions, so that the total number of potential terms is $q=30$.  
+
+In the same way as in previous examples, Tables \ref{tab::MSEB(D)_ex1}, \ref{tab::MSEB(L)_ex1} and \ref{tab::MSEB(D)P_ex1} contain the weight allocations for the determinant- and trace-based criteria, for two values of $\tau^2$, together with the performances of the resulting optimal designs; as before, each row corresponds to the optimal design with respect to the particular combination of weights in the MSE-based criterion.
+
+The total number of available residual degrees of freedom is $n-b-p=15$, and their distribution between the pure error and lack-of-fit components is presented in the $4$th and $5$th columns of the tables. Further columns contain the efficiency values of the optimal designs with respect to the individual criteria. In the case of the point prior estimates of the $MSE(D)$-component, together with the criterion values used for the design search, we obtained its Monte Carlo estimation for the designs in Table \ref{tab::MSEB(D)P_ex1}, with the sample size being equal to $1000$.  
+
+%%% MSE(D) criteria
+
+\begin{table}[h]
+\centering
+\caption{Properties of MSE(D)-optimal designs for blocked experiment}
+\label{tab::MSEB(D)_ex1}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{rrrrrrrrrrrrr}
+   & \multicolumn{3}{l}{\textbf{Criteria, $\bm{\tau^2=1}$}} & \multicolumn{2}{l}{\textbf{DoF}} & \multicolumn{6}{l}{\textbf{Efficiency,\%}}                               \\
+   & \textbf{DP}       & \textbf{LoF(DP)}    & \textbf{MSE(D)}   & \textbf{PE}        & \textbf{LoF}        & \textbf{DP}   & \textbf{LoF(DP)}   & \textbf{MSE(D)}  &  \textbf{LP}       & \textbf{LoF(LP)}   & \textbf{MSE(L)}  \\
+1 & 1 & 0 & 0 & \multicolumn{1}{|r}{14} & \multicolumn{1}{r|}{1} & 100.00 & 62.02 & 87.53 & \multicolumn{1}{|r}{93.65} & 99.58 & 12.16 \\
+2 & 0 & 1 & 0 & \multicolumn{1}{|r}{8} & \multicolumn{1}{r|}{7} & 36.59 & 100.00 & 42.93 & \multicolumn{1}{|r}{0.38} & 87.56 & 0.28 \\
+3 & 0 & 0 & 1 & \multicolumn{1}{|r}{0} & \multicolumn{1}{r|}{15} & 0.00 & 0.00 & 100.00 & \multicolumn{1}{|r}{0.00} & 0.00 & 26.86 \\
+4 & 0.5 & 0.5 & 0 & \multicolumn{1}{|r}{10} & \multicolumn{1}{r|}{5} & 81.67 & 84.71 & 85.28 & \multicolumn{1}{|r}{78.37} & 95.61 & 15.94 \\
+5 & 0.5 & 0 & 0.5 & \multicolumn{1}{|r}{12} & \multicolumn{1}{r|}{3} & 96.40 & 68.33 & 90.13 & \multicolumn{1}{|r}{96.16} & 98.44 & 13.96 \\
+6 & 0 & 0.5 & 0.5 & \multicolumn{1}{|r}{7} & \multicolumn{1}{r|}{8} & 66.70 & 92.23 & 86.58 & \multicolumn{1}{|r}{60.97} & 80.06 & 18.99 \\
+7 & 1/3 & 1/3 & 1/3 & \multicolumn{1}{|r}{9} & \multicolumn{1}{r|}{6} & 82.13 & 84.41 & 90.10 & \multicolumn{1}{|r}{78.98} & 91.93 & 15.47 \\
+8 & 0.5 & 0.25 & 0.25 & \multicolumn{1}{|r}{11} & \multicolumn{1}{r|}{4} & 91.62 & 72.43 & 89.38 & \multicolumn{1}{|r}{92.55} & 97.11 & 15.06 \\
+9 & 0.25 & 0.5 & 0.25 & \multicolumn{1}{|r}{9} & \multicolumn{1}{r|}{6} & 78.44 & 89.10 & 85.60 & \multicolumn{1}{|r}{75.50} & 92.21 & 17.31 \\
+   & \multicolumn{3}{l}{\textbf{Criteria, $\bm{\tau^2=1/q}$}} & \multicolumn{2}{l}{\textbf{DoF}} & \multicolumn{6}{l}{\textbf{Efficiency,\%}}                               \\
+   & \textbf{DP}       & \textbf{LoF(DP)}    & \textbf{MSE(D)}   & \textbf{PE}        & \textbf{LoF}        & \textbf{DP}   & \textbf{LoF(DP)}   & \textbf{MSE(D)}  & \textbf{LP}       & \textbf{LoF(LP)}   & \textbf{MSE(L)}  \\
+1 & 1 & 0 & 0 & \multicolumn{1}{|r}{14} & \multicolumn{1}{r|}{1} & 100.00 & 3.47 & 74.95 & \multicolumn{1}{|r}{93.65} & 3.33 & 3.67 \\
+2 & 0 & 1 & 0 & \multicolumn{1}{|r}{15} & \multicolumn{1}{r|}{0} & 13.58 & 100.00 & 12.05 & \multicolumn{1}{|r}{0.00} & 100.00 & 0.00 \\
+3 & 0 & 0 & 1 & \multicolumn{1}{|r}{0} & \multicolumn{1}{r|}{15} & 0.00 & 0.00 & 100.00 & \multicolumn{1}{|r}{0.00} & 0.00 & 79.95 \\
+4 & 0.5 & 0.5 & 0 & \multicolumn{1}{|r}{15} & \multicolumn{1}{r|}{0} & 95.66 & 100.00 & 83.27 & \multicolumn{1}{|r}{89.46} & 100.00 & 45.27 \\
+5 & 0.5 & 0 & 0.5 & \multicolumn{1}{|r}{12} & \multicolumn{1}{r|}{3} & 94.70 & 93.59 & 89.97 & \multicolumn{1}{|r}{94.38} & 92.12 & 51.52 \\
+6 & 0 & 0.5 & 0.5 & \multicolumn{1}{|r}{14} & \multicolumn{1}{r|}{1} & 98.16 & 97.89 & 87.12 & \multicolumn{1}{|r}{94.63} & 97.56 & 46.95 \\
+7 & 1/3 & 1/3 & 1/3 & \multicolumn{1}{|r}{13} & \multicolumn{1}{r|}{2} & 94.94 & 95.78 & 87.00 & \multicolumn{1}{|r}{88.54} & 94.95 & 44.34 \\
+8 & 0.5 & 0.25 & 0.25 & \multicolumn{1}{|r}{15} & \multicolumn{1}{r|}{0} & 95.07 & 100.00 & 83.10 & \multicolumn{1}{|r}{93.13} & 100.00 & 51.55 \\
+9 & 0.25 & 0.5 & 0.25 & \multicolumn{1}{|r}{15} & \multicolumn{1}{r|}{0} & 95.53 & 100.00 & 83.03 & \multicolumn{1}{|r}{87.12} & 100.00 & 40.67
+\end{tabular}
+}
+\end{table}
+
+The tendencies observed here are pretty much the same as in the unblocked case. An imbalance of the degrees of freedom distribution towards the pure error component, which is stronger for the determinant-bsed optimal designs, and for the smaller value of $\tau^2$ can be seen. While in general the designs perform quite well in terms of $DP$- and $LP$-optimality, the lowest efficiency values are achieved by the designs with either all weight on the lack-of-fit components (\#$2$), or equally distributed between the $LoF$- and $MSE$-components (\#$6$). $MSE(D)$- and $MSE(L)$-optimal designs have no replicates, so their $DP$-, $LP$-, and both lack-of-fit efficiencies are zero.
+
+While $MSE(D)$-efficiency seems to be not very sensitive to either the value of $\tau^2$ (indicating the measure of the influence of the potential terms) or to the reallocation of weights (except for, perhaps, the $LoF(D)$-optimal designs \#$2$ that have the lowest $MSE(D)$-efficiencies), $MSE(L)$-component is very responsive to both: a smaller value of $\tau^2$ results in increased efficiencies by up to $2.5-3$ times, and less than half of the weight allocated to the component leads to a considerable efficiency drop. In addition, designs optimal with respect to the determinant-based criteria perform worse in terms of the $MSE(L)$-component than the other way round: $MSE(D)$-efficiencies of the $MSE$ trace-based-optimal designs are quite moderate, but not too low.   
+
+%% MSE(L) criteria
+
+\begin{table}[h]
+\centering
+\caption{Properties of MSE(L)-optimal designs for blocked experiment}
+\label{tab::MSEB(L)_ex1}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{rrrrrrrrrrrrr}
+   & \multicolumn{3}{l}{\textbf{Criteria, $\bm{\tau^2=1}$}} & \multicolumn{2}{l}{\textbf{DoF}} & \multicolumn{6}{l}{\textbf{Efficiency,\%}}                               \\
+   & \textbf{LP}       & \textbf{LoF(LP)}    & \textbf{MSE(L)}   & \textbf{PE}        & \textbf{LoF}        & \textbf{DP}   & \textbf{LoF(DP)}   & \textbf{MSE(D)}  &  \textbf{LP}       & \textbf{LoF(LP)}   & \textbf{MSE(L)}  \\
+1 & 1 & 0 & 0 & \multicolumn{1}{|r}{13} & \multicolumn{1}{r|}{2} & 98.31 & 66.31 & 88.99 & \multicolumn{1}{|r}{100.00} & 99.44 & 13.87 \\
+2 & 0 & 1 & 0 & \multicolumn{1}{|r}{14} & \multicolumn{1}{r|}{1} & 25.97 & 67.59 & 23.36 & \multicolumn{1}{|r}{0.36} & 100.00 & 0.12 \\
+3 & 0 & 0 & 1 & \multicolumn{1}{|r}{0} & \multicolumn{1}{r|}{15} & 0.00 & 0.00 & 48.68 & \multicolumn{1}{|r}{0.00} & 0.00 & 100.00 \\
+4 & 0.5 & 0.5 & 0 & \multicolumn{1}{|r}{14} & \multicolumn{1}{r|}{1} & 91.17 & 61.40 & 80.53 & \multicolumn{1}{|r}{91.86} & 99.42 & 12.38 \\
+5 & 0.5 & 0 & 0.5 & \multicolumn{1}{|r}{9} & \multicolumn{1}{r|}{6} & 65.03 & 75.64 & 74.06 & \multicolumn{1}{|r}{65.77} & 91.03 & 29.15 \\
+6 & 0 & 0.5 & 0.5 & \multicolumn{1}{|r}{6} & \multicolumn{1}{r|}{9} & 27.84 & 66.29 & 44.99 & \multicolumn{1}{|r}{17.46} & 67.63 & 65.60 \\
+7 & 1/3 & 1/3 & 1/3 & \multicolumn{1}{|r}{10} & \multicolumn{1}{r|}{5} & 65.84 & 75.52 & 70.78 & \multicolumn{1}{|r}{64.94} & 94.85 & 30.16 \\
+8 & 0.5 & 0.25 & 0.25 & \multicolumn{1}{|r}{11} & \multicolumn{1}{r|}{4} & 78.07 & 73.31 & 78.62 & \multicolumn{1}{|r}{79.68} & 97.21 & 23.57 \\
+9 & 0.25 & 0.5 & 0.25 & \multicolumn{1}{|r}{11} & \multicolumn{1}{r|}{4} & 69.65 & 72.60 & 71.07 & \multicolumn{1}{|r}{69.24} & 97.08 & 27.15 \\
+   & \multicolumn{3}{l}{\textbf{Criteria, $\bm{\tau^2=1/q}$}} & \multicolumn{2}{l}{\textbf{DoF}} & \multicolumn{6}{l}{\textbf{Efficiency,\%}}                               \\
+   & \textbf{LP}       & \textbf{LoF(LP)}    & \textbf{MSE(L)}   & \textbf{PE}        & \textbf{LoF}        & \textbf{DP}   & \textbf{LoF(DP)}   & \textbf{MSE(D)}  & \textbf{LP}       & \textbf{LoF(LP)}   & \textbf{MSE(L)}  \\
+1 & 1 & 0 & 0 & \multicolumn{1}{|r}{13} & \multicolumn{1}{r|}{2} & 98.31 & 96.40 & 90.23 & \multicolumn{1}{|r}{100.00} & 95.44 & 53.97 \\
+2 & 0 & 1 & 0 & \multicolumn{1}{|r}{15} & \multicolumn{1}{r|}{0} & 11.33 & 100.00 & 10.08 & \multicolumn{1}{|r}{0.00} & 100.00 & 0.00 \\
+3 & 0 & 0 & 1 & \multicolumn{1}{|r}{0} & \multicolumn{1}{r|}{15} & 0.00 & 0.00 & 84.82 & \multicolumn{1}{|r}{0.00} & 0.00 & 100.00 \\
+4 & 0.5 & 0.5 & 0 & \multicolumn{1}{|r}{13} & \multicolumn{1}{r|}{2} & 91.69 & 96.37 & 84.48 & \multicolumn{1}{|r}{91.66} & 95.43 & 52.15 \\
+5 & 0.5 & 0 & 0.5 & \multicolumn{1}{|r}{10} & \multicolumn{1}{r|}{5} & 78.11 & 88.03 & 83.17 & \multicolumn{1}{|r}{81.76} & 84.63 & 77.50 \\
+6 & 0 & 0.5 & 0.5 & \multicolumn{1}{|r}{11} & \multicolumn{1}{r|}{4} & 70.80 & 91.06 & 72.82 & \multicolumn{1}{|r}{69.77} & 88.71 & 75.24 \\
+7 & 1/3 & 1/3 & 1/3 & \multicolumn{1}{|r}{12} & \multicolumn{1}{r|}{3} & 82.45 & 94.44 & 80.16 & \multicolumn{1}{|r}{85.40} & 92.73 & 69.24 \\
+8 & 0.5 & 0.25 & 0.25 & \multicolumn{1}{|r}{12} & \multicolumn{1}{r|}{3} & 87.25 & 93.99 & 83.94 & \multicolumn{1}{|r}{88.98} & 92.42 & 65.31 \\
+9 & 0.25 & 0.5 & 0.25 & \multicolumn{1}{|r}{13} & \multicolumn{1}{r|}{2} & 81.79 & 97.07 & 76.62 & \multicolumn{1}{|r}{80.92} & 95.91 & 62.78
+\end{tabular}
+}
+\end{table}
+
+Another notable matter in this example is that when $\tau^2=1/q$ several $MSE(D)$-optimal designs turned out to be $LoF(DP)$-optimal: designs \#$4$, \#$8$ and \#$9$ that are summarised in the second part of Table \ref{tab::MSEB(D)_ex1}; designs \#$2$ and \#$8$ are given in Table \ref{tab::LoFDP_design_blocked}.  Obtained with various weight combinations, they have all $15$ degrees of freedom allocated to the pure error component, and they are $LoF(LP)$-optimal as well. 
+
+The ``original'' $LoF(DP)$-optimal design \#$2$ performs quite badly in terms of other components: it is only $13.58\%$ $DP$-efficient and  $12.05\%$ $MSE(D)$-efficient, and its $LP$- and $MSE(L)$-efficiencies are less than $0.01\%$; all its replicates are within blocks, and most of the points are replicated once. The other three, however, are quite $DP$- and $LP$-efficient, and, for example, in the design \#$8$, most of the replicates are spread between blocks. In addition, despite the general tendency, as their $MSE$-based efficiencies are not greatly below the overall average across the designs, they seem to be a reasonable compromise between the $MSE$- and $LoF$-based components. It can be seen that $LoF(LP)$-efficiency values are consistently large across the different criteria and values of $\tau^2$. 
+
+%%% MSE(D) criteria, point prior on beta2 !!!
+
+\begin{table}[h]
+\centering
+\caption{Properties of MSE(D)-optimal designs for blocked experiment, with point prior}
+\label{tab::MSEB(D)P_ex1}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{rrrrrrrrrrrrrr}
+   & \multicolumn{3}{l}{\textbf{Criteria, $\bm{\tau^2=1}$}} & \multicolumn{2}{l}{\textbf{DoF}} & \multicolumn{7}{l}{\textbf{Efficiency,\%}}                               \\
+   & \textbf{DP}       & \textbf{LoF(DP)}    & \textbf{MSE(D)P}  & \textbf{PE}        & \textbf{LoF}        & \textbf{DP}   & \textbf{LoF(DP)}   & \textbf{MSE(D)}  & \textbf{MSE(D)P} &  \textbf{LP}       & \textbf{LoF(LP)}   & \textbf{MSE(L)}  \\
+1  & 1    & 0    & 0    & \multicolumn{1}{|r}{14} & \multicolumn{1}{r|}{1}  & 100.00 & 62.02  & 87.53 & \multicolumn{1}{|r}{86.28}  & \multicolumn{1}{|r}{93.65} & 99.58  & 12.16 \\
+2  & 0    & 1    & 0    & \multicolumn{1}{|r}{8}  & \multicolumn{1}{r|}{7}  & 36.59  & 100.00 & 42.93 & \multicolumn{1}{|r}{43.27}  & \multicolumn{1}{|r}{0.38}  & 87.56  & 2.57  \\
+3  & 0    & 0    & 1    & \multicolumn{1}{|r}{0}  & \multicolumn{1}{r|}{15} & 0.00   & 0.00   & 96.82 & \multicolumn{1}{|r}{100.00} & \multicolumn{1}{|r}{0.00}  & 0.00   & 26.38 \\
+4  & 0.5  & 0.5  & 0    & \multicolumn{1}{|r}{10} & \multicolumn{1}{r|}{5}  & 81.67  & 84.71  & 85.28 & \multicolumn{1}{|r}{85.64}  & \multicolumn{1}{|r}{78.37} & 95.61  & 15.94 \\
+5  & 0.5  & 0    & 0.5  & \multicolumn{1}{|r}{13} & \multicolumn{1}{r|}{2}  & 96.39  & 65.17  & 87.66 & \multicolumn{1}{|r}{89.69}  & \multicolumn{1}{|r}{94.92} & 99.28  & 14.32 \\
+6  & 0    & 0.5  & 0.5  & \multicolumn{1}{|r}{7}  & \multicolumn{1}{r|}{8}  & 63.99  & 94.11  & 82.77 & \multicolumn{1}{|r}{84.78}  & \multicolumn{1}{|r}{57.71} & 80.18  & 19.25 \\
+7  & 1/3  & 1/3  & 1/3  & \multicolumn{1}{|r}{9}  & \multicolumn{1}{r|}{6}  & 79.91  & 84.36  & 87.78 & \multicolumn{1}{|r}{89.27}  & \multicolumn{1}{|r}{78.66} & 91.83  & 17.62 \\
+8  & 0.5  & 0.25 & 0.25 & \multicolumn{1}{|r}{11} & \multicolumn{1}{r|}{4}  & 89.66  & 75.55  & 87.90 & \multicolumn{1}{|r}{88.64}  & \multicolumn{1}{|r}{91.42} & 97.48  & 16.20 \\
+9 & 0.25 & 0.5  & 0.25 & \multicolumn{1}{|r}{8} & \multicolumn{1}{r|}{7}  & 72.19  & 92.84  & 85.50 & \multicolumn{1}{|r}{85.34}  & \multicolumn{1}{|r}{66.82} & 87.26  & 18.92 \\
+   & \multicolumn{3}{l}{\textbf{Criteria, $\bm{\tau^2=1/q}$}} & \multicolumn{2}{l}{\textbf{DoF}} & \multicolumn{6}{l}{\textbf{Efficiency,\%}}                               \\
+   & \textbf{DP}       & \textbf{LoF(DP)}    & \textbf{MSE(D)P} & \textbf{PE}        & \textbf{LoF}        & \textbf{DP}   & \textbf{LoF(DP)}   & \textbf{MSE(D)} & \textbf{MSE(D)P} & \textbf{LP}       & \textbf{LoF(LP)}   & \textbf{MSE(L)}  \\
+1  & 1    & 0    & 0    & \multicolumn{1}{|r}{14} & \multicolumn{1}{r|}{1}  & 100.00 & 3.43   & 74.95 & \multicolumn{1}{|r}{73.67}  & \multicolumn{1}{|r}{93.65} & 3.33   & 3.67  \\
+2  & 0    & 1    & 0    & \multicolumn{1}{|r}{14} & \multicolumn{1}{r|}{1}  & 13.54  & 100.00 & 12.42 & \multicolumn{1}{|r}{12.73}  & \multicolumn{1}{|r}{0.00}  & 99.32  & 0.00  \\
+3  & 0    & 0    & 1    & \multicolumn{1}{|r}{0} & \multicolumn{1}{r|}{15} & 0.00   & 0.00   & 97.51 & \multicolumn{1}{|r}{100.00} & \multicolumn{1}{|r}{0.00}  & 0.00   & 77.64 \\
+4  & 0.5  & 0.5  & 0    & \multicolumn{1}{|r}{15} & \multicolumn{1}{r|}{0} & 96.33  & 98.87  & 83.86 & \multicolumn{1}{|r}{81.98}  & \multicolumn{1}{|r}{90.85} & 100.00 & 46.05 \\
+5  & 0.5  & 0    & 0.5  & \multicolumn{1}{|r}{12} & \multicolumn{1}{r|}{3} & 94.93  & 91.97  & 90.08 & \multicolumn{1}{|r}{90.13}  & \multicolumn{1}{|r}{94.12} & 91.66  & 51.67 \\
+6  & 0    & 0.5  & 0.5  & \multicolumn{1}{|r}{14} & \multicolumn{1}{r|}{1} & 92.80  & 96.69  & 82.25 & \multicolumn{1}{|r}{86.90}  & \multicolumn{1}{|r}{82.84} & 97.48  & 42.82 \\
+7  & 1/3  & 1/3  & 1/3  & \multicolumn{1}{|r}{14} & \multicolumn{1}{r|}{1} & 95.25  & 97.43  & 85.10 & \multicolumn{1}{|r}{85.39}  & \multicolumn{1}{|r}{90.09} & 98.06  & 46.61 \\
+8  & 0.5  & 0.25 & 0.25 & \multicolumn{1}{|r}{14} & \multicolumn{1}{r|}{1} & 95.77  & 96.73  & 85.35 & \multicolumn{1}{|r}{86.23}  & \multicolumn{1}{|r}{90.49} & 97.52  & 45.15 \\
+9  & 0.25 & 0.5  & 0.25 & \multicolumn{1}{|r}{14} & \multicolumn{1}{r|}{1} & 95.76  & 97.03  & 85.17 & \multicolumn{1}{|r}{88.21}  & \multicolumn{1}{|r}{90.35} & 97.77  & 45.15
+\end{tabular}
+}
+\end{table}
+
+Design search in the blocked case is more time consuming, due to the larger amount of computation needed at each criterion evaluation step; the typical increase for a criterion involving the $MSE(D)$-component is from $1.5-2$ days in the unblocked case up to as long as $2-2.5$ days in the blocked case (MC sample size is $100$ and $500$ for $\tau^2$ being equal to $1$ and $1/q$ respectively, and the number of random starts is $100$). Therefore, it might be of particular use to have a look at an alternative estimation approach to estimating the third component in the determinant-based criterion, i.e. estimating it using the point prior according to the $MSE(D)P$ criterion given in (\ref{eq::MSE_DP_B}). Comparing $MSE(D)$ and $MSE(D)P$ columns in Table \ref{tab::MSEB(D)P_ex1} with the $MSE(D)$-efficiencies of the designs summarised in Table \ref{tab::MSEB(D)_ex1}, we can see how much would be lost in terms of designs' $MSE(D)$-efficiency values if using the point prior for $\bm{\tilde{\beta}}_2$ in (\ref{eq::mse_b_component}): $\bm{\tilde{\beta}}_2=\tau\bm{1}_q$.
+
+In general, the loss in the $MSE(D)$-component is as low as $2\%-3\%$, for both $\tau^2=1$ and $\tau^2=1/q$, the maximum is $4.65\%$ for design \#$6$ in the case of the smaller $\tau^2$. As for the efficiency losses with respect to the compound criteria, they do not exceed $2\%$, except for the $MSE(D)$-optimal design, which is $96.82\%$ efficient. Optimal designs summarised in Table \ref{tab::MSEB(D)_ex1} tend to perform quite well in terms of the point-prior compound criteria: most of the efficiencies are above $99\%$, and the $MSE(D)$-optimal deigns \#$3$ are more than $97\%$-efficient with regard to the point-prior $MSE(D)$ component. While other tendencies observed in the $MSE(D)$ case remain here as well, time-wise these optimal designs were obtained quite quickly: for the same number of random starts ($100$), it usually took no more than $5-6$ hours. 
+
+\begin{table}[h]
+\centering
+\caption{LoF(DP)-optimal designs for blocked experiment, \#$2$ and \#$8$}
+\label{tab::LoFDP_design_blocked}
+\scalebox{0.8}{
+\begin{tabular}{rrrrrr|r|rrrrrr}
+1  & -1 & -1 & -1 & 1  & 1  &  & 1  & -1 & -1 & -1 & 1  & 1  \\
+2  & -1 & -1 & -1 & 1  & 1  &  & 2  & -1 & 0  & -1 & 1  & 0  \\
+3  & 1  & -1 & 1  & 1  & -1 &  & 3  & 0  & 0  & 0  & -1 & 0  \\
+4  & 1  & -1 & 1  & 1  & -1 &  & 4  & 0  & 0  & 1  & 0  & 1  \\
+5  & 1  & -1 & 1  & 1  & -1 &  & 5  & 0  & 1  & -1 & 0  & -1 \\
+6  & 1  & 0  & -1 & 0  & 0  &  & 6  & 1  & -1 & 1  & 1  & 1  \\
+7  & 1  & 1  & -1 & -1 & -1 &  & 7  & 1  & 1  & 0  & 1  & -1 \\
+8  & 1  & 1  & -1 & -1 & -1 &  & 8  & 1  & 1  & 1  & -1 & 1  \\ \cline{1-6}\cline{8-13}
+9  & -1 & -1 & -1 & -1 & -1 &  & 9  & -1 & -1 & 1  & -1 & 1  \\
+10 & -1 & -1 & -1 & -1 & -1 &  & 10 & -1 & 0  & 0  & 0  & -1 \\
+11 & -1 & -1 & -1 & -1 & 0  &  & 11 & -1 & 0  & 0  & 0  & -1 \\
+12 & -1 & -1 & -1 & -1 & 0  &  & 12 & -1 & 1  & -1 & -1 & 1  \\
+13 & 0  & 0  & -1 & -1 & -1 &  & 13 & 0  & 1  & 1  & 1  & 0  \\
+14 & 0  & 0  & -1 & -1 & -1 &  & 14 & 1  & -1 & -1 & -1 & 1  \\
+15 & 0  & 0  & 0  & -1 & 0  &  & 15 & 1  & -1 & -1 & 1  & -1 \\
+16 & 0  & 0  & 0  & -1 & 0  &  & 16 & 1  & 1  & -1 & 1  & 1  \\ \cline{1-6}\cline{8-13}
+17 & 0  & 0  & 0  & 0  & 1  &  & 17 & -1 & -1 & -1 & -1 & -1 \\
+18 & 0  & 0  & 0  & 0  & 1  &  & 18 & -1 & 1  & -1 & 1  & -1 \\
+19 & 0  & 0  & 0  & 0  & 1  &  & 19 & -1 & 1  & 1  & -1 & -1 \\
+20 & 0  & 1  & 1  & -1 & 1  &  & 20 & -1 & 1  & 1  & 1  & 1  \\
+21 & 0  & 1  & 1  & -1 & 1  &  & 21 & 0  & -1 & 0  & 0  & 0  \\
+22 & 1  & 0  & 0  & 0  & -1 &  & 22 & 0  & 0  & 0  & 1  & 1  \\
+23 & 1  & 0  & 0  & 0  & -1 &  & 23 & 1  & 0  & 1  & 0  & 0  \\
+24 & 1  & 0  & 0  & 0  & -1 &  & 24 & 1  & 0  & 1  & 0  & 0  \\ \cline{1-6}\cline{8-13}
+25 & -1 & -1 & -1 & 0  & 1  &  & 25 & -1 & -1 & -1 & 1  & 1  \\
+26 & -1 & 1  & -1 & 1  & -1 &  & 26 & -1 & -1 & 1  & 1  & -1 \\
+27 & -1 & 1  & -1 & 1  & -1 &  & 27 & -1 & 1  & 0  & 0  & 0  \\
+28 & -1 & 1  & 0  & -1 & -1 &  & 28 & 0  & 0  & 0  & -1 & 0  \\
+29 & 0  & -1 & -1 & -1 & 1  &  & 29 & 0  & 0  & 1  & 0  & 1  \\
+30 & 0  & -1 & -1 & -1 & 1  &  & 30 & 1  & -1 & 1  & -1 & -1 \\
+31 & 0  & 0  & 0  & 1  & 1  &  & 31 & 1  & 1  & -1 & -1 & -1 \\
+32 & 0  & 1  & 1  & 0  & 1  &  & 32 & 1  & 1  & 0  & 1  & -1 \\ \cline{1-6}\cline{8-13}
+33 & -1 & -1 & 0  & 0  & 1  &  & 33 & -1 & -1 & 1  & 1  & -1 \\
+34 & -1 & 0  & 1  & 1  & 1  &  & 34 & -1 & 0  & -1 & 1  & 0  \\
+35 & -1 & 1  & 0  & 1  & 0  &  & 35 & -1 & 1  & 0  & 0  & 0  \\
+36 & -1 & 1  & 1  & -1 & 0  &  & 36 & 0  & 1  & -1 & 0  & -1 \\
+37 & 0  & 1  & -1 & 1  & 0  &  & 37 & 1  & -1 & 1  & -1 & -1 \\
+38 & 1  & -1 & 1  & 1  & -1 &  & 38 & 1  & -1 & 1  & 1  & 1  \\
+39 & 1  & -1 & 1  & 1  & 0  &  & 39 & 1  & 1  & -1 & -1 & -1 \\
+40 & 1  & 1  & 1  & 1  & 1  &  & 40 & 1  & 1  & 1  & -1 & 1 
+\end{tabular}
+}
+\end{table}

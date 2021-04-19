@@ -1,0 +1,247 @@
+In this chapter we will adapt the MSE-based criteria derived before to the factorial experiments with units distributed in several strata. First we shall briefly review the approaches to the inference from the experiments with multi-level unit structures, and then will define the MSE-based optimality for the multistratum framework and provide the implementation strategy for the corresponding design search.
+
+In Section \ref{sec::ch7_ex} a few illustrative examples will be considered, for the main purposes of assessing the obtained optimal designs' performances and structures, and investigating the presence of any patterns and tendencies regarding the relationships between the criteria form, parameters and the results. 
+
+\subsection{Response-Surface Methodology for Multistratum Designs}
+%% Model. Ratio of variances.
+As randomisation occurs at each stratum, the model accounting for the hierarchical error structure and correlated observations can be written as
+\begin{equation}
+\label{eq::MS_model}
+\bm{Y}=\bm{X}\bm{\beta}+\sum_{i=1}^{s}\bm{Z}_{i}\bm{\varepsilon}_{i},
+\end{equation}
+where $\bm{Y}$ represents the $n$-dimensional vector of responses, $\bm{X}$ stands for the $n \times p$ model matrix and $\bm{\beta}$ for the $p$-dimensional vector of corresponding model coefficients. Each row of the $n\times m_{i}$ matrix $\bm{Z}_{i}$ corresponds to a single experimental run and indicates the unit in stratum $i$ containing this run. $\bm{\varepsilon}_{i}$ is a vector of random effects occurring due to the randomisation at level $i$, and these effects are assumed to be independent and identically distributed around zero mean and variance $\sigma^{2}_{i}$. The assumption of error normality, though quite common is required for some analysis methods, is not a necessary one at this stage.
+
+The majority of purposes of inference rely on obtaining parameter estimates $\bm{\hat{\beta}}$ of good quality, that is minimising the uncertainty of the obtained estimates, which implies the necessity of evaluating the dispersion parameters $\sigma^2_{i}$ that are directly related to the estimates' variance and, therefore, responsible for measuring the uncertainty of the inference in a general sense.
+
+\subsubsection{REML Methodology}
+An extensive amount of research has been conducted on the design of and analysis of data from split-plot and split-split-plot experiments, with one of the first works by \cite{Letsinger1996BiRandomization}, emphasising the necessity of adapting the design and analysis strategy with respect to the more complicated error structure.  In the most general case of non-orthogonal unit structures Residual Maximum Likelihood (REML) methodology has been acknowledged to be the most sensible approach to estimating the variance components by maximising the part of the likelihood function corresponding to the ``random'' part of the model; the details are provided, for example, in \cite{Searle2001generalized}. 
+
+In traditional REML-based methodology the estimates of $\sigma^{2}_{i}$ are obtained from model (\ref{eq::MS_model}) and then GLS estimators of $\bm{\beta}$ are calculated as
+\begin{equation}
+\label{eq::MS_GLS}
+\bm{\hat{\beta}}=(\bm{X}'\bm{V}^{-1}\bm{X})^{-1}\bm{X}'\bm{V}^{-1}\bm{Y},
+\end{equation}
+where $\bm{V}$ is the unknown variance-covariance matrix of the response vector, to which the estimates are to be plugged in:
+\begin{equation*}
+\bm{V}=\sum_{i=1}^{s}\sigma^{2}_{i}\bm{Z}_{i}\bm{Z}'_{i},
+\end{equation*}
+so that $\mbox{Var}(\bm{\hat{\beta}})=(\bm{X}'\bm{V}^{-1}\bm{X})^{-1}.$
+
+However, in some cases REML tends to underestimate the variance components in the higher stratum, for example \cite{Goos2006practical} considered some split-plot experiments with true whole-plot variances being non-negligibly far from zero, for which REML, however, provided zero estimates. 
+
+A possible alternative would be a Bayesian analysis, that is specifying prior information regarding the variance components (as was suggested by \cite{Gilmour2009analysis}), however, this requires a careful choice of the prior which is often not possible, especially in the case of more than two strata.
+
+\subsection{Full Treatment Model}
+
+In the context of model uncertainty it would be appropriate to loosen the assumption of the response surface model (\ref{eq::MS_model}) and consider instead the relationship of the response with the set of treatments:
+\begin{equation}
+\label{eq::treatmentMS}
+\bm{Y}=\bm{X_t}\bm{\tau}+\sum_{i=1}^{s}\bm{Z}_{i}\bm{\varepsilon}_{i}.
+\end{equation}
+
+Each column of $\bm{X_t}$ here corresponds to a treatment defined as a combination of the experimental factors;
+%in case of factorial experiment the total number of possible treatments (or candidate design points) $T$ would be the product of the number of the factors' levels. 
+$\bm{Z}_{i}$, as before, is the indicator matrix of random effects at stratum $i$.
+
+\subsubsection{Pure-error REML}
+\cite{GilmourGoos2016PEREML} introduced the notion of ``Pure Error REML'', such that the random effects are estimated from the treatment model (\ref{eq::treatmentMS}), and then for the sake of making inference regarding parameters of the response model (\ref{eq::MS_model}), they are substituted in the GLS estimators of the fixed effects (\ref{eq::MS_GLS}). It is also argued that some appropriate corrections are to be adapted and applied to the obtained estimates, i.e.~the ones suggested by \cite{kenward1997small}. 
+
+A careful definition of ``pure error'' is necessary when considering the treatment and response surface models, especially in the presence of nested random block effects. \cite{Gilmour2000PErsm} discuss the pure error estimation issues in the context of blocked experiments. 
+
+Pure error is expected to measure the variability between experimental units regardless of the treatments applied, and therefore, the assumption of treatment-unit additivity is essential in unblocked experiments.  In the presence of one or several blocking factors, the existence of block-treatment interaction would imply that pure error in the lower strata can only be estimated from the replicates within blocks, so that inter-block information is not taken into consideration. Hence, in the blocked cases the assumption of treatment-block additivity \citep{Draper1998} is desirable. \cite{Gilmour2000PErsm} argue for the preservation of treatment-unit additivity when either fixed or random block effects are in the model in order to preserve consistency with the unblocked experiments; that would also conveniently imply treatment-block additivity. Adoption of these assumptions would then lead to the following representation of the relationship between responses and treatments in multi-stratum experiments. 
+
+The outcome of applying treatment $i$ $(i=1\ldots T)$ to the experimental run located in the units $j_1$ of the first stratum, $j_2$ of the second stratum, $\ldots$ , and unit $j_s$ of the $s-$th stratum can be expressed as follows:
+\begin{equation}
+\label{eq::ms_tr}
+y_{ij_{1}...j_{s}}=\mu+t_{i}+b_{j_1}+\ldots +b_{j_s},
+\end{equation}
+where $b_{j_s}$ is usually denoted as between-run variation. 
+
+Under the stronger assumption of the response surface model (\ref{eq::MS_model}), the treatment effects $t_{i}$ are represented as a set of polynomial model terms.  
+
+Based on the interrelation of the two models, and the desirability of being able to provide the possibility for testing for the lack-of-fit together with obtaining robust estimates of the variance components, the approach of using pure error is adopted, \cite{GilmourGoos2016Robust} explored several approaches to estimating the variance components. 
+
+\subsubsection{Yates' procedure}
+\label{sec::ch7_varest}
+The first approach is stratum-by-stratum data analysis, where each randomisation level is considered separately, and at each stratum $i$ units are treated as runs aggregated in $m_{i-1}$ blocks with fixed effects. The lower stratum variance is estimated from within blocks (using intra-block residual mean square), and the higher stratum (inter-block) variance from the difference between the intra- and inter-block residual mean squares scaled by the number of runs per block \citep{Hinkelmann2005Advanced}. This simple strategy requires no other assumptions except for the treatment-unit additivity and provides unbiased treatment effects' estimators.
+
+However, as mentioned before, it would be desirable to make use of combining inter- and intra-block information, especially in the common cases of relatively small experiments when the amount of runs available does not allow for obtaining higher stratum variance components from only considering blocks as whole units. Yates' procedure, first suggested by \cite{yates1939recovery} and described in detail by \cite{Hinkelmann2005Advanced}, provides more degrees of freedom for the variance estimate in the higher stratum. 
+
+Within-block variance is obtained from the residual mean square, as before. The between-block variation is estimated form fitting the block-after-treatment model: the treatment sum of squares  accounted for the blocks corresponding to the higher strata and the residual sum of squares obtained in the intra-block analysis are subtracted from the total sum of squares. What remains is the extra sum of squares for the blocks in the current stratum, which is used for estimating the intra-block variation.
+%Whereas between-block variation is estimated from what is left for the blocking components sum of squares in the current stratum after the sums of squares corresponding to the block effects of the higher strata and all treatments are subtracted from the total sum of squares accounted for the residual sum of squares. 
+Schematically these two steps can be presented as below (with the order of the components being crucial):
+\begin{enumerate}
+\item Total SS = SS(Blocks) + SS(Treatments$\vert$Blocks) + SS(Residual)\\
+From fitting this full treatment-after-blocks model the residual mean square $S^2$ is taken as the estimate of the intra-block variance. SS(Residual) is then substituted in the following partition.
+\item Total SS = SS(Treatments) + SS(Blocks$\vert$Treatments) + SS(Residual)\\
+Therefore, the sums of squares for the blocks after the treatment effects have been accounted for is obtained and the corresponding mean square $$S^2_{b}=\mbox{SS(Blocks$\vert$Treatments)}/\nu_{b}$$ is then used to get an estimate of the inter-block variance:
+\item $\hat{\sigma}^2_{b}=\frac{\nu_{b}(S^2_{b}-S^2)}{d}$,\\
+where $d=n-\mbox{trace}[\bm{Z}'\bm{X_t}(\bm{X_t}'\bm{X_t})^{-1}\bm{X_t}'\bm{Z}]$, $\nu_{b}=\mbox{rank}([\bm{X_t} \bm{Z}])-\mbox{rank}(\bm{X_t})$, and $\bm{X_t}$ and $\bm{Z}$ are as in (\ref{eq::treatmentMS}).
+\end{enumerate}
+
+\cite{GilmourGoos2016Robust} show that in addition to the treatment-unit additivity and randomisation the assumption of the experimental units being a random sample from an infinite population is necessary for the inter-block variance estimate to be unbiased. In this particular context, when the normality and independence of responses in (\ref{eq::MS_model}) is a standard assumption, although a potential presence of contamination effects in the fixed part of the model is also accounted for, Yates' approach seems to be the most appropriate technique. However, relying on the distribution assumption to the extent that makes REML the most sensible approach means that the fixed part of the fitted model is assumed to be absolutely true, that is the parameters of the population distribution are known, which does not comply with the model uncertainty framework. 
+
+Together with the specifications regarding estimation of the variance components, it is necessary to carefully establish the way the pure error degrees of freedom should be determined and how the available remaining number of treatment degrees of freedom would be distributed between the polynomial, lack-of-fit and inter-block information components. 
+
+\subsection{Design Construction for MSE-based Optimality Criteria}
+\label{sec::ch7_search}
+With the theoretical insights discussed above in mind, the practical adaptation and implementation of the MSE-based criteria for multistratum experiments shall be presented as the algorithm of the corresponding optimal design search which is in accordance with the inference strategy described in the previous section.
+
+Recall the general outline of a multistratum experiment (as in Section \ref{sec::back_ms}): 
+\begin{itemize}
+\item There are $s$ strata nested within each other, stratum number $0$ denoting the whole experiment. A higher stratum number corresponds to the lower level in the hierarchical unit structure.
+\item Every unit at stratum $i-1$ contains $n_i$ units at the lower stratum $i$, so that stratum $j$ contains $m_j=\prod_{i=1}^{j}n_{i}$ units and in total there are $n=m_{s}=\prod_{i=1}^{s}n_{i}$ runs. 
+\item At least one factor is applied at some of the strata, if there is a stratum with no factor applied, then at this level only blocking is accounted for.
+\end{itemize}
+
+In the presence of potential model disturbance which is expressed as a matrix of polynomial terms, the full model for a multistratum experiment is then:
+\begin{equation}
+\label{eq::MS_model_full}
+\bm{Y}=\bm{X}_1\bm{\beta}_1+\bm{X}_2\bm{\beta}_2+\sum_{i=1}^{s}\bm{Z}_{i}\bm{\varepsilon}_{i},
+\end{equation}
+where $\bm{X}_1$ is the primary terms matrix, which was denoted as $\bm{X}$ in the fitted model (\ref{eq::MS_model}). 
+
+\subsubsection{Construction procedure}
+The design construction will follow the approach developed by \cite{Trinca2015improved}: an iterative, stratum-by-stratum algorithm, that treats the higher stratum units as fixed blocks; such an approach does not require any prior assumptions regarding the values of the variance components. 
+
+At each step a candidate set of treatments applied at the current stratum is to be generated, and the point exchange algorithm is applied. The model matrix to be used in the optimisation comprises model terms from all higher strata (with the factor values for individual runs obtained at previous steps), terms from the current stratum and interactions between these two groups of terms, if there are any to be considered. The allocation of the degrees of freedom shall be implemented according to the Yates procedure, and some illustrative examples will be given later on.
+
+Before moving to a more detailed presentation of the design construction algorithm, recall the MSE-based criteria (\ref{eq::MSE_D}), (\ref{eq::MSE_L}), (\ref{eq::MSE_D_B}) and (\ref{eq::MSE_L_B}) that are to be used:
+
+For an unblocked experiment:
+\begin{itemize}
+\item Determinant-based $MSE(D)$ criterion:
+\begin{align}
+\label{eq::MSE_D_ms}
+\mbox{minimise }&\left[\left|\bm{X}'_{1}\bm{X}_{1}\right|^{-1/p}F_{p,d;1-\alpha_{DP}}\right]^{\kappa_{DP}} \times \notag \\ &\left[\left|\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right|^{-1/q}F_{q,d;1-\alpha_{LoF}}\right]^{\kappa_{LoF}}\times \notag\\ & \left[|\bm{X}'_{1}\bm{X}_{1}|^{-1}\exp\left(\frac{1}{N}\sum_{i=1}^{N}\log(1+\bm{\tilde{\beta}}_{2i}'\bm{X}_2^{'}\bm{X}_1\bm{M}^{-1}\bm{X}_1^{'}\bm{X}_2\bm{\tilde{\beta}}_{2i})\right)\right]_{.}^{\kappa_{MSE}/p}
+\end{align}
+\item Trace-based $MSE(L)$ criterion:
+\begin{align}
+\label{eq::MSE_L_ms}
+\mbox{minimise} &\left[\frac{1}{p}\mbox{trace}(\bm{WX}'_{1}\bm{X}_{1})^{-1}F_{1,d;1-\alpha_{LP}}\right]^{\kappa_{LP}}\times \notag\\& \left[\frac{1}{q}\mbox{trace}\left(\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right)^{-1}F_{1,d;1-\alpha_{LoF}}\right]^{\kappa_{LoF}}\times 
+\notag\\& \left[\frac{1}{p}\mbox{trace}\{(\bm{X}'_{1}\bm{X}_{1})^{-1}+\tau^2\bm{A}\bm{A}'\}\right]^{\kappa_{MSE}}_{.}
+\end{align}
+\end{itemize} 
+ 
+For a blocked experiment:
+\begin{itemize}
+\item Determinant-based $MSE(D)$ criterion:
+\begin{align}
+\label{eq::MSE_D_B_ms}
+\mbox{minimise }&\left[\left|(\bm{X}'_{1}\bm{Q}\bm{X}_{1})^{-1}\right|^{1/p}F_{p,d_B;1-\alpha_{DP}}\right]^{\kappa_{DP}} \times \notag \\ &\left[\left|\bm{\tilde{L}}+\frac{\bm{I}_{q}}{\tau^{2}}\right|^{-1/q}F_{q,d_B;1-\alpha_{LoF}}\right]^{\kappa_{LoF}}\times \notag\\ & \left[|\bm{X}'_{1}\bm{QX}_{1}|^{-1}\exp\left(\frac{1}{N}\sum_{i=1}^{N}\log(1+\bm{\tilde{\beta}}_{2i}'\bm{X}_2^{'}\bm{QX}_1\bm{\tilde{M}}^{-1}\bm{X}_1^{'}\bm{QX}_2\bm{\tilde{\beta}}_{2i})\right)\right]_{.}^{\kappa_{MSE}/p}
+\end{align}
+\item Trace-based $MSE(L)$ criterion:
+\begin{align}
+\label{eq::MSE_L_B_ms}
+\mbox{minimise }&\left[\frac{1}{p}\mbox{trace}(\bm{WX}'_{1}\bm{Q}\bm{X}_{1})^{-1}F_{1,d_B;1-\alpha_{LP}}\right]^{\kappa_{LP}}\times \notag \\&\left[\frac{1}{q}\mbox{trace}\left(\bm{\tilde{L}}+\frac{\bm{I}_{q}}{\tau^{2}}\right)^{-1}F_{1,d_B;1-\alpha_{LoF}}\right]^{\kappa_{LoF}}\times \notag \\& \left[\frac{1}{p}\mbox{trace}\{(\bm{X}'_{1}\bm{QX}_{1})^{-1}+\tau^2[\bm{\tilde{A}}\bm{\tilde{A}}']_{22}\}\right]^{\kappa_{MSE}}_{.}
+\end{align}
+\end{itemize} 
+
+Then the optimal multistratum design search is implemented following the steps below:
+\begin{enumerate}
+\item Starting from the first stratum, if there are any factors applied at this level, a candidate set of treatments is formed together with the fitted model matrix comprising the primary terms and the matrix of potential terms. The optimal unblocked design $X_1$ is then obtained using the usual point-exchange algorithm, by minimising (\ref{eq::MSE_D_ms}) or (\ref{eq::MSE_L_ms}). The labels of the treatments applied at the current stratum are saved at this stage as well in order to calculate the number of pure error degrees of freedom at the lower strata.
+
+If there are no factors applied at the first stratum, we move to the second one, and conduct the optimal design search for a blocked experiment, where the number of blocks is equal to the number of units in the first stratum $n_1$, with $n_2$ runs per block; in this case criterion function (\ref{eq::MSE_D_B_ms}) or (\ref{eq::MSE_L_B_ms}) is used, and number of pure error degrees of freedom $d_B$ is calculated according to the usual blocked experiment framework. Treatment labels are saved as well. 
+ 
+\item When moving from stratum $i-1$ to stratum $i$, all factors applied in the higher strata are now treated as ``whole-plot'' factors. The corresponding model matrix $\bm{Xw.m}$ containing terms inherited from the higher strata is expanded accordingly, as treatments applied at each unit in stratum $i-1$ are now applied to $n_i$ units of the current stratum nested within it. A similar expansion procedure is carried out for the vector (or matrix, if there are two or more higher strata with factors applied) of the treatment labels, so that for each current unit we are able to see what treatment has been applied to it at each stratum.
+
+Blocking with no factors applied may occur at any stratum, not only at the first one. In such cases the procedure remains the same: skipping to the next stratum with some treatment applied, expanding the design matrices and vectors with treatment labels corresponding to the higher strata.
+
+\item Once there is a model matrix with the ``whole-plot'' terms is formed, the search procedure might be started for the current stratum. The candidate set of treatments is set for the factors applied in the current stratum; parameters of interest include not only the ones formed by these factors but also their interactions with the higher strata terms. As nesting within the previous strata is treated as fixed block effects, the criteria used are the ones given in (\ref{eq::MSE_D_B_ms}) and (\ref{eq::MSE_L_B_ms}). However, there are a few features worth noting:
+\begin{itemize}
+\item For each design under consideration during the extensive search procedure, its model matrix $\bm{X}_1$ is now constructed by binding the ``whole-plot'' model matrix $\bm{Xw.m}$, the model comprising the terms formed from the factors applied at the current stratum $\bm{Xi.m}$, and the matrix formed of the interaction terms (if any are to be included) between the two. The same relates to the construction of the potential terms matrix $\bm{X}_2$: it needs to be recalculated every time a design point is swapped between the candidate set of the current stratum terms and the current design if it contains any interactions involving terms inherited from the previous strata. If not, it then only comprises terms from the current stratum factors.
+\item Presence of the potential terms matrix in the criteria also implies that each stratum $i$ will ``have'' its own number of potential terms $q_i$ and, therefore, in the cases when the value of the variance scaling parameter $\tau^2$ depends on it, at each stratum the criterion function will be evaluated with the respective values of $\tau^2_i$ instead of some common one for all levels. In this work we consider common values of $\tau^2$, however, it is a case-sensitive parameter, and it is to be discussed in each particular case.
+\item As the numbers of primary and potential terms vary from stratum to stratum, so do the significance levels $\alpha_{LP}$ and $\alpha_{LoF}$ in the case of trace-based criterion (\ref{eq::MSE_L_B_ms}):
+\begin{align*}
+\alpha_{LP}&=1-(1-\alpha_1)^{\frac{1}{p}},\\
+\alpha_{LoF}&=1-(1-\alpha_2)^{\frac{1}{q}},
+\end{align*}
+as the corrected confidence levels depend on the dimension of the confidence regions (as in (\ref{eq::Sidak})). 
+\item We use the same values of weights in the criteria for all strata; however, the flexibility of the algorithm allows changing weights (and even criteria) between the strata.
+\end{itemize}
+\item If there are at least $3$ strata with some factors applied, and when the current stratum number is $3$ or more, an additional swapping procedure is performed (the same as that described by \cite{Trinca2001multistratum}). By looking at the $i-2$ stratum units that have the same treatments applied to them, and interchange the $i-1$ stratum units within those, the performance of the design evaluated with respect to the performance at the current stratum $i$. The same swapping is performed for all the higher strata up to the first one.
+\item It is all then repeated from step number $2$, until current stratum $i$ reaches the lowest stratum $s$. 
+\end{enumerate}
+
+\subsubsection{Allocation of degrees of freedom}
+
+The distribution of the degrees of freedom among different components at each stratum of the resulting design needs to be evaluated in accordance with the variance estimation procedure (as described in Section \ref{sec::ch7_varest}), so that both intra- and inter-block information is taken into account. 
+
+We shall consider here the case of a split-split-plot experiment (i.e. with $3$ strata), but this strategy is straightforwardly extended to the cases with any number of randomisation levels. At the first $2$ strata, where experimental units are to be further expanded, and treatments applied at these levels are to be replicated for all sub-units and runs within then the available degrees of freedom (after fitting the model at this current level) are split between three components: pure error, inter-plot (inter-whole-plot and inter-sub-plot for the $1$st and $2$nd strata respectively) and lack-of-fit. In the lowest stratum there are, as in the unblocked cases and experiments with fixed block effects, only pure error and lack-of-fit components.
+
+Starting with presenting the way of calculating the number of pure error degrees of freedom at each level, we then proceed to the details of the inter-plot and lack-of-fit degrees of freedom evaluation accompanied by the corresponding R code. In the end of this section we will consider an illustrative example of a design and see how degrees of freedom are allocated.
+
+If we consider an experiment with $n_1$ units in the first stratum, with each of them having $n_2$ units of stratum $2$, and with $n_3$ runs nested within each of those, there are $n=n_1\times n_2\times n_3$ runs in total. The notation to be used is as follows:
+\begin{itemize}
+\item $\bm{y}$ -- an $n$-dimensional dummy response vector (any randomly generated vector), which is used for fitting a linear model;
+\item $\bm{B_1}$ -- an $n$-dimensional vector, such that its $i$-th element is the label of the first stratum unit that contains the $i$-th run. Similarly, $\bm{B_2}$ contains labels of the second stratum units;
+\item  $\bm{T_{W}}$ -- a vector of labels for treatments applied at the first stratum (whole-plots); $\bm{T_{S}}$ -- a vector of labels for treatments applied at the second stratum units (sub-plots); this includes treatments in the higher stratum. And, finally, $\bm{T_{SS}}$ contains labels for all treatments applied at the lowest stratum, i.e. at individual runs;
+\item $\bm{Xw.m}$, $\bm{Xs.m}$ and $\bm{Xss.m}$ are the matrices containing fixed model terms that are to be fitted at the $1$st, $2$nd and $3$rd strata respectively.
+\end{itemize}
+
+If we denote by $p_i$ the number of the fixed model terms fitted at the $i$-th stratum, then the number of available degrees of freedom at each level is: $n_1-1-p_1$ for the $1$st, $n_1\times(n_2-1)-p_2$ -- for the $2$nd, and $n_1\times n_2\times(n_3-1)-p_3$ -- for the $3$rd stratum.
+
+After a design has been obtained, and all the treatment labels, block indicators and model matrices are in place, fitting the following linear models and studying their summary (i.e.~ANOVA) will provide the numbers of degrees of freedom corresponding to every component. 
+
+We start with fitting the full treatment model schematically presented in (\ref{eq::model_pe}): the effects of treatments applied to all strata, followed by the terms containing strata indicators, `$\bm{B_i}$'. In the resulting summary we then will see the distribution of pure error degrees of freedom: in the row corresponding to `$\bm{B_1}$' for the whole-plots ($1$st stratum), and in the row corresponding to `$\bm{B_2}$' for the sub-plots ($2$nd stratum). The `Residual' number of degrees of freedom is equal to the number of pure error degrees of freedom for the $3$rd stratum.
+\begin{equation}
+\label{eq::model_pe}
+\mathrm{lm}(\bm{y}\sim\bm{T_{SS}}+\bm{B_1}+\bm{B_2}).
+\end{equation}
+The order of terms in the expression above is crucial: this is a block-after-treatment model fitting; and the pure error degrees of freedom for lower-level plots occur not only when they are replicated within the same higher-level plot, but also when some pairs of treatments are split between two (or more) higher-level plots. An example of a design is given at the end of this section together with a detailed description of how each pure error degree of freedom is obtained.
+
+From the summary of model (\ref{eq::model_pe}) we automatically obtain the number of lack-of-fit degrees of freedom (LoF) for the lowest stratum, as $n_1\times n_2\times(n_3-1)-p_3 = $`Residual' P.E. $+$ LoF.
+
+Now we need to evaluate the number of degrees of freedom for estimating the inter-whole-plot/inter-sub-plot and lack-of-fit components for the first two strata. For this purpose, at each of the higher strata, we fit a linear model comprising polynomial terms (formed of the factors applied at the current and all higher strata), treatment labels, and current and all higher strata unit indicators. By doing so and first projecting the vector of (dummy) responses to the subspaces generated by the parametric model's terms and by the treatments, we account for the degrees of freedom required for evaluating the model parameters' estimates and for the lack-of-fit degrees of freedom. The number of degrees of freedom left for the components corresponding to the current stratum indicators is the sum of the inter-whole-plot (inter-sub-plot) and pure error degrees of freedom. 
+\begin{align}
+\label{eq::model_lof1}
+&\mathrm{lm}(\bm{y}\sim\bm{Xw.m}+\bm{T_{W}}+\bm{B_1}),\\
+\label{eq::model_lof2}
+&\mathrm{lm}(\bm{y}\sim\bm{Xw.m}+\bm{Xs.m}+\bm{T_{S}}+\bm{B_1}+\bm{B_2}).
+\end{align}
+Therefore, the summary of the model in (\ref{eq::model_lof1}) provides the sum of inter-whole-plot and pure error degrees of freedom under the `$\bm{B_1}$' component; and the `$\bm{B_2}$' component of the the summary of (\ref{eq::model_lof2}) gives the same sum for the sub-plot level. Hence, by substituting the number of pure error degrees of freedom, we obtain the inter-whole-plot/inter-sub-plot and then, from the known total numbers, -- the lack-of-fit degrees of freedom for the first and seconds strata.  
+
+In Table \ref{tab::SSP_design} below an example of a split-split-plot design is provided, with $12$ whole-plots, each containing $2$ sub-plots of size $2$, i.e. 48 runs in total. 
+\begin{table}[h]
+\centering
+\caption{Split-split-plot design}
+\label{tab::SSP_design}
+\scalebox{0.85}{
+\begin{tabular}{r|rr|r|rr|rr|rr|r|rr|}  
+\cline{2-6} \cline{9-13}
+I   & -1 & -1 & -1 & -1 & -1 & & VII  & 0 & 0  & -1 & 1  & 0  \\
+    & -1 & -1 & -1 & 1  & 1  & &      & 0 & 0  & -1 & 0  & 0  \\ \cline{4-6} \cline{11-13}
+    & -1 & -1 & 1  & -1 & 1  & &     & 0 & 0  & -1 & 1  & 0  \\
+    & -1 & -1 & 1  & 1  & 1  & &      & 0 & 0  & -1 & 0  & 0  \\ \cline{2-6} \cline{9-13}
+    &    &    &    &    &    & &      &   &    &    &    &    \\ \cline{2-6} \cline{9-13}
+II  & -1 & -1 & -1 & -1 & -1 & & VIII & 0 & 1  & 0  & 1  & 0  \\
+    & -1 & -1 & -1 & 1  & 1  & &      & 0 & 1  & 0  & 1  & 0  \\\cline{4-6} \cline{11-13}
+    & -1 & -1 & 1  & -1 & 1  & &      & 0 & 1  & -1 & 1  & 1  \\
+    & -1 & -1 & 1  & 1  & 1  & &      & 0 & 1  & -1 & -1 & 0  \\  \cline{2-6} \cline{9-13}
+    &    &    &    &    &    & &      &   &    &    &    &    \\ \cline{2-6} \cline{9-13}
+III & -1 & 0  & 1  & 0  & -1 & & IX   & 1 & -1 & 1  & 1  & 1  \\
+    & -1 & 0  & 1  & 1  & 0  & &      & 1 & -1 & 1  & -1 & -1 \\\cline{4-6} \cline{11-13}
+    & -1 & 0  & 1  & 0  & -1 & &      & 1 & -1 & -1 & 0  & 1  \\
+    & -1 & 0  & 1  & 1  & 0  & &      & 1 & -1 & -1 & 0  & 1  \\  \cline{2-6} \cline{9-13}
+    &    &    &    &    &    &  &     &   &    &    &    &    \\ \cline{2-6} \cline{9-13}
+IV  & -1 & 1  & 0  & -1 & 1  & & X    & 1 & -1 & 1  & -1 & 1  \\
+    & -1 & 1  & 0  & 1  & -1 & &      & 1 & -1 & 1  & 1  & -1 \\\cline{4-6} \cline{11-13}
+    & -1 & 1  & 1  & -1 & -1 & &      & 1 & -1 & -1 & 0  & 0  \\
+    & -1 & 1  & 1  & 0  & 1  & &      & 1 & -1 & -1 & 0  & 0  \\  \cline{2-6} \cline{9-13}
+    &    &    &    &    &    & &      &   &    &    &    &    \\ \cline{2-6} \cline{9-13}
+V   & -1 & 1  & 0  & -1 & 1  & & XI   & 1 & 0  & -1 & -1 & -1 \\
+    & -1 & 1  & 0  & 1  & -1 & &      & 1 & 0  & -1 & 1  & 0  \\\cline{4-6} \cline{11-13}
+    & -1 & 1  & 1  & -1 & -1 & &      & 1 & 0  & -1 & -1 & -1 \\
+    & -1 & 1  & 1  & 0  & 1  & &      & 1 & 0  & -1 & 1  & 0  \\ \cline{2-6} \cline{9-13}
+    &    &    &    &    &    & &      &   &    &    &    &    \\ \cline{2-6} \cline{9-13}
+VI  & 0  & -1 & -1 & -1 & 0  & & XII  & 1 & 1  & 1  & -1 & 0  \\
+    & 0  & -1 & -1 & 1  & -1 & &      & 1 & 1  & 1  & 1  & -1 \\ \cline{4-6} \cline{11-13}
+    & 0  & -1 & -1 & -1 & 0  & &      & 1 & 1  & -1 & 0  & -1 \\
+    & 0  & -1 & -1 & 1  & -1 & &      & 1 & 1  & -1 & -1 & 1  \\ \cline{2-6} \cline{9-13}
+\end{tabular}
+}
+\end{table}    
+
+We see that whole-plots I and II, and IV and V are identical, but with the sub-plot and sub-sub-plot treatments being different, so each such replicate provides $1$ whole-plot (WP), $1$ sub-plot(SP) and $2$ sub-sub-plot (SSP) pure error degrees of freedom. Whole-plots III, VI, VII and XI contain replicated sub-plots, although the sub-sub-plot treatments are not replicated within each sub-plot. Therefore, each of them provides $1$ SP and $1$ SSP pure error degree of freedom. 
+
+Finally, whole-plots VIII, IX and X contain $1$ replicated point (SSP treatment) within one of the sub-plots, which provides another $3$ SSP pure error degrees of freedom. In total, for three strata, there are $2$, $6$ and $11$ pure error degrees of freedom respectively.

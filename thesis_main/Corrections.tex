@@ -1,0 +1,150 @@
+%% Log-file of the corrections made
+
+\documentclass[11pt,a4paper,oneside]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[USenglish]{babel}
+\usepackage{graphicx} % Allows including images
+%\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{parskip}
+\usepackage[authoryear,round]{natbib}
+\usepackage[applemac]{inputenx}
+\usepackage{caption} \captionsetup[table]{skip=5pt}
+%\setlength{\parskip}{\baselineskip}
+\usepackage{setspace}
+\usepackage{gensymb}
+\usepackage{lscape}    %changing page orientation
+
+\begin{document}
+\begin{center}
+\textbf{\Large{Minor corrections to the thesis}}
+\end{center}
+
+\textbf{Abstract}
+\begin{enumerate}
+\item ``We first present'' (was in past tense)
+\item ``we also adapt the criteria for use in blocked experiments'' (was in passive voice)
+\end{enumerate}
+
+\textbf{Introduction}
+\begin{enumerate}
+\item Page 2. ``.. all responses are put in an $n$-dimensional vector $\bm{Y}$''
+\item Page 3. Extra ``further'' removed
+\end{enumerate}
+
+\textbf{Chapter 2. Background and Related Work}
+\begin{enumerate}
+\item Page 9. ``.. and derived the $DP$-criterion: minimising $(F_{p,d;1-\alpha_{DP}})^{p}\vert(\bm{X'}\bm{X})^{-1}\vert$'' (was $\nu$ instead of $d$)
+\item Page 10. Expanding the explanation of where L-optimality comes from: ``If we are interested in the functions of parameters given by $\bm{L}'\bm{\beta}$, then the variance-covariance matrix of $\bm{L}'\bm{\hat{\beta}}$ is...''
+\item Page 10. Explaining why Sidak's corrections were used: ``Here we shall use Sidak's correction \citep{vsidak1967rectangular}, which is...''
+\item Page 10. ``.. for example, $I$-optimality, that is minimising \textbf{average} prediction variance''
+\item  \hl{Page 11. Adding a comment regarding the reasons to use the compound criterion approach:} ``... and explore how the changes in the allocation of weights between the individual criteria affect the optimal designs' performances.''
+\item Page 11. ``.. prior knowledge of the \textbf{experimenter}'' (misprint)
+\item Page 12. ``.. it is sometimes \textbf{necessary} to allocate units in blocks''
+\item Page 12. ``.. its $(i,j)^{th}$ element''
+\item Page 12. ``.. and $\bm{\beta}_B$ is the vector of block effects''
+\item Page 13. ``.. matrix whose elements indicate \textbf{the} treatments''
+\item Page 13. ``.. the number of replications after \textbf{subtracting the number of replicates} taken for the estimation of block contrasts.''
+\item Page 15. ``.. \cite{Goos2001Doptimal} considered the three cases when D-optimal designs for split-plot experiments do not depend on the value of $\eta$; in other practical cases an estimate of the variance ratio is to be provided.'' 
+\item Page 16. ``\cite{Arnouts2012staggered} presented a coordinate-exchange algorithm \ldots examples of D- and I-optimal designs.''
+\item Page 16. ``.. assumed possible values of $\eta_i$'' (misprint)
+\item Page 16. ``.. in the presence'' (misprint)
+\item Page 17. ``In this thesis, due to the primary interest being the quality of inference,..''
+\item Page 18. Removed ``Therefore'' in the 4th paragraph.
+\end{enumerate}
+
+\textbf{Chapter 3. Compound criteria. Some amendments}
+\begin{enumerate}
+\item Page 20. Adding significance levels where they were missed: $F_{n-p-d,d;1-\alpha_{LoF}}$ instead of $F_{n-p-d,d}$, and on Figure 3.1 on page 21.
+\item Page 21. Expanding interpretation of the plot in Figure 3.1: ``Larger numbers of available residual degrees of freedom \ldots'' 
+\item Page 21. ``The third component in both criteria corresponds to the DF-efficiency defined in (2.7).''
+\item Pages 22 and 24. Tables 3.1 and 3.4: added columns with DF-efficiency values
+\item Page 23. ``..therefore, their $DF$-efficiency values $\frac{n-d}{n}$ are below $75\%$ (i.e. when $d>10$).'' 
+\item Page 24. ``..the design optimal <\ldots> (\#$12$) is also optimal with respect to the criterion with equal weights put on the $DF$- and $LoF$-components'' 
+\item Page 25. ``..except for the point number $18-19$ and the point number $36-37$''
+\item Page 25. ``..the resulting efficiency values. It also would be sensible..'' (breaking the sentence)
+\item Page 27. Adding extra comment: ``This particular parametrisation <\ldots> designs which are more than $50\%$ efficient.''
+\item Page 27. Adding subsection 3.2.2 Optimal designs (no text amendments)
+\item Pages 28 and 29.  Tables 3.6 and 3.7: added columns with DF-efficiency values
+\item Page 29. Paraphrasing the last paragraph: ``It was desired to alter the form of an efficiency's contribution..''
+\end{enumerate}
+
+\textbf{Chapter 4. Generalised Compound Criteria}
+\begin{enumerate}
+\item Page 31. Adding bullet points in the chapter introduction
+\item Page 32 - 33. Adding subsections 4.1.1 and 4.1.2
+\item Page 32. Equation (4.3) -- $\varepsilon$ in the subscripts
+\item Page 33. ``..how large the magnitude of each of the potential terms is assumed to \textbf{possibly} be..''
+\item Page 34. ``..we incorporate $L$-optimality for the primary terms..''
+\item Pages 35 and 36. ``..and (4.11)''
+\item Page 35. Adding the reference to Section 3.1.1
+\item Page 37. Adding the reference to \cite{DuMouchel1994})
+\item Page 37. Amending the derivation of the formula for the confidence region for $\bm{\beta}_2$ over the posterior distribution (introducing the corresponding F-quantile).
+\item Page 39. ``Henceforth'' instead of ``Here and further on''
+\item Page 40. ``The results should'' instead of ``The results would''
+\item Page 43. Table 4.6, $2$nd part, column names: \textbf{L}, \textbf{LP}, \textbf{LoF(LP)} and \textbf{Bias(L)}
+\item Page 44. Rephrasing: ``similar tendency seems to be true''
+\item Page 49. Paragraph 3. Adding an explanation regarding large $LoF$-efficiencies in case of smaller $\tau^2$: ``Such consistently high performance...''
+\item Page 53. ``..each factor can take five levels..''
+\item Page 53. ``all third and \textbf{fourth} order terms are taken as potentially missed terms''
+\item Page 53. Adding: `` Most of the replicates are at corner points...''
+\item Page 58. Changing the name of Section 4.3 (to ``Blocked Experiments'') and adding  subsection 4.3.1 ``Generalised criteria''
+\item Page 58. Adding ``$\bm{\beta}_{B}$ is the vector of \textbf{fixed block effects},...'' 
+\item Page 59. $\bm{\beta}_{B}$ instead of $\bm{\beta}_{0}$
+\item Page 59. ``Therefore, ...'' 
+\item Page 60. ``\textbf{the} $D$-optimal design''
+\item Page 64. Adding a comment regarding ignoring the orthonormalisation: ``Ignoring such a requirement would amend the formulae of the bias components, but in general it should not be expected to considerably influence the resulting optimal designs and their performances; though the orthonormalisation step should not be blindly omitted, especially if the prediction bias is of a particular interest.''
+\end{enumerate}
+
+\textbf{Chapter 5. MSE-based Criteria}
+\begin{enumerate}
+\item Page 66. Adding an explanation of `pseudo-Bayesian': ``..(hence we shall refer to such an approach as ``pseudo-Bayesian'')..''
+\item Page 67. ``.. and $\bm{u}$, $\bm{v}$ are column vectors''
+\item Page 68. Adding a definition of $\bm{\tilde{\beta}}_{2i}$ after the equation (5.5): ``Here $\bm{\tilde{\beta}}_{2i}$, $i=1..N$ -- independent random vectors sampled from $\mathcal{N}(\bm{0},\tau^{2}\sigma^{2}\bm{I}_{q})$.''
+\item Page 70. Emphasising the computational advantage of the trace-based criterion: ``The main advantage is the absence of the necessity of any additional numerical evaluations, and...'' 
+\item \hl{Page 74. Amending the interpretation:} ``..the decreased scale of the potentially missed contamination results in \textbf{a more easily achievable compromise} between...'' 
+\item Page 74. ``.. in the corresponding tables'' 
+\item Page 74. Rephrasing: ``..in the case of $MSE(D)$-efficient designs with smaller $\tau^2$.''
+\end{enumerate}
+
+\textbf{Chapter 6. MSE-based Criteria for Blocked Experiments}
+\begin{enumerate}
+\item Page 78. Equation (6.2): $\bm{\beta}_B$ and $\bm{\beta}_1$ instead of $\bm{\tilde{\beta}}_b$ and $\bm{\tilde{\beta}}_p$
+\item Page 82. ``in the design \#$8$''
+\item Page 84. Adding a comment regarding relative efficiencies between the designs optimal w.r.t. the continuous and point-prior-based criteria: ``As for the efficiency losses...''
+\item Page 85. Adding explanation about two centre points requirement: ``..two centre points to ensure representation of the conditions thought a priori most likely to be best...'' 
+\item Page 87. ``$LoF(DP)-$''
+\item Page 88. Amending the explanation of the ``Relative efficiency'': ``The last column of this table, ``Relative Efficiency,'' is..''
+\item Page 91. Misprint: ``experimenters''
+\end{enumerate}
+
+\textbf{Chapter 7. MSE-based Criteria for Multistratum Experiments}
+\begin{enumerate}
+\item Page 94. Changing \textbf{REML Methodology} from a subsection to section
+\item Page 96. Changing the title of Section 7.2.2: ``Yates' procedure'' 
+\item Page 97. ``$m_j=\ldots$ \textbf{units}''
+\item Page 98. Adding the \textbf{Construction procedure} subsection title (no text amendments)
+\item Page 103. Expanding the sentence: ``Now we need to evaluate the number of degrees of freedom for..''
+\item Page 103. ``.. the factors applied at the current and \textbf{all} higher strata''
+\item Page 104. Explaining why $\tau^2=\sqrt{1/q}$ was used: ``As this number tends to become..''
+\item Page 104. ``Regarding the \textbf{third-order} potential terms..''
+\item Page 106. ``(design\textbf{s} \#$3$)''
+\item Page 106. ``.. designs \#$5$ and \#$7$ provide the worst performance with respect to the $MSE(L)-$ and $LP$-components respectively''
+\item Page 109. ``i.e. designs \#$6$ in Table 7.6''
+\item Page 111. Adding the \textbf{Discussion} subsection title (no text amendments)
+\end{enumerate}
+
+\textbf{Chapter 8. Conclusions and Future Work}
+\begin{enumerate}
+\item Page 114. Adding a comment regarding advantages and disadvantages of the Pareto frontier approach: ``On one hand, such an algorithm would result in a set of designs...''
+\end{enumerate}
+
+\bibliographystyle{rss}
+\bibliography{thesis_bib}
+
+\end{document}

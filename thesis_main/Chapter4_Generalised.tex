@@ -1,0 +1,294 @@
+Standard design optimality theory is developed under the assumption that the fitted model represents the true relationship of interest and that there is no misspecification. However, it is obviously quite a strong belief and in reality we need to take into account at least the possibility that the model might not provide a good fit to the data. In Section \ref{sec::back_misspecification} a brief overview of various types of model misspecification is presented. 
+
+In this chapter we consider the case when the fitted polynomial model is nested within a larger model that is assumed to provide a better fit for the data. %Being interested in both the precision of the fitted model estimates and lack-of-fit testing in the direction of the bigger model, we start with the %generalised optimality criteria developed by \cite{Goos2005model} and amend them by treating the components from the objective of inference based on %replicates (`pure error'). 
+Being interested in
+\begin{itemize}
+\item the precision of the fitted model estimates,
+\item lack-of-fit testing in the direction of the bigger model, and
+\item prediction bias,
+\end{itemize}
+we start with the generalised optimality criteria developed by \cite{Goos2005model} and amend them by treating the components from the objective of inference based on replicates (`pure error'). We then follow through two examples introduced previously and explore the performances and features of the resulting designs and the relationships between the criteria components.
+
+\section{Model-Robust and Model-Sensitive Approach}
+In order to get a representation of the relationship of interest between the explanatory factors and the response, a polynomial regression model (\ref{eq::back_model}) is fitted:
+\begin{equation}
+\label{eq::fitted_model}
+\bm{Y}=\bm{X}_1\bm{\beta}_1+\bm{\varepsilon},
+\end{equation}
+where $\bm{X}_1$ is the $n\times p$ model matrix, each column of which contains primary terms -- powers and products of the explanatory factors and $\bm{\beta}_1$ is the corresponding $p$-dimensional vector of parameters and $\bm{\varepsilon}\sim \mathcal{N}(\bm{0}_{n},\sigma^{2}\bm{I}_{n})$ is the vector of independent identically distributed errors.
+
+Allowing for the anticipated model contamination, we say that an extended (`true', `full') model is essentially the one that describes the true nature of the relationship between the response and the factors of interest and, therefore, might be expected to provide a better fit for the data:
+\begin{equation}
+\label{eq::full_model}
+\bm{Y}=\bm{X}_1\bm{\beta}_1+\bm{X}_2\bm{\beta}_2+\bm{\varepsilon},
+\end{equation}
+where $\bm{X}_2$ is an $n\times q$ is an extension of the initial model matrix representing those extra $q$ potential terms that might represent the fitted model disturbance. The vector $\bm{\beta}_2$ denotes the corresponding parameters. This larger model has $p+q$ parameters in total and not all of them are estimable when the experiment is relatively small: $n<p+q$; this is the case we consider here.
+
+\subsection{Model-robust approach}
+The question of model misspecification was first discussed by \cite{Box1959}. Supposing that the true model consists of both primary and potential terms and only the primary model is fitted, they aimed at developing a search strategy for the designs that would allow precise estimates of the primary terms and some detectability of the potential terms (which was later named the `model-robust' approach). So the mean squared error for the prediction of responses at a factors' settings $\bm{x}_1$ integrated over the design region (IMSE) is considered as a sum of the expected squared bias and the expected prediction variance:
+\begin{equation}
+\label{eq::IMSE}
+\mbox{IMSE}=\textbf{E}_{\mu}\textbf{E}_{\varepsilon}[y(\bm{x})-\textbf{E}_{\varepsilon}[\hat{y}(\bm{x}_1)]]^{2}+\textbf{E}_{\mu}\textbf{E}_{\varepsilon}[\textbf{E}_{\varepsilon}[\hat{y}(\bm{x}_1)]-\hat{y}(\bm{x}_1)]^{2}.  
+\end{equation}
+Here integration is performed with respect to two measures. The first, $\mu$, is defined on the design space. \cite{Box1959} proposed the uniform measure, that is just averaging over the region of interest (i.e. across all candidate experimental points). The other one is the usual probability measure which is determined by the error distribution and used to calculate expectation in its regular meaning.
+
+By $y(\bm{x})=\bm{x^{'}}_{1}\bm{\beta}_1+\bm{x^{'}}_{2}\bm{\beta}_2+\varepsilon$ the true response value for a certain combination of explanatory factors $\bm{x}'=[\bm{x}^{'}_{1}\mbox{ } \bm{x}^{'}_{2}]$ is denoted, and $\hat{y}(\bm{x}_{1})$ is the fitted response value, according to the first model (\ref{eq::fitted_model}).
+
+For further derivations \citet{Kobilinsky1998} proposed to transform the columns of the extended design matrix $\bm{X}=[\bm{X}_1,\bm{X}_2]$ in terms of the orthogonal polynomials with respect to measure $\mu$ on the design region. If $N$ is the number of candidate points, then each column of the $N\times(p+q)$-matrix of the candidate set of the full model terms is an $N$-dimensional vector, and the orthonormalisation procedure turns it into one of the orthonormal basis vectors of a $(p+q)$-dimensional subspace. This is carried out using the Gram-Schmidt orthonormalisation procedure (\citealp{Meyer2000}). Such a process guarantees the separability of effects, hence, eases the interpretation of the effects of the fitted model, and also allows the use of a simple prior distribution for the potential terms. 
+
+After the orhonormalisation and a sequence of transitions (\citealp{Goos2005model}) the IMSE defined in (\ref{eq::IMSE}) can be presented as:
+\begin{equation*}
+%\label{IMSE_2}
+\mbox{IMSE}=\bm{\beta^{'}}_{2}[\bm{A}'\bm{A}+\bm{I}_{q}]\bm{\beta}_2+\sigma^{2}\mbox{trace}(\bm{X}'_{1}\bm{X}_1)^{-1},
+\end{equation*}   
+where $\bm{A}=(\bm{X}'_{1}\bm{X}_1)^{-1}\bm{X}'_{1}\bm{X}_2$ is the alias matrix and $\bm{I}_{q}$ is the $q\times q$ identity matrix. It is worth noting that from the derivation point of view the orthonormalisaton is only necessary for the simplification of the first summand in the equation above, i.e. of the prediction bias component.
+
+In order to obtain designs minimising the IMSE value, some information on the potential terms is needed. So it was decided by \citet{Kobilinsky1998} to put a normal prior on the potential terms, with zero mean as they are unlikely to be large and the variance proportional to the error variance $\sigma^2$, i.e. $\bm{\beta}_2\sim \mathcal{N}(\bm{0},\tau^{2}\sigma^{2}\bm{I}_{q})$, and then minimise the expectation of the IMSE with respect to this prior density:
+\begin{equation*}
+E_{\bm{\beta}}[\mbox{IMSE}]=\tau^{2}\sigma^{2}\mbox{trace}(\bm{A}'\bm{A}+\bm{I}_{q})+\sigma^{2}\mbox{trace}(\bm{X}'_{1}\bm{X}_{1})^{-1}.
+\end{equation*}
+As potential terms are orthonormalised, this makes it a reasonable assumption that components of $\bm{\beta}_2$ are independent and have equal variances. Choice of the parameter $\tau^{2}$ which determines how large the magnitude of each of the potential terms is assumed to possibly be in comparison to the error (residual) variance is quite arbitrary. So due to the orthogonalisation and scaling \citet{DuMouchel1994} suggested using $\tau^{2}=1$ that would signify the magnitude of the potential effects should not exceed the residual standard error. \citet{Kobilinsky1998} advocated $\tau^{2}=1/q$, so that this variance scaling parameter is inversely proportional to the number of potential terms; and the variation of the overall potential model contamination is comparable with the error disturbance.  
+
+\subsection{Model-sensitive approach}
+In contrast to the model-robust approach, the model-sensitive approach aims at making it possible to determine whether there is lack of fit of the fitted model in the direction of the potential terms. Testing for the lack of fit and precise estimation of the primary terms were put together in the criterion developed in \citet{Atkinson2007}:
+\begin{equation}
+\label{eq::model_sensitive}
+\mbox{maximise} \left[ \frac{\alpha}{p}\log|\bm{X}'_{1}\bm{X}_1|+\frac{1-\alpha}{q}\log|\bm{X}'_{2}\bm{X}_2-\bm{X}'_{2}\bm{X}_1(\bm{X}'_{1}\bm{X}_1)^{-1}\bm{X}'_{1}\bm{X}_2|\right].
+\end{equation}
+The expression in (\ref{eq::model_sensitive}) is the weighted sum of two components: the first stands for $D$-optimality for the primary terms and the second one -- for $D_S$-optimality for the potential terms. Weights are determined by the `belief' parameter $\alpha\in [0,1]$ reflecting the extent of initial certainty in the primary model being true (i.e. $\alpha=1$ indicating that there is no misspecification to be accounted for) and scaled by the number of parameters of each submodel.
+
+Checking whether the extended model provides a better fit for the data is directly related to the non-centrality parameter:
+\begin{equation}
+\label{eq::delta}
+\delta=\frac{\bm{\beta}'_{2}[\bm{X}'_{2}\bm{X}_2-\bm{X}'_{2}\bm{X}_1(\bm{X}'_{1}\bm{X}_1)^{-1}\bm{X}'_{1}\bm{X}_2]\bm{\beta}_2}{\sigma^2}=\frac{\bm{\beta}'_{2}\bm{L}\bm{\beta}_2}{\sigma^2},
+\end{equation}
+maximising which maximises the power for the lack-of-fit test of the reduced model when the extended model is true. As it also depends on the (inestimable) values of potential terms, \citet{Goos2005model} applied the same idea as with the bias and variance components, i.e. maximise the expectation of the non-centrality parameter over the same prior distribution of $\bm{\beta}_2$:
+\begin{equation*}
+E_{\bm{\beta}}(\delta)=\tau^{2}\mbox{trace}[\bm{L}].
+\end{equation*}
+Finally, they combined $A$-optimality for the primary terms, lack-of-fit and bias components in one criterion and extended it to the case of inestimable potential terms (as in \citealp{DuMouchel1994}). The resulting Generalised A-criterion looks as follows:
+\begin{equation}
+\label{eq::GA}
+\mbox{minimise} \left[ \frac{\gamma_{1}}{p}\mbox{trace}(\bm{X}'_{1}\bm{X}_1)^{-1}-\frac{\gamma_{2}}{q}\mbox{trace}\left(\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right)+\frac{\gamma_{3}}{q}\mbox{trace}(\bm{A}'\bm{A}+\bm{I}_{q})\right]_{.}
+\end{equation}
+In the next section it will be shown in detail, that the matrix $\bm{L}+\bm{I}_{q}/\tau^{2}$ in the second component is essentially the inverse posterior variance-covariance matrix of the vector of potential terms (up to a factor of $\sigma^2$). \\
+Similarly, the $GD$-criterion (Generalised $D$-optimality criterion) is given by:
+\begin{equation}
+\label{eq::GD}
+\mbox{minimise} \left[ \frac{\gamma_{1}}{p}\log|(\bm{X}'_{1}\bm{X}_1)^{-1}|+\frac{\gamma_{2}}{q}\log\left|\left(\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right)^{-1}\right|+\frac{\gamma_{3}}{q}\log|\bm{A}'\bm{A}+\bm{I}_{q}|\right]_{.}
+\end{equation}
+Weights $\gamma_{i}$ ($i=1..3$) are allocated to the different parts depending on which design properties are more or less desirable for a particular experiment; as before, $\gamma_{i} \geq 0$ and $\gamma_1+\gamma_2+\gamma_3=1$. \\
+For the sake of consistency, we incorporate $L$-optimality for the primary terms in the GA-criterion (which becomes Generalised L-criterion) and reformulate both criteria in terms of the efficiencies, giving the following expressions to be minimised:
+\begin{align}
+\label{eq::GD_eff}
+GD:\mbox{minimise }&|\bm{X}'_{1}\bm{X}_1|^{-\frac{\kappa_{D}}{p}}\times \left|\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right|^{-\frac{\kappa_{LoF}}{q}} \times |\bm{A}'\bm{A}+\bm{I}_{q}|^{\frac{\kappa_{bias}}{q}};
+\end{align} 
+\begin{align} 
+\label{eq::GL_eff}
+GL:\mbox{minimise }&\left[\frac{1}{p}\mbox{trace}\bm{W}(\bm{X}'_{1}\bm{X}_1)^{-1}\right]^{\kappa_{L}}\times \left[\frac{1}{q}\mbox{trace}\left(\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right)^{-1}\right]^{\kappa_{LoF}}\times\notag\\&\left[\frac{1}{q}\mbox{trace}(\bm{A}'\bm{A}+\bm{I}_{q})\right]_{.}^{\kappa_{bias}}
+\end{align} 
+For further examples we will still be treating the intercept as a nuisance parameter, and by $\bm{X}_1$ denote the matrix of primary terms without the intercept column (for example, as in (\ref{eq::ExtraFD_crit}) and (\ref{eq::ExtraFL_crit}); $\bm{Q}_0$ is as in (\ref{eq::s_infmatrix}). The criteria above can be straightforwardly adapted and so we will be using them in the following forms (for the shortness of notation, the standard subscript $S$ shall be omitted):
+\begin{align}
+\label{eq::GDs_eff}
+GD:\mbox{minimise }&\vert\bm{X}'_1\bm{Q}_{0}\bm{X}_1\vert^{-\frac{\kappa_{D}}{(p-1)}}\times \left|\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right|^{-\frac{\kappa_{LoF}}{q}} \times |\bm{A}'\bm{A}+\bm{I}_{q}|^{\frac{\kappa_{bias}}{q}};
+\end{align} 
+\begin{align} 
+\label{eq::GLs_eff}
+GL:\mbox{minimise }&\left[\frac{1}{p-1}\mbox{trace}\{\bm{W}(\bm{X}'_{1}\bm{Q}_{0}\bm{X}_{1})^{-1}\}\right]^{\kappa_{L}}\times \left[\frac{1}{q}\mbox{trace}\left(\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right)^{-1}\right]^{\kappa_{LoF}}\times\notag\\&\left[\frac{1}{q}\mbox{trace}(\bm{A}'\bm{A}+\bm{I}_{q})\right]_{.}^{\kappa_{bias}}
+\end{align} 
+
+\subsection{Generalised and compound criteria: example}
+We continue considering the setup of an experiment with five explanatory factors, each consisting of three levels, and $40$ runs. The model to be fitted is the second-order polynomial containing the intercept, all quadratic, interaction and linear terms, i.e. $p=21$. The potential terms are all of the third order: the products of three linear terms and products of quadratic and linear (pure cubic terms are not included since the factors have three levels), so that $q=30$. Thus, $n<p+q$, and the extended model cannot be fitted straightforwardly.
+
+We looked at how the designs summarised in Tables \ref{Table_extraFD} and \ref{Table_extraFL} (Section \ref{sec::optimal_extraF}), that are optimal according to different determinant- and trace-based compound criteria, perform in terms of the $GD$ and $GL$-criteria defined above in (\ref{eq::GDs_eff}) and (\ref{eq::GLs_eff}) with all the weight allocated to the LoF component and with equal weights. We considered two values of the variance scaling parameter: $\tau^2=1$ and $\tau^2=1/q$ ($q$ being equal to $30$). The results are presented in Tables \ref{Table::GD-eff} and \ref{Table::GL-eff}.
+
+\begin{table}[h]
+\begin{center}
+\caption{GD-efficiencies of designs optimal in terms of determinant-based compound criteria}
+\label{Table::GD-eff}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{rrrrrrrrrrrrr}
+\multicolumn{1}{l}{\textbf{}} & \multicolumn{4}{l}{\textbf{Criteria}} & \multicolumn{2}{l}{\textbf{DoF}} & \multicolumn{2}{l}{\textbf{Efficiency, \%}} & \multicolumn{2}{c}{$\bm{\tau^2=1}$} & \multicolumn{2}{c}{$\bm{\tau^2=1/q}$} \\
+\textbf{} & \textbf{D} & \textbf{DP} & \textbf{DF} & \textbf{LoF} & \textbf{PE} & \textbf{LoF} & \textbf{D} & \textbf{DP} & $\bm{\kappa_{LoF}=1}$ & $\bm{\kappa_{i}=1/3}$ & $\bm{\kappa_{LoF}=1}$ & $\bm{\kappa_{i}=1/3}$ \\
+1 & 1 & 0 & 0 & 0 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{100.00} & 0.00 & \multicolumn{1}{|r}{96.80} & 93.47 & \multicolumn{1}{|r}{99.90} & 94.60 \\
+2 & 0 & 1 & 0 & 0 & \multicolumn{1}{|r}{18} & 1 & \multicolumn{1}{|r}{93.00} & 100.00 & \multicolumn{1}{|r}{86.08} & 76.77 & \multicolumn{1}{|r}{99.45} & 80.68 \\
+3 & 0.5 & 0.5 & 0 & 0 & \multicolumn{1}{|r}{16} & 3 & \multicolumn{1}{|r}{95.29} & 98.64 & \multicolumn{1}{|r}{87.26} & 79.77 & \multicolumn{1}{|r}{99.50} & 83.46 \\
+4 & 0.5 & 0 & 0.5 & 0 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{100.00} & 0.00 & \multicolumn{1}{|r}{96.66} & 93.23 & \multicolumn{1}{|r}{99.90} & 94.60 \\
+5 & 0.5 & 0 & 0 & 0.5 & \multicolumn{1}{|r}{12} & 7 & \multicolumn{1}{|r}{97.59} & 90.38 & \multicolumn{1}{|r}{89.72} & 84.06 & \multicolumn{1}{|r}{99.61} & 87.17 \\
+6 & 0 & 0.5 & 0.5 & 0 & \multicolumn{1}{|r}{12} & 7 & \multicolumn{1}{|r}{97.62} & 90.40 & \multicolumn{1}{|r}{89.40} & 83.69 & \multicolumn{1}{|r}{99.59} & 86.89 \\
+7 & 0 & 0.5 & 0 & 0.5 & \multicolumn{1}{|r}{14} & 5 & \multicolumn{1}{|r}{96.93} & 95.61 & \multicolumn{1}{|r}{88.32} & 81.72 & \multicolumn{1}{|r}{99.55} & 85.17 \\
+8 & 0 & 0 & 0.5 & 0.5 & \multicolumn{1}{|r}{10} & 9 & \multicolumn{1}{|r}{49.77} & 42.27 & \multicolumn{1}{|r}{88.56} & 63.37 & \multicolumn{1}{|r}{99.55} & 65.99 \\
+9 & 1/3 & 1/3 & 1/3 & 0 & \multicolumn{1}{|r}{12} & 7 & \multicolumn{1}{|r}{97.60} & 90.38 & \multicolumn{1}{|r}{88.93} & 82.69 & \multicolumn{1}{|r}{99.57} & 85.99 \\
+10 & 1/3 & 1/3 & 0 & 1/3 & \multicolumn{1}{|r}{14} & 5 & \multicolumn{1}{|r}{96.93} & 95.61 & \multicolumn{1}{|r}{88.32} & 81.72 & \multicolumn{1}{|r}{99.55} & 85.17 \\
+11 & 0 & 1/3 & 1/3 & 1/3 & \multicolumn{1}{|r}{12} & 7 & \multicolumn{1}{|r}{97.60} & 90.38 & \multicolumn{1}{|r}{88.93} & 82.69 & \multicolumn{1}{|r}{99.57} & 85.99 \\
+12 & 0.25 & 0.25 & 0.25 & 0.25 & \multicolumn{1}{|r}{12} & 7 & \multicolumn{1}{|r}{97.62} & 89.40 & \multicolumn{1}{|r}{89.40} & 83.69 & \multicolumn{1}{|r}{99.59} & 86.89 
+\end{tabular}
+}
+\end{center}
+\end{table}
+
+The most general tendency is that these previously obtained optimal designs perform better in terms of the generalised `lack-of-fit-only' criteria, with $\kappa_{LoF}=1$, and the corresponding efficiencies considerably increase when the value of $\tau^2$ is decreased (up to almost $100\%$ for most of the designs). As for the optimality with respect to all components, with all $\kappa$-s being equal to $1/3$, this increase is smaller, but still quite evident. 
+
+Overall the efficiency values are not too bad, in both determinant- and trace-based cases, even for the almost `random' design $\#8$, where only degrees of freedom matter. $DP-$ and $LP-$ optimal designs perform slightly worse with respect to both generalised criteria considered, however, the deviation is too small cause any concern.
+
+\begin{table}[h]
+\begin{center}
+\caption{GL-efficiencies of designs optimal in terms of trace-based compound criteria}
+\label{Table::GL-eff}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{rrrrrrrrrrrrr}
+\multicolumn{1}{l}{\textbf{}} & \multicolumn{4}{l}{\textbf{Criteria}} & \multicolumn{2}{l}{\textbf{DoF}} & \multicolumn{2}{l}{\textbf{Efficiency, \%}} & \multicolumn{2}{c}{$\bm{\tau^2=1}$} & \multicolumn{2}{c}{$\bm{\tau^2=1/q}$} \\
+\textbf{} & \textbf{L} & \textbf{LP} & \textbf{DF} & \textbf{LoF} & \textbf{PE} & \textbf{LoF} & \textbf{L} & \textbf{LP} & $\bm{\kappa_{LoF}=1}$ & $\bm{\kappa_{i}=1/3}$ & $\bm{\kappa_{LoF}=1}$ & $\bm{\kappa_{i}=1/3}$ \\
+1  & 1    & 0    & 0    & 0    & \multicolumn{1}{|r}{0}  & 19 & \multicolumn{1}{|r}{100.00} & 0.00   & \multicolumn{1}{|r}{97.50} & 92.46 & \multicolumn{1}{|r}{99.90} & 93.45 \\
+2  & 0    & 1    & 0    & 0    & \multicolumn{1}{|r}{18} & 1  & \multicolumn{1}{|r}{88.88}  & 100.00 & \multicolumn{1}{|r}{89.29} & 76.85 & \multicolumn{1}{|r}{99.58} & 79.90 \\
+3  & 0.5  & 0.5  & 0    & 0    & \multicolumn{1}{|r}{16} & 3  & \multicolumn{1}{|r}{92.83}  & 99.18  & \multicolumn{1}{|r}{89.97} & 80.65 & \multicolumn{1}{|r}{99.61} & 83.65 \\
+4  & 0.5  & 0    & 0.5  & 0    & \multicolumn{1}{|r}{0}  & 19 & \multicolumn{1}{|r}{100.00} & 0.00   & \multicolumn{1}{|r}{97.50} & 92.46 & \multicolumn{1}{|r}{99.90} & 93.45 \\
+5  & 0.5  & 0    & 0    & 0.5  & \multicolumn{1}{|r}{12} & 7  & \multicolumn{1}{|r}{91.71}  & 99.99  & \multicolumn{1}{|r}{89.43} & 78.83 & \multicolumn{1}{|r}{99.59} & 81.92 \\
+6  & 0    & 0.5  & 0.5  & 0    & \multicolumn{1}{|r}{12} & 7  & \multicolumn{1}{|r}{95.61}  & 93.06  & \multicolumn{1}{|r}{92.95} & 85.32 & \multicolumn{1}{|r}{99.73} & 87.57 \\
+7  & 0    & 0.5  & 0    & 0.5  & \multicolumn{1}{|r}{14} & 5  & \multicolumn{1}{|r}{90.11}  & 99.93  & \multicolumn{1}{|r}{89.35} & 77.73 & \multicolumn{1}{|r}{99.59} & 80.80 \\
+8  & 0    & 0    & 0.5  & 0.5  & \multicolumn{1}{|r}{10} & 9  & \multicolumn{1}{|r}{25.19}  & 26.26  & \multicolumn{1}{|r}{88.50} & 42.98 & \multicolumn{1}{|r}{99.55} & 44.82 \\
+9 & 1/3  & 1/3  & 1/3  & 0    & \multicolumn{1}{|r}{12} & 7  & \multicolumn{1}{|r}{95.35}  & 92.80  & \multicolumn{1}{|r}{92.87} & 84.81 & \multicolumn{1}{|r}{99.72} & 87.07 \\
+10 & 1/3  & 1/3  & 0    & 1/3  & \multicolumn{1}{|r}{14} & 5  & \multicolumn{1}{|r}{91.71}  & 99.99  & \multicolumn{1}{|r}{89.43} & 78.83 & \multicolumn{1}{|r}{99.59} & 81.92 \\
+11 & 0    & 1/3  & 1/3  & 1/3  & \multicolumn{1}{|r}{12} & 7  & \multicolumn{1}{|r}{92.74}  & 99.09  & \multicolumn{1}{|r}{90.37} & 80.62 & \multicolumn{1}{|r}{99.63} & 83.50 \\
+12 & 0.25 & 0.25 & 0.25 & 0.25 & \multicolumn{1}{|r}{12} & 7  & \multicolumn{1}{|r}{93.99}  & 97.98  & \multicolumn{1}{|r}{90.87} & 82.02 & \multicolumn{1}{|r}{99.65} & 84.79 
+\end{tabular}
+}
+\end{center}
+\end{table} 
+
+\section{Generalised Determinant- and Trace-based Criteria}
+The lack-of-fit components in the generalised criteria (\ref{eq::GD_eff}) (and, hence, in (\ref{eq::GDs_eff}) and (\ref{eq::GLs_eff})) were derived from the expected values of the non-centrality parameter, i.e. point estimates. In this section we treat the components of these criteria from the `pure error' perspective and define criteria that would have the same desirable properties as before, and would be suitable (i.e. provide the most useful designs) when the further data analysis is to be carried out in terms of hypothesis testing and estimating confidence intervals.
+
+\subsection{Generalised DP-criterion}
+Recall the $GD$-criterion presented previously in (\ref{eq::GD_eff}):
+\begin{equation*}
+\mbox{minimise }|\bm{X}'_{1}\bm{X}_1|^{-\frac{\kappa_{D}}{p}}\times \left|\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right|^{-\frac{\kappa_{LoF}}{q}} \times |\bm{A}'\bm{A}+\bm{I}_{q}|.^{\frac{\kappa_{bias}}{q}}
+\end{equation*}
+
+First the `pure' estimation of the error variance based on replicates leads to replacing the first component by $DP$-optimality: $\vert(\bm{X}'_{1}\bm{X}_{1})^{-1/p}F_{p,d;1-\alpha_{DP}}\vert$; or $DPs$-optimality which we use throughout this work: $\vert(\bm{X}'_{1}\bm{Q}_{0}\bm{X}_{1})^{-1/(p-1)}F_{p-1,d;1-\alpha_{DP}}\vert$.
+
+Then we amend the second component. A diffuse prior shall be put on primary terms (as was done by \cite{DuMouchel1994}) -- an arbitrary mean and a variance going to infinity, and the prior on potential terms is the one specified before: $\bm{\beta}_2\sim\mathcal{N}(0,\bm{\Sigma}_{0})$,
+$\bm{\Sigma}_{0}=\sigma^{2}\tau^{2}\bm{I}_{q}$, then the posterior
+distribution of the coefficients is (as in \cite{Koch2007introduction} and \cite{DuMouchel1994}):
+$$\bm{\beta}|\bm{Y}\sim \mathcal{N}(\bm{b},\bm{\Sigma}),\mbox{ where }\bm{b}=\bm{\Sigma X}'\bm{Y}, \bm{X}=[\bm{X}_1, \bm{X}_2],$$
+$$\bm{\Sigma}=\left[\frac{\bm{K}}{\sigma^{2}\tau^{2}}+\sigma^{-2}(\bm{X'X})\right]^{-1}=\sigma^{2}[\bm{K}/\tau^{2}+\bm{X'}\bm{X}],^{-1}$$
+and 
+\begin{equation*}
+\bm{K}=\begin{pmatrix}
+\bm{0}_{p\times p} & \bm{0}_{p\times q}\\
+\bm{0}_{q\times p} & \bm{I}_{q\times q}
+\end{pmatrix}.
+\end{equation*}
+The marginal posterior of $\bm{\beta}_2$ is $\mathcal{N}(\bm{b}_{2},\bm{\Sigma}_{22})$, so using the general formula for the inverse of a block matrix
+$$\begin{bmatrix}
+ \bm{A}& \bm{B}\\
+ \bm{C}& \bm{D}
+\end{bmatrix}^{-1}=\begin{bmatrix}
+\ldots & \ldots\\
+\ldots & (\bm{D}-\bm{CA}^{-1}\bm{B})^{-1}
+\end{bmatrix},$$
+we can obtain the expression for $\bm{\Sigma}_{22}$:
+\begin{align*}
+[\bm{K}/\tau^{2}+\bm{X}'\bm{X}]^{-1}&=\begin{bmatrix}
+ \bm{X}'_1\bm{X}_1& \bm{X}'_1\bm{X}_2 \\
+ \bm{X}'_2\bm{X}_1& \bm{X}'_2\bm{X}_2+\bm{I}_{q}/\tau^{2}
+\end{bmatrix}^{-1}\\&=\begin{bmatrix}
+\ldots & \ldots\\
+\ldots &
+(\bm{X}'_2\bm{X}_2+\bm{I}_{q}/\tau^{2}-\bm{X}'_2\bm{X}_1(\bm{X}'_1\bm{X}_1)^{-1}\bm{X}'_1\bm{X}_2)^{-1}
+\end{bmatrix},\\
+\bm{\Sigma}_{22}&=\sigma^{2}[(\bm{K}/\tau^{2}+\bm{X}^{'}\bm{X})^{-1}]_{22}=\sigma^{2}\left(\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right)^{-1},
+\end{align*} 
+and $$(\bm{\Sigma}_{22})^{-1}=\frac{1}{\sigma^{2}}\left(\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right).$$
+
+Therefore, the $(1-\alpha)\times100\%$ confidence region for the potential terms over the posterior distribution, when $\sigma^2$ is estimated by $s^2$ on $\nu$ degrees of freedom, is given by \citep{Draper1998}:
+
+%$$(\bm{\beta}_{2}-\bm{b}_{2})^{'}(\bm{\Sigma}_{22})^{-1}(\bm{\beta}_{2}-\bm{b}_{2})\leq \chi^{2}(q,\alpha),$$
+%where $\chi^{2}(q,\alpha)$ is the $\alpha$-quantile of chi-square distribution with $q$ degrees of freedom.\\ 
+%Equivalently,
+%$$(\bm{\beta}_{2}-\bm{b}_{2})^{'}(\bm{L}+\bm{I}_{q}/\tau^{2})(\bm{\beta}_{2}-\bm{b}_{2})\leq \sigma^{2}\chi^{2}(q,\alpha).$$
+%If we use the estimate $s^2$ of $\sigma^2$ on $\nu$ degrees of freedom ($\nu=d$ in case of pure error estimate), then:
+$$(\bm{\beta}_{2}-\bm{b}_{2})^{'}(\bm{L}+\bm{I}_{q}/\tau^{2})(\bm{\beta}_{2}-\bm{b}_{2})\leq qs^{2}F_{q,\nu;1-\alpha},$$
+where $\mathrm{F}(q,\nu,\alpha)$ is the $\alpha$-quantile of F-distribution with $q$ and $\nu$ degrees of freedom.\\ 
+The volume of this confidence region is proportional to
+\begin{equation*}
+\sqrt{\vert(\bm{L}+\bm{I}_{q}/\tau^{2})^{-1}\vert}F^{q/2}_{q,\nu;1-\alpha}.
+\end{equation*}
+Minimising the volume is equivalent to minimising
+\begin{equation*}
+\vert(\bm{L}+\bm{I}_{q}/\tau^{2})^{-1/q}\vert\times F_{q,\nu;1-\alpha},
+\end{equation*}
+which is how we define the new lack-of-fit component. Note that when the mean square error estimation is used, $\nu=n-p$ and does not depend on the design and, therefore, this component is reduced to the lack-of-fit component of the $GD$-criterion (\ref{eq::GD_eff}). 
+
+As for the bias component, it remains unchanged, as it does not depend on the way the error variance is being estimated. We also add the standard $D$-component in order to allow for the inferences associated with the point estimates.
+
+So the generalised $DP$-criterion (or $GDP$-criterion) is:
+\begin{align*}
+%\label{eq::GDP}
+\mbox{minimise }&\left[\frac{\kappa_{D}}{p}\log|(\bm{X}'_{1}\bm{X}_{1})^{-1}|+\frac{\kappa_{DP}}{p}\log\left\{|(\bm{X}'_{1}\bm{X}_{1})^{-1}|F^{p}_{p,d;1-\alpha_{DP}}\right\} + \right.\\ &\left.\frac{\kappa_{LoF}}{q}\log\left\{\left|\left(\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right)^{-1}\right|F^{q}_{q,d;1-\alpha_{LoF}}\right\}+\frac{\kappa_{bias}}{q}\log|\bm{A}'\bm{A}+\bm{I}_{q}|\right]_{.} 
+\end{align*}
+
+If we present the same criterion as the weighted product of corresponding efficiencies, then we have to minimise:
+\begin{align}
+\label{eq::GDP_eff}
+\vert\bm{X}'_{1}\bm{X}_{1}\vert^{-\frac{\kappa_{D}}{p}}\times & \left[\left|\bm{X}'_{1}\bm{X}_{1}\right|^{-1/p}F_{p,d;1-\alpha_{DP}}\right]^{\kappa_{DP}} \times \notag \\ &\left[\left|\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right|^{-1/q}F_{q,d;1-\alpha_{LoF}}\right]^{\kappa_{LoF}} \times |\bm{A}'\bm{A}+\bm{I}_{q}|^{\frac{\kappa_{bias}}{q}}_{,}
+\end{align} 
+
+and when the intercept is a nuisance parameter, the generalised $DPs$ criterion is then:
+\begin{align}
+\label{eq::GDPs_eff}
+\vert\bm{X}'_1\bm{Q}_0\bm{X}_1\vert^{-\frac{\kappa_{D}}{p}}\times & \left[\left|\bm{X}'_1\bm{Q}_0\bm{X}_1\right|^{-1/(p-1)}F_{p-1,d;1-\alpha_{DP}}\right]^{\kappa_{DP}} \times \notag \\ &\left[\left|\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right|^{-1/q}F_{q,d;1-\alpha_{LoF}}\right]^{\kappa_{LoF}} \times |\bm{A}'\bm{A}+\bm{I}_{q}|^{\frac{\kappa_{bias}}{q}},
+\end{align} 
+where $\bm{X}_1$ is the model matrix not containing the intercept column.
+
+\subsection{Generalised LP-criterion}
+As was shown in the previous section, the posterior variance-covariance matrix for the potential terms is 
+\begin{equation*}
+\bm{\Sigma}_{22}=\sigma^{2}\left(\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right)_{.}^{-1}
+\end{equation*}
+
+Following the logic of the trace-based criteria, the mean of the variances of linear functions of $\bm{\beta}_2$ defined by matrix $\bm{J}$ can be calculated as the trace of $\sigma^2\bm{JJ}'\left(\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right)_{,}^{-1}$ scaled by the number of potential terms. The mean of the squared lengths of the $(1-\alpha)\times100\%$ confidence intervals  for these linear functions is proportional to
+\begin{equation*}
+\frac{1}{q}\mbox{trace}\left[\bm{JJ}'\left(\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right)^{-1}\right]F_{1,d;1-\alpha}.
+\end{equation*} 
+
+Henceforth we mainly consider the case when $\bm{J}$ is the identity matrix, that is we work with the analogue of $AP$-optimality. In other words, the lack-of-fit component in the generalised $AP$-criterion  stands for the minimisation of the $\bm{L}_2$-norm of the $q$-dimensional vector of the posterior confidence intervals' lengths for the potential parameters. 
+
+As before, we include both $L$- and $LP$-components for the primary terms, and the bias $GA$-component remains the same. The resulting criterion as a linear combination of traces is:
+\begin{align*}
+\mbox{minimise }&\left[ \frac{\gamma_{L}}{p}\mbox{trace}(\bm{WX}'_1\bm{X}_1)^{-1}+ \frac{\gamma_{LP}}{p}\mbox{trace}(\bm{WX}'_1\bm{X}_1)^{-1}F_{1,d;1-\alpha_{LP}}-\right. \\& \left.\frac{\gamma_{LoF}}{q}\mbox{trace}\left(\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right)F_{1,d;1-\alpha_{LoF}}+\frac{\gamma_{bias}}{q}\mbox{trace}(\bm{A}'\bm{A}+\bm{I}_{q})\right]_{.}
+\end{align*} 
+
+To keep the consistency of introducing the compound criteria as weighted products of the components' efficiencies, we need to minimise:
+\begin{multline}
+\label{eq::GLP_eff}
+\mbox{minimise }\left[\frac{1}{p}\mbox{trace}(\bm{WX}'_1\bm{X}_1)^{-1}\right]^{\kappa_{L}}\times \left[\frac{1}{p}\mbox{trace}(\bm{WX}'_1\bm{X}_1)^{-1}F_{1,d;1-\alpha_{LP}}\right]^{\kappa_{LP}}\times \\ \left[\frac{1}{q}\mbox{trace}\left(\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right)^{-1}F_{1,d;1-\alpha_{LoF}}\right]^{\kappa_{LoF}}\times\left[\frac{1}{q}\mbox{trace}(\bm{A}'\bm{A}+\bm{I}_{q})\right]_{.}^{\kappa_{bias}}
+\end{multline}
+
+The generalised $LPs$ criterion, as it will be used further on, is:
+\begin{multline}
+\label{eq::GLPs_eff}
+\mbox{minimise }\left[\frac{1}{p-1}\mbox{trace}\{\bm{W}(\bm{X}'_{1}\bm{Q}_{0}\bm{X}_{1})^{-1}\}\right]^{\kappa_{L}+\kappa_{LP}}\times \left[F_{1,d;1-\alpha_{LP}}\right]^{\kappa_{LP}}\times \\  \left[\frac{1}{q}\mbox{trace}\left(\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right)^{-1}F_{1,d;1-\alpha_{LoF}}\right]^{\kappa_{LoF}}\times\left[\frac{1}{q}\mbox{trace}(\bm{A'}\bm{A}+\bm{I}_{q})\right]_{.}^{\kappa_{bias}}
+\end{multline}
+
+Further we will consider examples of two experiments, and for each of them will obtain $GDP_S$- and $GLP_S$-optimal completely randomised designs with various combinations of weights allocated to different components. The points of the resulting design/model matrix are to be chosen from the orthonormalised candidate sets, which makes the bias component as we have it (as was justified by \cite{Goos2005model}). 
+
+\subsection{Examples}
+\input{Chapter4_Examples}
+
+\newpage
+\section{Blocked Experiments}
+\label{sec::gen_blocked}
+\input{Chapter4_Blocking}
+
+\section{Conclusions}
+The criteria derived and presented in this chapter incorporate both the precision of the primary terms and the possibility of model misspecification; they were adapted for experiments in blocks as well.
+
+We explored how the designs and their performances change when the prior variance scaling parameter is changed, and what happens when we consider a different number of potential terms in the full model.
+
+Though some specific patterns can be observed in the relationship between the allocation of weights and optimal designs' performance, it still could be seen that components' functions cannot be compensated by each other and, therefore, if one is looking for an efficient design in some sense, the corresponding component should be included in the criterion with non-zero weight. In most cases it would be suggested to examine a few weight combinations and the resulting optimal designs, such that the most suitable could be chosen by the experimenter. 
+
+In addition, as the examples demonstrated, most of the designs are highly $D$- and $L$-efficient, but the variation in efficiency in terms of other criteria can be quite large, that  is, at the stage of planning an experiment, the possible direction of model misspecification should be carefully thought through together with the main model which will be fitted. The scale of the `tuning' parameter $\tau^2$, however, does not seem to have a great influence, though, obviously, the importance of its choice should not be neglected.
+
+Regarding the practical implementation of the algorithm, it provides the results in reasonable time even when no additional computational power is used. However, the necessity of the orthonormalisation of the candidate set of points, arising from the derivation of the bias criteria components, makes the adaptation of the generalised criteria to, for example, experimental frameworks with nested unit structures, a non-trivial problem. Ignoring such a requirement would amend the formulae of the bias components, but in general it should not be expected to considerably influence the resulting optimal designs and their performances; though the orthonormalisation step should not be blindly omitted, especially if the prediction bias is of a particular interest. 
+      

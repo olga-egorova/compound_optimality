@@ -1,0 +1,315 @@
+%%% Examples of MSE MS optimal desgins. 
+
+In this section we shall consider three illustrative examples of multistratum experiments, with $2$, $3$ and $4$ strata. By implementing the stratum-by-stratum design search algorithm presented above, we will obtain determinant- and trace-based MSE-optimal designs. The third component in the MSE(D) criterion is estimated using the Monte-Carlo approach as given in Chapter \ref{ch::mse}; the point prior estimates are not considered here mainly because the results were obtained with the normal prior in a very reasonable time and there was no need for an alternative. 
+
+All the designs will be obtained using three values of the variance scaling parameter $\tau^2$, that is $1$, $1/q$ and $\sqrt{1/q}$, where $q$ stands for the total number of potential terms in the full model (\ref{eq::MS_model_full}). As this number tends to become quite large once the experiment is not too small, the value of $\tau^2=\sqrt{1/q}$ would provide an intermediate value between $1/q$ (which can be very small) and $1$. We shall assess designs' performances in terms of individual criteria for the model parameters in the lowest stratum, and see how available degrees of freedom are allocated between the pure error, inter-block information and lack-of-fit components at each stratum. 
+
+%% Example 1: 
+\subsection{Example 1}
+
+In the first example a $2$-stratum experimental framework is considered, with $2$ and $3$ three-level factors applied respectively; the first stratum has $18$ whole-plots with $3$ sub-plots in each, i.e. $54$ experimental runs in total. The full quadratic polynomial model is to be fitted, with $5$ parameters in the highest stratum ($2$ linear, $2$ quadratic and $1$ interaction term) and $15$ in the lowest one ($3$ of each of linear, quadratic and interaction terms plus $6$ interaction terms with the factors applied in the first stratum).
+
+Regarding the third-order potential terms, there are $2$ of them in the first stratum and $28$ in the second, $30$ in total; therefore, the values of $\tau^2$ used are $1/q\approx 0.033$, $\sqrt{1/q}\approx 0.18$ and $1$.
+
+The $MSE(D)$-optimal designs obtained are summarised in Table \ref{tab::mseD_ex1}: the three parts correspond to different values of $\tau^2$; the columns after those containing the weight allocation present the degrees of freedom distribution: the first three correspond to the first stratum (pure error, inter-whole-plot and lack-of-fit components), and the following two -- to the second stratum (pure error and lack-of-fit). A similar structure holds for the $MSE(L)$-optimal designs presentation in Table \ref{tab::mseL_ex1}.
+
+\begin{table}[h]
+\centering
+\caption{Example 1. Properties of MSE(D)-optimal designs}
+\label{tab::mseD_ex1}
+\scalebox{0.7}{
+\begin{tabular}{rrrrcccrrrrr}
+ & \multicolumn{3}{l}{\textbf{Criteria, $\bm{\tau^2=1/q}$}}             & \multicolumn{3}{l}{\textbf{DF (s=1)}}          & \multicolumn{2}{l}{\textbf{DF(s=2)}} & \multicolumn{3}{l}{\textbf{Efficiencies,\%}}     \\
+  & \textbf{DP} & \textbf{LoF(DP)} & \textbf{MSE(D)} & \textbf{PE} & \textbf{Inter-WP} & \textbf{LoF} & \textbf{PE}      & \textbf{LoF}      & \textbf{DP} & \textbf{LoF(DP)} & \textbf{MSE(D)} \\
+1 & 1    & 0    & 0    & \multicolumn{1}{|r}{7} & 2 & 3 & \multicolumn{1}{|r}{16} & 5  & \multicolumn{1}{|r}{100.00} & 94.30  & 93.89  \\
+2 & 0    & 1    & 0    & \multicolumn{1}{|r}{6} & 3 & 3 & \multicolumn{1}{|r}{20} & 1  & \multicolumn{1}{|r}{15.05}  & 100.00 & 14.18  \\
+3 & 0    & 0    & 1    & \multicolumn{1}{|r}{2} & 7 & 3 & \multicolumn{1}{|r}{0}  & 21 & \multicolumn{1}{|r}{0.00}   & 0.00   & 100.00 \\
+4 &  1/3  & 1/3  & 1/3 & \multicolumn{1}{|r}{7} & 2 & 3 & \multicolumn{1}{|r}{16} & 5  & \multicolumn{1}{|r}{90.80}  & 97.46  & 86.82  \\
+5 & 0.5  & 0.5  & 0    & \multicolumn{1}{|r}{5} & 4 & 3 & \multicolumn{1}{|r}{16} & 5  & \multicolumn{1}{|r}{83.82}  & 97.68  & 79.87  \\
+6 & 0.5  & 0    & 0.5  & \multicolumn{1}{|r}{7} & 2 & 3 & \multicolumn{1}{|r}{13} & 8  & \multicolumn{1}{|r}{92.92}  & 93.58  & 95.41  \\
+7 & 0    & 0.5  & 0.5  & \multicolumn{1}{|r}{6} & 3 & 3 & \multicolumn{1}{|r}{13} & 8  & \multicolumn{1}{|r}{84.19}  & 95.36  & 87.20  \\
+8 & 0.5  & 0.25 & 0.25 & \multicolumn{1}{|r}{6} & 3 & 3 & \multicolumn{1}{|r}{15} & 6  & \multicolumn{1}{|r}{92.95}  & 97.72  & 90.54  \\
+  &      &      &      &   &   &   &    &    &        &        &        \\  
+   & \multicolumn{3}{l}{\textbf{Criteria, $\bm{\tau^2=\sqrt{1/q}}$}}    & \multicolumn{3}{l}{\textbf{DF (s=1)}} & \multicolumn{2}{l}{\textbf{DF(s=2)}} & \multicolumn{3}{l}{\textbf{Efficiencies,\%}}     \\
+  & \textbf{DP} & \textbf{LoF(DP)} & \textbf{MSE(D)} & \textbf{PE} & \textbf{Inter-WP} & \textbf{LoF} & \textbf{PE}  & \textbf{LoF}      & \textbf{DP} & \textbf{LoF(DP)} & \textbf{MSE(D)} \\
+1 & 1    & 0    & 0    & \multicolumn{1}{|r}{7} & 2 & 3 & \multicolumn{1}{|r}{16} & 5  & \multicolumn{1}{|r}{100.00} & 76.63  & 93.28  \\
+2 & 0    & 1    & 0    & \multicolumn{1}{|r}{7} & 2 & 3 & \multicolumn{1}{|r}{13} & 8  & \multicolumn{1}{|r}{35.03}  & 100.00 & 37.40  \\
+3 & 0    & 0    & 1    & \multicolumn{1}{|r}{0} & 9 & 3 & \multicolumn{1}{|r}{0}  & 21 & \multicolumn{1}{|r}{0.00}   & 0.00   & 100.00 \\
+4 &   1/3  & 1/3  & 1/3& \multicolumn{1}{|r}{6} & 3 & 3 & \multicolumn{1}{|r}{12} & 9  & \multicolumn{1}{|r}{84.85}  & 91.04  & 90.36  \\
+5 & 0.5  & 0.5  & 0    & \multicolumn{1}{|r}{4} & 5 & 3 & \multicolumn{1}{|r}{13} & 8  & \multicolumn{1}{|r}{84.11}  & 94.38  & 87.64  \\
+6 & 0.5  & 0    & 0.5  & \multicolumn{1}{|r}{9} & 0 & 3 & \multicolumn{1}{|r}{15} & 6  & \multicolumn{1}{|r}{94.09}  & 83.72  & 91.11  \\
+7 & 0    & 0.5  & 0.5  & \multicolumn{1}{|r}{5} & 4 & 3 & \multicolumn{1}{|r}{11} & 10 & \multicolumn{1}{|r}{82.33}  & 92.41  & 92.56  \\
+8 & 0.5  & 0.25 & 0.25 & \multicolumn{1}{|r}{6} & 3 & 3 & \multicolumn{1}{|r}{12} & 9  & \multicolumn{1}{|r}{88.11}  & 90.72  & 94.12 \\  
+ &      &      &      &   &   &   &    &    &        &        &        \\  
+  & \multicolumn{3}{l}{\textbf{Criteria, $\bm{\tau^2=1}$}}             & \multicolumn{3}{l}{\textbf{DF (s=1)}}          & \multicolumn{2}{l}{\textbf{DF(s=2)}} & \multicolumn{3}{l}{\textbf{Efficiencies,\%}}     \\
+  & \textbf{DP} & \textbf{LoF(DP)} & \textbf{MSE(D)} & \textbf{PE} & \textbf{Inter-WP} & \textbf{LoF} & \textbf{PE}      & \textbf{LoF}      & \textbf{DP} & \textbf{LoF(DP)} & \textbf{MSE(D)} \\
+1 & 1    & 0    & 0    & \multicolumn{1}{|r}{7} & 2 & 3 & \multicolumn{1}{|r}{16} & 5  & \multicolumn{1}{|r}{100.00} & 54.24  & 93.58  \\
+2 & 0    & 1    & 0    & \multicolumn{1}{|r}{4} & 6 & 2 & \multicolumn{1}{|r}{8}  & 13 & \multicolumn{1}{|r}{61.51}  & 100.00 & 82.10  \\
+3 & 0    & 0    & 1    & \multicolumn{1}{|r}{0} & 9 & 3 & \multicolumn{1}{|r}{0}  & 21 & \multicolumn{1}{|r}{0.00}   & 0.00   & 100.00 \\
+4 & 1/3  & 1/3  & 1/3  & \multicolumn{1}{|r}{5} & 4 & 3 & \multicolumn{1}{|r}{10} & 11 & \multicolumn{1}{|r}{78.91}  & 90.22  & 93.03  \\
+5 & 0.5  & 0.5  & 0    & \multicolumn{1}{|r}{4} & 5 & 3 & \multicolumn{1}{|r}{11} & 10 & \multicolumn{1}{|r}{78.98}  & 88.35  & 88.85  \\
+6 & 0.5  & 0    & 0.5  & \multicolumn{1}{|r}{8} & 1 & 3 & \multicolumn{1}{|r}{16} & 5  & \multicolumn{1}{|r}{95.92}  & 56.84  & 90.82  \\
+7 & 0    & 0.5  & 0.5  & \multicolumn{1}{|r}{2} & 7 & 3 & \multicolumn{1}{|r}{8}  & 13 & \multicolumn{1}{|r}{68.12}  & 95.67  & 91.37  \\
+8 & 0.5  & 0.25 & 0.25 & \multicolumn{1}{|r}{4} & 5 & 3 & \multicolumn{1}{|r}{11} & 10 & \multicolumn{1}{|r}{82.75}  & 84.61  & 93.46 
+\end{tabular}
+}
+\end{table}
+%% Trace-based criteria. Example 1: 
+
+\begin{table}[h]
+\centering
+\caption{Example 1. Properties of MSE(L)-optimal designs}
+\label{tab::mseL_ex1}
+\scalebox{0.7}{
+\begin{tabular}{rrrrcccrrrrr}
+  & \multicolumn{3}{l}{\textbf{Criteria, $\bm{\tau^2=1/q}$}}             & \multicolumn{3}{l}{\textbf{DF (s=1)}}          & \multicolumn{2}{l}{\textbf{DF(s=2)}} & \multicolumn{3}{l}{\textbf{Efficiencies,\%}}     \\
+  & \textbf{LP} & \textbf{LoF(LP)} & \textbf{MSE(L)} & \textbf{PE} & \textbf{Inter-WP} & \textbf{LoF} & \textbf{PE}      & \textbf{LoF}      & \textbf{LP} & \textbf{LoF(LP)} & \textbf{MSE(L)} \\
+1 & 1    & 0    & 0    & \multicolumn{1}{|r}{7} & 2 & 3 & \multicolumn{1}{|r}{16} & 5  & \multicolumn{1}{|r}{100.00} & 95.87  & 56.60  \\
+2 & 0    & 1    & 0    & \multicolumn{1}{|r}{1} & 8 & 3 & \multicolumn{1}{|r}{20} & 1  & \multicolumn{1}{|r}{0.00}   & 100.00 & 0.00   \\
+3 & 0    & 0    & 1    & \multicolumn{1}{|r}{1} & 8 & 3 & \multicolumn{1}{|r}{0}  & 21 & \multicolumn{1}{|r}{0.00}   & 0.00   & 100.00 \\
+4 & 1/3 & 1/3 & 1/3    & \multicolumn{1}{|r}{5} & 4 & 3 & \multicolumn{1}{|r}{14} & 7  & \multicolumn{1}{|r}{81.64}  & 91.43  & 67.32  \\
+5 & 0.5  & 0.5  & 0    & \multicolumn{1}{|r}{7} & 2 & 3 & \multicolumn{1}{|r}{17} & 4  & \multicolumn{1}{|r}{92.02}  & 97.01  & 54.36  \\
+6 & 0.5  & 0    & 0.5  & \multicolumn{1}{|r}{6} & 3 & 3 & \multicolumn{1}{|r}{12} & 9  & \multicolumn{1}{|r}{83.60}  & 85.60  & 76.54  \\
+7 & 0    & 0.5  & 0.5  & \multicolumn{1}{|r}{2} & 7 & 3 & \multicolumn{1}{|r}{12} & 9  & \multicolumn{1}{|r}{70.91}  & 87.08  & 72.93  \\
+8 & 0.5  & 0.25 & 0.25 & \multicolumn{1}{|r}{7} & 2 & 3 & \multicolumn{1}{|r}{15} & 6  & \multicolumn{1}{|r}{86.23}  & 94.70  & 63.45  \\
+  &      &      &      &   &   &   &    &    &        &        &        \\  
+   & \multicolumn{3}{l}{\textbf{Criteria, $\bm{\tau^2=\sqrt{1/q}}$}}    & \multicolumn{3}{l}{\textbf{DF (s=1)}} & \multicolumn{2}{l}{\textbf{DF(s=2)}} & \multicolumn{3}{l}{\textbf{Efficiencies,\%}}     \\
+  & \textbf{LP} & \textbf{LoF(LP)} & \textbf{MSE(L)} & \textbf{PE} & \textbf{Inter-WP} & \textbf{LoF} & \textbf{PE}      & \textbf{LoF}      & \textbf{LP} & \textbf{LoF(LP)} & \textbf{MSE(L)} \\
+1 & 1    & 0    & 0    & \multicolumn{1}{|r}{7} & 2 & 3 & \multicolumn{1}{|r}{16} & 5  & \multicolumn{1}{|r}{100.00} & 97.16  & 34.02  \\
+2 & 0    & 1    & 0    & \multicolumn{1}{|r}{4} & 5 & 3 & \multicolumn{1}{|r}{15} & 6  & \multicolumn{1}{|r}{22.57}  & 100.00 & 13.65  \\
+3 & 0    & 0    & 1    & \multicolumn{1}{|r}{0} & 9 & 3 & \multicolumn{1}{|r}{0}  & 21 & \multicolumn{1}{|r}{0.00}   & 0.00   & 100.00 \\
+4 & 1/3 & 1/3 & 1/3    & \multicolumn{1}{|r}{3} & 6 & 3 & \multicolumn{1}{|r}{11} & 10 & \multicolumn{1}{|r}{72.15}  & 92.81  & 59.54  \\
+5 & 0.5  & 0.5  & 0    & \multicolumn{1}{|r}{6} & 3 & 3 & \multicolumn{1}{|r}{15} & 6  & \multicolumn{1}{|r}{90.32}  & 97.61  & 36.84  \\
+6 & 0.5  & 0    & 0.5  & \multicolumn{1}{|r}{3} & 6 & 3 & \multicolumn{1}{|r}{10} & 11 & \multicolumn{1}{|r}{74.91}  & 87.03  & 57.10  \\
+7 & 0    & 0.5  & 0.5  & \multicolumn{1}{|r}{3} & 6 & 3 & \multicolumn{1}{|r}{10} & 11 & \multicolumn{1}{|r}{49.02}  & 89.19  & 70.75  \\
+8 & 0.5  & 0.25 & 0.25 & \multicolumn{1}{|r}{3} & 6 & 3 & \multicolumn{1}{|r}{13} & 8  & \multicolumn{1}{|r}{80.37}  & 95.79  & 47.64 \\
+  &      &      &      &   &   &   &    &    &        &        &        \\ 
+ & \multicolumn{3}{l}{\textbf{Criteria, $\bm{\tau^2=1}$}}             & \multicolumn{3}{l}{\textbf{DF (s=1)}}          & \multicolumn{2}{l}{\textbf{DF(s=2)}} & \multicolumn{3}{l}{\textbf{Efficiencies,\%}}     \\
+  & \textbf{LP} & \textbf{LoF(LP)} & \textbf{MSE(L)} & \textbf{PE} & \textbf{Inter-WP} & \textbf{LoF} & \textbf{PE}      & \textbf{LoF}      & \textbf{LP} & \textbf{LoF(LP)} & \textbf{MSE(L)} \\
+1 & 1    & 0    & 0    & \multicolumn{1}{|r}{7} & 2 & 3 & \multicolumn{1}{|r}{16} & 5  & \multicolumn{1}{|r}{100.00} & 96.46  & 17.41  \\
+2 & 0    & 1    & 0    & \multicolumn{1}{|r}{3} & 6 & 3 & \multicolumn{1}{|r}{13} & 8  & \multicolumn{1}{|r}{5.52}   & 100.00 & 1.87   \\
+3 & 0    & 0    & 1    & \multicolumn{1}{|r}{2} & 7 & 3 & \multicolumn{1}{|r}{0}  & 21 & \multicolumn{1}{|r}{0.00}   & 0.00   & 100.00 \\
+4 & 1/3 & 1/3 & 1/3    & \multicolumn{1}{|r}{3} & 6 & 3 & \multicolumn{1}{|r}{11} & 10 & \multicolumn{1}{|r}{68.69}  & 98.29  & 38.05  \\
+5 & 0.5  & 0.5  & 0    & \multicolumn{1}{|r}{7} & 2 & 3 & \multicolumn{1}{|r}{15} & 6  & \multicolumn{1}{|r}{96.16}  & 97.11  & 17.83  \\
+6 & 0.5  & 0    & 0.5  & \multicolumn{1}{|r}{1} & 8 & 3 & \multicolumn{1}{|r}{11} & 10 & \multicolumn{1}{|r}{60.94}  & 97.01  & 43.47  \\
+7 & 0    & 0.5  & 0.5  & \multicolumn{1}{|r}{5} & 4 & 3 & \multicolumn{1}{|r}{12} & 9  & \multicolumn{1}{|r}{27.57}  & 97.04  & 81.98  \\
+8 & 0.5  & 0.25 & 0.25 & \multicolumn{1}{|r}{3} & 6 & 3 & \multicolumn{1}{|r}{12} & 9  & \multicolumn{1}{|r}{80.28}  & 98.83  & 29.24  \\
+\end{tabular}
+}
+\end{table}  
+
+The number of degrees of freedom available at the first stratum is $m_1-1-p_1=18-1-5=12$, and at the second-stratum $m_2-1-(m_1-1)-p_2=53-17-15=21$. The number of pure error degrees of freedom seems to slowly decrease when $\tau^2$ increases, in both strata; that is with the lack of fit degrees of freedom in the first stratum staying equal to $3$ throughout, fewer of them are allocated to the inter-whole-plot information when the scale of the possible model contamination increases. Design \#$6$, when the weight is equally distributed between the $DP$ and $MSE(D)$-components, is an exception to this observation, and its $LoF(DP)$-efficiencies are almost the worst compared to the average values. 
+
+Meanwhile, as the value of $\tau^2$ goes up, $DP$- and $LoF(DP)$-efficiencies decrease; however, they are generally not too bad, especially for the first two cases. $MSE(D)$-efficiencies remain consistently large at about $90\%-93\%$ for almost all designs; all $MSE(D)$-optimal designs have no pure error degrees of freedom (designs \#$3$), and two other criterion component values for them are $0.00\%$. 
+
+In the case of the trace-based criteria, the imbalance in the degrees of freedom distribution is less drastic, although the tendencies are the same as in the determinant-based case. As for the individual efficiencies, they are more sensitive and clearly more responsive to the allocation of weight. They drop considerably once there is no weight on the corresponding part of the criterion, except for the $LoF(LP)$ part, where the change is less obvious. For example, designs \#$5$ and \#$7$ provide the worst performance with respect to the $MSE(L)-$ and $LP$-components respectively (and the larger the value of $\tau^2$, the lower the efficiencies are), to which no weight was allocated and the $LoF(LP)$-optimal design \#$2$ has extremely low efficiency values in terms of the other two criterion parts. 
+
+%%% Example 2: 
+
+\subsection{Example 2}
+
+Now we will explore a larger example with three strata, and the numbers of factors applied are $2$, $1$ and $2$ respectively, all at three levels. The total of $48$ runs are set up in $12$ whole-plots, each of them containing $2$ sub-plots with $2$ runs per sub-plot. The fitted full quadratic polynomial model in this case contains $20$ parameters: $5$ in the first stratum, $4$ in the second and $11$ in the third. As for the potential terms, there are $30$ of them (as in the first example, so the values of $\tau^2$ are the same as well), just $2$ and $5$ are  in the whole- and sub-plots, the other $23$ are the third-order terms formed from the factors in the sub-sub-plots and their interactions with the terms from the higher strata.
+
+\begin{table}[h]
+\centering
+\caption{Example 2. Properties of MSE(D)-optimal designs}
+\label{tab::mseD_ex2}
+%\scalebox{0.75}{
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{rrrrccccccrrrrr}
+  & \multicolumn{3}{l}{\textbf{Criteria, $\bm{\tau^2=1/q}$}}    & \multicolumn{3}{l}{\textbf{DF (s=1)}}   & \multicolumn{3}{l}{\textbf{DF (s=2)}}    & \multicolumn{2}{l}{\textbf{DF(s=3)}} & \multicolumn{3}{l}{\textbf{Efficiencies,\%}}     \\
+  & \textbf{DP} & \textbf{LoF(DP)} & \textbf{MSE(D)} & \textbf{PE} & \textbf{Inter-WP} & \textbf{LoF} & \textbf{PE} & \textbf{Inter-SP} & \textbf{LoF}& \textbf{PE}      & \textbf{LoF}      & \textbf{DP} & \textbf{LoF(DP)} & \textbf{MSE(D)} \\
+1 & 1    & 0    & 0    & \multicolumn{1}{|r}{3} & 0 & 3 & \multicolumn{1}{|r}{5} & 1 & 2 & \multicolumn{1}{|r}{10} & 3  & \multicolumn{1}{|r}{100.00} & 91.44  & 85.32  \\
+2 & 0    & 1    & 0    & \multicolumn{1}{|r}{2} & 1 & 3 & \multicolumn{1}{|r}{3} & 5 & 0 & \multicolumn{1}{|r}{13} & 0  & \multicolumn{1}{|r}{5.99}   & 100.00 & 5.06   \\
+3 & 0    & 0    & 1    & \multicolumn{1}{|r}{0} & 3 & 3 & \multicolumn{1}{|r}{0} & 3 & 5 & \multicolumn{1}{|r}{0}  & 13 & \multicolumn{1}{|r}{0.00}  & 0.00  & 100.00 \\
+4 &1/3  & 1/3  & 1/3   & \multicolumn{1}{|r}{3} & 0 & 3 & \multicolumn{1}{|r}{3} & 3 & 2 & \multicolumn{1}{|r}{9}  & 4  & \multicolumn{1}{|r}{92.85}  & 87.17  & 83.81  \\
+5 & 0.5  & 0.5  & 0    & \multicolumn{1}{|r}{2} & 1 & 3 & \multicolumn{1}{|r}{6} & 1 & 1 & \multicolumn{1}{|r}{11} & 2  & \multicolumn{1}{|r}{84.77}  & 96.02  & 70.81  \\
+6 & 0.5  & 0    & 0.5  & \multicolumn{1}{|r}{3} & 0 & 3 & \multicolumn{1}{|r}{4} & 1 & 3 & \multicolumn{1}{|r}{8}  & 5  & \multicolumn{1}{|r}{93.22}  & 83.11  & 90.42  \\
+7 & 0    & 0.5  & 0.5  & \multicolumn{1}{|r}{3} & 0 & 3 & \multicolumn{1}{|r}{2} & 4 & 2 & \multicolumn{1}{|r}{9}  & 4  & \multicolumn{1}{|r}{85.98}  & 90.59  & 79.33  \\
+8 & 0.5  & 0.25 & 0.25 & \multicolumn{1}{|r}{3} & 0 & 3 & \multicolumn{1}{|r}{4} & 2 & 2 & \multicolumn{1}{|r}{9}  & 4  & \multicolumn{1}{|r}{90.88}  & 91.03  & 83.39  \\
+  &      &      &      &   &   &   &   &   &   &    &    &        &        &        \\  
+  & \multicolumn{3}{l}{\textbf{Criteria, $\bm{\tau^2=\sqrt{1/q}}$}}    & \multicolumn{3}{l}{\textbf{DF (s=1)}}   & \multicolumn{3}{l}{\textbf{DF (s=2)}}    & \multicolumn{2}{l}{\textbf{DF(s=3)}} & \multicolumn{3}{l}{\textbf{Efficiencies,\%}}     \\
+  & \textbf{DP} & \textbf{LoF(DP)} & \textbf{MSE(D)} & \textbf{PE} & \textbf{Inter-WP} & \textbf{LoF} & \textbf{PE} & \textbf{Inter-SP} & \textbf{LoF}& \textbf{PE}      & \textbf{LoF}      & \textbf{DP} & \textbf{LoF(DP)} & \textbf{MSE(D)} \\
+1 & 1    & 0    & 0    & \multicolumn{1}{|r}{3} & 0 & 3 & \multicolumn{1}{|r}{5} & 1 & 2 & \multicolumn{1}{|r}{10} & 3  & \multicolumn{1}{|r}{100.00} & 92.11  & 84.07  \\
+2 & 0    & 1    & 0    & \multicolumn{1}{|r}{1} & 2 & 3 & \multicolumn{1}{|r}{2} & 5 & 1 & \multicolumn{1}{|r}{10} & 3  & \multicolumn{1}{|r}{30.24}  & 100.00 & 28.05  \\
+3 & 0    & 0    & 1    & \multicolumn{1}{|r}{0} & 3 & 3 & \multicolumn{1}{|r}{0} & 3 & 5 & \multicolumn{1}{|r}{0}  & 13 & \multicolumn{1}{|r}{0.00}   & 0.00   & 100.00 \\
+4 &1/3  & 1/3  & 1/3   & \multicolumn{1}{|r}{2} & 1 & 3 & \multicolumn{1}{|r}{5} & 1 & 2 & \multicolumn{1}{|r}{9}  & 4  & \multicolumn{1}{|r}{86.39}  & 96.27  & 78.05  \\
+5 & 0.5  & 0.5  & 0    & \multicolumn{1}{|r}{2} & 1 & 3 & \multicolumn{1}{|r}{3} & 3 & 2 & \multicolumn{1}{|r}{9}  & 4  & \multicolumn{1}{|r}{83.93}  & 100.76 & 76.45  \\
+6 & 0.5  & 0    & 0.5  & \multicolumn{1}{|r}{3} & 0 & 3 & \multicolumn{1}{|r}{5} & 0 & 3 & \multicolumn{1}{|r}{9}  & 4  & \multicolumn{1}{|r}{96.90}  & 90.06  & 86.09  \\
+7 & 0    & 0.5  & 0.5  & \multicolumn{1}{|r}{3} & 0 & 3 & \multicolumn{1}{|r}{2} & 3 & 3 & \multicolumn{1}{|r}{8}  & 5  & \multicolumn{1}{|r}{77.78}  & 97.70  & 78.21  \\
+8 & 0.5  & 0.25 & 0.25 & \multicolumn{1}{|r}{3} & 0 & 3 & \multicolumn{1}{|r}{2} & 4 & 2 & \multicolumn{1}{|r}{9}  & 4  & \multicolumn{1}{|r}{88.17}  & 95.22  & 79.23  \\
+  &      &      &      &   &   &   &   &   &   &    &    &        &        &        \\  
+  & \multicolumn{3}{l}{\textbf{Criteria, $\bm{\tau^2=1}$}}    & \multicolumn{3}{l}{\textbf{DF (s=1)}}   & \multicolumn{3}{l}{\textbf{DF (s=2)}}    & \multicolumn{2}{l}{\textbf{DF(s=3)}} & \multicolumn{3}{l}{\textbf{Efficiencies,\%}}     \\
+  & \textbf{DP} & \textbf{LoF(DP)} & \textbf{MSE(D)} & \textbf{PE} & \textbf{Inter-WP} & \textbf{LoF} & \textbf{PE} & \textbf{Inter-SP} & \textbf{LoF}& \textbf{PE}      & \textbf{LoF}      & \textbf{DP} & \textbf{LoF(DP)} & \textbf{MSE(D)} \\
+1 & 1    & 0    & 0    & \multicolumn{1}{|r}{3} & 0 & 3 & \multicolumn{1}{|r}{5} & 1 & 2 & \multicolumn{1}{|r}{10} & 3  & \multicolumn{1}{|r}{100.00} & 69.23  & 89.76  \\
+2 & 0    & 1    & 0    & \multicolumn{1}{|r}{2} & 2 & 2 & \multicolumn{1}{|r}{1} & 4 & 3 & \multicolumn{1}{|r}{7}  & 6  & \multicolumn{1}{|r}{46.43}  & 100.00 & 51.81  \\
+3 & 0    & 0    & 1    & \multicolumn{1}{|r}{1} & 2 & 3 & \multicolumn{1}{|r}{0} & 3 & 5 & \multicolumn{1}{|r}{0}  & 13 & \multicolumn{1}{|r}{0.00}   & 0.00   & 100.00 \\
+4 &1/3  & 1/3  & 1/3   & \multicolumn{1}{|r}{3} & 0 & 3 & \multicolumn{1}{|r}{5} & 0 & 3 & \multicolumn{1}{|r}{8}  & 5  & \multicolumn{1}{|r}{83.38}  & 84.60  & 88.46  \\
+5 & 0.5  & 0.5  & 0    & \multicolumn{1}{|r}{1} & 2 & 3 & \multicolumn{1}{|r}{3} & 2 & 3 & \multicolumn{1}{|r}{8}  & 5  & \multicolumn{1}{|r}{74.06}  & 87.14  & 78.63  \\
+6 & 0.5  & 0    & 0.5  & \multicolumn{1}{|r}{3} & 0 & 3 & \multicolumn{1}{|r}{5} & 0 & 3 & \multicolumn{1}{|r}{9}  & 4  & \multicolumn{1}{|r}{98.09}  & 74.68  & 93.25  \\
+7 & 0    & 0.5  & 0.5  & \multicolumn{1}{|r}{3} & 0 & 3 & \multicolumn{1}{|r}{3} & 2 & 3 & \multicolumn{1}{|r}{6}  & 7  & \multicolumn{1}{|r}{81.25}  & 94.80  & 93.70  \\
+8 & 0.5  & 0.25 & 0.25 & \multicolumn{1}{|r}{3} & 0 & 3 & \multicolumn{1}{|r}{2} & 3 & 3 & \multicolumn{1}{|r}{8}  & 5  & \multicolumn{1}{|r}{83.00}  & 87.46  & 87.02  
+\end{tabular}
+}
+\end{table}  
+
+The resulting $MSE(D)$- and $MSE(L)$-optimal designs' performances and the distributions of the degrees of freedom are given in Tables \ref{tab::mseD_ex2} and \ref{tab::mseL_ex2} respectively. In the first two strata some of the degrees of freedom are allocated to the inter-whole-plot (denoted as ``Inter-WP'' in the tables) and inter-sub-plot (``Inter-SP'') information components. 
+
+As there are fewer residual degrees of freedom available at each stratum, the pattern of the imbalance between the pure error and lack-of-fit components (especially in the lower stratum) is less apparent. However, it still can be observed: lower values of the variance scaling parameter result in more replicates; in the case of $MSE(L)$-optimality this pattern seems to be coherent with the weight put on the $LP$- and $LoF(LP)$-components. 
+
+When the number of strata is increased, the tendencies regarding designs' performances remain the same: in the lowest stratum designs in general perform not poorly in terms of $DP$-, $LP$- and lack-of-fit components, with the efficiencies dropping when no weight is allocated to the corresponding part of the criterion and/or with the value of $\tau^2$ increasing. 
+
+An interesting observation worth noting is the $MSE(D)$-optimal design \#$5$ (for $\tau^2=\sqrt{1/q}$) that was obtained as $DP$- and $LoF(DP)$-efficient turned out to be more $LoF(DP)$-efficient ($100.76\%$) rather than the one that was searched for as $LoF(DP)$-optimal (\#$2$); besides, it performs much better in terms of the other criterion components, i.e. it is more than $70\%$ more efficient for each of them. 
+
+%%%% Trace-based, Example 2
+  
+\begin{table}[h]
+\centering
+\caption{Example 2. Properties of MSE(L)-optimal designs}
+\label{tab::mseL_ex2}
+%\scalebox{0.75}{
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{rrrrccccccrrrrr}
+  & \multicolumn{3}{l}{\textbf{Criteria, $\bm{\tau^2=1/q}$}}    & \multicolumn{3}{l}{\textbf{DF (s=1)}}   & \multicolumn{3}{l}{\textbf{DF (s=2)}}    & \multicolumn{2}{l}{\textbf{DF(s=3)}} & \multicolumn{3}{l}{\textbf{Efficiencies,\%}}     \\
+  & \textbf{LP} & \textbf{LoF(LP)} & \textbf{MSE(L)} & \textbf{PE} & \textbf{Inter-WP} & \textbf{LoF} & \textbf{PE} & \textbf{Inter-SP} & \textbf{LoF}& \textbf{PE}      & \textbf{LoF}      & \textbf{LP} & \textbf{LoF(LP)} & \textbf{MSE(L)} \\
+1 & 1    & 0    & 0    & \multicolumn{1}{|r}{2} & 1 & 3 & \multicolumn{1}{|r}{3} & 3 & 2 & \multicolumn{1}{|r}{10} & 3  & \multicolumn{1}{|r}{100.00} & 84.14  & 53.61  \\
+2 & 0    & 1    & 0    & \multicolumn{1}{|r}{1} & 2 & 3 & \multicolumn{1}{|r}{3} & 5 & 0 & \multicolumn{1}{|r}{13} & 0  & \multicolumn{1}{|r}{0.00}   & 100.00 & 0.00   \\
+3 & 0    & 0    & 1    & \multicolumn{1}{|r}{0} & 3 & 3 & \multicolumn{1}{|r}{0} & 1 & 7 & \multicolumn{1}{|r}{0}  & 13 & \multicolumn{1}{|r}{0.00}   & 0.00   & 100.00 \\
+4 & 1/3 & 1/3 & 1/3    & \multicolumn{1}{|r}{2} & 1 & 3 & \multicolumn{1}{|r}{4} & 2 & 2 & \multicolumn{1}{|r}{10} & 3  & \multicolumn{1}{|r}{88.77}  & 84.09  & 59.95  \\
+5 & 0.5  & 0.5  & 0    & \multicolumn{1}{|r}{3} & 0 & 3 & \multicolumn{1}{|r}{2} & 5 & 1 & \multicolumn{1}{|r}{12} & 1  & \multicolumn{1}{|r}{94.41}  & 95.38  & 48.74  \\
+6 & 0.5  & 0    & 0.5  & \multicolumn{1}{|r}{3} & 0 & 3 & \multicolumn{1}{|r}{2} & 3 & 3 & \multicolumn{1}{|r}{9}  & 4  & \multicolumn{1}{|r}{89.77}  & 76.14  & 67.58  \\
+7 & 0    & 0.5  & 0.5  & \multicolumn{1}{|r}{3} & 0 & 3 & \multicolumn{1}{|r}{3} & 2 & 3 & \multicolumn{1}{|r}{11} & 2  & \multicolumn{1}{|r}{81.78}  & 91.51  & 59.73  \\
+8 & 0.5  & 0.25 & 0.25 & \multicolumn{1}{|r}{3} & 0 & 3 & \multicolumn{1}{|r}{2} & 4 & 2 & \multicolumn{1}{|r}{10} & 3  & \multicolumn{1}{|r}{95.82}  & 83.35  & 57.59  \\
+  &      &      &      &   &   &   &   &   &   &    &    &        &        &        \\  
+  & \multicolumn{3}{l}{\textbf{Criteria, $\bm{\tau^2=\sqrt{1/q}}$}}    & \multicolumn{3}{l}{\textbf{DF (s=1)}}   & \multicolumn{3}{l}{\textbf{DF (s=2)}}    & \multicolumn{2}{l}{\textbf{DF(s=3)}} & \multicolumn{3}{l}{\textbf{Efficiencies,\%}}     \\
+  & \textbf{LP} & \textbf{LoF(LP)} & \textbf{MSE(L)} & \textbf{PE} & \textbf{Inter-WP} & \textbf{LoF} & \textbf{PE} & \textbf{Inter-SP} & \textbf{LoF}& \textbf{PE}      & \textbf{LoF}      & \textbf{LP} & \textbf{LoF(LP)} & \textbf{MSE(L)} \\
+1 & 1    & 0    & 0    & \multicolumn{1}{|r}{2} & 1 & 3 & \multicolumn{1}{|r}{3} & 3 & 2 & \multicolumn{1}{|r}{10} & 3  & \multicolumn{1}{|r}{100.00} & 88.95  & 31.38  \\
+2 & 0    & 1    & 0    & \multicolumn{1}{|r}{0} & 3 & 3 & \multicolumn{1}{|r}{2} & 5 & 1 & \multicolumn{1}{|r}{13} & 0  & \multicolumn{1}{|r}{0.00}   & 100.00 & 0.00   \\
+3 & 0    & 0    & 1    & \multicolumn{1}{|r}{0} & 3 & 3 & \multicolumn{1}{|r}{0} & 0 & 8 & \multicolumn{1}{|r}{0}  & 13 & \multicolumn{1}{|r}{0.00}   & 0.00   & 100.00 \\
+4 & 1/3 & 1/3 & 1/3    & \multicolumn{1}{|r}{2} & 1 & 3 & \multicolumn{1}{|r}{2} & 4 & 2 & \multicolumn{1}{|r}{10} & 3  & \multicolumn{1}{|r}{85.15}  & 88.87  & 39.06  \\
+5 & 0.5  & 0.5  & 0    & \multicolumn{1}{|r}{2} & 1 & 3 & \multicolumn{1}{|r}{2} & 5 & 1 & \multicolumn{1}{|r}{11} & 2  & \multicolumn{1}{|r}{91.36}  & 93.49  & 31.90  \\
+6 & 0.5  & 0    & 0.5  & \multicolumn{1}{|r}{3} & 0 & 3 & \multicolumn{1}{|r}{3} & 2 & 3 & \multicolumn{1}{|r}{9}  & 4  & \multicolumn{1}{|r}{93.18}  & 82.34  & 41.75  \\
+7 & 0    & 0.5  & 0.5  & \multicolumn{1}{|r}{1} & 2 & 3 & \multicolumn{1}{|r}{1} & 4 & 3 & \multicolumn{1}{|r}{9}  & 4  & \multicolumn{1}{|r}{57.49}  & 81.98  & 53.67  \\
+8 & 0.5  & 0.25 & 0.25 & \multicolumn{1}{|r}{2} & 1 & 3 & \multicolumn{1}{|r}{3} & 3 & 2 & \multicolumn{1}{|r}{9}  & 4  & \multicolumn{1}{|r}{94.10}  & 83.43  & 38.75  \\
+  &      &      &      &   &   &   &   &   &   &    &    &        &        &   \\  
+  & \multicolumn{3}{l}{\textbf{Criteria, $\bm{\tau^2=1}$}}    & \multicolumn{3}{l}{\textbf{DF (s=1)}}   & \multicolumn{3}{l}{\textbf{DF (s=2)}}    & \multicolumn{2}{l}{\textbf{DF(s=3)}} & \multicolumn{3}{l}{\textbf{Efficiencies,\%}}     \\
+  & \textbf{LP} & \textbf{LoF(LP)} & \textbf{MSE(L)} & \textbf{PE} & \textbf{Inter-WP} & \textbf{LoF} & \textbf{PE} & \textbf{Inter-SP} & \textbf{LoF}& \textbf{PE}      & \textbf{LoF}      & \textbf{LP} & \textbf{LoF(LP)} & \textbf{MSE(L)} \\
+1 & 1    & 0    & 0    & \multicolumn{1}{|r}{2} & 1 & 3 & \multicolumn{1}{|r}{3} & 3 & 2 & \multicolumn{1}{|r}{10} & 3  & \multicolumn{1}{|r}{100.00} & 91.95  & 18.79  \\
+2 & 0    & 1    & 0    & \multicolumn{1}{|r}{3} & 1 & 2 & \multicolumn{1}{|r}{4} & 1 & 3 & \multicolumn{1}{|r}{13} & 0  & \multicolumn{1}{|r}{0.00}   & 100.00 & 0.00   \\
+3 & 0    & 0    & 1    & \multicolumn{1}{|r}{0} & 3 & 3 & \multicolumn{1}{|r}{0} & 0 & 8 & \multicolumn{1}{|r}{1}  & 12 & \multicolumn{1}{|r}{0.00}   & 0.00   & 100.00 \\
+4 & 1/3 & 1/3 & 1/3    & \multicolumn{1}{|r}{2} & 1 & 3 & \multicolumn{1}{|r}{0} & 5 & 3 & \multicolumn{1}{|r}{9}  & 4  & \multicolumn{1}{|r}{76.38}  & 86.50  & 29.72  \\
+5 & 0.5  & 0.5  & 0    & \multicolumn{1}{|r}{2} & 1 & 3 & \multicolumn{1}{|r}{2} & 4 & 2 & \multicolumn{1}{|r}{11} & 2  & \multicolumn{1}{|r}{91.18}  & 95.72  & 17.55  \\
+6 & 0.5  & 0    & 0.5  & \multicolumn{1}{|r}{2} & 1 & 3 & \multicolumn{1}{|r}{0} & 5 & 3 & \multicolumn{1}{|r}{8}  & 5  & \multicolumn{1}{|r}{72.48}  & 79.24  & 34.81  \\
+7 & 0    & 0.5  & 0.5  & \multicolumn{1}{|r}{0} & 3 & 3 & \multicolumn{1}{|r}{1} & 4 & 3 & \multicolumn{1}{|r}{8}  & 5  & \multicolumn{1}{|r}{37.45}  & 78.53  & 49.34  \\
+8 & 0.5  & 0.25 & 0.25 & \multicolumn{1}{|r}{3} & 1 & 2 & \multicolumn{1}{|r}{3} & 2 & 3 & \multicolumn{1}{|r}{10} & 3  & \multicolumn{1}{|r}{93.63}  & 91.72  & 23.68 
+\end{tabular}
+}
+\end{table}    
+
+The MSE-based efficiency values are slightly lower than in the first example (especially in the trace-based criterion case) and  are still more responsive to the allocation of weights; so once an MSE-based component is of importance, this tendency certainly needs to be taken into account regardless of what criterion and variance scaling parameter is used.
+  
+%%% Example 3: 
+\subsection{Example 3}
+In both examples considered previously at least one factor was applied at every stratum; now we shall explore how designs change when treatments are applied only at the second stratum onwards. In this framework we assume having $4$ strata in total, with $2$, $1$ and $3$ factors applied at the second, third and fourth stratum respectively; in the lowest stratum the factors are at $2$ levels, at all others at $3$ levels. When the full quadratic polynomial model is fitted (with, obviously, no quadratic terms for the $2$-level factors), the numbers of parameters in the three strata are $5$, $4$ and $15$ ($24$ in total); and all possible third-order potential terms: $2$, $5$ and $27$ ($34$ in total, so the values of $\tau^2$ that will be implemented are $1/q\approx 0.03$, $\sqrt{1/q}\approx 0.17$ and $1$).
+
+As for the structure of the units, there are $4$ blocks, each containing $4$ whole-plots with $2$ sub-plots per unit and with $2$ sub-sub-plots (runs) per sub-plot; all in all there are $64$ runs, which allows for more available degrees of freedom at each level in comparison with Example $2$.
+
+Optimal designs with respect to the MSE-based criteria are given in Tables \ref{tab::mseD_ex3} and \ref{tab::mseL_ex3}; the outline of the tables is the same as before. With more available degrees of freedom, one distribution pattern observed earlier remains the same: increasing $\tau^2$ values result in reduced imbalance between the pure error and lack-of-fit components in the lowest stratum for the MSE(D)-optimal designs; however, now more of them are allocated to lack of fit. In the case of trace-based criteria the numbers are roughly the same across different values of $\tau^2$. It seems that more weight being put on the $LoF(DP)$-component results in the allocation of degrees of freedom being more sensitive to the variance scaling parameter, i.e. designs \#$6$ in Table \ref{tab::mseD_ex3}, where all the weight is distributed between the $DP$- and $MSE(D)$-components, does not seem to respond to the changes in $\tau^2$ in terms of degrees of freedom at either of the three strata.
+
+\begin{table}[h]
+\centering
+\caption{Example 3. Properties of MSE(D)-optimal designs}
+\label{tab::mseD_ex3}
+%\scalebox{0.75}{
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{rrrrccccccrrrrr}   
+  & \multicolumn{3}{l}{\textbf{Criteria, $\bm{\tau^2=1/q}$}}    & \multicolumn{3}{l}{\textbf{DF (s=2)}}   & \multicolumn{3}{l}{\textbf{DF (s=3)}}    & \multicolumn{2}{l}{\textbf{DF(s=4)}} & \multicolumn{3}{l}{\textbf{Efficiencies,\%}}     \\
+  & \textbf{DP} & \textbf{LoF(DP)} & \textbf{MSE(D)} & \textbf{PE} & \textbf{Inter-WP} & \textbf{LoF} & \textbf{PE} & \textbf{Inter-SP} & \textbf{LoF}& \textbf{PE}      & \textbf{LoF}      & \textbf{DP} & \textbf{LoF(DP)} & \textbf{MSE(D)} \\  
+1 & 1    & 0    & 0    & \multicolumn{1}{|r}{6} & 1 & 0 & \multicolumn{1}{|r}{5} & 4 & 3  & \multicolumn{1}{|r}{14} & 15 & \multicolumn{1}{|r}{100.00} & 96.03  & 82.97  \\
+2 & 0    & 1    & 0    & \multicolumn{1}{|r}{6} & 1 & 0 & \multicolumn{1}{|r}{5} & 6 & 1  & \multicolumn{1}{|r}{15} & 14 & \multicolumn{1}{|r}{26.90}  & 100.00 & 22.05  \\
+3 & 0    & 0    & 1    & \multicolumn{1}{|r}{0} & 4 & 3 & \multicolumn{1}{|r}{0} & 4 & 8  & \multicolumn{1}{|r}{0}  & 29 & \multicolumn{1}{|r}{0.00}   & 0.00   & 100.00 \\
+4 & 1/3 & 1/3 & 1/3 & \multicolumn{1}{|r}{5} & 1 & 1 & \multicolumn{1}{|r}{4} & 4 & 4  & \multicolumn{1}{|r}{12} & 17 & \multicolumn{1}{|r}{93.85}  & 94.51  & 83.57  \\
+5 & 0.5  & 0.5  & 0    & \multicolumn{1}{|r}{6} & 1 & 0 & \multicolumn{1}{|r}{3} & 6 & 3  & \multicolumn{1}{|r}{14} & 15 & \multicolumn{1}{|r}{90.62}  & 97.27  & 75.18  \\
+6 & 0.5  & 0    & 0.5  & \multicolumn{1}{|r}{5} & 1 & 1 & \multicolumn{1}{|r}{6} & 2 & 4  & \multicolumn{1}{|r}{13} & 16 & \multicolumn{1}{|r}{102.76} & 94.28  & 87.76  \\
+7 & 0    & 0.5  & 0.5  & \multicolumn{1}{|r}{5} & 1 & 1 & \multicolumn{1}{|r}{4} & 4 & 4  & \multicolumn{1}{|r}{11} & 18 & \multicolumn{1}{|r}{92.61}  & 93.38  & 86.13  \\
+8 & 0.5  & 0.25 & 0.25 & \multicolumn{1}{|r}{6} & 1 & 0 & \multicolumn{1}{|r}{3} & 6 & 3  & \multicolumn{1}{|r}{13} & 16 & \multicolumn{1}{|r}{92.08}  & 95.01  & 79.22  \\
+  &      &      &      &   &   &   &   &   &    &    &    &        &        &        \\
+  & \multicolumn{3}{l}{\textbf{Criteria, $\bm{\tau^2=\sqrt{1/q}}$}}    & \multicolumn{3}{l}{\textbf{DF (s=2)}}   & \multicolumn{3}{l}{\textbf{DF (s=3)}}    & \multicolumn{2}{l}{\textbf{DF (s=4)}} & \multicolumn{3}{l}{\textbf{Efficiencies,\%}}     \\
+  & \textbf{DP} & \textbf{LoF(DP)} & \textbf{MSE(D)} & \textbf{PE} & \textbf{Inter-WP} & \textbf{LoF} & \textbf{PE} & \textbf{Inter-SP} & \textbf{LoF}& \textbf{PE}      & \textbf{LoF}      & \textbf{DP} & \textbf{LoF(DP)} & \textbf{MSE(D)} \\      
+1 & 1    & 0    & 0    & \multicolumn{1}{|r}{6} & 1 & 0 & \multicolumn{1}{|r}{5} & 4 & 3  & \multicolumn{1}{|r}{14} & 15 & \multicolumn{1}{|r}{100.00} & 78.68  & 82.20  \\
+2 & 0    & 1    & 0    & \multicolumn{1}{|r}{0} & 5 & 2 & \multicolumn{1}{|r}{0} & 8 & 4  & \multicolumn{1}{|r}{9}  & 20 & \multicolumn{1}{|r}{47.65}  & 100.00 & 51.11  \\
+3 & 0    & 0    & 1    & \multicolumn{1}{|r}{0} & 4 & 3 & \multicolumn{1}{|r}{0} & 4 & 8  & \multicolumn{1}{|r}{0}  & 29 & \multicolumn{1}{|r}{0.00}   & 0.00   & 100.00 \\
+4 & 1/3 & 1/3 & 1/3 & \multicolumn{1}{|r}{6} & 0 & 1 & \multicolumn{1}{|r}{2} & 6 & 4  & \multicolumn{1}{|r}{10} & 19 & \multicolumn{1}{|r}{90.33}  & 87.65  & 87.16  \\
+5 & 0.5  & 0.5  & 0    & \multicolumn{1}{|r}{5} & 1 & 1 & \multicolumn{1}{|r}{3} & 5 & 4  & \multicolumn{1}{|r}{11} & 18 & \multicolumn{1}{|r}{91.80}  & 87.17  & 84.55  \\
+6 & 0.5  & 0    & 0.5  & \multicolumn{1}{|r}{6} & 0 & 1 & \multicolumn{1}{|r}{5} & 3 & 4  & \multicolumn{1}{|r}{13} & 16 & \multicolumn{1}{|r}{102.32} & 80.66  & 86.63  \\
+7 & 0    & 0.5  & 0.5  & \multicolumn{1}{|r}{5} & 1 & 1 & \multicolumn{1}{|r}{3} & 5 & 4  & \multicolumn{1}{|r}{9}  & 20 & \multicolumn{1}{|r}{87.26}  & 93.60  & 89.73  \\
+8 & 0.5  & 0.25 & 0.25 & \multicolumn{1}{|r}{4} & 2 & 1 & \multicolumn{1}{|r}{4} & 4 & 4  & \multicolumn{1}{|r}{10} & 19 & \multicolumn{1}{|r}{90.78}  & 84.32  & 86.94 \\
+  &      &      &      &   &   &   &   &   &    &    &    &        &        &        \\ 
+  & \multicolumn{3}{l}{\textbf{Criteria, $\bm{\tau^2=1}$}}    & \multicolumn{3}{l}{\textbf{DF (s=2)}}   & \multicolumn{3}{l}{\textbf{DF (s=3)}}    & \multicolumn{2}{l}{\textbf{DF (s=4)}} & \multicolumn{3}{l}{\textbf{Efficiencies,\%}}     \\
+  & \textbf{DP} & \textbf{LoF(DP)} & \textbf{MSE(D)} & \textbf{PE} & \textbf{Inter-WP} & \textbf{LoF} & \textbf{PE} & \textbf{Inter-SP} & \textbf{LoF}& \textbf{PE}      & \textbf{LoF}      & \textbf{DP} & \textbf{LoF(DP)} & \textbf{MSE(D)} \\
+1 & 1    & 0    & 0    & \multicolumn{1}{|r}{6} & 1 & 0 & \multicolumn{1}{|r}{5} & 4 & 3  & \multicolumn{1}{|r}{14} & 15 & \multicolumn{1}{|r}{100.00} & 53.81  & 83.29  \\
+2 & 0    & 1    & 0    & \multicolumn{1}{|r}{0} & 4 & 3 & \multicolumn{1}{|r}{0} & 6 & 6  & \multicolumn{1}{|r}{7}  & 22 & \multicolumn{1}{|r}{46.92}  & 100.00 & 58.68  \\
+3 & 0    & 0    & 1    & \multicolumn{1}{|r}{0} & 1 & 6 & \multicolumn{1}{|r}{0} & 1 & 11 & \multicolumn{1}{|r}{0}  & 29 & \multicolumn{1}{|r}{0.00}  & 0.00   & 100.00 \\
+4  &1/3  & 1/3  & 1/3  & \multicolumn{1}{|r}{4} & 1 & 2 & \multicolumn{1}{|r}{4} & 3 & 5  & \multicolumn{1}{|r}{9}  & 20 & \multicolumn{1}{|r}{82.07}  & 76.62  & 85.89  \\
+5 & 0.5  & 0.5  & 0    & \multicolumn{1}{|r}{4} & 1 & 2 & \multicolumn{1}{|r}{1} & 7 & 4  & \multicolumn{1}{|r}{9}  & 20 & \multicolumn{1}{|r}{82.52}  & 85.29  & 85.87  \\
+6 & 0.5  & 0    & 0.5  & \multicolumn{1}{|r}{5} & 1 & 1 & \multicolumn{1}{|r}{5} & 3 & 4  & \multicolumn{1}{|r}{12} & 17 & \multicolumn{1}{|r}{98.30}  & 61.88  & 87.75  \\
+7 & 0    & 0.5  & 0.5  & \multicolumn{1}{|r}{2} & 3 & 2 & \multicolumn{1}{|r}{3} & 4 & 5  & \multicolumn{1}{|r}{7}  & 22 & \multicolumn{1}{|r}{67.22}  & 80.70  & 82.90  \\
+8 & 0.5  & 0.25 & 0.25 & \multicolumn{1}{|r}{6} & 0 & 1 & \multicolumn{1}{|r}{2} & 6 & 4  & \multicolumn{1}{|r}{10} & 19 & \multicolumn{1}{|r}{92.20}  & 73.87  & 90.21  
+\end{tabular}
+}
+\end{table}  
+
+As for the designs' performances in terms of the individual criteria, $DP$- and $MSE(D)$-efficiencies are in general larger than in previous examples, which is not true for the $LoF(DP)$-efficiencies, although they are relatively large, especially when $\tau^2$ is small. $MSE(D)$-optimal designs \#$6$ for $\tau^2=1/q$ and $\sqrt{1/q}$ turned out to perform slightly better in terms of the $DP$ criterion (in the fourth, lowest stratum), even though the `original' one was searched for with $500$ random starts; in addition, both of them perform better with respect to the other components. 
+
+It would be difficult to find a clear reason for that; the most obvious suggestion is that due to the stratum-by-stratum nature of the search algorithm, the factors' levels that are fixed for higher strata cannot be amended once the algorithm moves to the lower strata (and recall that the efficiencies presented are calculated at the lowest stratum), and so it may get stuck at some `local' optimum.  
+
+Regarding the component criteria in the trace-based case, it is still quite difficult to find a design that would perform well with respect to the $MSE(L)$-criterion, and at the same time would have decent $LP$-efficiencies.      
+ 
+%% Trace-based criteria, Example 3
+
+\begin{table}[h]
+\centering
+\caption{Example 3. Properties of MSE(L)-optimal designs}
+\label{tab::mseL_ex3}
+%\scalebox{0.75}{
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{rrrrccccccrrrrr}   
+  & \multicolumn{3}{l}{\textbf{Criteria, $\bm{\tau^2=1/q}$}}    & \multicolumn{3}{l}{\textbf{DF (s=2)}}   & \multicolumn{3}{l}{\textbf{DF (s=3)}}    & \multicolumn{2}{l}{\textbf{DF(s=4)}} & \multicolumn{3}{l}{\textbf{Efficiencies,\%}}     \\
+  & \textbf{LP} & \textbf{LoF(LP)} & \textbf{MSE(L)} & \textbf{PE} & \textbf{Inter-WP} & \textbf{LoF} & \textbf{PE} & \textbf{Inter-SP} & \textbf{LoF}& \textbf{PE}      & \textbf{LoF}      & \textbf{LP} & \textbf{LoF(LP)} & \textbf{MSE(L)} \\  
+1 & 1    & 0    & 0    & \multicolumn{1}{|r}{3} & 1 & 3 & \multicolumn{1}{|r}{1} & 7 & 4  & \multicolumn{1}{|r}{14} & 15 & \multicolumn{1}{|r}{100.00} & 94.01  & 51.76  \\
+2 & 0    & 1    & 0    & \multicolumn{1}{|r}{1} & 3 & 3 & \multicolumn{1}{|r}{3} & 9 & 0  & \multicolumn{1}{|r}{17} & 12 & \multicolumn{1}{|r}{0.00}   & 100.00 & 0.00   \\
+3 & 0    & 0    & 1    & \multicolumn{1}{|r}{0} & 4 & 3 & \multicolumn{1}{|r}{0} & 4 & 8  & \multicolumn{1}{|r}{0}  & 29 & \multicolumn{1}{|r}{0.00}   & 0.00   & 100.00 \\
+4 & 1/3 & 1/3 & 1/3 & \multicolumn{1}{|r}{1} & 3 & 3 & \multicolumn{1}{|r}{2} & 6 & 4  & \multicolumn{1}{|r}{12} & 17 & \multicolumn{1}{|r}{92.32}  & 86.87  & 59.91  \\
+5 & 0.5  & 0.5  & 0    & \multicolumn{1}{|r}{2} & 2 & 3 & \multicolumn{1}{|r}{2} & 8 & 2  & \multicolumn{1}{|r}{14} & 15 & \multicolumn{1}{|r}{92.67}  & 94.26  & 47.81  \\
+6 & 0.5  & 0    & 0.5  & \multicolumn{1}{|r}{1} & 3 & 3 & \multicolumn{1}{|r}{3} & 4 & 5  & \multicolumn{1}{|r}{10} & 19 & \multicolumn{1}{|r}{85.11}  & 76.25  & 68.03  \\
+7 & 0    & 0.5  & 0.5  & \multicolumn{1}{|r}{2} & 2 & 3 & \multicolumn{1}{|r}{4} & 4 & 4  & \multicolumn{1}{|r}{11} & 18 & \multicolumn{1}{|r}{87.53}  & 82.43  & 64.56  \\
+8 & 0.5  & 0.25 & 0.25 & \multicolumn{1}{|r}{1} & 3 & 3 & \multicolumn{1}{|r}{3} & 6 & 3  & \multicolumn{1}{|r}{12} & 17 & \multicolumn{1}{|r}{93.79}  & 87.29  & 61.20  \\
+  &      &      &      &   &   &   &   &   &    &    &    &        &        &        \\
+  & \multicolumn{3}{l}{\textbf{Criteria, $\bm{\tau^2=\sqrt{1/q}}$}}    & \multicolumn{3}{l}{\textbf{DF (s=2)}}   & \multicolumn{3}{l}{\textbf{DF (s=3)}}    & \multicolumn{2}{l}{\textbf{DF(s=4)}} & \multicolumn{3}{l}{\textbf{Efficiencies,\%}}     \\
+  & \textbf{LP} & \textbf{LoF(LP)} & \textbf{MSE(L)} & \textbf{PE} & \textbf{Inter-WP} & \textbf{LoF} & \textbf{PE} & \textbf{Inter-SP} & \textbf{LoF}& \textbf{PE}      & \textbf{LoF}      & \textbf{LP} & \textbf{LoF(LP)} & \textbf{MSE(L)} \\   
+1 & 1    & 0    & 0    & \multicolumn{1}{|r}{3} & 1 & 3 & \multicolumn{1}{|r}{1} & 7 & 4  & \multicolumn{1}{|r}{14} & 15 & \multicolumn{1}{|r}{100.00} & 98.07  & 30.89  \\
+2 & 0    & 1    & 0    & \multicolumn{1}{|r}{1} & 2 & 4 & \multicolumn{1}{|r}{3} & 5 & 4  & \multicolumn{1}{|r}{16} & 13 & \multicolumn{1}{|r}{4.09}   & 100.00 & 3.89   \\
+3 & 0    & 0    & 1    & \multicolumn{1}{|r}{0} & 4 & 3 & \multicolumn{1}{|r}{0} & 1 & 11 & \multicolumn{1}{|r}{1}  & 28 & \multicolumn{1}{|r}{0.00}   & 0.00   & 100.00 \\
+4 & 1/3 & 1/3 & 1/3    & \multicolumn{1}{|r}{2} & 1 & 4 & \multicolumn{1}{|r}{3} & 4 & 5  & \multicolumn{1}{|r}{12} & 17 & \multicolumn{1}{|r}{94.25}  & 93.98  & 38.54  \\
+5 & 0.5  & 0.5  & 0    & \multicolumn{1}{|r}{3} & 1 & 3 & \multicolumn{1}{|r}{3} & 6 & 3  & \multicolumn{1}{|r}{13} & 16 & \multicolumn{1}{|r}{95.59}  & 96.27  & 34.66  \\
+6 & 0.5  & 0    & 0.5  & \multicolumn{1}{|r}{3} & 1 & 3 & \multicolumn{1}{|r}{3} & 4 & 5  & \multicolumn{1}{|r}{10} & 19 & \multicolumn{1}{|r}{86.74}  & 84.60  & 48.40  \\
+7 & 0    & 0.5  & 0.5  & \multicolumn{1}{|r}{1} & 2 & 4 & \multicolumn{1}{|r}{0} & 5 & 7  & \multicolumn{1}{|r}{10} & 19 & \multicolumn{1}{|r}{41.47}  & 83.86  & 56.92  \\
+8 & 0.5  & 0.25 & 0.25 & \multicolumn{1}{|r}{2} & 2 & 3 & \multicolumn{1}{|r}{3} & 5 & 4  & \multicolumn{1}{|r}{13} & 16 & \multicolumn{1}{|r}{100.61} & 95.74  & 35.72  \\
+  &      &      &      &   &   &   &   &   &    &    &    &        &        &        \\ 
+  & \multicolumn{3}{l}{\textbf{Criteria, $\bm{\tau^2=1}$}}    & \multicolumn{3}{l}{\textbf{DF (s=2)}}   & \multicolumn{3}{l}{\textbf{DF (s=3)}}    & \multicolumn{2}{l}{\textbf{DF(s=4)}} & \multicolumn{3}{l}{\textbf{Efficiencies,\%}}     \\
+  & \textbf{LP} & \textbf{LoF(LP)} & \textbf{MSE(L)} & \textbf{PE} & \textbf{Inter-WP} & \textbf{LoF} & \textbf{PE} & \textbf{Inter-SP} & \textbf{LoF}& \textbf{PE}      & \textbf{LoF}      & \textbf{LP} & \textbf{LoF(LP)} & \textbf{MSE(L)} \\  
+ 1 & 1    & 0    & 0   & \multicolumn{1}{|r}{3} & 1 & 3 & \multicolumn{1}{|r}{1} & 7 & 4  & \multicolumn{1}{|r}{14} & 15 & \multicolumn{1}{|r}{100.00} & 99.47  & 14.10  \\
+2 & 0    & 1    & 0    & \multicolumn{1}{|r}{3} & 2 & 2 & \multicolumn{1}{|r}{3} & 4 & 5  & \multicolumn{1}{|r}{15} & 14 & \multicolumn{1}{|r}{0.11}   & 100.00 & 0.05   \\
+3 & 0    & 0    & 1    & \multicolumn{1}{|r}{0} & 4 & 3 & \multicolumn{1}{|r}{0} & 3 & 9  & \multicolumn{1}{|r}{3}  & 26 & \multicolumn{1}{|r}{2.90}   & 7.37   & 100.00 \\
+4 & 1/3 & 1/3 & 1/3    & \multicolumn{1}{|r}{2} & 2 & 3 & \multicolumn{1}{|r}{2} & 4 & 6  & \multicolumn{1}{|r}{11} & 18 & \multicolumn{1}{|r}{71.48}  & 94.24  & 26.61  \\
+5 & 0.5  & 0.5  & 0    & \multicolumn{1}{|r}{2} & 2 & 3 & \multicolumn{1}{|r}{2} & 5 & 5  & \multicolumn{1}{|r}{14} & 15 & \multicolumn{1}{|r}{93.55}  & 99.46  & 14.51  \\
+6 & 0.5  & 0    & 0.5  & \multicolumn{1}{|r}{1} & 3 & 3 & \multicolumn{1}{|r}{3} & 5 & 4  & \multicolumn{1}{|r}{10} & 19 & \multicolumn{1}{|r}{72.56}  & 89.81  & 29.38  \\
+7 & 0    & 0.5  & 0.5  & \multicolumn{1}{|r}{0} & 2 & 5 & \multicolumn{1}{|r}{0} & 5 & 7  & \multicolumn{1}{|r}{9}  & 20 & \multicolumn{1}{|r}{38.29}  & 84.24  & 49.71  \\
+8 & 0.5  & 0.25 & 0.25 & \multicolumn{1}{|r}{5} & 0 & 2 & \multicolumn{1}{|r}{0} & 7 & 5  & \multicolumn{1}{|r}{12} & 17 & \multicolumn{1}{|r}{84.55}  & 96.70  & 21.57 
+\end{tabular}
+}
+\end{table}  
+
+$MSE(L)$-optimal design \#$8$ (in the case of $\tau^2=\sqrt{1/q}$) is a bit more $LP$-efficient than the one that was searched for as $LP$-efficient (\#$1$), which again might be due to the specifics of the search algorithm (as they do have different degrees of freedom allocations in the $2$nd and $3$rd strata); however, the performance loss is very small and it might not be sensible to introduce more computational complexity in order to, perhaps, obtain a relatively small improvement.    
+  
+  

@@ -1,0 +1,715 @@
+% Examples for Generalised DP- and LP- optimality criteria
+In this section we consider several examples of factorial experiments, obtain optimal designs with respect to the generalised criteria developed and investigate their behaviour depending on various weight allocations, values of the scaling parameter $\tau^2$, number of potential terms in the model and the total size of the experiment. The results should provide some empirical evidence of any patterns and features of the relationships between the nature of the criteria, weights and characteristics of the resulting designs. 
+
+\subsubsection{Example 1}
+\label{sec::generalised_example}
+First we continue exploring the example which was introduced earlier: a factorial experiment, with $5$ factors, each is at three levels. The small number of runs ($40$) allows estimation of the full-second order polynomial model ($p=21$), but we assume that the `true' model contains also all third-order terms (linear-by-linear-by-linear and quadratic-by-linear interactions), $q=30$ of them in total.
+
+We considered several sets of weight allocations to the components of the generalised $D$-, $L$-, $DP$- and $LP$-criteria. We would like to see how the designs obtained differ, how efficient they are in terms of the original single criterion components and what their structure is in the sense of the relationship between the assigned weights and degrees of freedom allocated to the  pure error (i.e. the number of replicates) and lack-of-fit components.
+
+Together with the original framework, we will also consider the same example, but with the value of the scaling parameter being inversely proportional to the number of potential terms: $\tau^2=1/q$. Further in this section we will investigate the case with only quadratic-by-linear potential terms, so that the total number is $q=20$ rather than $30$. 
+
+These designs were obtained using the point exchange algorithm described previously, with $500$ random starts. The computational time was quite reasonable: for each design the search procedure took approximately $2.5$ to $7.5$ hours (i7-3770 CPU, $16.0$GB RAM). The optimal designs themselves are provided in the Supplementary material, together with the corresponding R code files.
+
+
+%% GD-optimal designs, ex 11
+\begin{table}[h]
+\caption{Example 1.1. Properties of generalised D- and L-optimal designs. $\tau^2=1$}
+\label{tab::GD_ex11}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{rrrrrrrrrrrr}
+   & \multicolumn{3}{l}{\textbf{Criteria}} & \multicolumn{2}{l}{\textbf{DoF}} & \multicolumn{6}{l}{\textbf{Efficiency,\%}}                               \\
+   & \textbf{D}       & \textbf{LoF(D)}    & \textbf{Bias(D)}   & \textbf{PE}        & \textbf{LoF}        & \textbf{D}   & \textbf{LoF(D)}   & \textbf{Bias(D)}  & \textbf{L}       & \textbf{LoF(L)}   & \textbf{Bias(L)}  \\
+1 & 1 & 0 & 0 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{100.00} & 96.80 & 76.70 & \multicolumn{1}{|r}{98.96} & 96.27 & 71.09 \\
+2 & 0 & 1 & 0 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{95.99} & 100.00 & 94.71 & \multicolumn{1}{|r}{92.97} & 100.00 & 92.32 \\
+3 & 0 & 0 & 1 & \multicolumn{1}{|r}{1} & 18 & \multicolumn{1}{|r}{79.90} & 97.27 & 100.00 & \multicolumn{1}{|r}{68.75} & 97.06 & 100.00 \\
+4 & 0.5 & 0.5 & 0 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{99.22} & 97.98 & 78.54 & \multicolumn{1}{|r}{98.46} & 97.64 & 73.10 \\
+5 & 0.5 & 0 & 0.5 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{92.03} & 99.52 & 97.87 & \multicolumn{1}{|r}{85.88} & 99.48 & 97.20 \\
+6 & 0 & 0.5 & 0.5 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{79.41} & 97.73 & 99.22 & \multicolumn{1}{|r}{68.48} & 97.54 & 98.99 \\
+7 & 1/3 & 1/3 & 1/3 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{95.99} & 100.00 & 94.71 & \multicolumn{1}{|r}{92.97} & 100.00 & 92.32 \\
+8 & 0.5 & 0.25 & 0.25 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{95.99} & 100.00 & 94.71 & \multicolumn{1}{|r}{92.97} & 100.00 & 92.32 \\
+9 & 0.25 & 0.5 & 0.25 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{95.11} & 99.86 & 94.33 & \multicolumn{1}{|r}{90.33} & 99.84 & 91.91 \\
+   & \multicolumn{3}{l}{\textbf{Criteria}} & \multicolumn{2}{l}{\textbf{DoF}} & \multicolumn{6}{l}{\textbf{Efficiency,\%}}                               \\
+   & \textbf{L}       & \textbf{LoF(L)}    & \textbf{Bias(L)}   & \textbf{PE}        & \textbf{LoF}        & \textbf{D}   & \textbf{LoF(D)}   & \textbf{Bias(D)}  & \textbf{L}       & \textbf{LoF(L)}   & \textbf{Bias(L)}  \\
+1 & 1 & 0 & 0 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{99.95} & 91.73 & 73.77 & \multicolumn{1}{|r}{100.00} & 90.66 & 70.01 \\
+2 & 0 & 1 & 0 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{95.99} & 100.00 & 94.71 & \multicolumn{1}{|r}{92.97} & 100.00 & 92.32 \\
+3 & 0 & 0 & 1 & \multicolumn{1}{|r}{1} & 18 & \multicolumn{1}{|r}{79.90} & 97.27 & 100.00 & \multicolumn{1}{|r}{68.75} & 97.06 & 100.00 \\
+4 & 0.5 & 0.5 & 0 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{99.29} & 97.49 & 74.07 & \multicolumn{1}{|r}{99.83} & 97.16 & 66.83 \\
+5 & 0.5 & 0 & 0.5 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{95.99} & 100.00 & 94.71 & \multicolumn{1}{|r}{92.97} & 100.00 & 92.32 \\
+6 & 0 & 0.5 & 0.5 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{81.22} & 97.99 & 98.09 & \multicolumn{1}{|r}{69.20} & 97.85 & 97.39 \\
+7 & 1/3 & 1/3 & 1/3 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{95.99} & 100.00 & 94.71 & \multicolumn{1}{|r}{92.97} & 100.00 & 92.32 \\
+8 & 0.5 & 0.25 & 0.25 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{95.99} & 100.00 & 94.71 & \multicolumn{1}{|r}{92.97} & 100.00 & 92.32 \\
+9 & 0.25 & 0.5 & 0.25 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{95.01} & 99.82 & 95.10 & \multicolumn{1}{|r}{91.00} & 99.86 & 92.96
+\end{tabular}
+}
+\end{table}
+
+Tables \ref{tab::GD_ex11} and \ref{tab::GDP_ex11} contain the summaries of the optimal designs: the weight allocations are given in the first columns (`Criteria'), followed by the distribution of the degrees of freedom (`DoF') and, finally, the efficiencies of the designs with respect to the individual determinant- and trace-based component criteria (`Efficiency, $\%$').
+
+Almost all $GD$- and $GL$-optimal designs in Table \ref{tab::GD_ex11} have all $19$ available degrees of freedom allocated to the lack-of-fit and none to the pure error (except for the `bias'-optimal design \#$3$), so they contain no replicate points in contrast to the $GDP$- and $GLP$-optimal designs in Table \ref{tab::GDP_ex11}, where the imbalance tends to occur in favour of the pure error when some weight is put on either of the `pure error' components ($DP$, $LP$, $LoF(DP)$ and $LoF(LP)$), e.g.~designs \#$2$, \#$3$, \#$11$, \#$14$. The imbalance seems to be, however, less extreme in the case of trace-based than in the case of determinant-based optimality.
+
+It is also quite notable that the same designs were obtained as optimal with regards to different weight allocation schemes and even with respect to different criteria, for example, the lack-of-fit optimal design (design \#$2$ in Table \ref{tab::GD_ex11}), which remains optimal if some weight is distributed among all three components: either equally (\#$7$) or with half of it allocated to the `primary terms' component (\#$8$). This particular design performs quite well in terms of all three components (all efficiency values are above $90\%$), and is also optimal with respect to $L-$ and Bias$(L)$- components taken with equal weights, e.g.~when no weight is actually allocated to the lack-of-fit part of the criterion. The design itself is given in Table \ref{tab::Ex11_LoFD_design}; whilst no points are replicated, they seem to be distributed quite uniformly in the design region, though there are no centre points and each factor takes its $0$-level value in only a few runs. Besides that, there are not any particular patterns of interest to be observed.
+\begin{table}[h]
+\centering
+\caption{Example 1. LoF(D)- and LoF(L)-optimal design (\#$2$, \#$7$ and \#$8$)}
+\label{tab::Ex11_LoFD_design}
+\scalebox{0.8}{
+\begin{tabular}{rrrrrr|r|rrrrrr}
+1  & -1 & -1 & -1 & -1 & -1 &  & 21 & 0 & 1  & -1 & 1  & -1 \\
+2  & -1 & -1 & -1 & -1 & 1  &  & 22 & 0 & 1  & 0  & 0  & 1  \\
+3  & -1 & -1 & -1 & 1  & 0  &  & 23 & 0 & 1  & 1  & -1 & -1 \\
+4  & -1 & -1 & 0  & 1  & 1  &  & 24 & 1 & -1 & -1 & -1 & 0  \\
+5  & -1 & -1 & 1  & -1 & -1 &  & 25 & 1 & -1 & -1 & 0  & 1  \\
+6  & -1 & -1 & 1  & 0  & 1  &  & 26 & 1 & -1 & -1 & 1  & -1 \\
+7  & -1 & -1 & 1  & 1  & -1 &  & 27 & 1 & -1 & 0  & -1 & 1  \\
+8  & -1 & 0  & -1 & 1  & -1 &  & 28 & 1 & -1 & 1  & -1 & -1 \\
+9  & -1 & 0  & 0  & -1 & 0  &  & 29 & 1 & -1 & 1  & 1  & -1 \\
+10 & -1 & 0  & 1  & 1  & 1  &  & 30 & 1 & -1 & 1  & 1  & 1  \\
+11 & -1 & 1  & -1 & -1 & -1 &  & 31 & 1 & 0  & -1 & -1 & -1 \\
+12 & -1 & 1  & -1 & -1 & 1  &  & 32 & 1 & 0  & 0  & 1  & 0  \\
+13 & -1 & 1  & -1 & 1  & 1  &  & 33 & 1 & 0  & 1  & -1 & 1  \\
+14 & -1 & 1  & 0  & 1  & -1 &  & 34 & 1 & 1  & -1 & -1 & 1  \\
+15 & -1 & 1  & 1  & -1 & 1  &  & 35 & 1 & 1  & -1 & 0  & -1 \\
+16 & -1 & 1  & 1  & 0  & -1 &  & 36 & 1 & 1  & -1 & 1  & 1  \\
+17 & -1 & 1  & 1  & 1  & 0  &  & 37 & 1 & 1  & 0  & -1 & -1 \\
+18 & 0  & -1 & -1 & 1  & 1  &  & 38 & 1 & 1  & 1  & -1 & 0  \\
+19 & 0  & -1 & 0  & 0  & -1 &  & 39 & 1 & 1  & 1  & 1  & -1 \\
+20 & 0  & -1 & 1  & -1 & 1  &  & 40 & 1 & 1  & 1  & 1  & 1 
+\end{tabular}
+}
+\end{table}
+
+The design that was found as a Bias$(L)$-optimal design turned out to be Bias$(D)$-optimal as well: it is the only one with $1$ pure-error degree of freedom, which occurred due to the replicated central point. This design is given in Table \ref{tab::Ex11_BiasD_design}, and it can be observed that, in contrast to the lack-of-fit-optimal design, it seems to be more space-filling an the sense that it contains more `not corner' points. 
+
+It is worth noting that in general the bias component seems to be in opposition to the `primary terms' components, in both determinant- and trace-based criteria: the bias-optimal design is the worst in terms of $D-$ and $L-$ efficiencies (less than $80\%$ and $70\%$ respectively) with the minimum among others being consistently above $90\%$, and best designs in terms of $D-$ and $L-$optimality providing lower efficiencies for minimising the prediction bias. Further on, we shall see how this changes when we either consider a smaller set of potential terms or tune the scaling parameter. 
+
+\begin{table}[h]
+\centering
+\caption{Example 1. Bias(D)- and Bias(L)-optimal design \#$3$}
+\label{tab::Ex11_BiasD_design}
+\scalebox{0.8}{
+\begin{tabular}{rrrrrr|r|rrrrrr}
+1  & -1 & -1 & -1 & 0  & 1  &  & 21 & 0 & 0  & 0  & 0  & 0  \\
+2  & -1 & -1 & 0  & -1 & 0  &  & 22 & 0 & 0  & 1  & -1 & -1 \\
+3  & -1 & -1 & 0  & 1  & 0  &  & 23 & 0 & 0  & 1  & 1  & -1 \\
+4  & -1 & -1 & 1  & 0  & -1 &  & 24 & 0 & 1  & -1 & -1 & -1 \\
+5  & -1 & 0  & -1 & -1 & -1 &  & 25 & 0 & 1  & -1 & 1  & -1 \\
+6  & -1 & 0  & -1 & -1 & 0  &  & 26 & 0 & 1  & 1  & 0  & 1  \\
+7  & -1 & 0  & -1 & 1  & -1 &  & 27 & 1 & -1 & -1 & -1 & 0  \\
+8  & -1 & 0  & 1  & 0  & 1  &  & 28 & 1 & -1 & -1 & 1  & 0  \\
+9  & -1 & 1  & -1 & 0  & 0  &  & 29 & 1 & -1 & 0  & -1 & -1 \\
+10 & -1 & 1  & 0  & -1 & 1  &  & 30 & 1 & -1 & 0  & 0  & 1  \\
+11 & -1 & 1  & 0  & 0  & -1 &  & 31 & 1 & -1 & 0  & 1  & -1 \\
+12 & -1 & 1  & 0  & 1  & 1  &  & 32 & 1 & -1 & 1  & 0  & 0  \\
+13 & -1 & 1  & 1  & -1 & 0  &  & 33 & 1 & 0  & -1 & 0  & -1 \\
+14 & -1 & 1  & 1  & 1  & 0  &  & 34 & 1 & 0  & 1  & -1 & 1  \\
+15 & 0  & -1 & -1 & 0  & -1 &  & 35 & 1 & 0  & 1  & 1  & 0  \\
+16 & 0  & -1 & 1  & -1 & 1  &  & 36 & 1 & 0  & 1  & 1  & 1  \\
+17 & 0  & -1 & 1  & 1  & 1  &  & 37 & 1 & 1  & -1 & 0  & 1  \\
+18 & 0  & 0  & -1 & -1 & 1  &  & 38 & 1 & 1  & 0  & -1 & 0  \\
+19 & 0  & 0  & -1 & 1  & 1  &  & 39 & 1 & 1  & 0  & 1  & 0  \\
+20 & 0  & 0  & 0  & 0  & 0  &  & 40 & 1 & 1  & 1  & 0  & -1
+\end{tabular}
+}
+\end{table}
+
+\begin{landscape}
+%% GDP- and GLP-optimal designs, ex 11
+\begin{table}[p]
+\caption{Example 1. Properties of generalised DP- and LP-optimal designs. $\tau^2=1$}
+\label{tab::GDP_ex11}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{rrrrrrrrrrrrrrrrr}
+\multicolumn{1}{l}{} & \multicolumn{4}{l}{{\bf Criteria}} & \multicolumn{2}{l}{{\bf DoF}} & \multicolumn{10}{l}{{\bf Efficiency,\%}} \\
+\multicolumn{1}{l}{} & \multicolumn{1}{l}{{\bf D}} & \multicolumn{1}{l}{{\bf DP}} & \multicolumn{1}{l}{{\bf LoF(DP)}} & \multicolumn{1}{l}{{\bf Bias(D)}} & \multicolumn{1}{l}{{\bf PE}} & \multicolumn{1}{l}{{\bf LoF}} & \multicolumn{1}{l}{{\bf D}} & \multicolumn{1}{l}{{\bf DP}} & \multicolumn{1}{l}{{\bf LoF(D)}} & \multicolumn{1}{l}{{\bf LoF(DP)}} & \multicolumn{1}{l}{{\bf Bias(D)}} & \multicolumn{1}{l}{{\bf L}} & \multicolumn{1}{l}{{\bf LP}} & \multicolumn{1}{l}{{\bf LoF(L)}} & \multicolumn{1}{l}{{\bf LoF(LP)}} & \multicolumn{1}{l}{{\bf Bias(L)}} \\
+1 & 1 & 0 & 0 & 0 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{100.00} & 0.00 & 96.80 & 0.00 & 76.70 & \multicolumn{1}{|r}{98.96} & 0.00 & 96.27 & 0.00 & 71.09 \\
+2 & 0 & 1 & 0 & 0 & \multicolumn{1}{|r}{18} & 1 & \multicolumn{1}{|r}{93.00} & 100.00 & 86.08 & 97.67 & 51.39 & \multicolumn{1}{|r}{86.47} & 98.52 & 84.94 & 98.04 & 37.87 \\
+3 & 0 & 0 & 1 & 0 & \multicolumn{1}{|r}{17} & 2 & \multicolumn{1}{|r}{48.85} & 51.59 & 89.83 & 100.00 & 42.78 & \multicolumn{1}{|r}{9.72} & 10.87 & 90.47 & 98.97 & 7.22 \\
+4 & 0 & 0 & 0 & 1 & \multicolumn{1}{|r}{1} & 18 & \multicolumn{1}{|r}{79.90} & 0.00 & 97.27 & 0.00 & 100.00 & \multicolumn{1}{|r}{68.75} & 0.00 & 97.06 & 0.00 & 100.00 \\
+5 & 0.5 & 0.5 & 0 & 0 & \multicolumn{1}{|r}{16} & 3 & \multicolumn{1}{|r}{95.29} & 98.64 & 87.26 & 95.06 & 55.49 & \multicolumn{1}{|r}{91.31} & 100.00 & 86.21 & 95.11 & 45.81 \\
+6 & 0.5 &  & 0.5 & 0 & \multicolumn{1}{|r}{18} & 1 & \multicolumn{1}{|r}{92.94} & 99.93 & 86.17 & 97.77 & 51.98 & \multicolumn{1}{|r}{87.37} & 99.54 & 85.04 & 98.12 & 37.88 \\
+7 & 0.5 & 0 & 0 & 0.5 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{92.03} & 0.00 & 99.52 & 0.00 & 97.87 & \multicolumn{1}{|r}{85.88} & 0.00 & 99.48 & 0.00 & 97.20 \\
+8 & 0 & 0.5 & 0.5 & 0 & \multicolumn{1}{|r}{18} & 1 & \multicolumn{1}{|r}{93.00} & 100.00 & 86.08 & 97.67 & 51.39 &\multicolumn{1}{|r}{86.47} & 98.52 & 84.94 & 98.04 & 37.87 \\
+9 & 0 & 0.5 & 0 & 0.5 & \multicolumn{1}{|r}{11} & 8 & \multicolumn{1}{|r}{85.70} & 76.28 & 93.80 & 87.24 & 78.00 & \multicolumn{1}{|r}{74.51} & 69.02 & 93.69 & 84.48 & 68.63 \\
+10 & 0 & 0 & 0.5 & 0.5 & \multicolumn{1}{|r}{9} & 10 & \multicolumn{1}{|r}{63.97} & 51.31 & 95.55 & 79.77 & 94.40 & \multicolumn{1}{|r}{32.96} & 26.97 & 95.57 & 75.09 & 92.02 \\
+11 & 0.25 & 0.25 & 0.25 & 0.25 & \multicolumn{1}{|r}{15} & 4 & \multicolumn{1}{|r}{93.05} & 94.17 & 88.67 & 94.35 & 61.15 & \multicolumn{1}{|r}{85.26} & 91.15 & 87.84 & 93.95 & 49.62 \\
+12 & 1/3 & 1/3 & 1/3 & 0 & \multicolumn{1}{|r}{18} & 1 & \multicolumn{1}{|r}{93.00} & 100.00 & 86.08 & 97.67 & 51.39 & \multicolumn{1}{|r}{86.47} & 98.52 & 84.94 & 98.04 & 37.87 \\
+13 & 1/3 & 1/3 & 0 & 1/3 & \multicolumn{1}{|r}{12} & 7 & \multicolumn{1}{|r}{96.43} & 89.30 & 89.25 & 86.52 & 64.26 & \multicolumn{1}{|r}{93.02} & 90.19 & 88.37 & 85.10 & 56.46 \\
+14 & 0 & 1/3 & 1/3 & 1/3 & \multicolumn{1}{|r}{15} & 4 & \multicolumn{1}{|r}{89.28} & 90.35 & 88.79 & 94.48 & 64.58 & \multicolumn{1}{|r}{79.84} & 85.36 & 88.05 & 94.02 & 53.77 \\
+ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\multicolumn{1}{l}{} & \multicolumn{4}{l}{{\bf Criteria}} & \multicolumn{2}{l}{{\bf DoF}} & \multicolumn{10}{l}{{\bf Efficiency,\%}} \\
+\multicolumn{1}{l}{} & \multicolumn{1}{l}{{\bf L}} & \multicolumn{1}{l}{{\bf LP}} & \multicolumn{1}{l}{{\bf LoF(LP)}} & \multicolumn{1}{l}{{\bf Bias(L)}} & \multicolumn{1}{l}{{\bf PE}} & \multicolumn{1}{l}{{\bf LoF}} & \multicolumn{1}{l}{{\bf D}} & \multicolumn{1}{l}{{\bf DP}} & \multicolumn{1}{l}{{\bf LoF(D)}} & \multicolumn{1}{l}{{\bf LoF(DP)}} & \multicolumn{1}{l}{{\bf Bias(D)}} & \multicolumn{1}{l}{{\bf L}} & \multicolumn{1}{l}{{\bf LP}} & \multicolumn{1}{l}{{\bf LoF(L)}} & \multicolumn{1}{l}{{\bf LoF(LP)}} & \multicolumn{1}{l}{{\bf Bias(L)}} \\
+1 & 1 & 0 & 0 & 0 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{99.95} & 0.00 & 91.73 & 0.00 & 73.77 & \multicolumn{1}{|r}{100.00} & 0.00 & 90.66 & 0.00 & 70.01 \\
+2 & 0 & 1 & 0 & 0 & \multicolumn{1}{|r}{16} & 3 & \multicolumn{1}{|r}{95.29} & 98.64 & 87.26 & 95.06 & 55.49 & \multicolumn{1}{|r}{91.31} & 100.00 & 86.21 & 95.11 & 45.81 \\
+3 & 0 & 0 & 1 & 0 & \multicolumn{1}{|r}{18} & 1 & \multicolumn{1}{|r}{48.65} & 52.31 & 87.64 & 99.44 & 42.35 & \multicolumn{1}{|r}{17.82} & 20.30 & 87.37 & 100.00 & 11.60 \\
+4 & 0 & 0 & 0 & 1 & \multicolumn{1}{|r}{1} & 18 & \multicolumn{1}{|r}{79.90} & 0.00 & 97.27 & 0.00 & 100.00 & \multicolumn{1}{|r}{68.75} & 0.00 & 97.06 & 0.00 & 100.00 \\
+5 & 0.5 & 0.5 & 0 & 0 & \multicolumn{1}{|r}{14} & 5 & \multicolumn{1}{|r}{96.30} & 95.00 & 88.80 & 91.98 & 57.53 & \multicolumn{1}{|r}{94.46} & 98.24 & 87.91 & 92.19 & 47.22 \\
+6 & 0.5 &  & 0.5 & 0 & \multicolumn{1}{|r}{15} & 4 & \multicolumn{1}{|r}{95.61} & 96.76 & 87.89 & 93.52 & 55.06 & \multicolumn{1}{|r}{92.98} & 99.41 & 86.91 & 94.09 & 44.06 \\
+7 & 0.5 & 0 & 0 & 0.5 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{95.99} & 0.00 & 100.00 & 0.00 & 94.71 & \multicolumn{1}{|r}{92.97} & 0.00 & 100.00 & 0.00 & 92.32 \\
+8 & 0 & 0.5 & 0.5 & 0 & \multicolumn{1}{|r}{18} & 1 & \multicolumn{1}{|r}{92.94} & 99.93 & 86.17 & 97.77 & 51.98 & \multicolumn{1}{|r}{87.37} & 99.54 & 85.04 & 98.93 & 37.88 \\
+9 & 0 & 0.5 & 0 & 0.5 & \multicolumn{1}{|r}{12} & 7 & \multicolumn{1}{|r}{96.78} & 89.63 & 89.59 & 86.85 & 63.49 & \multicolumn{1}{|r}{93.56} & 90.71 & 88.70 & 86.23 & 56.34 \\
+10 & 0 & 0 & 0.5 & 0.5 & \multicolumn{1}{|r}{9} & 10 & \multicolumn{1}{|r}{63.30} & 50.77 & 94.86 & 79.20 & 93.51 & \multicolumn{1}{|r}{39.89} & 32.63 & 94.69 & 75.47 & 90.52 \\
+11 & 0.25 & 0.25 & 0.25 & 0.25 & \multicolumn{1}{|r}{13} & 6 & \multicolumn{1}{|r}{96.64} & 92.58 & 89.18 & 89.57 & 60.52 & \multicolumn{1}{|r}{93.87} & 94.53 & 88.27 & 89.44 & 52.90 \\
+12 & 1/3 & 1/3 & 1/3 & 0 & \multicolumn{1}{|r}{16} & 3 & \multicolumn{1}{|r}{94.45} & 97.77 & 87.38 & 95.22 & 53.63 & \multicolumn{1}{|r}{91.08} & 99.75 & 86.35 & 96.03 & 41.78 \\
+13 & 1/3 & 1/3 & 0 & 1/3 & \multicolumn{1}{|r}{12} & 7 & \multicolumn{1}{|r}{96.20} & 89.09 & 89.81 & 87.06 & 64.68 & \multicolumn{1}{|r}{92.76} & 89.93 & 88.98 & 86.39 & 57.04 \\
+14 & 0 & 1/3 & 1/3 & 1/3 & \multicolumn{1}{|r}{14} & 5 & \multicolumn{1}{|r}{95.20} & 93.91 & 88.68 & 91.85 & 60.21 & \multicolumn{1}{|r}{91.11} & 94.75 & 87.79 & 92.07 & 52.81
+\end{tabular}
+}
+\end{table}
+\end{landscape}
+
+%%% Comments on GDP and GLP ex1 tau2=1
+In Table \ref{tab::GDP_ex11} the performance characteristics of the designs optimal with respect to generalised $DP$ and $LP$ criteria are given. Due to the larger number of components (compared with the $GD$ and $GL$ compound criteria), we considered $14$ instead of $9$ weight allocation sets, in order to have a chance to observe the relationships between the criteria components and between the weights and optimal designs' performances. Some efficiencies cannot be evaluated when there are no replicates, in such cases they are set to $0$.
+
+In general it can be observed that all the designs have large $D$-efficiencies, the worst are those where no weight was put on either $D$- or $DP$-component; similar tendency seems to be true for generalised $LP$-optimal designs. When some weight is assigned to the $DP$- or $LP$-component, the resulting designs tend to be good in terms of $LoF$-efficiencies: the $DP$-optimal design (as given in Table \ref{tab::Ex11_DP_design}) retains optimality when half of the weight is put on the lack-of-fit component (\#$8$) or is equally distributed between the $D$-, $DP$- and $LoF(DP)$-components (\#$12$). All the replicates are single (i.e. there is no point being replicated more than once), and only $4$ of them out of $18$ are not `corner' points.
+
+The opposite regarding the relationship between the `primary' and `potential' terms components, however, is not true: the $LoF(DP)$-optimal design \#$3$ is only $48.85\%$ $D$-efficient and $51.56\%$ $DP$-efficient (the same happens with the trace-based optimality). As for the $LoF(D)$- and $LoF(L)$- components, the optimal designs in this case lost around $10\%$ in the corresponding efficiencies compared to the generalised $D$- and $L$-optimal designs in Table \ref{tab::GD_ex11}.  
+
+\begin{table}[h]
+\centering
+\caption{Example 1. DP-optimal design \#$2$}
+\label{tab::Ex11_DP_design}
+\scalebox{0.8}{
+\begin{tabular}{rrrrrr|r|rrrrrr}
+1  & -1 & -1 & -1 & -1 & -1 &  & 21 & 0 & 0  & 1  & 1  & 0  \\
+2  & -1 & -1 & -1 & -1 & -1 &  & 22 & 0 & 1  & -1 & 0  & 1  \\
+3  & -1 & -1 & -1 & 1  & 1  &  & 23 & 1 & -1 & -1 & -1 & 1  \\
+4  & -1 & -1 & -1 & 1  & 1  &  & 24 & 1 & -1 & -1 & -1 & 1  \\
+5  & -1 & -1 & 1  & -1 & 0  &  & 25 & 1 & -1 & -1 & 1  & -1 \\
+6  & -1 & -1 & 1  & 1  & -1 &  & 26 & 1 & -1 & -1 & 1  & -1 \\
+7  & -1 & -1 & 1  & 1  & -1 &  & 27 & 1 & -1 & 0  & 0  & 0  \\
+8  & -1 & 0  & 1  & 0  & 1  &  & 28 & 1 & -1 & 0  & 0  & 0  \\
+9  & -1 & 0  & 1  & 0  & 1  &  & 29 & 1 & -1 & 1  & -1 & -1 \\
+10 & -1 & 1  & -1 & -1 & 1  &  & 30 & 1 & -1 & 1  & -1 & -1 \\
+11 & -1 & 1  & -1 & -1 & 1  &  & 31 & 1 & -1 & 1  & 1  & 1  \\
+12 & -1 & 1  & -1 & 1  & -1 &  & 32 & 1 & -1 & 1  & 1  & 1  \\
+13 & -1 & 1  & -1 & 1  & -1 &  & 33 & 1 & 0  & 0  & 1  & 1  \\
+14 & -1 & 1  & 1  & -1 & -1 &  & 34 & 1 & 1  & -1 & -1 & -1 \\
+15 & -1 & 1  & 1  & -1 & -1 &  & 35 & 1 & 1  & -1 & -1 & -1 \\
+16 & -1 & 1  & 1  & 1  & 1  &  & 36 & 1 & 1  & -1 & 1  & 1  \\
+17 & -1 & 1  & 1  & 1  & 1  &  & 37 & 1 & 1  & 1  & -1 & 1  \\
+18 & 0  & -1 & 0  & -1 & 1  &  & 38 & 1 & 1  & 1  & -1 & 1  \\
+19 & 0  & -1 & 0  & -1 & 1  &  & 39 & 1 & 1  & 1  & 1  & -1 \\
+20 & 0  & 0  & 1  & 1  & 0  &  & 40 & 1 & 1  & 1  & 1  & -1
+\end{tabular}
+}
+\end{table}
+The contradiction between the components corresponding to the prediction bias and to the primary terms remains, and might be even more dramatic: in general, bias efficiencies are much lower (just a few are above $90\%$, only when more than half of the weight is allocated to this component). Together with that, designs optimal in terms of determinant-based criteria sometimes have very low trace-based efficiencies, e.g.~the $LoF(DP)$-optimal design \#$3$ (Table \ref{tab::Ex11_LoFDP_design}), which can be seen to have many points being replicated twice and even three times (unlike the designs seen before).
+On the other hand, trace-based optimal designs tend to perform quite well in terms of $GDP$-components. This encourages the idea of the necessity of a careful choice between a trace- and determinant-based approach in this case or, at least, of a double check when constructing a design to be used. 
+
+\begin{table}[h]
+\centering
+\caption{Example 1. LoF(DP)-optimal design \#$3$}
+\label{tab::Ex11_LoFDP_design}
+\scalebox{0.8}{
+\begin{tabular}{rrrrrr|r|rrrrrr}
+1  & -1 & -1 & -1 & -1 & 0  &  & 21 & 0 & 1  & 1  & -1 & 0  \\
+2  & -1 & -1 & -1 & -1 & 0  &  & 22 & 1 & -1 & -1 & -1 & 1  \\
+3  & -1 & -1 & 0  & -1 & -1 &  & 23 & 1 & -1 & 1  & -1 & -1 \\
+4  & -1 & -1 & 1  & -1 & 1  &  & 24 & 1 & -1 & 1  & -1 & -1 \\
+5  & -1 & -1 & 1  & -1 & 1  &  & 25 & 1 & -1 & 1  & 1  & 1  \\
+6  & -1 & -1 & 1  & -1 & 1  &  & 26 & 1 & 0  & -1 & -1 & -1 \\
+7  & -1 & -1 & 1  & 1  & -1 &  & 27 & 1 & 0  & -1 & -1 & -1 \\
+8  & -1 & -1 & 1  & 1  & -1 &  & 28 & 1 & 0  & -1 & -1 & -1 \\
+9  & -1 & 0  & -1 & -1 & 1  &  & 29 & 1 & 0  & 1  & -1 & 1  \\
+10 & -1 & 0  & -1 & 1  & -1 &  & 30 & 1 & 0  & 1  & -1 & 1  \\
+11 & -1 & 0  & -1 & 1  & -1 &  & 31 & 1 & 0  & 1  & -1 & 1  \\
+12 & -1 & 0  & -1 & 1  & -1 &  & 32 & 1 & 0  & 1  & 1  & 0  \\
+13 & -1 & 0  & 1  & 1  & 1  &  & 33 & 1 & 1  & -1 & -1 & 1  \\
+14 & -1 & 0  & 1  & 1  & 1  &  & 34 & 1 & 1  & -1 & -1 & 1  \\
+15 & -1 & 0  & 1  & 1  & 1  &  & 35 & 1 & 1  & -1 & 0  & 1  \\
+16 & -1 & 1  & -1 & -1 & -1 &  & 36 & 1 & 1  & -1 & 1  & -1 \\
+17 & -1 & 1  & -1 & 1  & 1  &  & 37 & 1 & 1  & -1 & 1  & -1 \\
+18 & -1 & 1  & -1 & 1  & 1  &  & 38 & 1 & 1  & -1 & 1  & -1 \\
+19 & -1 & 1  & 0  & 1  & 0  &  & 39 & 1 & 1  & 1  & 1  & -1 \\
+20 & 0  & 0  & 1  & 0  & 1  &  & 40 & 1 & 1  & 1  & 1  & 1 
+\end{tabular}
+}
+\end{table}
+
+Overall, lack-of-fit efficiencies  are quite large for all the designs (where they can be evaluated, of course), they are almost always higher than $85\%$ and only drop when the weight is not `fairly' distributed between the competing parts of the criteria. Designs performing well in terms of bias usually occurred when at least half of the weight was put on the components corresponding to the properties of the potential terms. This observation will later contribute to the motivation to substitute the prediction bias with the bias of the primary model coefficients' estimates (see Chapter \ref{ch::mse}). 
+
+%%% Example 1. Tau2=1/q
+%% Tables, comments
+\paragraph{Example 1.1. $\tau^2=1/q$}\mbox{}\\
+As the prior variance of the additional terms $\bm{\beta}_2$ in the full model (\ref{eq::full_model}) is proportional to the error variance $\sigma^2$ with the scaling parameter $\tau^2$, when the number of potential terms is large, and under the assumption of them being uncorrelated (i.e. independent in the case of the normal distribution), the total potential variability becomes quite substantial.
+
+Therefore, as for $\tau^2=1$ in the first example we observed certain contradictions in the resulting performances between the criterion parts corresponding to the primary model terms and to the potential ones. The next step is to try a different value of this tuning parameter, specifically, to make it dependent on the number of potential terms, such that the total contamination from the model misspecification is comparable with the error disturbance. 
+
+We set $\tau^2$ equal to $1/q$, i.e. the inverse of the number of potential terms, so that under the assumption of their independence their total prior variance would be 
+\begin{equation}
+\sum_{i=1}^{q} \sigma^{2} \tau^{2} = q\sigma^{2} \frac{1}{q}=\sigma^{2},
+\end{equation}
+that is exactly the error variance.
+
+Tables \ref{tab::GD_ex1q} and \ref{tab::GDP_ex1q} contain the performances of the optimal designs, with the same layouts of weight allocations as before. The general observation is that the optimal designs seem to behave similarly to the ones obtained previously: generalised $D$- and $L$-optimal designs have no pure error degrees of freedom, and in the case of $GDP$- and $GLP$-optimality, on the contrary, most of the available residual degrees of freedom are allocated to the pure error component (with the imbalance being more evident in the case of determinant-based criteria). 
+
+%%% GD- and GL-optimal designs
+\begin{table}[h]
+\caption{Example 1.1. Properties of generalised D- and L-optimal designs. $\tau^2=1/q$}
+\label{tab::GD_ex1q}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{rrrrrrrrrrrr}
+   & \multicolumn{3}{l}{\textbf{Criteria}} & \multicolumn{2}{l}{\textbf{DoF}} & \multicolumn{6}{l}{\textbf{Efficiency,\%}}                               \\
+   & \textbf{D}       & \textbf{LoF(D)}    & \textbf{Bias(D)}   & \textbf{PE}        & \textbf{LoF}        & \textbf{D}   & \textbf{LoF(D)}   & \textbf{Bias(D)}  & \textbf{L}       & \textbf{LoF(L)}   & \textbf{Bias(L)}  \\
+1 & 1 & 0 & 0 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{100.00} & 99.85 & 77.89 & \multicolumn{1}{|r}{98.96} & 99.85 & 72.51 \\
+2 & 0 & 1 & 0 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{95.99} & 100.00 & 96.19 & \multicolumn{1}{|r}{92.97} & 100.00 & 94.16 \\
+3 & 0 & 0 & 1 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{77.96} & 99.90 & 100.00 & \multicolumn{1}{|r}{66.24} & 99.90 & 100.00 \\
+4 & 0.5 & 0.5 & 0 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{99.90} & 99.85 & 77.50 & \multicolumn{1}{|r}{98.74} & 99.85 & 71.90 \\
+5 & 0.5 & 0 & 0.5 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{95.99} & 100.00 & 96.19 & \multicolumn{1}{|r}{92.97} & 100.00 & 94.16 \\
+6 & 0 & 0.5 & 0.5 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{80.62} & 99.92 & 99.86 & \multicolumn{1}{|r}{68.88} & 99.92 & 99.69 \\
+7 & 1/3 & 1/3 & 1/3 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{93.96} & 99.98 & 97.81 & \multicolumn{1}{|r}{88.15} & 99.98 & 96.62 \\
+8 & 0.5 & 0.25 & 0.25 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{95.99} & 100.00 & 96.19 & \multicolumn{1}{|r}{92.97} & 100.00 & 94.16 \\
+9 & 0.25 & 0.5 & 0.25 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{93.96} & 99.98 & 97.81 & \multicolumn{1}{|r}{88.15} & 99.98 & 96.62 \\
+ &  &  &  &  &  &  &  &  &  &  &  \\
+    & \multicolumn{3}{l}{\textbf{Criteria}} & \multicolumn{2}{l}{\textbf{DoF}} & \multicolumn{6}{l}{\textbf{Efficiency,\%}}                               \\
+   & \textbf{L}       & \textbf{LoF(L)}    & \textbf{Bias(L)}   & \textbf{PE}        & \textbf{LoF}        & \textbf{D}   & \textbf{LoF(D)}   & \textbf{Bias(D)}  & \textbf{L}       & \textbf{LoF(L)}   & \textbf{Bias(L)}  \\
+1 & 1 & 0 & 0 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{99.95} & 99.86 & 76.73 & \multicolumn{1}{|r}{100.00} & 99.86 & 70.37 \\
+2 & 0 & 1 & 0 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{95.99} & 100.00 & 96.19 & \multicolumn{1}{|r}{92.97} & 100.00 & 94.16 \\
+3 & 0 & 0 & 1 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{77.96} & 99.90 & 100.00 & \multicolumn{1}{|r}{66.24} & 99.90 & 100.00 \\
+4 & 0.5 & 0.5 & 0 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{99.95} & 99.86 & 76.73 & \multicolumn{1}{|r}{100.00} & 99.86 & 70.37 \\
+5 & 0.5 & 0 & 0.5 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{95.99} & 100.00 & 96.19 & \multicolumn{1}{|r}{92.97} & 100.00 & 94.16 \\
+6 & 0 & 0.5 & 0.5 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{79.87} & 99.91 & 99.99 & \multicolumn{1}{|r}{65.72} & 99.91 & 99.97 \\
+7 & 1/3 & 1/3 & 1/3 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{92.37} & 99.98 & 99.22 & \multicolumn{1}{|r}{87.39} & 99.98 & 98.95 \\
+8 & 0.5 & 0.25 & 0.25 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{95.99} & 100.00 & 96.19 & \multicolumn{1}{|r}{92.97} & 100.00 & 94.16 \\
+9 & 0.25 & 0.5 & 0.25 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{92.37} & 99.98 & 99.22 & \multicolumn{1}{|r}{87.39} & 99.98 & 98.95
+\end{tabular}
+}
+\end{table}
+As before, lack-of-fit determinant- and trace-based optimality are achieved by the same design (\#$2$ in Table \ref{tab::GD_ex1q}), and, moreover, it remains optimal when the weight is distributed between the $D$- ($L$-) and bias components (\#$5$) and it is also design \#$8$. 
+
+The same holds for the bias-optimal designs. They are the same, and their $D$- and $L$- efficiencies are  $2-3\%$ lower than when $\tau^2=1$. These two designs are given in Tables \ref{tab::Ex1q_LoF_design} and \ref{tab::Ex1q_bias_design}; the bias-optimal design is quite different from the ones we have observed before, having just a few `corner' points, with the majority being more or less evenly distributed across the design region (i.e. the candidate set of points).
+
+\begin{table}[h]
+\centering
+\caption{Example 1.1. LoF(D)- and LoF(L)-optimal design \#$2$ ($\tau^2=1/q$)}
+\label{tab::Ex1q_LoF_design}
+\scalebox{0.8}{
+\begin{tabular}{rrrrrr|r|rrrrrr}
+1  & -1 & -1 & -1 & -1 & 1  &  & 21 & 0 & 0  & 1  & -1 & 0  \\
+2  & -1 & -1 & -1 & 1  & 1  &  & 22 & 0 & 1  & -1 & -1 & 1  \\
+3  & -1 & -1 & -1 & 1  & -1 &  & 23 & 0 & 1  & 1  & 1  & 1  \\
+4  & -1 & -1 & 0  & -1 & -1 &  & 24 & 1 & -1 & -1 & -1 & 0  \\
+5  & -1 & -1 & 1  & -1 & 1  &  & 25 & 1 & -1 & -1 & 1  & 1  \\
+6  & -1 & -1 & 1  & 0  & -1 &  & 26 & 1 & -1 & -1 & 1  & -1 \\
+7  & -1 & -1 & 1  & 1  & 1  &  & 27 & 1 & -1 & 0  & -1 & 1  \\
+8  & -1 & 0  & -1 & -1 & -1 &  & 28 & 1 & -1 & 1  & -1 & -1 \\
+9  & -1 & 0  & 0  & 0  & 1  &  & 29 & 1 & -1 & 1  & 0  & 1  \\
+10 & -1 & 0  & 1  & 1  & -1 &  & 30 & 1 & -1 & 1  & 1  & 0  \\
+11 & -1 & 1  & -1 & -1 & 0  &  & 31 & 1 & 0  & -1 & -1 & 1  \\
+12 & -1 & 1  & -1 & 0  & -1 &  & 32 & 1 & 0  & 0  & 0  & -1 \\
+13 & -1 & 1  & -1 & 1  & 1  &  & 33 & 1 & 0  & 1  & 1  & 1  \\
+14 & -1 & 1  & 0  & 1  & -1 &  & 34 & 1 & 1  & -1 & -1 & -1 \\
+15 & -1 & 1  & 1  & -1 & -1 &  & 35 & 1 & 1  & -1 & 0  & 1  \\
+16 & -1 & 1  & 1  & -1 & 1  &  & 36 & 1 & 1  & -1 & 1  & -1 \\
+17 & -1 & 1  & 1  & 1  & 0  &  & 37 & 1 & 1  & 0  & 1  & 1  \\
+18 & 0  & -1 & -1 & -1 & -1 &  & 38 & 1 & 1  & 1  & -1 & 1  \\
+19 & 0  & -1 & 1  & 1  & -1 &  & 39 & 1 & 1  & 1  & -1 & -1 \\
+20 & 0  & 0  & -1 & 1  & 0  &  & 40 & 1 & 1  & 1  & 1  & -1
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Example 1.1. Bias(D)- and Bias(L)-optimal design \#$3$ ($\tau^2=1/q$)}
+\label{tab::Ex1q_bias_design}
+\scalebox{0.8}{
+\begin{tabular}{rrrrrr|r|rrrrrr}
+1  & -1 & -1 & -1 & 1  & 1  &  & 21 & 0 & 0  & 1  & 1  & -1 \\
+2  & -1 & -1 & 0  & -1 & 1  &  & 22 & 0 & 1  & -1 & -1 & -1 \\
+3  & -1 & -1 & 0  & 0  & -1 &  & 23 & 0 & 1  & -1 & 1  & 0  \\
+4  & -1 & -1 & 0  & 1  & 0  &  & 24 & 0 & 1  & 1  & -1 & 0  \\
+5  & -1 & -1 & 1  & 1  & 0  &  & 25 & 0 & 1  & 1  & 1  & 1  \\
+6  & -1 & 0  & -1 & -1 & 0  &  & 26 & 1 & -1 & -1 & 0  & 0  \\
+7  & -1 & 0  & -1 & 1  & -1 &  & 27 & 1 & -1 & 0  & -1 & -1 \\
+8  & -1 & 0  & 0  & 0  & 1  &  & 28 & 1 & -1 & 0  & 0  & 1  \\
+9  & -1 & 0  & 1  & -1 & -1 &  & 29 & 1 & -1 & 0  & 1  & -1 \\
+10 & -1 & 0  & 1  & 0  & 1  &  & 30 & 1 & -1 & 1  & 0  & -1 \\
+11 & -1 & 1  & -1 & 0  & 1  &  & 31 & 1 & 0  & -1 & 0  & -1 \\
+12 & -1 & 1  & 0  & -1 & 1  &  & 32 & 1 & 0  & -1 & 1  & 1  \\
+13 & -1 & 1  & 0  & 0  & -1 &  & 33 & 1 & 0  & 0  & 0  & -1 \\
+14 & -1 & 1  & 0  & 1  & 1  &  & 34 & 1 & 0  & 1  & -1 & 1  \\
+15 & -1 & 1  & 1  & 0  & 0  &  & 35 & 1 & 0  & 1  & 1  & 0  \\
+16 & 0  & -1 & -1 & -1 & -1 &  & 36 & 1 & 1  & -1 & -1 & 0  \\
+17 & 0  & -1 & -1 & 1  & 0  &  & 37 & 1 & 1  & 0  & -1 & 0  \\
+18 & 0  & -1 & 1  & -1 & 0  &  & 38 & 1 & 1  & 0  & 0  & 1  \\
+19 & 0  & -1 & 1  & 1  & 1  &  & 39 & 1 & 1  & 0  & 1  & -1 \\
+20 & 0  & 0  & -1 & -1 & 1  &  & 40 & 1 & 1  & 1  & -1 & -1
+\end{tabular}
+}
+\end{table}
+
+%% GDP- and GLP-optimal designs. Example 1, tau2=1/q.
+\begin{landscape}
+\begin{table}[p]
+\caption{Example 1.1. Properties of generalised DP- and LP-optimal designs. $\tau^2=1/q$}
+\label{tab::GDP_ex1q}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{rrrrrrrrrrrrrrrrr}
+\multicolumn{1}{l}{} & \multicolumn{4}{l}{{\bf Criteria}} & \multicolumn{2}{l}{{\bf DoF}} & \multicolumn{10}{l}{{\bf Efficiency,\%}} \\
+\multicolumn{1}{l}{} & \multicolumn{1}{l}{{\bf D}} & \multicolumn{1}{l}{{\bf DP}} & \multicolumn{1}{l}{{\bf LoF(DP)}} & \multicolumn{1}{l}{{\bf Bias(D)}} & \multicolumn{1}{l}{{\bf PE}} & \multicolumn{1}{l}{{\bf LoF}} & \multicolumn{1}{l}{{\bf D}} & \multicolumn{1}{l}{{\bf DP}} & \multicolumn{1}{l}{{\bf LoF(D)}} & \multicolumn{1}{l}{{\bf LoF(DP)}} & \multicolumn{1}{l}{{\bf Bias(D)}} & \multicolumn{1}{l}{{\bf L}} & \multicolumn{1}{l}{{\bf LP}} & \multicolumn{1}{l}{{\bf LoF(L)}} & \multicolumn{1}{l}{{\bf LoF(LP)}} & \multicolumn{1}{l}{{\bf Bias(L)}} \\
+1 & 1 & 0 & 0 & 0 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{100.00} & 0.00 & 99.85 & 0.00 & 77.89 & \multicolumn{1}{|r}{98.96} & 0.00 & 99.85 & 0.00 & 72.51 \\
+2 & 0 & 1 & 0 & 0 & \multicolumn{1}{|r}{18} & 1 & \multicolumn{1}{|r}{93.00} & 100.00 & 99.41 & 98.32 & 52.19 & \multicolumn{1}{|r}{86.47} & 98.52 & 99.41 & 98.26 & 38.62 \\
+3 & 0 & 0 & 1 & 0 & \multicolumn{1}{|r}{19} & 0 & \multicolumn{1}{|r}{90.07} & 98.43 & 99.39 & 100.00 & 51.00 & \multicolumn{1}{|r}{79.39} & 91.96 & 99.38 & 100.00 & 37.11 \\
+4 & 0 & 0 & 0 & 1 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{77.96} & 0.00 & 99.90 & 0.00 & 100.00 & \multicolumn{1}{|r}{66.24} & 0.00 & 99.90 & 0.00 & 100.00 \\
+5 & 0.5 & 0.5 & 0 & 0 & \multicolumn{1}{|r}{16} & 3 & \multicolumn{1}{|r}{95.29} & 98.64 & 99.46 & 94.48 & 56.36 & \multicolumn{1}{|r}{91.31} & 100.00 & 99.46 & 94.19 & 46.72 \\
+6 & 0.5 &  & 0.5 & 0 & \multicolumn{1}{|r}{18} & 1 & \multicolumn{1}{|r}{93.00} & 100.00 & 99.41 & 98.32 & 52.19 & \multicolumn{1}{|r}{86.47} & 98.52 & 99.41 & 98.26 & 38.62 \\
+7 & 0.5 & 0 & 0 & 0.5 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{95.99} & 0.00 & 100.00 & 0.00 & 96.19 & \multicolumn{1}{|r}{92.97} & 0.00 & 100.00 & 0.00 & 94.16 \\
+8 & 0 & 0.5 & 0.5 & 0 & \multicolumn{1}{|r}{19} & 0 & \multicolumn{1}{|r}{90.07} & 98.43 & 99.39 & 100.00 & 51.00 & \multicolumn{1}{|r}{79.39} & 91.96 & 99.38 & 100.00 & 37.11 \\
+9 & 0 & 0.5 & 0 & 0.5 & \multicolumn{1}{|r}{12} & 7 & \multicolumn{1}{|r}{93.40} & 86.50 & 99.61 & 84.17 & 69.50 & \multicolumn{1}{|r}{85.03} & 82.44 & 99.61 & 82.68 & 62.11 \\
+10 & 0 & 0 & 0.5 & 0.5 & \multicolumn{1}{|r}{10} & 9 & \multicolumn{1}{|r}{54.50} & 46.28 & 99.80 & 77.04 & 88.25 & \multicolumn{1}{|r}{13.05} & 11.44 & 99.80 & 74.25 & 77.38 \\
+11 & 0.25 & 0.25 & 0.25 & 0.25 & \multicolumn{1}{|r}{15} & 4 & \multicolumn{1}{|r}{93.89} & 95.02 & 99.50 & 92.29 & 61.42 & \multicolumn{1}{|r}{88.13} & 94.22 & 99.50 & 91.82 & 52.26 \\
+12 & 1/3 & 1/3 & 1/3 & 0 & \multicolumn{1}{|r}{18} & 1 & \multicolumn{1}{|r}{93.00} & 100.00 & 99.41 & 98.32 & 52.19 & \multicolumn{1}{|r}{86.47} & 98.52 & 99.41 & 98.26 & 38.62 \\
+13 & 1/3 & 1/3 & 0 & 1/3 & \multicolumn{1}{|r}{12} & 7 & \multicolumn{1}{|r}{96.43} & 89.30 & 99.54 & 84.11 & 65.26 & \multicolumn{1}{|r}{93.02} & 90.19 & 99.54 & 82.63 & 57.58 \\
+14 & 0 & 1/3 & 1/3 & 1/3 & \multicolumn{1}{|r}{16} & 3 & \multicolumn{1}{|r}{91.86} & 95.09 & 99.48 & 94.50 & 61.98 & \multicolumn{1}{|r}{84.85} & 92.92 & 99.48 & 94.21 & 50.69 \\
+ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ \multicolumn{1}{l}{} & \multicolumn{4}{l}{{\bf Criteria}} & \multicolumn{2}{l}{{\bf DoF}} & \multicolumn{10}{l}{{\bf Efficiency,\%}} \\
+\multicolumn{1}{l}{} & \multicolumn{1}{l}{{\bf L}} & \multicolumn{1}{l}{{\bf LP}} & \multicolumn{1}{l}{{\bf LoF(LP)}} & \multicolumn{1}{l}{{\bf Bias(L)}} & \multicolumn{1}{l}{{\bf PE}} & \multicolumn{1}{l}{{\bf LoF}} & \multicolumn{1}{l}{{\bf D}} & \multicolumn{1}{l}{{\bf DP}} & \multicolumn{1}{l}{{\bf LoF(D)}} & \multicolumn{1}{l}{{\bf LoF(DP)}} & \multicolumn{1}{l}{{\bf Bias(D)}} & \multicolumn{1}{l}{{\bf L}} & \multicolumn{1}{l}{{\bf LP}} & \multicolumn{1}{l}{{\bf LoF(L)}} & \multicolumn{1}{l}{{\bf LoF(LP)}} & \multicolumn{1}{l}{{\bf Bias(L)}} \\
+1 & 1 & 0 & 0 & 0 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{99.95} & 0.00 & 99.86 & 0.00 & 76.73 & \multicolumn{1}{|r}{100.00} & 0.00 & 99.86 & 0.00 & 70.37 \\
+2 & 0 & 1 & 0 & 0 & \multicolumn{1}{|r}{16} & 3 & \multicolumn{1}{|r}{95.29} & 98.64 & 99.46 & 94.48 & 56.36 & \multicolumn{1}{|r}{91.31} & 100.00 & 99.46 & 94.19 & 46.72 \\
+3 & 0 & 0 & 1 & 0 & \multicolumn{1}{|r}{19} & 0 & \multicolumn{1}{|r}{90.07} & 98.43 & 99.39 & 100.00 & 51.00 & \multicolumn{1}{|r}{79.39} & 91.96 & 99.38 & 100.00 & 37.11 \\
+4 & 0 & 0 & 0 & 1 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{77.96} & 0.00 & 99.90 & 0.00 & 100.00 & \multicolumn{1}{|r}{66.24} & 0.00 & 99.90 & 0.00 & 100.00 \\
+5 & 0.5 & 0.5 & 0 & 0 & \multicolumn{1}{|r}{14} & 5 & \multicolumn{1}{|r}{96.30} & 95.00 & 99.53 & 89.86 & 58.43 & \multicolumn{1}{|r}{94.46} & 98.24 & 99.53 & 89.14 & 48.16 \\
+6 & 0.5 &  & 0.5 & 0 & \multicolumn{1}{|r}{18} & 1 & \multicolumn{1}{|r}{92.94} & 99.93 & 99.41 & 98.32 & 52.79 & \multicolumn{1}{|r}{87.37} & 99.54 & 99.41 & 98.26 & 38.63 \\
+7 & 0.5 & 0 & 0 & 0.5 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{95.99} & 0.00 & 100.00 & 0.00 & 96.19 & \multicolumn{1}{|r}{92.97} & 0.00 & 100.00 & 0.00 & 94.16\\
+8 & 0 & 0.5 & 0.5 & 0 & \multicolumn{1}{|r}{18} & 1 & \multicolumn{1}{|r}{92.94} & 99.93 & 99.41 & 98.32 & 52.79 & \multicolumn{1}{|r}{87.37} & 99.54 & 99.41 & 98.26 & 38.63 \\
+9 & 0 & 0.5 & 0 & 0.5 & \multicolumn{1}{|r}{12} & 7 & \multicolumn{1}{|r}{96.75} & 89.59 & 99.57 & 84.13 & 63.86 & \multicolumn{1}{|r}{93.87} & 91.01 & 99.57 & 82.65 & 56.04 \\
+10 & 0 & 0 & 0.5 & 0.5 & \multicolumn{1}{|r}{10} & 9 & \multicolumn{1}{|r}{57.94} & 49.20 & 99.72 & 76.98 & 85.60 & \multicolumn{1}{|r}{36.49} & 31.98 & 99.72 & 74.19 & 75.86 \\
+11 & 0.25 & 0.25 & 0.25 & 0.25 & \multicolumn{1}{|r}{14} & 5 & \multicolumn{1}{|r}{95.72} & 94.42 & 99.52 & 89.85 & 60.52 & \multicolumn{1}{|r}{91.98} & 95.66 & 99.52 & 89.13 & 52.93 \\
+12 & 1/3 & 1/3 & 1/3 & 0 & \multicolumn{1}{|r}{16} & 3 & \multicolumn{1}{|r}{94.45} & 97.77 & 99.48 & 94.47 & 54.47 & \multicolumn{1}{|r}{91.08} & 99.75 & 99.46 & 94.20 & 42.62 \\
+13 & 1/3 & 1/3 & 0 & 1/3 & \multicolumn{1}{|r}{12} & 7 & \multicolumn{1}{|r}{97.41} & 90.21 & 99.56 & 84.12 & 62.55 & \multicolumn{1}{|r}{94.94} & 92.05 & 99.55 & 82.64 & 55.03 \\
+14 & 0 & 1/3 & 1/3 & 1/3 & \multicolumn{1}{|r}{14} & 5 & \multicolumn{1}{|r}{95.05} & 93.77 & 99.51 & 89.85 & 62.66 & \multicolumn{1}{|r}{90.60} & 94.22 & 99.51 & 89.13 & 54.76
+\end{tabular}
+}
+\end{table}
+\end{landscape}
+On average, designs' performances in terms of both bias and lack-of-fit slightly increased compared to the case of $\tau^2=1$, which can be seen especially well in Table \ref{tab::GDP_ex1q}, where $LoF(D)-$ and $LoF(L)$-efficiencies are around $10\%$ larger than what was seen in Table \ref{tab::GDP_ex11}. However, the minimum efficiency values are still roughly the same and are achieved when no weight is allocated to the potential terms components.    
+
+Designs that are optimal with respect to $GDP$-criteria still tend to have relatively low trace-based efficiency values, and the minimum values are even worse, i.e. when no weight was allocated to the $D$-component, the $GDP$-optimal design \#$10$ is only $13.05\%$ $L$-efficient and $11.44\%$ $LP$-efficient in comparison to $32.96\%$ and $26.97\%$ respectively when $\tau^2$ was set to $1$. The corresponding drops for the $D$- and $DP$-efficiencies are around $9\%$ and $2\%$ accordingly. However, it is worth noting that in general, in both cases, the contradiction between criterion components corresponding to the primary and potential terms is stronger for the trace-based criteria than for the determinant-based ones.
+
+Overall, setting a different value of $\tau^2$ resulted in similar tendencies of the optimal designs; the most considerable is the larger average $LoF(D)-$ and $LoF(L)-$ efficiencies of all optimal designs: reducing the prior variance of the potential terms leads to most of them being consistently well above $99\%$ compared to previously observed average of around $85\%-90\%$ (for $GDP$- and $GLP$-optimal designs). Such consistently high performance may signify the lack-of-fit component redundancy for small enough values of $\tau^2$.
+
+%%%%%%%%%%% Example 1.2
+\paragraph{Example 1.2}\mbox{}\\
+Now in the framework of the previous example $1$ (five three-level factors, the fitted model is full quadratic polynomial, prior variance scaling parameter $\tau^2=1$) we consider a smaller subset of the potential terms and take just $q=20$ of them: all linear-by-quadratic terms. Tables \ref{tab::GD_ex12} and \ref{tab::GDP_ex12} reflect the performances of the generalised $D$-, $L$-, $DP$- and $LP$-criteria together with the distribution of the degrees of freedom and efficiencies with respect to the individual components; the layouts of the weight distributions are the same as before. The point exchange search algorithm was implemented with $500$ random starts, and the computation took a little less time (around $2.5$ to $5.5$ hours depending on the number of components involved). 
+
+%% GD- and GL-optimal designs, ex 12
+\begin{table}[h]
+\caption{Example 1.2. Properties of generalised D and L-optimal designs}
+\label{tab::GD_ex12}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{rrrrrrrrrrrr}
+   & \multicolumn{3}{l}{\textbf{Criteria}} & \multicolumn{2}{l}{\textbf{DoF}} & \multicolumn{6}{l}{\textbf{Efficiency,\%}}                               \\
+   & \textbf{D}       & \textbf{LoF(D)}    & \textbf{Bias(D)}   & \textbf{PE}        & \textbf{LoF}        & \textbf{D}   & \textbf{LoF(D)}   & \textbf{Bias(D)}  & \textbf{L}       & \textbf{LoF(L)}   & \textbf{Bias(L)}  \\
+1 & 1 & 0 & 0 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{100.00} & 97.50 & 76.51 & \multicolumn{1}{|r}{98.96} & 45.57 & 70.77 \\
+2 & 0 & 1 & 0 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{71.31} & 100.00 & 100.00 & \multicolumn{1}{|r}{41.41} & 100.00 & 100.00 \\
+3 & 0 & 0 & 1 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{71.31} & 100.00 & 100.00 & \multicolumn{1}{|r}{41.41} & 100.00 & 100.00 \\
+4 & 0.5 & 0.5 & 0 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{98.85} & 94.10 & 77.59 & \multicolumn{1}{|r}{97.70} & 93.61 & 75.48 \\
+5 & 0.5 & 0 & 0.5 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{92.51} & 97.61 & 96.51 & \multicolumn{1}{|r}{85.88} & 97.50 & 95.98 \\
+6 & 0 & 0.5 & 0.5 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{75.56} & 99.46 & 98.06 & \multicolumn{1}{|r}{62.63} & 99.67 & 97.48 \\
+7 & 1/3 & 1/3 & 1/3 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{92.14} & 97.69 & 97.55 & \multicolumn{1}{|r}{85.10} & 97.61 & 97.21 \\
+8 & 0.5 & 0.25 & 0.25 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{94.35} & 97.35 & 93.72 & \multicolumn{1}{|r}{88.97} & 97.20 & 92.60 \\
+9 & 0.25 & 0.5 & 0.25 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{92.79} & 97.56 & 96.06 & \multicolumn{1}{|r}{86.39} & 97.46 & 95.31 \\
+ &  &  &  &  &  &  &  &  &  &  &  \\
+   & \multicolumn{3}{l}{\textbf{Criteria}} & \multicolumn{2}{l}{\textbf{DoF}} & \multicolumn{6}{l}{\textbf{Efficiency,\%}}                               \\
+   & \textbf{L}       & \textbf{LoF(L)}    & \textbf{Bias(L)}   & \textbf{PE}        & \textbf{LoF}        & \textbf{D}   & \textbf{LoF(D)}   & \textbf{Bias(D)}  & \textbf{L}       & \textbf{LoF(L)}   & \textbf{Bias(L)}  \\
+1 & 1 & 0 & 0 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{99.95} & 92.39 & 73.60 & \multicolumn{1}{|r}{100.00} & 91.90 & 69.70 \\
+2 & 0 & 1 & 0 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{71.31} & 100.00 & 100.00 & \multicolumn{1}{|r}{41.41} & 100.00 & 100.00 \\
+3 & 0 & 0 & 1 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{71.31} & 100.00 & 100.00 & \multicolumn{1}{|r}{41.41} & 100.00 & 100.00 \\
+4 & 0.5 & 0.5 & 0 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{99.32} & 93.23 & 75.69 & \multicolumn{1}{|r}{98.86} & 92.74 & 71.39 \\
+5 & 0.5 & 0 & 0.5 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{93.32} & 97.46 & 95.78 & \multicolumn{1}{|r}{87.17} & 97.32 & 94.94 \\
+6 & 0 & 0.5 & 0.5 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{78.00} & 98.81 & 98.07 & \multicolumn{1}{|r}{58.95} & 98.87 & 97.67 \\
+7 & 1/3 & 1/3 & 1/3 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{92.68} & 97.64 & 96.75 & \multicolumn{1}{|r}{86.26} & 97.54 & 96.26 \\
+8 & 0.5 & 0.25 & 0.25 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{99.11} & 94.46 & 86.58 & \multicolumn{1}{|r}{99.00} & 94.11 & 84.41 \\
+9 & 0.25 & 0.5 & 0.25 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{92.37} & 98.12 & 96.52 & \multicolumn{1}{|r}{86.99} & 97.95 & 95.69 
+\end{tabular}
+}
+\end{table}
+
+Similar tendencies can be observed as in the initial example (Tables \ref{tab::GD_ex11} and \ref{tab::GDP_ex11}) regarding the distribution of degrees of freedom: $GD$- and $GL$-optimal designs do not allow estimation of the pure error, but the imbalance in the case of $GDP$-optimal designs is weaker than before. Now the lack-of-fit-optimal design is also bias-optimal in terms of generalised $D$- and $L$-criteria (designs \#$2$ and \#$3$ in Table \ref{tab::GD_ex12}, and the design is presented in Table \ref{tab::Ex12_LoF_design}), its $D$- and $L$-efficiencies are the lowest ($71.31\%$ and only $41.41\%$ respectively); these components also seem to be acting in the same direction, i.e. lack-of-fit-efficient designs are also bias-efficient and vice versa. 
+
+The same relationship pattern holds for the bias and lack-of-fit parts in the determinant and trace forms: higher bias$(D)$-efficiency usually occurs together with higher bias$(L)$-efficiency (and the same for the lack-of-fit components). 
+
+\begin{table}[h]
+\centering
+\caption{Example 1.2. LoF- and Bias-optimal design \#$2$ and \#$3$}
+\label{tab::Ex12_LoF_design}
+\scalebox{0.8}{
+\begin{tabular}{rrrrrr|r|rrrrrr}
+1  & -1 & -1 & -1 & 1  & 0  &  & 21 & 0 & 0  & 1  & -1 & 1  \\
+2  & -1 & -1 & 0  & -1 & -1 &  & 22 & 0 & 0  & 1  & 1  & 1  \\
+3  & -1 & -1 & 0  & 0  & 1  &  & 23 & 0 & 1  & -1 & 0  & 1  \\
+4  & -1 & -1 & 1  & -1 & 0  &  & 24 & 0 & 1  & -1 & 1  & -1 \\
+5  & -1 & 0  & -1 & -1 & 1  &  & 25 & 0 & 1  & 0  & -1 & -1 \\
+6  & -1 & 0  & -1 & 1  & 1  &  & 26 & 0 & 1  & 1  & 0  & -1 \\
+7  & -1 & 0  & 0  & 1  & 0  &  & 27 & 1 & -1 & -1 & -1 & 0  \\
+8  & -1 & 0  & 1  & 0  & -1 &  & 28 & 1 & -1 & -1 & 0  & -1 \\
+9  & -1 & 1  & -1 & -1 & 0  &  & 29 & 1 & -1 & 0  & -1 & 1  \\
+10 & -1 & 1  & -1 & 0  & -1 &  & 30 & 1 & -1 & 0  & 1  & -1 \\
+11 & -1 & 1  & 0  & -1 & 1  &  & 31 & 1 & -1 & 1  & 0  & 1  \\
+12 & -1 & 1  & 0  & 1  & -1 &  & 32 & 1 & -1 & 1  & 1  & 0  \\
+13 & -1 & 1  & 1  & 0  & 1  &  & 33 & 1 & 0  & -1 & 0  & 1  \\
+14 & -1 & 1  & 1  & 1  & 0  &  & 34 & 1 & 0  & 0  & -1 & 0  \\
+15 & 0  & -1 & -1 & 0  & 1  &  & 35 & 1 & 0  & 1  & -1 & -1 \\
+16 & 0  & -1 & 0  & 1  & 1  &  & 36 & 1 & 0  & 1  & 1  & -1 \\
+17 & 0  & -1 & 1  & -1 & 1  &  & 37 & 1 & 1  & -1 & 1  & 0  \\
+18 & 0  & -1 & 1  & 0  & -1 &  & 38 & 1 & 1  & 0  & 0  & -1 \\
+19 & 0  & 0  & -1 & -1 & -1 &  & 39 & 1 & 1  & 0  & 1  & 1  \\
+20 & 0  & 0  & -1 & 1  & -1 &  & 40 & 1 & 1  & 1  & -1 & 0 
+\end{tabular}
+}
+\end{table}
+  
+
+
+\begin{landscape}
+%% GDP-optimal designs, ex 12
+\begin{table}[p]
+\caption{Example 1.2. Properties of generalised DP- and LP-optimal designs}
+\label{tab::GDP_ex12}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{rrrrrrrrrrrrrrrrr}
+\multicolumn{1}{l}{} & \multicolumn{4}{l}{{\bf Criteria}} & \multicolumn{2}{l}{{\bf DoF}} & \multicolumn{10}{l}{{\bf Efficiency,\%}} \\
+\multicolumn{1}{l}{} & \multicolumn{1}{l}{{\bf D}} & \multicolumn{1}{l}{{\bf DP}} & \multicolumn{1}{l}{{\bf LoF(DP)}} & \multicolumn{1}{l}{{\bf Bias(D)}} & \multicolumn{1}{l}{{\bf PE}} & \multicolumn{1}{l}{{\bf LoF}} & \multicolumn{1}{l}{{\bf D}} & \multicolumn{1}{l}{{\bf DP}} & \multicolumn{1}{l}{{\bf LoF(D)}} & \multicolumn{1}{l}{{\bf LoF(DP)}} & \multicolumn{1}{l}{{\bf Bias(D)}} & \multicolumn{1}{l}{{\bf L}} & \multicolumn{1}{l}{{\bf LP}} & \multicolumn{1}{l}{{\bf LoF(L)}} & \multicolumn{1}{l}{{\bf LoF(LP)}} & \multicolumn{1}{l}{{\bf Bias(L)}} \\
+1 & 1 & 0 & 0 & 0 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{100.00} & 0.00 & 92.06 & 0.00 & 73.83 & \multicolumn{1}{|r}{98.96} & 0.00 & 91.58 & 0.00 & 69.87 \\
+2 & 0 & 1 & 0 & 0 & \multicolumn{1}{|r}{18} & 1 & \multicolumn{1}{|r}{93.00} & 100.00 & 86.65 & 96.61 & 56.39 & \multicolumn{1}{|r}{86.47} & 98.52 & 86.02 & 97.91 & 39.67 \\
+3 & 0 & 0 & 1 & 0 & \multicolumn{1}{|r}{17} & 2 & \multicolumn{1}{|r}{48.81} & 51.55 & 91.32 & 100.00 & 51.49 & \multicolumn{1}{|r}{12.78} & 14.29 & 92.27 & 100.00 & 24.94 \\
+4 & 0 & 0 & 0 & 1 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{71.31} & 0.00 & 100.00 & 0.00 & 100.00 & \multicolumn{1}{|r}{41.41} & 0.00 & 100.00 & 0.00 & 100.00 \\
+5 & 0.5 & 0.5 & 0 & 0 & \multicolumn{1}{|r}{16} & 3 & \multicolumn{1}{|r}{95.29} & 98.64 & 88.52 & 95.00 & 64.31 & \multicolumn{1}{|r}{91.31} & 100.00 & 88.04 & 95.97 & 50.12 \\
+6 & 0.5 &  & 0.5 & 0 & \multicolumn{1}{|r}{16} & 3 & \multicolumn{1}{|r}{95.05} & 98.39 & 88.90 & 95.41 & 67.67 & \multicolumn{1}{|r}{90.98} & 99.64 & 88.49 & 96.32 & 53.37 \\
+7 & 0.5 & 0 & 0 & 0.5 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{92.51} & 0.00 & 97.61 & 0.00 & 96.51 & \multicolumn{1}{|r}{85.88} & 0.00 & 97.50 & 0.00 & 95.98 \\
+8 & 0 & 0.5 & 0.5 & 0 & \multicolumn{1}{|r}{18} & 1 & \multicolumn{1}{|r}{92.98} & 99.98 & 86.77 & 96.74 & 56.51 & \multicolumn{1}{|r}{86.32} & 98.34 & 86.16 & 98.03 & 41.23 \\
+9 & 0 & 0.5 & 0 & 0.5 & \multicolumn{1}{|r}{14} & 5 & \multicolumn{1}{|r}{93.71} & 92.44 & 91.52 & 93.61 & 85.25 & \multicolumn{1}{|r}{87.43} & 90.93 & 91.38 & 93.91 & 79.33 \\
+10 & 0 & 0 & 0.5 & 0.5 & \multicolumn{1}{|r}{14} & 5 & \multicolumn{1}{|r}{73.25} & 72.26 & 94.19 & 96.33 & 95.11 & \multicolumn{1}{|r}{64.26} & 66.83 & 94.79 & 96.02 & 92.74 \\
+11 & 0.25 & 0.25 & 0.25 & 0.25 & \multicolumn{1}{|r}{14} & 5 & \multicolumn{1}{|r}{93.71} & 92.44 & 91.52 & 93.61 & 85.25 & \multicolumn{1}{|r}{87.43} & 90.93 & 91.38 & 93.91 & 79.33 \\
+12 & 1/3 & 1/3 & 1/3 & 0 & \multicolumn{1}{|r}{17} & 2 & \multicolumn{1}{|r}{94.24} & 99.53 & 87.81 & 96.15 & 61.44 & \multicolumn{1}{|r}{89.21} & 99.77 & 87.29 & 97.27 & 45.08 \\
+13 & 1/3 & 1/3 & 0 & 1/3 & \multicolumn{1}{|r}{14} & 5 & \multicolumn{1}{|r}{93.71} & 92.44 & 91.52 & 93.61 & 85.25 & \multicolumn{1}{|r}{87.43} & 90.93 & 91.38 & 93.91 & 79.33 \\
+14 & 0 & 1/3 & 1/3 & 1/3 & \multicolumn{1}{|r}{14} & 5 & \multicolumn{1}{|r}{93.67} & 92.40 & 91.53 & 93.61 & 85.27 & \multicolumn{1}{|r}{87.55} & 91.06 & 91.39 & 93.92 & 79.42 \\
+ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\multicolumn{1}{l}{} & \multicolumn{4}{l}{{\bf Criteria}} & \multicolumn{2}{l}{{\bf DoF}} & \multicolumn{10}{l}{{\bf Efficiency,\%}} \\
+\multicolumn{1}{l}{} & \multicolumn{1}{l}{{\bf L}} & \multicolumn{1}{l}{{\bf LP}} & \multicolumn{1}{l}{{\bf LoF(LP)}} & \multicolumn{1}{l}{{\bf Bias(L)}} & \multicolumn{1}{l}{{\bf PE}} & \multicolumn{1}{l}{{\bf LoF}} & \multicolumn{1}{l}{{\bf D}} & \multicolumn{1}{l}{{\bf DP}} & \multicolumn{1}{l}{{\bf LoF(D)}} & \multicolumn{1}{l}{{\bf LoF(DP)}} & \multicolumn{1}{l}{{\bf Bias(D)}} & \multicolumn{1}{l}{{\bf L}} & \multicolumn{1}{l}{{\bf LP}} & \multicolumn{1}{l}{{\bf LoF(L)}} & \multicolumn{1}{l}{{\bf LoF(LP)}} & \multicolumn{1}{l}{{\bf Bias(L)}} \\ 
+1 & 1 & 0 & 0 & 0 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{99.95} & 0.00 & 92.39 & 0.00 & 73.60 & \multicolumn{1}{|r}{100.00} & 0.00 & 91.90 & 0.00 & 69.70 \\
+2 & 0 & 1 & 0 & 0 & \multicolumn{1}{|r}{16} & 3 & \multicolumn{1}{|r}{95.29} & 98.64 & 88.52 & 95.00 & 64.31 & \multicolumn{1}{|r}{91.31} & 100.00 & 88.04 & 95.97 & 50.12 \\
+3 & 0 & 0 & 1 & 0 & \multicolumn{1}{|r}{17} & 2 & \multicolumn{1}{|r}{48.81} & 51.55 & 91.32 & 100.00 & 51.49 & \multicolumn{1}{|r}{12.78} & 14.29 & 92.27 & 100.00 & 24.94 \\
+4 & 0 & 0 & 0 & 1 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{71.31} & 0.00 & 100.00 & 0.00 & 100.00 & \multicolumn{1}{|r}{41.41} & 0.00 & 100.00 & 0.00 & 100.00 \\
+5 & 0.5 & 0.5 & 0 & 0 & \multicolumn{1}{|r}{14} & 5 & \multicolumn{1}{|r}{96.30} & 95.00 & 89.12 & 91.15 & 64.66 & \multicolumn{1}{|r}{94.46} & 98.24 & 88.60 & 91.79 & 53.71 \\
+6 & 0.5 &  & 0.5 & 0 & \multicolumn{1}{|r}{16} & 3 & \multicolumn{1}{|r}{94.28} & 97.59 & 88.28 & 94.75 & 62.28 & \multicolumn{1}{|r}{90.90} & 99.54 & 87.78 & 95.75 & 50.13 \\
+7 & 0.5 & 0 & 0 & 0.5 & \multicolumn{1}{|r}{0} & 19 & \multicolumn{1}{|r}{92.14} & 0.00 & 97.69 & 0.00 & 97.55 & \multicolumn{1}{|r}{85.10} & 0.00 & 97.61 & 0.00 & 97.21 \\
+8 & 0 & 0.5 & 0.5 & 0 & \multicolumn{1}{|r}{18} & 1 & \multicolumn{1}{|r}{92.94} & 99.93 & 87.07 & 97.08 & 58.19 & \multicolumn{1}{|r}{87.37} & 99.54 & 86.51 & 98.32 & 41.91 \\
+9 & 0 & 0.5 & 0 & 0.5 & \multicolumn{1}{|r}{14} & 5 & \multicolumn{1}{|r}{93.70} & 92.43 & 91.47 & 93.55 & 85.06 & \multicolumn{1}{|r}{88.04} & 91.57 & 91.32 & 93.87 & 79.11 \\
+10 & 0 & 0 & 0.5 & 0.5 & \multicolumn{1}{|r}{14} & 5 & \multicolumn{1}{|r}{64.38} & 63.51 & 91.34 & 93.43 & 91.15 & \multicolumn{1}{|r}{42.59} & 44.29 & 91.19 & 93.75 & 88.64 \\
+11 & 0.25 & 0.25 & 0.25 & 0.25 & \multicolumn{1}{|r}{14} & 5 & \multicolumn{1}{|r}{93.53} & 92.26 & 91.48 & 93.57 & 85.21 & \multicolumn{1}{|r}{87.85} & 91.36 & 91.36 & 84.18 & 79.08 \\
+12 & 1/3 & 1/3 & 1/3 & 0 & \multicolumn{1}{|r}{16} & 3 & \multicolumn{1}{|r}{94.45} & 97.77 & 87.96 & 94.41 & 60.47 & \multicolumn{1}{|r}{91.08} & 99.75 & 87.41 & 95.45 & 46.71 \\
+13 & 1/3 & 1/3 & 0 & 1/3 & \multicolumn{1}{|r}{12} & 7 & \multicolumn{1}{|r}{95.03} & 88.00 & 92.52 & 88.83 & 86.75 & \multicolumn{1}{|r}{90.37} & 87.62 & 92.40 & 88.46 & 81.82 \\
+14 & 0 & 1/3 & 1/3 & 1/3 & \multicolumn{1}{|r}{14} & 5 & \multicolumn{1}{|r}{93.70} & 92.43 & 91.47 & 93.55 & 85.06 & \multicolumn{1}{|r}{88.04} & 91.57 & 91.32 & 93.87 & 79.11
+\end{tabular}
+}
+\end{table}
+\end{landscape}
+
+Overall, designs perform a bit better in terms of the `potential' terms components than before, which is not a surprising consequence of reducing the number of potential terms by a third. If we look at $GLP$-optimal designs \#$9$ and \#$10$, when half of the weight is on the bias component, and the other half is moved from the $LP$ component to the lack-of-fit one, while in terms of all lack-of-fit and bias individual criteria the design still performs quite well, for example, the $LP$-efficiency decreases from $91.57\%$ to $44.29\%$ in comparison to falling from $90.71\%$ to $32.63\%$ in the case of $q=30$ and $\tau^2=1$ (and to similar values in the case of $\tau^2=1/q$). The contradiction between the two opposite groups of elementary criteria seems to be slightly less drastic when the number of potential terms is decreased. 
+
+$GDP$-optimal design \#$5$ turns out to be also $LP$-optimal, $GLP$-optimal design \#$14$ is also optimal in terms of the $GLP$-criterion with equal importance of $LP$ and bias$(L)$ (\#$9$). In terms of performance it is quite similar to $GDP$-optimal designs \#$9$, \#$11$ and \#$13$ (given in Table \ref{tab::Ex12_GDP_design}), which are the same, even though they were obtained using quite different weight allocations. It also illustrates an example of a design providing a good compromise between various criterion components. In the previous case various efficiencies of the corresponding designs differed by up to $13\%$.  In general, in this `smaller' example, the performance of the optimal designs appears to be less sensitive to changes in the weight allocation scheme, especially when some reallocations occur within either the `primary' or the `potential' terms' elementary criterion group. 
+
+\begin{table}[h]
+\centering
+\caption{Example 1.2. GDP-optimal design \#$9$, \#$11$ and \#$13$}
+\label{tab::Ex12_GDP_design}
+\scalebox{0.8}{
+\begin{tabular}{rrrrrr|r|rrrrrr}
+1  & -1 & -1 & -1 & -1 & -1 &  & 21 & 0 & 0  & 1  & 1  & 0  \\
+2  & -1 & -1 & -1 & 1  & 1  &  & 22 & 0 & 1  & 0  & 1  & 1  \\
+3  & -1 & -1 & -1 & 1  & 1  &  & 23 & 0 & 1  & 1  & 0  & -1 \\
+4  & -1 & -1 & 0  & 0  & 0  &  & 24 & 1 & -1 & -1 & -1 & 1  \\
+5  & -1 & -1 & 1  & -1 & 1  &  & 25 & 1 & -1 & -1 & -1 & 1  \\
+6  & -1 & -1 & 1  & -1 & 1  &  & 26 & 1 & -1 & -1 & 1  & -1 \\
+7  & -1 & -1 & 1  & 1  & -1 &  & 27 & 1 & -1 & -1 & 1  & -1 \\
+8  & -1 & -1 & 1  & 1  & -1 &  & 28 & 1 & -1 & 1  & -1 & -1 \\
+9  & -1 & 0  & 0  & 0  & -1 &  & 29 & 1 & -1 & 1  & -1 & -1 \\
+10 & -1 & 1  & -1 & -1 & 1  &  & 30 & 1 & -1 & 1  & 1  & 1  \\
+11 & -1 & 1  & -1 & -1 & 1  &  & 31 & 1 & -1 & 1  & 1  & 1  \\
+12 & -1 & 1  & -1 & 1  & -1 &  & 32 & 1 & 0  & 0  & 0  & 1  \\
+13 & -1 & 1  & -1 & 1  & -1 &  & 33 & 1 & 1  & -1 & -1 & -1 \\
+14 & -1 & 1  & 1  & -1 & -1 &  & 34 & 1 & 1  & -1 & -1 & -1 \\
+15 & -1 & 1  & 1  & -1 & -1 &  & 35 & 1 & 1  & -1 & 1  & 1  \\
+16 & -1 & 1  & 1  & 1  & 1  &  & 36 & 1 & 1  & 0  & 0  & 0  \\
+17 & -1 & 1  & 1  & 1  & 1  &  & 37 & 1 & 1  & 1  & -1 & 1  \\
+18 & 0  & -1 & -1 & 0  & 1  &  & 38 & 1 & 1  & 1  & -1 & 1  \\
+19 & 0  & -1 & 0  & -1 & -1 &  & 39 & 1 & 1  & 1  & 1  & -1 \\
+20 & 0  & 0  & -1 & -1 & 0  &  & 40 & 1 & 1  & 1  & 1  & -1
+\end{tabular}
+}
+\end{table}
+
+\newpage
+\subsubsection{Example 2}\mbox{}\\
+Having observed a certain inflexibility of the designs regarding the response to the changes in the allocation of weights, we consider a larger factorial experiment. Now it has four factors, and each factor can take five levels, i.e. $625$ candidate points in total; the number of runs is chosen to be $60$. Fitting the full second-order polynomial model as the primary one means we have $p=15$ parameters and $45$ residual degrees of freedom in total. 
+
+All third and fourth order terms are taken as potentially missed terms (so there are $q=55$ of them), and we assume that the `true' model is actually the full third-order polynomial, with the total $p+q=70$ parameters and, therefore, not all of them can be estimated. The variance scaling parameter of the prior assumed for the potential terms remains the same: $\tau^2=1$.
+
+We ran the point exchange algorithm with $200$ random starts, the time needed for the computations is now around $4$ -- $13$ hours; the resulting designs are summarised in Tables \ref{tab::GD&GL_ex2} and \ref{tab::GDP_ex2} below and we see most of the features  observed in the previous example remain present here as well. However, some properties do differ.
+
+The main one is that a few of $GD$- and $GL$-optimal  designs have some degrees of freedom allocated to the pure error component (fewer than to the lack-of-fit component though); even $D$- and $L$-optimal designs have $17$ and $19$ pure error degrees of freedom respectively, and designs with no weight allocated to these components perform worse than in the previous example (e.g.~$GD$-optimal designs \#$3$ and \#$6$ are just $65\%-67\%$ $D$-efficient, the corresponding $GL$-optimal designs are $59\%-61\%$ $L$-efficient. Most of the replicates are at corner points; however, for example, centre point in the $GD$-optimal design \#$4$ is replicated three times. 
+
+Designs that are optimal in terms of bias are the same for $D$- and $L$-based criteria: design \#$3$ in Table \ref{tab::GD&GL_ex2}. The $LoF(L)$-optimal design also turned out to be optimal with respect to the determinant based component; it is shown in Table \ref{tab::Ex2_LoF_designs} together with the `original' $LoF(D)$-optimal design: although they are different, both have quite a lot of points with at least one coordinate being equal to $\pm 0.5$, which is a more general tendency for the designs that perform well in terms of either lack-of-fit component.
+
+The $LoF(DP)$-optimal design, which is also $LoF(LP)$-optimal, turns out to be `robust' to the allocation of half of the weight to the $DP$-component (\#$9$ in Table \ref{tab::GDP_ex2}). The design itself is given in Table \ref{tab::Ex2_LoFDP_design}: it can be seen that in approximately half of the runs at least one factor is applied at either the $0.5$ or $-0.5$-level value (and most of these points are replicated more than once).
+
+
+\begin{landscape}
+%GD-opt. Ex 2
+\begin{table}[p]
+\centering
+\caption{Example 2. Properties of generalised D- and L-optimal designs. $\tau^2=1$}
+\label{tab::GD&GL_ex2}
+\scalebox{0.8}{
+%\resizebox{\linewidth}{!}{%
+\begin{tabular}{rrrrrrrrrrrrrrrr}
+\multicolumn{1}{l}{} & \multicolumn{3}{l}{{\bf Criteria}} & \multicolumn{2}{l}{{\bf DoF}} & \multicolumn{10}{l}{{\bf Efficiency,\%}} \\
+\multicolumn{1}{l}{} & \multicolumn{1}{r}{{\bf D}} & \multicolumn{1}{r}{{\bf LoF(D)}} & \multicolumn{1}{r}{{\bf Bias(D)}} & \multicolumn{1}{r}{{\bf PE}} & \multicolumn{1}{r}{{\bf LoF}} & \multicolumn{1}{r}{{\bf D}} & \multicolumn{1}{r}{{\bf DP}} & \multicolumn{1}{r}{{\bf LoF(D)}} & \multicolumn{1}{r}{{\bf LoF(DP)}} & \multicolumn{1}{r}{{\bf Bias(D)}} & \multicolumn{1}{r}{{\bf L}} & \multicolumn{1}{r}{{\bf LP}} & \multicolumn{1}{r}{{\bf LoF(L)}} & \multicolumn{1}{r}{{\bf LoF(LP)}} & \multicolumn{1}{r}{{\bf Bias(L)}} \\
+1 & 1 & 0 & 0 & \multicolumn{1}{|r}{17} & 28 & \multicolumn{1}{|r}{100.00} & 87.14 & 97.76 & 84.28 & 75.25 & \multicolumn{1}{|r}{99.35} & 87.66 & 98.19 & 84.21 & 62.27 \\
+2 & 0 & 1 & 0 & \multicolumn{1}{|r}{0} & 45 & \multicolumn{1}{|r}{89.21} & 0.00 & 100.00 & 0.00 & 86.15 & \multicolumn{1}{|r}{87.80} & 0.00 & 99.96 & 0.00 & 80.61 \\
+3 & 0 & 0 & 1 & \multicolumn{1}{|r}{0} & 45 & \multicolumn{1}{|r}{65.66} & 0.00 & 97.31 & 0.00 & 100.00 & \multicolumn{1}{|r}{59.61} & 0.00 & 97.15 & 0.00 & 100.00 \\
+4 & 0.5 & 0.5 & 0 & \multicolumn{1}{|r}{11} & 34 & \multicolumn{1}{|r}{99.47} & 73.71 & 98.85 & 70.52 & 76.41 & \multicolumn{1}{|r}{98.01} & 72.60 & 99.13 & 67.87 & 65.07 \\
+5 & 0.5 & 0 & 0.5 & \multicolumn{1}{|r}{0} & 45 & \multicolumn{1}{|r}{96.21} & 0.00 & 99.57 & 0.00 & 81.93 & \multicolumn{1}{|r}{93.38} & 0.00 & 99.62 & 0.00 & 74.81 \\
+6 & 0 & 0.5 & 0.5 & \multicolumn{1}{|r}{0} & 45 & \multicolumn{1}{|r}{67.04} & 0.00 & 97.53 & 0.00 & 99.70 & \multicolumn{1}{|r}{60.89} & 0.00 & 97.36 & 0.00 & 99.68 \\
+7 & 1/3 & 1/3 & 1/3 & \multicolumn{1}{|r}{0} & 45 & \multicolumn{1}{|r}{95.79} & 0.00 & 99.57 & 0.00 & 82.26 & \multicolumn{1}{|r}{93.00} & 0.00 & 99.62 & 0.00 & 75.28 \\
+8 & 0.5 & 0.25 & 0.25 & \multicolumn{1}{|r}{4} & 41 & \multicolumn{1}{|r}{97.56} & 33.71 & 99.24 & 31.06 & 80.48 & \multicolumn{1}{|r}{94.87} & 25.52 & 99.36 & 17.80 & 72.32 \\
+9 & 0.25 & 0.5 & 0.25 & \multicolumn{1}{|r}{0} & 45 & \multicolumn{1}{|r}{95.55} & 0.00 & 99.59 & 0.00 & 82.40 & \multicolumn{1}{|r}{92.79} & 0.00 & 99.63 & 0.00 & 75.58 \\
+ &  &  &  &  &  &  &  &  &  &  &  &  &  &  & \\
+\multicolumn{1}{l}{} & \multicolumn{3}{l}{{\bf Criteria}} & \multicolumn{2}{l}{{\bf DoF}} & \multicolumn{10}{l}{{\bf Efficiency,\%}} \\
+\multicolumn{1}{l}{} & \multicolumn{1}{l}{{\bf L}} & \multicolumn{1}{l}{{\bf LoF(L)}} & \multicolumn{1}{l}{{\bf Bias(L)}} & \multicolumn{1}{l}{{\bf PE}} & \multicolumn{1}{l}{{\bf LoF}} & \multicolumn{1}{l}{{\bf D}} & \multicolumn{1}{l}{{\bf DP}} & \multicolumn{1}{l}{{\bf LoF(D)}} & \multicolumn{1}{l}{{\bf LoF(DP)}} & \multicolumn{1}{l}{{\bf Bias(D)}} & \multicolumn{1}{l}{{\bf L}} & \multicolumn{1}{l}{{\bf LP}} & \multicolumn{1}{l}{{\bf LoF(L)}} & \multicolumn{1}{l}{{\bf LoF(LP)}} & \multicolumn{1}{l}{{\bf Bias(L)}} \\
+1 & 1 & 0 & 0 & \multicolumn{1}{|r}{19} & 26 & \multicolumn{1}{|r}{99.73} & 89.73 & 97.87 & 87.72 & 74.35 & \multicolumn{1}{|r}{100.00} & 91.16 & 98.41 & 87.86 & 59.89 \\
+2 & 0 & 1 & 0 & \multicolumn{1}{|r}{0} & 45 & \multicolumn{1}{|r}{89.88} & 0.00 & 100.00 & 0.00 & 85.08 & \multicolumn{1}{|r}{88.83} & 0.00 & 100.00 & 0.00 & 79.12 \\
+3 & 0 & 0 & 1 & \multicolumn{1}{|r}{0} & 45 & \multicolumn{1}{|r}{65.66} & 0.00 & 97.31 & 0.00 & 100.00 & \multicolumn{1}{|r}{59.61} & 0.00 & 97.15 & 0.00 & 100.00 \\
+4 & 0.5 & 0.5 & 0 & \multicolumn{1}{|r}{15} & 30 & \multicolumn{1}{|r}{99.73} & 83.48 & 98.45 & 80.90 & 75.22 & \multicolumn{1}{|r}{99.73} & 84.39 & 98.81 & 80.34 & 62.73 \\
+5 & 0.5 & 0 & 0.5 & \multicolumn{1}{|r}{0} & 45 & \multicolumn{1}{|r}{86.26} & 0.00 & 99.53 & 0.00 & 89.43 & \multicolumn{1}{|r}{83.81} & 0.00 & 99.45 & 0.00 & 86.19 \\
+6 & 0 & 0.5 & 0.5 & \multicolumn{1}{|r}{0} & 45 & \multicolumn{1}{|r}{67.22} & 0.00 & 97.55 & 0.00 & 99.64 & \multicolumn{1}{|r}{61.16} & 0.00 & 97.39 & 0.00 & 99.59 \\
+7 & 1/3 & 1/3 & 1/3 & \multicolumn{1}{|r}{0} & 45 & \multicolumn{1}{|r}{86.79} & 0.00 & 99.66 & 0.00 & 88.81 & \multicolumn{1}{|r}{84.55} & 0.00 & 99.59 & 0.00 & 85.53 \\
+8 & 0.5 & 0.25 & 0.25 & \multicolumn{1}{|r}{0} & 45 & \multicolumn{1}{|r}{95.05} & 0.00 & 99.62 & 0.00 & 81.87 & \multicolumn{1}{|r}{93.72} & 0.00 & 99.69 & 0.00 & 75.10 \\
+9 & 0.25 & 0.5 & 0.25 & \multicolumn{1}{|r}{0} & 45 & \multicolumn{1}{|r}{87.82} & 0.00 & 99.71 & 0.00 & 87.91 & \multicolumn{1}{|r}{85.86} & 0.00 & 99.66 & 0.00 & 84.23
+\end{tabular}
+}
+\end{table}
+\end{landscape}
+
+\begin{table}[h]
+\centering
+\caption{Example 2. LoF(D)-optimal (left) and LoF(L)-optimal (right) designs}
+\label{tab::Ex2_LoF_designs}
+\scalebox{0.7}{
+\begin{tabular}{rrrrr|rrrrr|r|rrrrr|rrrrr}
+1  & -1   & -1   & -1   & -1   & 31 & 0   & 0    & 0    & 0    &  & 1  & -1   & -1   & -1   & -1   & 31 & 0   & 1    & -1   & 1    \\
+2  & -1   & -1   & -1   & 0    & 32 & 0   & 1    & -1   & -1   &  & 2  & -1   & -1   & -1   & 1    & 32 & 0   & 1    & 1    & -1   \\
+3  & -1   & -1   & -1   & 1    & 33 & 0   & 1    & 0.5  & 1    &  & 3  & -1   & -1   & -0.5 & 0.5  & 33 & 0.5 & -1   & -0.5 & 1    \\
+4  & -1   & -1   & 0    & 0.5  & 34 & 0   & 1    & 1    & -1   &  & 4  & -1   & -1   & 0    & -1   & 34 & 0.5 & -1   & 0.5  & -1   \\
+5  & -1   & -1   & 0.5  & -0.5 & 35 & 0.5 & -1   & -1   & 0.5  &  & 5  & -1   & -1   & 1    & -1   & 35 & 0.5 & -1   & 1    & -0.5 \\
+6  & -1   & -1   & 1    & -1   & 36 & 0.5 & -1   & 0.5  & 1    &  & 6  & -1   & -1   & 1    & 0    & 36 & 0.5 & 0    & -1   & -1   \\
+7  & -1   & -1   & 1    & 1    & 37 & 0.5 & -1   & 1    & -1   &  & 7  & -1   & -1   & 1    & 1    & 37 & 0.5 & 0.5  & 1    & 1    \\
+8  & -1   & -0.5 & -0.5 & -1   & 38 & 0.5 & 1    & -1   & 1    &  & 8  & -1   & -0.5 & -1   & -0.5 & 38 & 0.5 & 1    & -1   & -0.5 \\
+9  & -1   & -0.5 & 0.5  & 1    & 39 & 0.5 & 1    & -0.5 & -0.5 &  & 9  & -1   & -0.5 & 0    & 1    & 39 & 0.5 & 1    & 0.5  & 1    \\
+10 & -1   & -0.5 & 1    & 0.5  & 40 & 0.5 & 1    & 1    & 0.5  &  & 10 & -1   & 0    & -1   & -1   & 40 & 1   & -1   & -1   & -1   \\
+11 & -1   & 0    & -1   & 1    & 41 & 1   & -1   & -1   & -1   &  & 11 & -1   & 0    & 1    & 1    & 41 & 1   & -1   & -1   & 0    \\
+12 & -1   & 0    & 1    & -1   & 42 & 1   & -1   & -1   & 1    &  & 12 & -1   & 0.5  & -1   & 1    & 42 & 1   & -1   & -1   & 1    \\
+13 & -1   & 0.5  & -1   & -0.5 & 43 & 1   & -1   & -0.5 & -0.5 &  & 13 & -1   & 0.5  & 0.5  & -1   & 43 & 1   & -1   & 0    & -0.5 \\
+14 & -1   & 1    & -1   & -1   & 44 & 1   & -1   & 0.5  & -1   &  & 14 & -1   & 0.5  & 1    & -0.5 & 44 & 1   & -1   & 0    & 1    \\
+15 & -1   & 1    & -1   & 1    & 45 & 1   & -1   & 1    & 0    &  & 15 & -1   & 1    & -1   & -1   & 45 & 1   & -1   & 1    & -1   \\
+16 & -1   & 1    & -0.5 & 0    & 46 & 1   & -1   & 1    & 1    &  & 16 & -1   & 1    & -1   & 0    & 46 & 1   & -1   & 1    & 0.5  \\
+17 & -1   & 1    & 0    & -1   & 47 & 1   & -0.5 & -1   & 0    &  & 17 & -1   & 1    & -1   & 1    & 47 & 1   & -1   & 1    & 1    \\
+18 & -1   & 1    & 0    & 1    & 48 & 1   & -0.5 & 0    & 1    &  & 18 & -1   & 1    & 0    & 1    & 48 & 1   & -0.5 & -0.5 & -1   \\
+19 & -1   & 1    & 1    & -1   & 49 & 1   & -0.5 & 1    & -1   &  & 19 & -1   & 1    & 0.5  & -0.5 & 49 & 1   & -0.5 & 1    & 1    \\
+20 & -1   & 1    & 1    & 0    & 50 & 1   & 0    & -1   & -1   &  & 20 & -1   & 1    & 1    & -1   & 50 & 1   & 0    & -1   & 1    \\
+21 & -1   & 1    & 1    & 1    & 51 & 1   & 0    & 1    & 1    &  & 21 & -1   & 1    & 1    & 1    & 51 & 1   & 0    & 1    & -1   \\
+22 & -0.5 & -1   & -0.5 & 1    & 52 & 1   & 0.5  & -1   & 1    &  & 22 & -0.5 & -1   & 0.5  & 1    & 52 & 1   & 0.5  & -1   & -0.5 \\
+23 & -0.5 & -1   & 0    & -1   & 53 & 1   & 0.5  & 1    & -0.5 &  & 23 & -0.5 & -0.5 & -1   & 1    & 53 & 1   & 0.5  & 0.5  & 1    \\
+24 & -0.5 & -1   & 1    & -0.5 & 54 & 1   & 1    & -1   & -1   &  & 24 & -0.5 & -0.5 & 1    & -1   & 54 & 1   & 1    & -1   & -1   \\
+25 & -0.5 & 0    & -1   & -1   & 55 & 1   & 1    & -1   & 0    &  & 25 & -0.5 & 1    & -0.5 & -1   & 55 & 1   & 1    & -1   & 1    \\
+26 & -0.5 & 0.5  & 1    & 1    & 56 & 1   & 1    & -0.5 & 1    &  & 26 & -0.5 & 1    & 1    & 0.5  & 56 & 1   & 1    & -0.5 & 0.5  \\
+27 & -0.5 & 1    & -1   & 0.5  & 57 & 1   & 1    & 0    & -1   &  & 27 & 0    & -1   & -1   & -1   & 57 & 1   & 1    & 0    & -1   \\
+28 & 0    & -1   & -1   & -1   & 58 & 1   & 1    & 0.5  & 0.5  &  & 28 & 0    & -1   & -1   & 0.5  & 58 & 1   & 1    & 1    & -1   \\
+29 & 0    & -1   & 1    & 1    & 59 & 1   & 1    & 1    & -1   &  & 29 & 0    & -1   & 1    & 1    & 59 & 1   & 1    & 1    & 0    \\
+30 & 0    & -0.5 & -1   & 1    & 60 & 1   & 1    & 1    & 1    &  & 30 & 0    & 0    & 0    & 0    & 60 & 1   & 1    & 1    & 1   
+\end{tabular}
+}
+\end{table}
+
+The $D$- and $DP$- optimal design ($GDP$-optimal design \#$5$ in Table \ref{tab::GDP_ex2}) is also $LP$-optimal, but it is different from the one that was obtained as a $GLP$-optimal design (Table \ref{tab::GDP_ex2}, design \#$2$); their efficiencies with respect to other components are quite similar, but the $GDP$-optimal design tends to perform slightly better in terms of determinant-based elementary criteria.
+
+Other than that, there are no more repeated designs, and the distribution of the degrees of freedom between pure error and lack-of-fit components is less extreme than in the case of a smaller experiment.
+
+Most of the designs are highly $D$-, $L$- and $LoF$-efficient, regardless of the corresponding weights. $GD$- and $GL$-optimal designs have moderate $DP$- and $LP$-efficiencies (where the positive numbers of pure error degrees of freedom allow their estimation). In general, the contradiction between optimising the criterion parts, corresponding to either primary terms or the potentially missed ones, is still in place; however, in this particular case it is a bit less drastic than before. For example, the minimum values of $D$- and $DP$- efficiency are achieved when the weight is distributed between lack-of-fit and bias components (designs \#$10$ in Tables \ref{tab::GDP_ex11} and \ref{tab::GDP_ex2}), and the same is true for trace-based optimality.  Bias efficiency values are overall lower than others, and they seem to depend on whether most of the weight is assigned to the criterion parts which correspond to the potential terms (i.e. lack-of-fit and bias itself). This is quite sensible, especially as this component minimises the expected prediction bias rather than dealing with the bias in the parameters' estimators. 
+%In the next chapter we will introduce another form of 'bias component', which would arguably be of more interest in a case when a potential model contamination is assumed. 
+
+\begin{landscape}
+%% GDP- and GLP-optimal designs, ex 2
+\begin{table}[p]
+\caption{Example 2. Properties of generalised DP- and LP-optimal designs. $\tau^2=1$}
+\label{tab::GDP_ex2}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{rrrrrrrrrrrrrrrrr}
+\multicolumn{1}{l}{} & \multicolumn{4}{l}{{\bf Criteria}} & \multicolumn{2}{l}{{\bf DoF}} & \multicolumn{10}{l}{{\bf Efficiency,\%}} \\
+\multicolumn{1}{l}{} & \multicolumn{1}{l}{{\bf D}} & \multicolumn{1}{l}{{\bf DP}} & \multicolumn{1}{l}{{\bf LoF(DP)}} & \multicolumn{1}{l}{{\bf Bias(D)}} & \multicolumn{1}{l}{{\bf PE}} & \multicolumn{1}{l}{{\bf LoF}} & \multicolumn{1}{l}{{\bf D}} & \multicolumn{1}{l}{{\bf DP}} & \multicolumn{1}{l}{{\bf LoF(D)}} & \multicolumn{1}{l}{{\bf LoF(DP)}} & \multicolumn{1}{l}{{\bf Bias(D)}} & \multicolumn{1}{l}{{\bf L}} & \multicolumn{1}{l}{{\bf LP}} & \multicolumn{1}{l}{{\bf LoF(L)}} & \multicolumn{1}{l}{{\bf LoF(LP)}} & \multicolumn{1}{l}{{\bf Bias(L)}} \\
+1 & 1 & 0 & 0 & 0 & \multicolumn{1}{|r}{17} & 28 & \multicolumn{1}{|r}{100.00} & 87.14 & 97.76 & 83.92 & 75.25 & \multicolumn{1}{|r}{99.35} & 87.66 & 98.19 & 84.21 & 62.27 \\
+2 & 0 & 1 & 0 & 0 & \multicolumn{1}{|r}{35} & 10 & \multicolumn{1}{|r}{97.85} & 100.00 & 95.18 & 99.84 & 71.21 & \multicolumn{1}{|r}{95.85} & 98.82 & 96.02 & 99.90 & 52.12 \\
+3 & 0 & 0 & 1 & 0 & \multicolumn{1}{|r}{37} & 8 & \multicolumn{1}{|r}{95.78} & 98.71 & 94.27 & 100.00 & 70.60 & \multicolumn{1}{|r}{92.66} & 96.26 & 95.03 & 100.00 & 49.96 \\
+4 & 0 & 0 & 0 & 1 & \multicolumn{1}{|r}{0} & 45 & \multicolumn{1}{|r}{65.66} & 0.00 & 97.31 & 0.00 & 100.00 & \multicolumn{1}{|r}{59.61} & 0.00 & 97.15 & 0.00 & 100.00 \\
+5 & 0.5 & 0.5 & 0 & 0 & \multicolumn{1}{|r}{31} & 14 & \multicolumn{1}{|r}{99.52} & 99.70 & 95.90 & 98.00 & 72.65 & \multicolumn{1}{|r}{98.53} & 99.72 & 96.62 & 98.38 & 56.10 \\
+6 & 0.5 & 0 & 0.5 & 0 & \multicolumn{1}{|r}{36} & 9 & \multicolumn{1}{|r}{97.20} & 99.76 & 94.62 & 99.83 & 70.66 & \multicolumn{1}{|r}{94.58} & 97.89 & 95.38 & 99.90 & 50.44 \\
+7 & 0.5 & 0 & 0 & 0.5 & \multicolumn{1}{|r}{0} & 45 & \multicolumn{1}{|r}{96.21} & 0.00 & 99.57 & 0.00 & 81.93 & \multicolumn{1}{|r}{93.38} & 0.00 & 99.62 & 0.00 & 74.81  \\
+8 & 0 & 0.5 & 0.5 & 0 & \multicolumn{1}{|r}{37} & 8 & \multicolumn{1}{|r}{95.78} & 98.71 & 94.27 & 100.00 & 70.60 & \multicolumn{1}{|r}{92.66} & 96.26 & 95.03 & 100.00 & 49.96 \\
+9 & 0 & 0.5 & 0 & 0.5 & \multicolumn{1}{|r}{30} & 15 & \multicolumn{1}{|r}{95.81} & 95.44 & 96.43 & 97.80 & 76.90 & \multicolumn{1}{|r}{92.86} & 93.48 & 97.09 & 98.25 & 63.00 \\
+10 & 0 & 0 & 0.5 & 0.5 & \multicolumn{1}{|r}{26} & 19 & \multicolumn{1}{|r}{60.51} & 58.65 & 95.49 & 93.48 & 90.16 & \multicolumn{1}{|r}{53.62} & 52.59 & 95.58 & 94.53 & 85.86 \\
+11 & 0.25 & 0.25 & 0.25 & 0.25 & \multicolumn{1}{|r}{33} & 12 & \multicolumn{1}{|r}{98.18} & 99.41 & 95.67 & 99.12 & 73.14 & \multicolumn{1}{|r}{95.20} & 97.30 & 96.41 & 99.36 & 56.89 \\
+12 & 1/3 & 1/3 & 1/3 & 0 & \multicolumn{1}{|r}{35} & 10 & \multicolumn{1}{|r}{97.54} & 99.69 & 95.10 & 99.76 & 71.27 & \multicolumn{1}{|r}{94.91} & 97.84 & 95.89 & 99.86 & 52.66 \\
+13 & 1/3 & 1/3 & 0 & 1/3 & \multicolumn{1}{|r}{29} & 16 & \multicolumn{1}{|r}{98.40} & 97.41 & 96.45 & 97.03 & 75.80 & \multicolumn{1}{|r}{95.81} & 95.89 & 97.11 & 97.55 & 62.20 \\
+14 & 0 & 1/3 & 1/3 & 1/3 & \multicolumn{1}{|r}{32} & 13 & \multicolumn{1}{|r}{93.27} & 93.95 & 96.11 & 98.91 & 75.91 & \multicolumn{1}{|r}{89.89} & 91.44 & 96.82 & 99.22 & 61.64 \\
+ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\multicolumn{1}{l}{} & \multicolumn{4}{l}{{\bf Criteria}} & \multicolumn{2}{l}{{\bf DoF}} & \multicolumn{10}{l}{{\bf Efficiency,\%}} \\
+\multicolumn{1}{l}{} & \multicolumn{1}{l}{{\bf L}} & \multicolumn{1}{l}{{\bf LP}} & \multicolumn{1}{l}{{\bf LoF(LP)}} & \multicolumn{1}{l}{{\bf Bias(L)}} & \multicolumn{1}{l}{{\bf PE}} & \multicolumn{1}{l}{{\bf LoF}} & \multicolumn{1}{l}{{\bf D}} & \multicolumn{1}{l}{{\bf DP}} & \multicolumn{1}{l}{{\bf LoF(D)}} & \multicolumn{1}{l}{{\bf LoF(DP)}} & \multicolumn{1}{l}{{\bf Bias(D)}} & \multicolumn{1}{l}{{\bf L}} & \multicolumn{1}{l}{{\bf LP}} & \multicolumn{1}{l}{{\bf LoF(L)}} & \multicolumn{1}{l}{{\bf LoF(LP)}} & \multicolumn{1}{l}{{\bf Bias(L)}} \\
+1 & 1 & 0 & 0 & 0 & \multicolumn{1}{|r}{19} & 26 & \multicolumn{1}{|r}{99.73} & 89.73 & 97.87 & 87.33 & 74.35 & \multicolumn{1}{|r}{100.00} & 91.16 & 98.41 & 87.86 & 59.89 \\
+2 & 0 & 1 & 0 & 0 & \multicolumn{1}{|r}{31} & 14 & \multicolumn{1}{|r}{99.04} & 99.22 & 96.09 & 98.19 & 71.97 & \multicolumn{1}{|r}{98.81} & 100.00 & 96.73 & 98.62 & 54.22 \\
+3 & 0 & 0 & 1 & 0 & \multicolumn{1}{|r}{37} & 8 & \multicolumn{1}{|r}{95.78} & 98.71 & 94.27 & 100.00 & 70.60 & \multicolumn{1}{|r}{92.66} & 96.26 & 95.03 & 100.00 & 49.96 \\
+4 & 0 & 0 & 0 & 1 & \multicolumn{1}{|r}{0} & 45 & \multicolumn{1}{|r}{65.66} & 0.00 & 97.31 & 0.00 & 100.00 & \multicolumn{1}{|r}{59.61} & 0.00 & 97.15 & 0.00 & 100.00 \\
+5 & 0.5 & 0.5 & 0 & 0 & \multicolumn{1}{|r}{31} & 14 & \multicolumn{1}{|r}{99.04} & 99.22 & 96.09 & 98.19 & 71.97 & \multicolumn{1}{|r}{98.81} & 100.00 & 96.73 & 98.62 & 54.22 \\
+6 & 0.5 &  & 0.5 & 0 & \multicolumn{1}{|r}{31} & 14 & \multicolumn{1}{|r}{98.75} & 98.94 & 96.22 & 98.32 & 72.13 & \multicolumn{1}{|r}{98.52} & 99.71 & 96.89 & 98.71 & 54.15 \\
+7 & 0.5 & 0 & 0 & 0.5 & \multicolumn{1}{|r}{0} & 45 & \multicolumn{1}{|r}{86.68} & 0.00 & 99.57 & 0.00 & 89.16 & \multicolumn{1}{|r}{84.22} & 0.00 & 99.49 & 0.00 & 85.90 \\
+8 & 0 & 0.5 & 0.5 & 0 & \multicolumn{1}{|r}{34} & 11 & \multicolumn{1}{|r}{95.57} & 97.22 & 95.07 & 99.12 & 70.81 & \multicolumn{1}{|r}{95.69} & 98.24 & 95.64 & 99.42 & 51.68 \\
+9 & 0 & 0.5 & 0 & 0.5 & \multicolumn{1}{|r}{25} & 20 & \multicolumn{1}{|r}{88.05} & 84.64 & 97.58 & 94.55 & 82.70 & \multicolumn{1}{|r}{85.29} & 83.00 & 98.10 & 95.28 & 74.70 \\
+10 & 0 & 0 & 0.5 & 0.5 & \multicolumn{1}{|r}{25} & 20 & \multicolumn{1}{|r}{60.19} & 57.86 & 95.58 & 92.61 & 91.46 & \multicolumn{1}{|r}{52.38} & 50.97 & 95.64 & 93.69 & 88.62 \\
+11 & 0.25 & 0.25 & 0.25 & 0.25 & \multicolumn{1}{|r}{25} & 20 & \multicolumn{1}{|r}{98.80} & 94.97 & 97.10 & 94.08 & 74.98 & \multicolumn{1}{|r}{98.18} & 95.54 & 97.75 & 94.77 & 61.57 \\
+12 & 1/3 & 1/3 & 1/3 & 0 & \multicolumn{1}{|r}{31} & 14 & \multicolumn{1}{|r}{98.70} & 98.88 & 96.18 & 98.28 & 72.06 & \multicolumn{1}{|r}{98.50} & 99.69 & 96.88 & 98.66 & 53.98 \\
+13 & 1/3 & 1/3 & 0 & 1/3 & \multicolumn{1}{|r}{23} & 22 & \multicolumn{1}{|r}{97.20} & 91.74 & 97.79 & 92.58 & 77.01 & \multicolumn{1}{|r}{95.96} & 91.73 & 98.34 & 93.30 & 65.26 \\
+14 & 0 & 1/3 & 1/3 & 1/3 & \multicolumn{1}{|r}{28} & 17 & \multicolumn{1}{|r}{88.98} & 87.50 & 97.09 & 96.85 & 80.91 & \multicolumn{1}{|r}{86.52} & 86.05 & 97.66 & 97.44 & 70.55
+\end{tabular}
+}
+\end{table}
+\end{landscape}
+
+
+\begin{table}[h]
+\centering
+\caption{Example 2. LoF(DP)- and LoF(LP)-optimal design}
+\label{tab::Ex2_LoFDP_design}
+\scalebox{0.8}{
+\begin{tabular}{rrrrr|r|rrrrr|r|rrrrr|r|rrrrr}
+1  & -1 & -1  & -1   & -1 &  & 16 & -0.5 & -1   & -1 & 1    &  & 31 & 0.5 & -1 & -1 & -0.5 &  & 46 & 1 & -1 & -1 & 0  \\
+2  & -1 & -1  & -1   & -1 &  & 17 & -0.5 & -1   & -1 & 1    &  & 32 & 0.5 & -1 & -1 & -0.5 &  & 47 & 1 & -1 & -1 & 0  \\
+3  & -1 & 0   & -1   & 1  &  & 18 & -0.5 & -1   & -1 & 1    &  & 33 & 0.5 & 0  & -1 & 1    &  & 48 & 1 & -1 & -1 & 1  \\
+4  & -1 & 0   & -1   & 1  &  & 19 & -0.5 & -0.5 & -1 & -0.5 &  & 34 & 0.5 & 0  & -1 & 1    &  & 49 & 1 & -1 & -1 & 1  \\
+5  & -1 & 0   & -1   & 1  &  & 20 & -0.5 & -0.5 & -1 & -0.5 &  & 35 & 0.5 & 0  & -1 & 1    &  & 50 & 1 & -1 & -1 & 1  \\
+6  & -1 & 0   & -1   & 1  &  & 21 & -0.5 & -0.5 & -1 & -0.5 &  & 36 & 0.5 & 1  & -1 & 0    &  & 51 & 1 & -1 & 1  & -1 \\
+7  & -1 & 0   & -0.5 & 0  &  & 22 & -0.5 & -0.5 & -1 & -0.5 &  & 37 & 0.5 & 1  & -1 & 0    &  & 52 & 1 & -1 & 1  & 1  \\
+8  & -1 & 0.5 & -1   & 0  &  & 23 & 0    & -0.5 & -1 & 1    &  & 38 & 0.5 & 1  & -1 & 0    &  & 53 & 1 & 0  & -1 & -1 \\
+9  & -1 & 0.5 & -1   & 0  &  & 24 & 0    & -0.5 & -1 & 1    &  & 39 & 0.5 & 1  & -1 & 0    &  & 54 & 1 & 0  & -1 & -1 \\
+10 & -1 & 0.5 & -1   & 0  &  & 25 & 0    & -0.5 & -1 & 1    &  & 40 & 1   & -1 & -1 & -1   &  & 55 & 1 & 0  & -1 & -1 \\
+11 & -1 & 0.5 & -0.5 & 0  &  & 26 & 0    & 0.5  & -1 & -1   &  & 41 & 1   & -1 & -1 & -1   &  & 56 & 1 & 1  & -1 & -1 \\
+12 & -1 & 1   & -1   & 1  &  & 27 & 0    & 0.5  & -1 & -1   &  & 42 & 1   & -1 & -1 & -1   &  & 57 & 1 & 1  & -1 & -1 \\
+13 & -1 & 1   & -1   & 1  &  & 28 & 0    & 0.5  & -1 & -1   &  & 43 & 1   & -1 & -1 & -1   &  & 58 & 1 & 1  & -1 & -1 \\
+14 & -1 & 1   & 0.5  & -1 &  & 29 & 0.5  & -1   & -1 & -0.5 &  & 44 & 1   & -1 & -1 & 0    &  & 59 & 1 & 1  & -1 & 1  \\
+15 & -1 & 1   & 0.5  & 1  &  & 30 & 0.5  & -1   & -1 & -0.5 &  & 45 & 1   & -1 & -1 & 0    &  & 60 & 1 & 1  & -1 & 1 
+\end{tabular}
+}
+\end{table}
+
+
