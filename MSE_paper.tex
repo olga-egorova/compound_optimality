@@ -42,33 +42,40 @@
 \tableofcontents
 
 \newpage
-\section{Abstract}
+\section*{Abstract}
 
 \section{Introduction}
 
-\begin{Large}
-	
-\end{Large}
+\textit{
+	Model-independent approach to building designs in case of model uncertainty
+	\begin{itemize}
+		\item[-] Planning a controlled intervention -- reliance on a model (1) +
+		\item[-] Active assumption of a specific model misspecification (2) =
+		\item[-] Combining conflicting aims: model-based inference based on the model-independent variance estimate and distrust in the model sufficiency
+		\item[-] Briefly: extension on more complex experimental structures
+	\end{itemize}
+}
 
-Most experiments are conducted in order to gain understanding of the impact that different parameters of interest make on the outcome; the quantitative measure of this impact allows comparisons as well as making interpretable conclusions regarding the scale and the pattern of the relationships between process parameters and measured output. 
-%% Polynomial models
-While the exact true nature of that relationship remains unknown, we need to have some form of approximation. Polynomial functions are well known to be able to provide an approximation of any required precision for functions from a certain class of differentiability \citep{Rudin1987real}: obviously, higher desirable precision would require a polynomial of a higher order and, therefore, more experimental effort. Response Surface Methodology (RSM) that was first introduced by \cite{Box1951Roy} is aimed at optimising the response by fitting a second order polynomial to the data obtained after an experiment on the points within the experimental region of interest has been performed. The response measured at each of $n$ experimental runs would then be presented as a linear combination of experimental factors' values, their interactions and corresponding quadratic terms; of course, some of the terms might be excluded, but, unless stated otherwise, we will consider a full second-order polynomial model with $1+2k+\frac{k(k-1)}{2}$ parameters (including the intercept), where $k$ is the number of factors. Together with the fixed polynomial part, the error term here would stand for all the variation in data that has not been captured by the model. 
-%% Experimental design
-At the stage of experimental planning, when there is little, if any, prior knowledge and no data available, there is still a lot that can and should be done to make sure the results of the experimentation and the following analysis are credible.
+Designed experiments are commonly conducted in order to gain understanding of the impact that different parameters of interest make on the outcome; the quantitative measure of this impact allows comparisons as well as making interpretable conclusions regarding the scale and the pattern of the relationships between process parameters and measured output. 
 
-The design construction usually depends on the model in several ways. Firstly, the interest in the properties of the model parameters' estimation leads to the development of various optimality criteria (e.g.~so-called `alphabetic criteria'). Secondly, the fact of the model-dependence of the majority of the criteria implies the necessity of taking into account the possible lack-of-fit as well as the desirability of obtaining error variance estimates from replicated observations (model-independent, `pure' error). The latter two are also in the list of the properties of what would be considered as a `good design' (summarised by \cite{Box1987empirical}, Chapter $14$): it should ``make it possible to detect lack of fit'' and ``provide an internal estimate of error from replication''.
+While the exact true nature of that relationship remains unknown, some form of approximation is needed -- and polynomial functions are able to provide any required precision for functions from a certain class of differentiability \citep{Rudin1987real}. Response Surface Methodology (RSM, \cite{Box1951Roy}) aims at optimising the approximated functions by fitting second-order polynomials, and higher desirable precision would require a polynomial of a higher order and, therefore, more experimental effort. 
 
-It is obvious that all the individual criteria are not interchangeable and can possibly be contradictory, however, they all are desired to be accounted for. There are a few ways of combining them, and here we will be working with the notion of a compound optimality criterion which is basically a weighted combination of the elementary criteria, where weights are generally arbitrary, and are expected to be chosen in accordance with the experimenter's beliefs and intentions. 
+Whichever the chosen, `primary',  model is, planning a controlled intervention does rely on the approximating model assumptions in two main -- and quite contradicting -- directions(?). Firstly, it is desirable to ensure the goodness of what the model is essentially fitted for, that is, for example, the precision of model parameters and/or the prediction accuracy of the untested treatment combinations. The corresponding design aims are usually reflected in utilising well-known optimality criteria (D-, A-, ?prediction) and rely on the variance estimate, the way it is obtained. Secondly, treating the chosen model as the absolute truth, especially at the designing stage is at least too optimistic and, as in many cases fitting a more suitable, but complicated model might not be feasible due to various restrictions and limitations, could be dangerous for the results credibility. So having a particular model also means that at the stage of planning it is highly desirable to include some [sensitivity towards and robustness against]  control over the model lack of fit and its effect on the inference. 
 
-We will focus in this work on factorial experiments with a relatively small number of runs and the fitted model being a polynomial regression. We work here with exact designs: for each run we are to provide a point as a combination of the treatment factors' levels; therefore, finding the corresponding optimal design is essentially a matrix optimisation problem, i.e. searching for a design maximising (minimising) the criterion function. When considering examples of different compound criteria with various weight allocations, we will examine the resulting optimal designs in terms of their performances with respect to individual components. This would allow evaluating how much is ``lost'' when achieving a compromise, what component criteria contradict each others' performances, and how they are affected by changes of weight allocations.
+We deal with such duality [of model-dependence and accounting for its misspecification] by developing compound optimality criteria, each constructed as a weighted combination of individual criterion functions, with the two main features:
+\begin{enumerate}
+	\item Each corresponds to a specific desirable property:  either accounting for an aim coming from trusting the model or mitigating the effects from its potential misfit. The relative importance of the components are reflected by the assigned weights -- and we shall examine the performance of the resulting designs in terms of the individual criteria, and explore the role of weight allocation.
+	\item The concept of model-independent internal variance estimation, `pure error' (\cite{GilmourTrinca2012})) underlies each of the individual criteria -- the most appropriate [sensible] strategy in the case of possible model insufficiency. 
+ \end{enumerate}
 
-The first and main objective of the research presented is to develop a methodology for combining several desirable data inference properties in compound optimality criteria for factorial experiments. The properties are to correspond to the precision of inference based on the primary model and to the possibility of the specified model contamination presence; the components are aimed to comply with the `pure error' strategy, where it is feasible.
+The general spirit of this work aims at aligning with the concept of a good design, which, as summarised by \cite{Box1987empirical},  should ``make it possible to detect lack of fit'' and ``provide an internal estimate of error from replication'', among other properties. 
 
-The obvious following objective is to investigate the relationships between the individual components of the introduced criteria and, by considering some examples, provide some empirical recommendations for complex experimentation research that would benefit from applying these methods.
+We will focus on factorial experiments with a relatively small number of runs and the fitted model being a polynomial regression. Section \ref{sec::background} provides the background on the modelling, error estimation and fundamental individual criteria. Controlling the lack-of-fit and the bias arising from the model misspecification are introduced in Section \ref{sec::criteria}, where they are combined with the primary model-driven ones in compound optimality criteria. Their adaptation to experimental frameworks with restricted randomisation is described in Section \ref{sec::ms_experiments}, as well as the design construction procedure for the multistratum experiments. Finally, a series of examples are presented in Section \ref{sec::examples} -- examining dynamics across various optimal designs,  shape of the constructed criteria and other properties, followed up by a Discussion in Section \ref{sec::discussion} with main conclusions and recommendations. 
 
-The criteria will also be adapted to be applied within experimental frameworks with restricted randomisation: blocked and multistratum experiments.
+The $\mbox{R}$ code used to search for the optimal designs are located at <...> [?github for now].
 
 \section{Background}
+\label{sec::background}
 
 Recall the polynomial regression model (\ref{eq::back_model}) for the unblocked experiment, containing initial factors, their powers and interactions is used as a good approximation to the relation between the variables:  
 
@@ -91,7 +98,7 @@ where $\bm{X_{t}}$ is the $n\times t$ full treatment model matrix, in which the 
 
 Many authors advocate the use of the `pure' error estimate of $\sigma^2$ instead of the one pooled with the lack-of-fit part from the model (\ref{eq::back_model}): \cite{Cox1958planning} recommends using it for the estimation unless there are no replicate treatments, while \cite{Draper1998} argue for the reliability of `pure' error and recommend aiming for the presence of replicates at the stage of planning. \cite{Atkinson2007} also state that ``If lack-of-fit of the model is of potential interest, $\sigma^{2}$ is better estimated from replicate observations'' (page 22). For response surface experiments in blocks \cite{Gilmour2000PErsm} explicated the definition of pure error and its estimate which are compatible with the unblocked case: from replicates but also taking into account  block effects additive to treatment effects. Finally, the work by \cite{GilmourTrinca2012} that inspired this research, comprises a thorough analysis in favour of estimating the error from the full treatment model which is true regardless of what function is used to approximate the relationship of interest.
 
-?? Adding background on MS experiments: briefly about the structure, pure-error reml, note on degresof freedom. 
+
 
 \subsection{Combining criteria}
 
@@ -116,15 +123,15 @@ Some of the alternative approaches of considering several objectives would inclu
 Another approach was presented by \cite{Stallings2015general}: the authors developed methodology for generalising eigenvalue-based criteria (e.g. $A$- and $E$-optimality) in a way that allows differing interest (expressed through the weights) among any set of estimable functions of the fitted model parameters. The introduced strategy reflects the aims of experimentation that are not traditionally accounted for but definitely are of interest.
 
 \section{Individual criteria construction}
-\label{ch::compound_criteria}
+\label{sec::criteria}
 \input{compound_criterion}
 
-\section{Multistratum Experiments}
-\label{seq::ms_experiments}
+\section{Restricted randomisation}
+\label{sec::ms_experiments}
 \input{ms_experiments}
 
 \section{Examples}
-\label{ch::compound_examples}
+\label{sec::examples}
 \input{compound_examples}
 
 %% Criteria for blocked experiments as a special case of MS
@@ -137,8 +144,8 @@ Another approach was presented by \cite{Stallings2015general}: the authors devel
 \input{blocked_case_study}
 
 
-\section{Future work}
-
+\section{Discussion}
+\label{sec::discussion}
 
 \section{Acknowledgements}
 
