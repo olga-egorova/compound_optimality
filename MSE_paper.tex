@@ -74,20 +74,29 @@ We will focus on factorial experiments with a relatively small number of runs an
 
 The $\mbox{R}$ code used to search for the optimal designs are located at <...> [?github for now].
 
-\section{Background}
+\section{Model-dependent planning}
 \label{sec::background}
 
-Recall the polynomial regression model (\ref{eq::back_model}) for the unblocked experiment, containing initial factors, their powers and interactions is used as a good approximation to the relation between the variables:  
+\textit{	
+	\begin{itemize}
+		\item[-] Modelling and relevant error estimation 
+		\item[-]  Fundamental individual criteria
+		\item[-] Combining objectives: lit.review
+	\end{itemize}
+}
+
+Assuming a smooth enough relationship between $k$ experimental factors $X_1, \dots, X_k$ $\in$ $\Theta \subset \mbox{R}^{k}$ and the response variable $Y=\eta(X_1,\ldots, X_k)$ $\in$ $\mbox{R}$, a suitable polynomial model is chosen to fit data obtained from $n$ experimental runs:
 
 \begin{equation}
 \label{eq::back_model}
 \bm{Y}=\bm{X\beta}+\bm{\varepsilon}.
 \end{equation} 
 
-Here $\bm{X}$ is the $n\times p$ model matrix, $\bm{Y}$ is the $n\times 1$ vector of responses; $\bm{\beta}$ is the $p\times 1$ vector of parameters corresponding to the model terms and $\bm{\varepsilon}$ are independent normally distributed random error terms with constant variance, i.e. $\bm{\varepsilon}\sim \mathcal{N}(\bm{0},\sigma^{2}\bm{I}_{n})$.
+Here $\bm{X}$ is the $n\times p$ model matrix, $\bm{Y}$ is the $n\times 1$ vector of responses; $\bm{\beta}$ is the $p\times 1$ vector of parameters corresponding to the model terms and $\bm{\varepsilon}$ are independent normally distributed random error terms with constant variance, i.e. $\bm{\varepsilon}\sim \mathcal{N}(\bm{0},\sigma^{2}\bm{I}_{n})$. 
 
-\subsection{Error estimation}
-The error variance estimation can be obtained in two ways. The first one is the mean square error: $\hat{\sigma}^2_{mse}=\mbox{Residual SS}/(n-p)$, i.e. the residual sum of squares divided by the corresponding number of degrees of freedom (obtained from the ANOVA decomposition, the details can be found in \cite{Draper1998}). This estimator obviously depends on the model and on the number of its parameters. The other one is model-independent `pure' error, derived from the further decomposition of the residual sum of squares into the `pure' error and `lack-of-fit' components: $\hat{\sigma}^2_{PE}=\mbox{Pure error SS}/(n-t)$, where $t$ is the number of unique treatments applied and $d=n-t$ is the pure error degrees of freedom, i.e. the number of replicated points. In other words, the error is estimated by fitting the full treatment model:
+Any inference following the model fitting relies on the error variance estimate  $\hat{\sigma}^2$. The most common one is the mean square error: $\hat{\sigma}^2_{mse}=\mbox{Residual SS}/(n-p)$ (e.g. \cite{Draper1998}), which is model-dependent with the residual degrees of freedom $\nu = n-p$ containing the number of model parameters. 
+
+The other one is `pure' error, independent from the parametric model, which is derived from the further decomposition of the residual sum of squares into the `pure' error and `lack-of-fit' components: $\hat{\sigma}^2_{PE}=\mbox{Pure error SS}/(n-t)$, where $t$ is the number of unique treatments (combinations of factors' levels) applied and $d=n-t$ is the pure error degrees of freedom, that is the number of replicated points. In other words, the error is estimated as the mean square error from fitting the full treatment model:
 
 \begin{equation}
 \label{eq::back_trnt}
@@ -96,31 +105,33 @@ The error variance estimation can be obtained in two ways. The first one is the 
 
 where $\bm{X_{t}}$ is the $n\times t$ full treatment model matrix, in which the $(i,j)^{th}$ element is equal to $1$ if treatment $j$ is applied to the $i^{th}$ unit, otherwise it is set to $0$. Then the elements of the $t$-dimensional vector $\bm{\mu_{t}}$ are the mean effects of each treatment. The vector of errors $\bm{\varepsilon}$ comprises the between-unit variation, such that $\mbox{E}(\bm{\varepsilon})=\bm{0}$, $\mbox{Var}(\bm{\varepsilon})=\sigma^2\bm{I}_{n}$.
 
-Many authors advocate the use of the `pure' error estimate of $\sigma^2$ instead of the one pooled with the lack-of-fit part from the model (\ref{eq::back_model}): \cite{Cox1958planning} recommends using it for the estimation unless there are no replicate treatments, while \cite{Draper1998} argue for the reliability of `pure' error and recommend aiming for the presence of replicates at the stage of planning. \cite{Atkinson2007} also state that ``If lack-of-fit of the model is of potential interest, $\sigma^{2}$ is better estimated from replicate observations'' (page 22). For response surface experiments in blocks \cite{Gilmour2000PErsm} explicated the definition of pure error and its estimate which are compatible with the unblocked case: from replicates but also taking into account  block effects additive to treatment effects. Finally, the work by \cite{GilmourTrinca2012} that inspired this research, comprises a thorough analysis in favour of estimating the error from the full treatment model which is true regardless of what function is used to approximate the relationship of interest.
+Many authors advocate the use of the `pure' error estimate instead of the one pooled with the lack-of-fit part from the model (\ref{eq::back_model}): \cite{Cox1958planning} recommends using it for the estimation unless there are no replicate treatments, while \cite{Draper1998} argue for the reliability of `pure' error and recommend aiming for the presence of replicates at the stage of planning. \cite{Atkinson2007} also state that ``If lack-of-fit of the model is of potential interest, $\sigma^{2}$ is better estimated from replicate observations''. Finally, the work by \cite{GilmourTrinca2012} that inspired this research, comprises a thorough analysis in favour of estimating the error from the full treatment model which is true regardless of what function is used to approximate the relationship of interest.
 
+% Atkinson -- (page 22)
+%[For response surface experiments in blocks \cite{Gilmour2000PErsm} explicated the definition of pure error and its estimate which are compatible with the unblocked case: from replicates but also taking into account  block effects additive to treatment effects.] 
 
+\subsection*{Optimality criteria}
 
-\subsection{Combining criteria}
+Model-dependency at the stage of experimental planning is reflected in searching for a design that optimises a criterion function, that is a function of a design that translates a specific inference-driven objective. For example, among the most well-known, ``alphabetic'' optimality criteria, such as $D$-, $C$-, $L$-optimality and a series of others (\cite{Atkinson2007}) target the precision of parameters estimates in model (\ref{eq::back_model}); while others, like $G$- and $V$-optimality, deal with the prediction variance. Traditionally these criteria are formulated based on the mean square error estimate; citet{GilmourTrinca2012} derived the alternative pure-error based criteria, which would guarantee the presence of replicates in the resulting designs. 
 
-The concept of the compound criteria is based on the notion of design efficiency, which can be defined for any design matrix and any criterion. For example, the $D$-efficiency of design $\bm{X}$ is
-\begin{equation}
-\label{eq::D_eff}
-\mbox{Eff}_{D}(X)=\left[\frac{\vert \bm{X}'\bm{X}\vert}{\vert \bm{X}'_{*}\bm{X}_{*}\vert}\right]^{1/p},
-\end{equation}   
-where $\bm{X}_{*}$ is the $D$-optimum design. In this definition the power $1/p$ brings the efficiency to the scale of variances of model coefficients $\bm{\beta}_{i}, i=1\ldots p.$ It is obvious that the efficiency value may vary from $0$ to $1$ and is equal to $1$ if and only if the design is optimal according to the criterion of interest.
+Combining multiple desirable objectives in the design can be fulfilled through constructing a compound criterion. This concept is based on the notion of design efficiency, which can be defined for any design matrix $X$ and any criterion $F(X)$ as the ratio with respect to the best (e.g. maximum, without the loss of generality) value achieved at the optimal design. For example, the $D$-efficiency of design $\bm{X}$ is
+\begin{equation*}
+%\label{eq::D_eff}
+\mbox{Eff}_{D}(X)=\frac{\vert \bm{X}'\bm{X}\vert^{1/p}}{\vert \bm{X}'_{*}\bm{X}_{*}\vert^{1/p}},
+\end{equation*}   
+where $\bm{X}_{*}$ is the $D$-optimum design. In this definition the power $1/p$ brings the efficiency to the scale of variances of model coefficients $\bm{\beta}_{i}, i=1\ldots p.$ The efficiency value may vary from $0$ to $1$ and is equal to $1$ if and only if the design is optimal according to the criterion of interest.
 
-The final criterion function to be maximised among all the possible designs is obtained by combining the efficiencies for the component criteria $\mbox{Eff}_{1},\ldots, \mbox{Eff}_{m}$ with the corresponding weights $\kappa_{1},\ldots ,\kappa_{m}$ such that each $\kappa_{k}>0$ and $\sum_{k=1}^{m}\kappa_{k}=1:$
-
+The compound criterion to be maximised among all the possible designs is obtained then as weighted product of the individual criteria efficiencies $\mbox{Eff}_{1},\ldots, \mbox{Eff}_{m}$ with the corresponding weights $\kappa_{1},\ldots ,\kappa_{m}$ (s.t. $\kappa_{k}>0$ and $\sum_{k=1}^{m}\kappa_{k}=1$):
 \begin{equation}
 \label{eq::compound}
 \mbox{Eff}^{\kappa_{1}}_{1}(\bm{X})\times\mbox{Eff}^{\kappa_{2}}_{2}(\bm{X})\times\ldots\times\mbox{Eff}^{\kappa_{m}}_{m}(\bm{X})\rightarrow \underset{\bm{X}}\max.
 \end{equation}
 
-The choice of weights is an arbitrary decision, made relying on both prior knowledge of the experimenter, the objectives of a specific experiment and the interpretation of the criterion components. The most general and intuitively sensible recommendation would be to obtain optimal designs with respect to several weight allocations, and then, after examining them, choose the one to be applied. Throughout the course of this research, when considering the examples of experiments layouts, we chose a set of weight allocations. Most of these sets were essentially classical design schemes for experiments with mixtures \citep{Cornell2011Mixtures}. For example, if the criterion consists of three elements, we would first obtain designs with all the weight on each component, then all combinations of distributing it equally between two components, and finally put equal weights on all of the components. Some additional schemes are included when examining particular cases.  
+The choice of weights is arbitrary in general, although is driven by prior knowledge of the experimenter, the objectives of a specific experiment and the components' interpretation. In the examples considered further in this work, we chose a set of weight allocations, most of which are  classical design schemes for experiments with mixtures \citep{Cornell2011Mixtures}. 
 
-Some of the alternative approaches of considering several objectives would include the Pareto frontier approach, thoroughly described, for example, by \cite{Lu2011optimization}. When there are $l$ individual criterion functions $\phi_1(\bm{X}),\ldots\phi_{l}(\bm{X})$ to be maximised, the Pareto optimal set is generated so that for each of the designs from this set there is no other possible design that provides better criterion values for all the criteria (or, as it was defined, the Pareto optimal set is formed of designs that are not ``dominated'' by any other design).
+%The most general and intuitively sensible recommendation would be to obtain optimal designs with respect to several weight allocations, and then, after examining them, choose the one to be applied. Throughout the course of this research, when considering the examples of experiments layouts, we For example, if the criterion consists of three elements, we would first obtain designs with all the weight on each component, then all combinations of distributing it equally between two components, and finally put equal weights on all of the components. Some additional schemes are included when examining particular cases.  
 
-Another approach was presented by \cite{Stallings2015general}: the authors developed methodology for generalising eigenvalue-based criteria (e.g. $A$- and $E$-optimality) in a way that allows differing interest (expressed through the weights) among any set of estimable functions of the fitted model parameters. The introduced strategy reflects the aims of experimentation that are not traditionally accounted for but definitely are of interest.
+Some of the alternative approaches of combining several objectives would include generating the Pareto optimal set of designs -- the approach thoroughly described by \cite{Lu2011optimization}.  \cite{Stallings2015general}developed methodology for generalising eigenvalue-based criteria (e.g. $A$- and $E$-optimality) in a way that allows differing interest (expressed through the weights) among any set of estimable functions of the fitted model parameters. The introduced strategy reflects the aims of experimentation that are not traditionally accounted for but definitely are of interest. [Add 2 more references to compound optimality]
 
 \section{Individual criteria construction}
 \label{sec::criteria}

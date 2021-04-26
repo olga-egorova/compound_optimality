@@ -1,8 +1,6 @@
 \contentsline {section}{\numberline {1}Introduction}{2}{section.1}
-\contentsline {section}{\numberline {2}Background}{3}{section.2}
-\contentsline {subsection}{\numberline {2.1}Error estimation}{4}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}Combining criteria}{4}{subsection.2.2}
-\contentsline {section}{\numberline {3}Individual criteria construction}{5}{section.3}
+\contentsline {section}{\numberline {2}Model-dependent planning}{3}{section.2}
+\contentsline {section}{\numberline {3}Individual criteria construction}{6}{section.3}
 \contentsline {subsection}{\numberline {3.1}Lack-of-fit criterion}{6}{subsection.3.1}
 \contentsline {subsection}{\numberline {3.2}MSE-based bias criterion}{7}{subsection.3.2}
 \contentsline {subsubsection}{\numberline {3.2.1}Point-based estimate}{9}{subsubsection.3.2.1}
@@ -23,4 +21,4 @@
 \contentsline {subsection}{\numberline {5.5}Results}{32}{subsection.5.5}
 \contentsline {section}{\numberline {6}Discussion}{35}{section.6}
 \contentsline {section}{\numberline {7}Acknowledgements}{35}{section.7}
-\contentsline {chapter}{Bibliography}{37}{section*.14}
+\contentsline {chapter}{Bibliography}{37}{section*.15}

@@ -1,26 +1,24 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
-\BOOKMARK [1][-]{section.2}{Background}{}% 2
-\BOOKMARK [2][-]{subsection.2.1}{Error estimation}{section.2}% 3
-\BOOKMARK [2][-]{subsection.2.2}{Combining criteria}{section.2}% 4
-\BOOKMARK [1][-]{section.3}{Individual criteria construction}{}% 5
-\BOOKMARK [2][-]{subsection.3.1}{Lack-of-fit criterion}{section.3}% 6
-\BOOKMARK [2][-]{subsection.3.2}{MSE-based bias criterion}{section.3}% 7
-\BOOKMARK [3][-]{subsubsection.3.2.1}{Point-based estimate}{subsection.3.2}% 8
-\BOOKMARK [1][-]{section.4}{Restricted randomisation}{}% 9
-\BOOKMARK [2][-]{subsection.4.1}{Response-Surface Methodology for Multistratum Designs}{section.4}% 10
-\BOOKMARK [3][-]{subsubsection.4.1.1}{REML Methodology}{subsection.4.1}% 11
-\BOOKMARK [2][-]{subsection.4.2}{Full Treatment Model}{section.4}% 12
-\BOOKMARK [3][-]{subsubsection.4.2.1}{Pure-error REML}{subsection.4.2}% 13
-\BOOKMARK [3][-]{subsubsection.4.2.2}{Yates' procedure}{subsection.4.2}% 14
-\BOOKMARK [2][-]{subsection.4.3}{Design Construction for MSE-based Optimality Criteria}{section.4}% 15
-\BOOKMARK [3][-]{subsubsection.4.3.1}{Construction procedure}{subsection.4.3}% 16
-\BOOKMARK [3][-]{subsubsection.4.3.2}{Allocation of degrees of freedom}{subsection.4.3}% 17
-\BOOKMARK [1][-]{section.5}{Examples}{}% 18
-\BOOKMARK [2][-]{subsection.5.1}{Criteria for blocked experiments}{section.5}% 19
-\BOOKMARK [2][-]{subsection.5.2}{Determinant-based criterion}{section.5}% 20
-\BOOKMARK [2][-]{subsection.5.3}{Example. Case study}{section.5}% 21
-\BOOKMARK [2][-]{subsection.5.4}{Design search}{section.5}% 22
-\BOOKMARK [2][-]{subsection.5.5}{Results}{section.5}% 23
-\BOOKMARK [1][-]{section.6}{Discussion}{}% 24
-\BOOKMARK [1][-]{section.7}{Acknowledgements}{}% 25
-\BOOKMARK [0][-]{section*.14}{Bibliography}{}% 26
+\BOOKMARK [1][-]{section.2}{Model-dependent planning}{}% 2
+\BOOKMARK [1][-]{section.3}{Individual criteria construction}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Lack-of-fit criterion}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{MSE-based bias criterion}{section.3}% 5
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Point-based estimate}{subsection.3.2}% 6
+\BOOKMARK [1][-]{section.4}{Restricted randomisation}{}% 7
+\BOOKMARK [2][-]{subsection.4.1}{Response-Surface Methodology for Multistratum Designs}{section.4}% 8
+\BOOKMARK [3][-]{subsubsection.4.1.1}{REML Methodology}{subsection.4.1}% 9
+\BOOKMARK [2][-]{subsection.4.2}{Full Treatment Model}{section.4}% 10
+\BOOKMARK [3][-]{subsubsection.4.2.1}{Pure-error REML}{subsection.4.2}% 11
+\BOOKMARK [3][-]{subsubsection.4.2.2}{Yates' procedure}{subsection.4.2}% 12
+\BOOKMARK [2][-]{subsection.4.3}{Design Construction for MSE-based Optimality Criteria}{section.4}% 13
+\BOOKMARK [3][-]{subsubsection.4.3.1}{Construction procedure}{subsection.4.3}% 14
+\BOOKMARK [3][-]{subsubsection.4.3.2}{Allocation of degrees of freedom}{subsection.4.3}% 15
+\BOOKMARK [1][-]{section.5}{Examples}{}% 16
+\BOOKMARK [2][-]{subsection.5.1}{Criteria for blocked experiments}{section.5}% 17
+\BOOKMARK [2][-]{subsection.5.2}{Determinant-based criterion}{section.5}% 18
+\BOOKMARK [2][-]{subsection.5.3}{Example. Case study}{section.5}% 19
+\BOOKMARK [2][-]{subsection.5.4}{Design search}{section.5}% 20
+\BOOKMARK [2][-]{subsection.5.5}{Results}{section.5}% 21
+\BOOKMARK [1][-]{section.6}{Discussion}{}% 22
+\BOOKMARK [1][-]{section.7}{Acknowledgements}{}% 23
+\BOOKMARK [0][-]{section*.15}{Bibliography}{}% 24
