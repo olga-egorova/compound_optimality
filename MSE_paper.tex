@@ -92,14 +92,14 @@ Assuming a smooth enough relationship between $k$ experimental factors $X_1, \do
 \bm{Y}=\bm{X\beta}+\bm{\varepsilon}.
 \end{equation} 
 
-Here $\bm{X}$ is the $n\times p$ model matrix, $\bm{Y}$ is the $n\times 1$ vector of responses; $\bm{\beta}$ is the $p\times 1$ vector of parameters corresponding to the model terms and $\bm{\varepsilon}$ are independent normally distributed random error terms with constant variance, i.e. $\bm{\varepsilon}\sim \mathcal{N}(\bm{0},\sigma^{2}\bm{I}_{n})$. 
+Here $\bm{X}$ is the $n\times p$ model matrix, $\bm{Y}$ is the $n\times 1$ vector of responses; $\bm{\beta}$ is the $p\times 1$ vector of parameters corresponding to the model terms and $\bm{\varepsilon}$ are independent normally distributed random error terms with constant variance: $\bm{\varepsilon}\sim \mathcal{N}(\bm{0},\sigma^{2}\bm{I}_{n})$. 
 
 Any inference following the model fitting relies on the error variance estimate  $\hat{\sigma}^2$. The most common one is the mean square error: $\hat{\sigma}^2_{mse}=\mbox{Residual SS}/(n-p)$ (e.g. \cite{Draper1998}), which is model-dependent with the residual degrees of freedom $\nu = n-p$ containing the number of model parameters. 
 
 The other one is `pure' error, independent from the parametric model, which is derived from the further decomposition of the residual sum of squares into the `pure' error and `lack-of-fit' components: $\hat{\sigma}^2_{PE}=\mbox{Pure error SS}/(n-t)$, where $t$ is the number of unique treatments (combinations of factors' levels) applied and $d=n-t$ is the pure error degrees of freedom, that is the number of replicated points. In other words, the error is estimated as the mean square error from fitting the full treatment model:
 
 \begin{equation}
-\label{eq::back_trnt}
+\label{eq::treatment_model}
 \bm{Y}=\bm{X_{t}\mu_{t}}+\bm{\varepsilon},
 \end{equation} 
 
@@ -131,29 +131,33 @@ The choice of weights is arbitrary in general, although is driven by prior knowl
 
 %The most general and intuitively sensible recommendation would be to obtain optimal designs with respect to several weight allocations, and then, after examining them, choose the one to be applied. Throughout the course of this research, when considering the examples of experiments layouts, we For example, if the criterion consists of three elements, we would first obtain designs with all the weight on each component, then all combinations of distributing it equally between two components, and finally put equal weights on all of the components. Some additional schemes are included when examining particular cases.  
 
-Some of the alternative approaches of combining several objectives would include generating the Pareto optimal set of designs -- the approach thoroughly described by \cite{Lu2011optimization}.  \cite{Stallings2015general}developed methodology for generalising eigenvalue-based criteria (e.g. $A$- and $E$-optimality) in a way that allows differing interest (expressed through the weights) among any set of estimable functions of the fitted model parameters. The introduced strategy reflects the aims of experimentation that are not traditionally accounted for but definitely are of interest. [Add 2 more references to compound optimality]
+Some of the alternative approaches of combining several objectives would include generating the Pareto optimal set of designs -- the approach thoroughly described by \cite{Lu2011optimization}.  \cite{Stallings2015general}developed methodology for generalising eigenvalue-based criteria (e.g. $A$- and $E$-optimality) in a way that allows differing interest (expressed through the weights) among any set of estimable functions of the fitted model parameters. The introduced strategy reflects the aims of experimentation that are not traditionally accounted for but definitely are of interest. [Add more references to compound optimality?]
 
 \section{Individual criteria construction}
 \label{sec::criteria}
+\textit{	
+	\begin{itemize}
+		\item[-] Model misspecification setup. What objectives to be reflected in criteria: PE
+		\item[-] Lack-of-fit criterion (and then the traditional LoF)
+		\item[-] MSE criterion
+		\item[-] Combining with DP/LP -- the general compound criterion
+	\end{itemize}
+}
 \input{compound_criterion}
 
 \section{Restricted randomisation}
-\label{sec::ms_experiments}
-\input{ms_experiments}
+\label{sec::restricted_randomisation}
+\input{restricted_randomisation}
 
 \section{Examples}
 \label{sec::examples}
 \input{compound_examples}
 
 %% Criteria for blocked experiments as a special case of MS
-\subsection{Criteria for blocked experiments}
-\label{subsec::compound_blocked}
-\input{compound_blocked}
 
 \subsection{Example. Case study}
 \label{subsec::case_study}
 \input{blocked_case_study}
-
 
 \section{Discussion}
 \label{sec::discussion}

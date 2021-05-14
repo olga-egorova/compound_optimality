@@ -1,24 +1,13 @@
 \contentsline {section}{\numberline {1}Introduction}{2}{section.1}
 \contentsline {section}{\numberline {2}Model-dependent planning}{3}{section.2}
-\contentsline {section}{\numberline {3}Individual criteria construction}{6}{section.3}
-\contentsline {subsection}{\numberline {3.1}Lack-of-fit criterion}{6}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}MSE-based bias criterion}{7}{subsection.3.2}
-\contentsline {subsubsection}{\numberline {3.2.1}Point-based estimate}{9}{subsubsection.3.2.1}
+\contentsline {section}{\numberline {3}Individual criteria construction}{5}{section.3}
 \contentsline {section}{\numberline {4}Restricted randomisation}{10}{section.4}
-\contentsline {subsection}{\numberline {4.1}Response-Surface Methodology for Multistratum Designs}{10}{subsection.4.1}
-\contentsline {subsubsection}{\numberline {4.1.1}REML Methodology}{11}{subsubsection.4.1.1}
-\contentsline {subsection}{\numberline {4.2}Full Treatment Model}{12}{subsection.4.2}
-\contentsline {subsubsection}{\numberline {4.2.1}Pure-error REML}{12}{subsubsection.4.2.1}
-\contentsline {subsubsection}{\numberline {4.2.2}Yates' procedure}{13}{subsubsection.4.2.2}
-\contentsline {subsection}{\numberline {4.3}Design Construction for MSE-based Optimality Criteria}{14}{subsection.4.3}
-\contentsline {subsubsection}{\numberline {4.3.1}Construction procedure}{15}{subsubsection.4.3.1}
-\contentsline {subsubsection}{\numberline {4.3.2}Allocation of degrees of freedom}{18}{subsubsection.4.3.2}
+\contentsline {subsection}{\numberline {4.1}Response-Surface Methodology for multistratum framework}{11}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}MSE-based compound criteria for multistratum experiments}{14}{subsection.4.2}
 \contentsline {section}{\numberline {5}Examples}{20}{section.5}
-\contentsline {subsection}{\numberline {5.1}Criteria for blocked experiments}{26}{subsection.5.1}
-\contentsline {subsection}{\numberline {5.2}Determinant-based criterion}{27}{subsection.5.2}
-\contentsline {subsection}{\numberline {5.3}Example. Case study}{29}{subsection.5.3}
-\contentsline {subsection}{\numberline {5.4}Design search}{30}{subsection.5.4}
-\contentsline {subsection}{\numberline {5.5}Results}{32}{subsection.5.5}
-\contentsline {section}{\numberline {6}Discussion}{35}{section.6}
-\contentsline {section}{\numberline {7}Acknowledgements}{35}{section.7}
-\contentsline {chapter}{Bibliography}{37}{section*.15}
+\contentsline {subsection}{\numberline {5.1}Example. Case study}{24}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Design search}{25}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Results}{27}{subsection.5.3}
+\contentsline {section}{\numberline {6}Discussion}{31}{section.6}
+\contentsline {section}{\numberline {7}Acknowledgements}{31}{section.7}
+\contentsline {chapter}{Bibliography}{32}{section*.19}

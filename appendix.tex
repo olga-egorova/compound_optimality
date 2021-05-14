@@ -1,0 +1,82 @@
+\subsubsection{Allocation of degrees of freedom}
+
+The distribution of the degrees of freedom among different components at each stratum of the resulting design needs to be evaluated in accordance with the variance estimation procedure (as described in Section \ref{sec::ch7_varest}), so that both intra- and inter-block information is taken into account. 
+
+We shall consider here the case of a split-split-plot experiment (i.e. with $3$ strata), but this strategy is straightforwardly extended to the cases with any number of randomisation levels. At the first $2$ strata, where experimental units are to be further expanded, and treatments applied at these levels are to be replicated for all sub-units and runs within then the available degrees of freedom (after fitting the model at this current level) are split between three components: pure error, inter-plot (inter-whole-plot and inter-sub-plot for the $1$st and $2$nd strata respectively) and lack-of-fit. In the lowest stratum there are, as in the unblocked cases and experiments with fixed block effects, only pure error and lack-of-fit components.
+
+Starting with presenting the way of calculating the number of pure error degrees of freedom at each level, we then proceed to the details of the inter-plot and lack-of-fit degrees of freedom evaluation accompanied by the corresponding R code. In the end of this section we will consider an illustrative example of a design and see how degrees of freedom are allocated.
+
+If we consider an experiment with $n_1$ units in the first stratum, with each of them having $n_2$ units of stratum $2$, and with $n_3$ runs nested within each of those, there are $n=n_1\times n_2\times n_3$ runs in total. The notation to be used is as follows:
+\begin{itemize}
+\item $\bm{y}$ -- an $n$-dimensional dummy response vector (any randomly generated vector), which is used for fitting a linear model;
+\item $\bm{B_1}$ -- an $n$-dimensional vector, such that its $i$-th element is the label of the first stratum unit that contains the $i$-th run. Similarly, $\bm{B_2}$ contains labels of the second stratum units;
+\item  $\bm{T_{W}}$ -- a vector of labels for treatments applied at the first stratum (whole-plots); $\bm{T_{S}}$ -- a vector of labels for treatments applied at the second stratum units (sub-plots); this includes treatments in the higher stratum. And, finally, $\bm{T_{SS}}$ contains labels for all treatments applied at the lowest stratum, i.e. at individual runs;
+\item $\bm{Xw.m}$, $\bm{Xs.m}$ and $\bm{Xss.m}$ are the matrices containing fixed model terms that are to be fitted at the $1$st, $2$nd and $3$rd strata respectively.
+\end{itemize}
+
+If we denote by $p_i$ the number of the fixed model terms fitted at the $i$-th stratum, then the number of available degrees of freedom at each level is: $n_1-1-p_1$ for the $1$st, $n_1\times(n_2-1)-p_2$ -- for the $2$nd, and $n_1\times n_2\times(n_3-1)-p_3$ -- for the $3$rd stratum.
+
+After a design has been obtained, and all the treatment labels, block indicators and model matrices are in place, fitting the following linear models and studying their summary (i.e.~ANOVA) will provide the numbers of degrees of freedom corresponding to every component. 
+
+We start with fitting the full treatment model schematically presented in (\ref{eq::model_pe}): the effects of treatments applied to all strata, followed by the terms containing strata indicators, `$\bm{B_i}$'. In the resulting summary we then will see the distribution of pure error degrees of freedom: in the row corresponding to `$\bm{B_1}$' for the whole-plots ($1$st stratum), and in the row corresponding to `$\bm{B_2}$' for the sub-plots ($2$nd stratum). The `Residual' number of degrees of freedom is equal to the number of pure error degrees of freedom for the $3$rd stratum.
+\begin{equation}
+\label{eq::model_pe}
+\mathrm{lm}(\bm{y}\sim\bm{T_{SS}}+\bm{B_1}+\bm{B_2}).
+\end{equation}
+The order of terms in the expression above is crucial: this is a block-after-treatment model fitting; and the pure error degrees of freedom for lower-level plots occur not only when they are replicated within the same higher-level plot, but also when some pairs of treatments are split between two (or more) higher-level plots. An example of a design is given at the end of this section together with a detailed description of how each pure error degree of freedom is obtained.
+
+From the summary of model (\ref{eq::model_pe}) we automatically obtain the number of lack-of-fit degrees of freedom (LoF) for the lowest stratum, as $n_1\times n_2\times(n_3-1)-p_3 = $`Residual' P.E. $+$ LoF.
+
+Now we need to evaluate the number of degrees of freedom for estimating the inter-whole-plot/inter-sub-plot and lack-of-fit components for the first two strata. For this purpose, at each of the higher strata, we fit a linear model comprising polynomial terms (formed of the factors applied at the current and all higher strata), treatment labels, and current and all higher strata unit indicators. By doing so and first projecting the vector of (dummy) responses to the subspaces generated by the parametric model's terms and by the treatments, we account for the degrees of freedom required for evaluating the model parameters' estimates and for the lack-of-fit degrees of freedom. The number of degrees of freedom left for the components corresponding to the current stratum indicators is the sum of the inter-whole-plot (inter-sub-plot) and pure error degrees of freedom. 
+\begin{align}
+\label{eq::model_lof1}
+&\mathrm{lm}(\bm{y}\sim\bm{Xw.m}+\bm{T_{W}}+\bm{B_1}),\\
+\label{eq::model_lof2}
+&\mathrm{lm}(\bm{y}\sim\bm{Xw.m}+\bm{Xs.m}+\bm{T_{S}}+\bm{B_1}+\bm{B_2}).
+\end{align}
+Therefore, the summary of the model in (\ref{eq::model_lof1}) provides the sum of inter-whole-plot and pure error degrees of freedom under the `$\bm{B_1}$' component; and the `$\bm{B_2}$' component of the the summary of (\ref{eq::model_lof2}) gives the same sum for the sub-plot level. Hence, by substituting the number of pure error degrees of freedom, we obtain the inter-whole-plot/inter-sub-plot and then, from the known total numbers, -- the lack-of-fit degrees of freedom for the first and seconds strata.  
+
+In Table \ref{tab::SSP_design} below an example of a split-split-plot design is provided, with $12$ whole-plots, each containing $2$ sub-plots of size $2$, i.e. 48 runs in total. 
+\begin{table}[h]
+\centering
+\caption{Split-split-plot design}
+\label{tab::SSP_design}
+\scalebox{0.85}{
+\begin{tabular}{r|rr|r|rr|rr|rr|r|rr|}  
+\cline{2-6} \cline{9-13}
+I   & -1 & -1 & -1 & -1 & -1 & & VII  & 0 & 0  & -1 & 1  & 0  \\
+    & -1 & -1 & -1 & 1  & 1  & &      & 0 & 0  & -1 & 0  & 0  \\ \cline{4-6} \cline{11-13}
+    & -1 & -1 & 1  & -1 & 1  & &     & 0 & 0  & -1 & 1  & 0  \\
+    & -1 & -1 & 1  & 1  & 1  & &      & 0 & 0  & -1 & 0  & 0  \\ \cline{2-6} \cline{9-13}
+    &    &    &    &    &    & &      &   &    &    &    &    \\ \cline{2-6} \cline{9-13}
+II  & -1 & -1 & -1 & -1 & -1 & & VIII & 0 & 1  & 0  & 1  & 0  \\
+    & -1 & -1 & -1 & 1  & 1  & &      & 0 & 1  & 0  & 1  & 0  \\\cline{4-6} \cline{11-13}
+    & -1 & -1 & 1  & -1 & 1  & &      & 0 & 1  & -1 & 1  & 1  \\
+    & -1 & -1 & 1  & 1  & 1  & &      & 0 & 1  & -1 & -1 & 0  \\  \cline{2-6} \cline{9-13}
+    &    &    &    &    &    & &      &   &    &    &    &    \\ \cline{2-6} \cline{9-13}
+III & -1 & 0  & 1  & 0  & -1 & & IX   & 1 & -1 & 1  & 1  & 1  \\
+    & -1 & 0  & 1  & 1  & 0  & &      & 1 & -1 & 1  & -1 & -1 \\\cline{4-6} \cline{11-13}
+    & -1 & 0  & 1  & 0  & -1 & &      & 1 & -1 & -1 & 0  & 1  \\
+    & -1 & 0  & 1  & 1  & 0  & &      & 1 & -1 & -1 & 0  & 1  \\  \cline{2-6} \cline{9-13}
+    &    &    &    &    &    &  &     &   &    &    &    &    \\ \cline{2-6} \cline{9-13}
+IV  & -1 & 1  & 0  & -1 & 1  & & X    & 1 & -1 & 1  & -1 & 1  \\
+    & -1 & 1  & 0  & 1  & -1 & &      & 1 & -1 & 1  & 1  & -1 \\\cline{4-6} \cline{11-13}
+    & -1 & 1  & 1  & -1 & -1 & &      & 1 & -1 & -1 & 0  & 0  \\
+    & -1 & 1  & 1  & 0  & 1  & &      & 1 & -1 & -1 & 0  & 0  \\  \cline{2-6} \cline{9-13}
+    &    &    &    &    &    & &      &   &    &    &    &    \\ \cline{2-6} \cline{9-13}
+V   & -1 & 1  & 0  & -1 & 1  & & XI   & 1 & 0  & -1 & -1 & -1 \\
+    & -1 & 1  & 0  & 1  & -1 & &      & 1 & 0  & -1 & 1  & 0  \\\cline{4-6} \cline{11-13}
+    & -1 & 1  & 1  & -1 & -1 & &      & 1 & 0  & -1 & -1 & -1 \\
+    & -1 & 1  & 1  & 0  & 1  & &      & 1 & 0  & -1 & 1  & 0  \\ \cline{2-6} \cline{9-13}
+    &    &    &    &    &    & &      &   &    &    &    &    \\ \cline{2-6} \cline{9-13}
+VI  & 0  & -1 & -1 & -1 & 0  & & XII  & 1 & 1  & 1  & -1 & 0  \\
+    & 0  & -1 & -1 & 1  & -1 & &      & 1 & 1  & 1  & 1  & -1 \\ \cline{4-6} \cline{11-13}
+    & 0  & -1 & -1 & -1 & 0  & &      & 1 & 1  & -1 & 0  & -1 \\
+    & 0  & -1 & -1 & 1  & -1 & &      & 1 & 1  & -1 & -1 & 1  \\ \cline{2-6} \cline{9-13}
+\end{tabular}
+}
+\end{table}    
+
+We see that whole-plots I and II, and IV and V are identical, but with the sub-plot and sub-sub-plot treatments being different, so each such replicate provides $1$ whole-plot (WP), $1$ sub-plot(SP) and $2$ sub-sub-plot (SSP) pure error degrees of freedom. Whole-plots III, VI, VII and XI contain replicated sub-plots, although the sub-sub-plot treatments are not replicated within each sub-plot. Therefore, each of them provides $1$ SP and $1$ SSP pure error degree of freedom. 
+
+Finally, whole-plots VIII, IX and X contain $1$ replicated point (SSP treatment) within one of the sub-plots, which provides another $3$ SSP pure error degrees of freedom. In total, for three strata, there are $2$, $6$ and $11$ pure error degrees of freedom respectively.

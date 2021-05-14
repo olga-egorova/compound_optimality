@@ -1,4 +1,4 @@
-\begin{thebibliography}{26}
+\begin{thebibliography}{28}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \expandafter\ifx\csname url\endcsname\relax
   \def\url#1{\texttt{#1}}\fi
@@ -70,6 +70,13 @@ Gilmour, S.~G. and Trinca, L.~A. (2012) Optimum design of experiments for
 \newblock \emph{Journal of the Royal Statistical Society: Series C},
   \textbf{61}, 345--401.
 
+\bibitem[{Goos \emph{et~al.}(2005)Goos, Kobilinsky, O'Brien and
+  Vandebroek}]{Goos2005model}
+Goos, P., Kobilinsky, A., O'Brien, T.~E. and Vandebroek, M. (2005) Model-robust
+  and model-sensitive designs.
+\newblock \emph{Computational Statistics \& Data Analysis}, \textbf{49},
+  201--216.
+
 \bibitem[{Goos \emph{et~al.}(2006)Goos, Langhans and
   Vandebroek}]{Goos2006practical}
 Goos, P., Langhans, I. and Vandebroek, M. (2006) Practical inference from
@@ -111,6 +118,11 @@ Lu, L., Anderson-Cook, C.~M. and Robinson, T.~J. (2011) Optimization of
 McCulloch, C.~E. and Searle, S.~R. (2001) \emph{Generalized, Linear and Mixed
   Models}.
 \newblock John Wiley \& Sons.
+
+\bibitem[{Mead \emph{et~al.}(2012)Mead, Gilmour and Mead}]{MeadGilmour2012}
+Mead, R., Gilmour, S.~G. and Mead, A. (2012) \emph{Statistical Principles for
+  the Design of Experiments: Applications to Real Experiments}.
+\newblock Cambridge University Press.
 
 \bibitem[{Montepiedra and Fedorov(1997)}]{FedorovMontepiedra1997}
 Montepiedra, G. and Fedorov, V.~V. (1997) Minimum bias designs with
