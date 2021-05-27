@@ -32,6 +32,7 @@
 \setcounter{tocdepth}{3}
 \setcounter{secnumdepth}{3}
 
+\newcommand{\highlight}{\textcolor{red}}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 
@@ -39,6 +40,12 @@
 
 
 \begin{document}
+
+\title{Optimal planning of factorial experiments in case of model contamination}
+\author{\large{Olga Egorova, Steven G. Gilmour}}
+\date{[Draft]}
+\maketitle
+
 \tableofcontents
 
 \newpage
@@ -46,55 +53,38 @@
 
 \section{Introduction}
 
-\textit{
-	Model-independent approach to building designs in case of model uncertainty
-	\begin{itemize}
-		\item[-] Planning a controlled intervention -- reliance on a model (1) +
-		\item[-] Active assumption of a specific model misspecification (2) =
-		\item[-] Combining conflicting aims: model-based inference based on the model-independent variance estimate and distrust in the model sufficiency
-		\item[-] Briefly: extension on more complex experimental structures
-	\end{itemize}
-}
-
-Designed experiments are commonly conducted in order to gain understanding of the impact that different parameters of interest make on the outcome; the quantitative measure of this impact allows comparisons as well as making interpretable conclusions regarding the scale and the pattern of the relationships between process parameters and measured output. 
+Designed experiments are commonly conducted in order to gain understanding of the impact that different parameters of interest make on the outcome; the quantitative measure of this impact allows comparisons as well as making interpretable conclusions regarding the scale and the pattern of the relationships between \highlight{experimental factors} and measured output. 
 
 While the exact true nature of that relationship remains unknown, some form of approximation is needed -- and polynomial functions are able to provide any required precision for functions from a certain class of differentiability \citep{Rudin1987real}. Response Surface Methodology (RSM, \cite{Box1951Roy}) aims at optimising the approximated functions by fitting second-order polynomials, and higher desirable precision would require a polynomial of a higher order and, therefore, more experimental effort. 
 
-Whichever the chosen, `primary',  model is, planning a controlled intervention does rely on the approximating model assumptions in two main -- and quite contradicting -- directions(?). Firstly, it is desirable to ensure the goodness of what the model is essentially fitted for, that is, for example, the precision of model parameters and/or the prediction accuracy of the untested treatment combinations. The corresponding design aims are usually reflected in utilising well-known optimality criteria (D-, A-, ?prediction) and rely on the variance estimate, the way it is obtained. Secondly, treating the chosen model as the absolute truth, especially at the designing stage is at least too optimistic and, as in many cases fitting a more suitable, but complicated model might not be feasible due to various restrictions and limitations, could be dangerous for the results credibility. So having a particular model also means that at the stage of planning it is highly desirable to include some [sensitivity towards and robustness against]  control over the model lack of fit and its effect on the inference. 
+Whichever the chosen, `primary',  model is, planning a controlled intervention does rely on the approximating model assumptions in two main -- and quite contradicting -- directions. Firstly, it is desirable to ensure the goodness of what the model is essentially fitted for, that is, for example, the precision of model parameters and/or the prediction accuracy of the untested treatment combinations. The corresponding design aims are usually reflected in utilising well-known optimality criteria ($D$-, $A$-, $G$-,$V$-, etc.), which rely on the variance estimate, making the way it is obtained crucial. Secondly, treating the chosen model as the absolute truth, especially at the designing stage is at least too optimistic and, as in many cases fitting a more suitable, but complicated model might not be feasible due to various restrictions and limitations, could be dangerous for the results credibility. So having a particular model also means that at the stage of planning it is highly desirable to include some control over the model lack of fit and its effect on the inference. 
 
-We deal with such duality [of model-dependence and accounting for its misspecification] by developing compound optimality criteria, each constructed as a weighted combination of individual criterion functions, with the two main features:
+We deal with such duality of model-dependence and accounting for its misspecification by developing compound optimality criteria, each constructed as a weighted combination of individual criterion functions, with the two main features:
 \begin{enumerate}
-	\item Each corresponds to a specific desirable property:  either accounting for an aim coming from trusting the model or mitigating the effects from its potential misfit. The relative importance of the components are reflected by the assigned weights -- and we shall examine the performance of the resulting designs in terms of the individual criteria, and explore the role of weight allocation.
-	\item The concept of model-independent internal variance estimation, `pure error' (\cite{GilmourTrinca2012})) underlies each of the individual criteria -- the most appropriate [sensible] strategy in the case of possible model insufficiency. 
+	\item Each corresponds to a specific desirable property:  either accounting for an aim coming from trusting the model or mitigating the effects from its potential misfit. The relative importance of the components are reflected by the assigned weights -- and we shall examine the performance of resulting optimal designs in terms of the individual criteria, and explore the role of weight allocation.
+	\item The concept of model-independent internal variance estimation, `pure error' (\cite{GilmourTrinca2012})) underlies each of the individual criteria -- the most appropriate and sensible strategy in the case of possible model insufficiency. 
  \end{enumerate}
 
-The general spirit of this work aims at aligning with the concept of a good design, which, as summarised by \cite{Box1987empirical},  should ``make it possible to detect lack of fit'' and ``provide an internal estimate of error from replication'', among other properties. 
+The general spirit of this work aims at aligning with the concept of a good design, which, as summarised by \cite{Box1987empirical},  should ``make it possible to detect lack of fit'' and ``provide an internal estimate of error from replication'', among other properties. Classical designs, like central composite ones (CCDs, \cite{Myers2009}), have been very popular in practice due to their geometrical properties.
 
-We will focus on factorial experiments with a relatively small number of runs and the fitted model being a polynomial regression. Section \ref{sec::background} provides the background on the modelling, error estimation and fundamental individual criteria. Controlling the lack-of-fit and the bias arising from the model misspecification are introduced in Section \ref{sec::criteria}, where they are combined with the primary model-driven ones in compound optimality criteria. Their adaptation to experimental frameworks with restricted randomisation is described in Section \ref{sec::ms_experiments}, as well as the design construction procedure for the multistratum experiments. Finally, a series of examples are presented in Section \ref{sec::examples} -- examining dynamics across various optimal designs,  shape of the constructed criteria and other properties, followed up by a Discussion in Section \ref{sec::discussion} with main conclusions and recommendations. 
+We will focus on factorial experiments with a relatively small number of runs and the fitted model being a polynomial regression. Section \ref{sec::background} provides the background on the modelling, error estimation and fundamental individual criteria. Controlling the lack-of-fit and the bias arising from the model misspecification are introduced in Section \ref{sec::criteria}, where they are combined with the primary model-driven ones in compound optimality criteria. Their adaptation to blocked experiments is described in Section \ref{sec::compound_blocked}, followed by the optimal design construction and variance analysis for experimental frameworks with restricted randomisation in Section \ref{sec::multistratum_experiments}.
+A series of examples are  presented -- examining dynamics across various optimal designs,  shape of the constructed criteria and other properties, followed up by a Discussion in Section \ref{sec::discussion} with main conclusions and recommendations. 
 
-The $\mbox{R}$ code used to search for the optimal designs are located at <...> [?github for now].
+The $\mbox{R}$ code used to search for the optimal designs are located at [github/R package link].
 
 \section{Model-dependent planning}
 \label{sec::background}
 
-\textit{	
-	\begin{itemize}
-		\item[-] Modelling and relevant error estimation 
-		\item[-]  Fundamental individual criteria
-		\item[-] Combining objectives: lit.review
-	\end{itemize}
-}
-
 Assuming a smooth enough relationship between $k$ experimental factors $X_1, \dots, X_k$ $\in$ $\Theta \subset \mbox{R}^{k}$ and the response variable $Y=\eta(X_1,\ldots, X_k)$ $\in$ $\mbox{R}$, a suitable polynomial model is chosen to fit data obtained from $n$ experimental runs:
 
 \begin{equation}
-\label{eq::back_model}
+\label{eq::primary_model}
 \bm{Y}=\bm{X\beta}+\bm{\varepsilon}.
 \end{equation} 
 
 Here $\bm{X}$ is the $n\times p$ model matrix, $\bm{Y}$ is the $n\times 1$ vector of responses; $\bm{\beta}$ is the $p\times 1$ vector of parameters corresponding to the model terms and $\bm{\varepsilon}$ are independent normally distributed random error terms with constant variance: $\bm{\varepsilon}\sim \mathcal{N}(\bm{0},\sigma^{2}\bm{I}_{n})$. 
 
-Any inference following the model fitting relies on the error variance estimate  $\hat{\sigma}^2$. The most common one is the mean square error: $\hat{\sigma}^2_{mse}=\mbox{Residual SS}/(n-p)$ (e.g. \cite{Draper1998}), which is model-dependent with the residual degrees of freedom $\nu = n-p$ containing the number of model parameters. 
+Any inference based on building confidence regions and hypothesis testing following the model fitting relies on the error variance estimate $\hat{\sigma}^2$. The most common one is the mean square error: $\hat{\sigma}^2_{mse}=\mbox{Residual SS}/\nu$ (e.g. \cite{Draper1998}), which is model-dependent with the residual degrees of freedom $\nu = n-p$ containing the number of model parameters. 
 
 The other one is `pure' error, independent from the parametric model, which is derived from the further decomposition of the residual sum of squares into the `pure' error and `lack-of-fit' components: $\hat{\sigma}^2_{PE}=\mbox{Pure error SS}/(n-t)$, where $t$ is the number of unique treatments (combinations of factors' levels) applied and $d=n-t$ is the pure error degrees of freedom, that is the number of replicated points. In other words, the error is estimated as the mean square error from fitting the full treatment model:
 
@@ -110,16 +100,22 @@ Many authors advocate the use of the `pure' error estimate instead of the one po
 % Atkinson -- (page 22)
 %[For response surface experiments in blocks \cite{Gilmour2000PErsm} explicated the definition of pure error and its estimate which are compatible with the unblocked case: from replicates but also taking into account  block effects additive to treatment effects.] 
 
-\subsection*{Optimality criteria}
+%\subsection*{Optimality criteria}
+However, model-dependency at the stage of experimental planning is reflected in searching for a design that optimises a criterion, that is a function of a design that translates a specific inference-driven objective. For example, among the most well-known, ``alphabetic'' optimality criteria, such as $D$-, $C$-, $L$-optimality and a series of others (\cite{Atkinson2007}) target the precision of parameters estimates in model (\ref{eq::back_model}); while others, like $G$- and $V$-optimality, deal with the prediction variance; traditionally these criteria are formulated based on the mean square error estimate. \citet{GilmourTrinca2012} derived the alternative, model-independent pure-error based criteria, which would guarantee the presence of replicates in the resulting designs. \highlight{Primary criteria were formulated for interval-based inferential properties: minimising the volume of a $(1-\alpha_{DP})\times 100\%$ confidence region for the model parameters ($DP$-optimality) or the mean squared lengths of the $(1-\alpha_{LP})\times 100\%$ confidence intervals for linear functions of the parameters' estimates' variances ($LP$-optimality):
+\begin{align}
+\label{DP_LP}
+DP: \mbox{  }(F_{p,d;1-\alpha_{DP}})^{p}\vert(\bm{X'}\bm{X})^{-1}\vert &\longrightarrow \mbox{ min}, \\ \notag
+LP: \mbox{ }F_{1,d;1-\alpha_{LP}}\mbox{tr}\{\bm{W}(\bm{X}'\bm{X})^{-1}\} &\longrightarrow \mbox{ min},
+\end{align}
+where $F_{df_1,df_2;1-\alpha}$ is the ``upper $\alpha$-point'' of the F-distribution with $df_1$ and $df_2$ numerator and denominator degrees of freedom.
+}
 
-Model-dependency at the stage of experimental planning is reflected in searching for a design that optimises a criterion function, that is a function of a design that translates a specific inference-driven objective. For example, among the most well-known, ``alphabetic'' optimality criteria, such as $D$-, $C$-, $L$-optimality and a series of others (\cite{Atkinson2007}) target the precision of parameters estimates in model (\ref{eq::back_model}); while others, like $G$- and $V$-optimality, deal with the prediction variance. Traditionally these criteria are formulated based on the mean square error estimate; citet{GilmourTrinca2012} derived the alternative pure-error based criteria, which would guarantee the presence of replicates in the resulting designs. 
-
-Combining multiple desirable objectives in the design can be fulfilled through constructing a compound criterion. This concept is based on the notion of design efficiency, which can be defined for any design matrix $X$ and any criterion $F(X)$ as the ratio with respect to the best (e.g. maximum, without the loss of generality) value achieved at the optimal design. For example, the $D$-efficiency of design $\bm{X}$ is
+Combining multiple desirable objectives in the design can be fulfilled through constructing a compound criterion. This concept is based on the notion of design efficiency, which can be defined for any design matrix $X$ and any criterion $C(X)$ as the ratio with respect to the best (e.g. \highlight{minimum}, without the loss of generality) value achieved at the optimal design. \highlight{For example, the $DP$-efficiency of design $\bm{X}$ is
 \begin{equation*}
-%\label{eq::D_eff}
-\mbox{Eff}_{D}(X)=\frac{\vert \bm{X}'\bm{X}\vert^{1/p}}{\vert \bm{X}'_{*}\bm{X}_{*}\vert^{1/p}},
+%\label{eq::DP_eff}
+\mbox{Eff}_{DP}(X)=\frac{\vert \bm{X}'_{*}\bm{X}_{*}\vert^{1/p}/F_{p,d_{*};1-\alpha_{DP}}}{\vert \bm{X}'\bm{X}\vert^{1/p}/F_{p,d;1-\alpha_{DP}}},
 \end{equation*}   
-where $\bm{X}_{*}$ is the $D$-optimum design. In this definition the power $1/p$ brings the efficiency to the scale of variances of model coefficients $\bm{\beta}_{i}, i=1\ldots p.$ The efficiency value may vary from $0$ to $1$ and is equal to $1$ if and only if the design is optimal according to the criterion of interest.
+where $\bm{X}_{*}$ is the $DP$-optimum design with $d_{*}$ pure error degrees of freedom.} In this definition the power $1/p$ brings the efficiency to the scale of variances of model coefficients $\bm{\beta}_{i}, i=1\ldots p.$ The efficiency value may vary from $0$ to $1$ and is equal to $1$ if and only if the design is optimal according to the criterion of interest.
 
 The compound criterion to be maximised among all the possible designs is obtained then as weighted product of the individual criteria efficiencies $\mbox{Eff}_{1},\ldots, \mbox{Eff}_{m}$ with the corresponding weights $\kappa_{1},\ldots ,\kappa_{m}$ (s.t. $\kappa_{k}>0$ and $\sum_{k=1}^{m}\kappa_{k}=1$):
 \begin{equation}
@@ -131,43 +127,65 @@ The choice of weights is arbitrary in general, although is driven by prior knowl
 
 %The most general and intuitively sensible recommendation would be to obtain optimal designs with respect to several weight allocations, and then, after examining them, choose the one to be applied. Throughout the course of this research, when considering the examples of experiments layouts, we For example, if the criterion consists of three elements, we would first obtain designs with all the weight on each component, then all combinations of distributing it equally between two components, and finally put equal weights on all of the components. Some additional schemes are included when examining particular cases.  
 
-Some of the alternative approaches of combining several objectives would include generating the Pareto optimal set of designs -- the approach thoroughly described by \cite{Lu2011optimization}.  \cite{Stallings2015general}developed methodology for generalising eigenvalue-based criteria (e.g. $A$- and $E$-optimality) in a way that allows differing interest (expressed through the weights) among any set of estimable functions of the fitted model parameters. The introduced strategy reflects the aims of experimentation that are not traditionally accounted for but definitely are of interest. [Add more references to compound optimality?]
+Some of the alternative approaches of combining several objectives would include generating the Pareto optimal set of designs -- the approach thoroughly described by \cite{Lu2011optimization}.  \cite{Stallings2015general}developed methodology for generalising eigenvalue-based criteria (e.g. $A$- and $E$-optimality) in a way that allows differing interest (expressed through the weights) among any set of estimable functions of the fitted model parameters. The introduced strategy reflects the aims of experimentation that are not traditionally accounted for but definitely are of interest. 
 
-\section{Individual criteria construction}
+\section{Criteria Accounting for Model Uncertainty}
 \label{sec::criteria}
-\textit{	
-	\begin{itemize}
-		\item[-] Model misspecification setup. What objectives to be reflected in criteria: PE
-		\item[-] Lack-of-fit criterion (and then the traditional LoF)
-		\item[-] MSE criterion
-		\item[-] Combining with DP/LP -- the general compound criterion
-	\end{itemize}
-}
 \input{compound_criterion}
 
-\section{Restricted randomisation}
-\label{sec::restricted_randomisation}
-\input{restricted_randomisation}
-
-\section{Examples}
+\subsection{Example}
 \label{sec::examples}
 \input{compound_examples}
 
-%% Criteria for blocked experiments as a special case of MS
+\section{Blocked Experiments}
+\label{sec::compound_blocked}
+\input{compound_blocked}
 
 \subsection{Example. Case study}
 \label{subsec::case_study}
 \input{blocked_case_study}
 
+\section{Multistratum Experiments}
+\label{sec::multistratum_experiments}
+\input{multistratum_experiments}
+
+\subsection{Split-split-plot optimal design}
+\label{subsec::ms_example}
+\input{ssp_example}
+
 \section{Discussion}
 \label{sec::discussion}
+\textit{
+\begin{itemize}
+	\item Conclusions
+	\item Focus on future work(?) and/or alternatives
+\end{itemize}
+}
+%The adapted MSE-based compound criteria, error estimation and design search procedure brought together allows for providing compromise across competing objectives in a complex experimental framework -- and tools for a decision making reflecting the priorities and aims of the experimentation.
+
 
 \section{Acknowledgements}
+
+\clearpage
+
+\appendix
+\section{Appendices}
+\subsection{Appendix I}
+\label{appendix::example1}
+\input{appendix_example}
+
+\subsection{Appendix II}
+\label{appendix::ms_df}
+\input{appendix_df}
+
+\subsection{Appendix III}
+\label{appendix::ms_design}
+\input{appendix_ms_design}
 
 %%% Bibliography
 \cleardoublepage
 \phantomsection
-\addcontentsline{toc}{chapter}{Bibliography} 
+%\addcontentsline{toc}{chapter}{Bibliography} 
 %\bibliographystyle{apalike}
 \bibliographystyle{rss}
 \bibliography{thesis_bib}

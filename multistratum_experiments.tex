@@ -1,0 +1,113 @@
+
+In a large number of industrial, engineering and laboratory-based experiments, either the nature of the study or certain restrictions result in the necessity of considering a multi-level structure of experimental units. For example, a chemical process consisting of applying treatments to the material batches of different sizes at each stage;  or one or several experimental factors' values can be changed only once per a certain amount of runs whereas values of other factors are varied between runs. Therefore, different factors are applied at different levels, and randomisation is performed at each level, thus the whole process of allocating treatments to experimental units should be amended accordingly \citep{MeadGilmour2012}.
+
+In this work we go on to consider experimental framework comprising such a hierarchical structure of experimental units and treatments, which is referred to as multistratum experiment, and each stratum is defined as a level in the unit structure. Units are grouped into whole-plots, each of them divided into sub-plots, which contain a certain number of sub-sub-plots, and so on up to the smallest units --- runs of the experiment -- [Figure with Hasse diagram?] . In the general case of two strata, we deal with what is called a ``split-plot'' experiment, in case of three strata a ``split-split-plot'' experiment. 
+
+Our aim is to adapt the MSE-based criteria derived before to the factorial experiments with units distributed in several strata. The most important aspects are (1) estimating the error components at every level and (2) formulating the compliant criteria and presenting a suitable implementation strategy for the optimal design search.
+
+%\subsection*{Response-Surface Methodology for multistratum framework}
+Here we are considering experiments with $s$ strata in total, stratum $i$ being nested within units of the stratum $i-1$, and stratum $0$ will be seen as the whole experiment (\citet{Trinca2015improved}). The number of units in stratum $i$ within every unit in stratum $i-1$ is denoted by $n_i$, such that $m_{j}=\prod_{i=1}^{j}n_{i}$ is the number of units in stratum $j$ and, therefore,  $n=m_{s}=\prod_{i=1}^{s}n_{i}$ is the total number of runs.  As randomisation occurs at each stratum, the overall  polynomial model accounting for the hierarchical error structure and correlated observations can be written as
+\begin{equation}
+\label{eq::MS_model}
+\bm{Y}=\bm{X}\bm{\beta}+\sum_{i=1}^{s}\bm{Z}_{i}\bm{\varepsilon}_{i},
+\end{equation}
+where $\bm{Y}$ represents the $n$-dimensional vector of responses, $\bm{X}$ stands for the $n \times p$ model matrix and $\bm{\beta}$ for the $p$-dimensional vector of corresponding model coefficients. Each row of the $n\times m_{i}$ matrix $\bm{Z}_{i}$ corresponds to a single experimental run and indicates the unit in stratum $i$ containing this run. $\bm{\varepsilon}_{i}$ is a vector of random effects occurring due to the randomisation at level $i$, and these effects are assumed to be independent and identically distributed around zero mean and variance $\sigma^{2}_{i}$. Generalised Least Squared  (GLS) estimators of $\bm{\beta}$ are calculated as
+\begin{equation}
+\label{eq::MS_GLS}
+\bm{\hat{\beta}}=(\bm{X}'\bm{V}^{-1}\bm{X})^{-1}\bm{X}'\bm{V}^{-1}\bm{Y}.
+\end{equation}
+
+%The assumption of error normality, though quite common is required for some analysis methods, is not a necessary one at this stage.
+
+%Inferential purposes of obtaining parameter estimates $\bm{\hat{\beta}}$ of good quality imply the necessity of evaluating the dispersion parameters $\sigma^2_{i}$ that are directly related to the estimates' variance and, therefore, responsible for measuring the uncertainty of the inference in a general sense.
+
+%\subsubsection*{Error Estimate}
+An extensive amount of research has been conducted on the design of and analysis of data from split-plot and split-split-plot experiments, with one of the first works by \cite{Letsinger1996BiRandomization}, emphasising the necessity of adapting the design and analysis strategy with respect to the more complicated error structure.  In the most general case of non-orthogonal unit structures Residual Maximum Likelihood (REML) methodology has been acknowledged to be the most sensible approach to estimating the variance components by maximising the part of the likelihood function corresponding to the ``random'' part of the model; the details are provided, for example, in \cite{Searle2001generalized}. 
+
+%In traditional REML-based methodology the estimates of $\sigma^{2}_{i}$ are obtained from model (\ref{eq::MS_model}) and then GLS estimators of $\bm{\beta}$ are calculated as
+%\begin{equation}
+%\label{eq::MS_GLS}
+%\bm{\hat{\beta}}=(\bm{X}'\bm{V}^{-1}\bm{X})^{-1}\bm{X}'\bm{V}^{-1}\bm{Y},
+%\end{equation}
+%where $\bm{V}$ is the unknown variance-covariance matrix of the response vector, to which the estimates are to be plugged in:
+%\begin{equation*}
+%\bm{V}=\sum_{i=1}^{s}\sigma^{2}_{i}\bm{Z}_{i}\bm{Z}'_{i},
+%\end{equation*}
+%so that $\mbox{Var}(\bm{\hat{\beta}})=(\bm{X}'\bm{V}^{-1}\bm{X})^{-1}.$
+
+In some case, though,  REML tends to underestimate the variance components in the higher stratum, for example \cite{Goos2006practical} considered some split-plot experiments with true whole-plot variances being non-negligibly far from zero, for which REML, however, provided zero estimates. A possible alternative of following Bayesian strategy \citep{Gilmour2009analysis}, however, this requires a careful choice of the prior which is often not possible, especially in the case of more than two strata.
+
+In the context of model uncertainty, it would be appropriate to consider instead the direct relationship between the response and the set of treatments, similar to (\ref{eq::treatment_model}):
+\begin{equation}
+\label{eq::treatmentMS}
+\bm{Y}=\bm{X_t}\bm{\mu_t}+\sum_{i=1}^{s}\bm{Z}_{i}\bm{\varepsilon}_{i}.
+\end{equation}
+
+Each column of $\bm{X_t}$ corresponds to a treatment defined as a combination of the experimental factors;
+%in case of factorial experiment the total number of possible treatments (or candidate design points) $T$ would be the product of the number of the factors' levels. 
+$\bm{Z}_{i}$ is the indicator matrix of random effects at stratum $i$.
+
+\cite{GilmourGoos2016PEREML} introduced the notion of ``Pure Error REML'', where random effects are estimated from the treatment model (\ref{eq::treatmentMS}), and then for the sake of making inference regarding parameters of the response model (\ref{eq::MS_model}), they are substituted in the GLS estimators of the fixed effects (\ref{eq::MS_GLS}). It is also argued that some appropriate corrections are to be adapted and applied to the obtained estimates, i.e.~the ones suggested by \cite{kenward1997small}. 
+
+A careful definition of ``pure error'' is necessary when considering the treatment and response surface models, especially in the presence of nested random block effects, as discussed by \cite{Gilmour2000PErsm}.  Treatment-block additivity  assumption (\cite{Draper1998}) would allow for estimating pure error not just from the within-block replicates, but also using inter-block information; (\cite{Gilmour2000PErsm}) argue for preserving the treatment-unit additivity as well, for the consistency with the unblocked cases -- so that between unit variability is measured regardless of the treatments applied. Based on the interrelation of the polynomial and full treatment models, and the desirability of being able to provide the possibility for testing for the lack-of-fit together with obtaining robust estimates of the variance components, the approach of using pure error is adopted, \cite{GilmourGoos2016Robust} explored several approaches to estimating the variance components. 
+
+The first approach is stratum-by-stratum data analysis, where each randomisation level is considered separately, and at each stratum $i$ units are treated as runs aggregated in $m_{i-1}$ blocks with fixed effects. The lower stratum variance is estimated from within blocks (using intra-block residual mean square), and the higher stratum (inter-block) variance from the difference between the intra- and inter-block residual mean squares scaled by the number of runs per block \citep{Hinkelmann2005Advanced}. However, it would be desirable to make use of inter-block replicates as well, especially in the common cases of relatively small experiments; Yates' procedure, first suggested by \cite{yates1939recovery} and described in detail by \cite{Hinkelmann2005Advanced}, provides more degrees of freedom for the variance estimate in the higher stratum -- and this is the approach we are adopting in this work. 
+
+In the case of two levels of randomisation, variance components are estimated in two variance decomposition steps: 
+\begin{enumerate}
+	\item Total SS = SS(Blocks) + SS(Treatments$\vert$Blocks) + SS(Residual)\\
+	From fitting this full treatment-after-blocks model the residual mean square $S^2$ is taken as the estimate of the intra-block variance. SS(Residual) is then substituted in the following partition.
+	\item Total SS = SS(Treatments) + SS(Blocks$\vert$Treatments) + SS(Residual)\\
+	Therefore, the sums of squares for the blocks after the treatment effects have been accounted for is obtained and the corresponding mean square $$S^2_{b}=\mbox{SS(Blocks$\vert$Treatments)}/\nu_{b}$$ is then used to get an estimate of the inter-block variance:
+	$\hat{\sigma}^2_{b}=\frac{\nu_{b}(S^2_{b}-S^2)}{d}$,
+	where pure error degrees of freedom for inter-block variance is $d=n-\mbox{trace}[\bm{Z}'\bm{X_t}(\bm{X_t}'\bm{X_t})^{-1}\bm{X_t}'\bm{Z}]$, $\nu_{b}=\mbox{rank}([\bm{X_t} \bm{Z}])-\mbox{rank}(\bm{X_t})$, and $\bm{X_t}$ and $\bm{Z}$ are as in (\ref{eq::treatmentMS}).
+\end{enumerate}
+
+Allocation of the degrees of freedom in practice, following Yates' procedure, is provided in the Appendix \ref{appendix::ms_df}. 
+
+\cite{GilmourGoos2016Robust} show that in addition to the treatment-unit additivity and randomisation the assumption of the experimental units being a random sample from an infinite population is necessary for the inter-block variance estimate to be unbiased. In this particular context, when the normality and independence of responses in (\ref{eq::MS_model}) is a standard assumption, although a potential presence of contamination effects in the fixed part of the model is also accounted for, Yates' approach seems to be the most appropriate technique. Relying on the distribution assumption to the extent that makes REML the most sensible approach means that the fixed part of the fitted model is assumed to be absolutely true, that is the parameters of the population distribution are known, which does not comply with the model uncertainty framework. 
+
+%\subsection*{MSE-based compound criteria for multistratum experiments}
+\label{sec::ch7_search}
+In the presence of potential model disturbance which is expressed as $q$ additional polynomial terms for the purposes of optimal planning, the overall model for a multistratum experiment is similar to (\ref{eq::full_model}):
+\begin{equation}
+\label{eq::MS_model_full}
+\bm{Y}=\bm{X}_p\bm{\beta}_p+\bm{X}_q\bm{\beta}_q+\sum_{i=1}^{s}\bm{Z}_{i}\bm{\varepsilon}_{i}.
+\end{equation}
+
+The design construction strategy has been chosen to comply with the error estimation and the whole framework, and will follow the stratum-by-stratum algorithm approach developed by \cite{Trinca2015improved}. Starting with the higher stratum, it is an iterative procedure that at each step treats the higher stratum units as fixed blocks and generates a candidate set of treatments applied at the current stratum.  The model matrix then comprises terms inherited from all higher strata, the current stratum's polynomial terms and interactions between these two groups of terms; the current stratum search is carried out using the same algorithm, e.g. point exchange. Treating the previous strata as fixed blocked effects means that the optimality criteria used are exactly the ones that were introduced for unblocked (Section \ref{sec::criteria}) and blocked (Section \ref{sec::compound_blocked}) experiments.
+The detailed step-by-step procedure is outlined in Appendix \ref{appendix::ms_design}, and an example of a multistartum experimental framework and optimal design search is considered next.
+
+%Before moving to a more detailed presentation of the design construction algorithm, recall the MSE-based criteria (\ref{eq::MSE_D}), (\ref{eq::MSE_L}), (\ref{eq::MSE_D_B}) and (\ref{eq::MSE_L_B}) that are to be used:
+%
+%For an unblocked experiment:
+%\begin{itemize}
+%\item Determinant-based $MSE(D)$ criterion:
+%\begin{align}
+%\label{eq::MSE_D_ms}
+%\mbox{minimise }&\left[\left|\bm{X}'_{1}\bm{X}_{1}\right|^{-1/p}F_{p,d;1-\alpha_{DP}}\right]^{\kappa_{DP}} \times \notag \\ &\left[\left|\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right|^{-1/q}F_{q,d;1-\alpha_{LoF}}\right]^{\kappa_{LoF}}\times \notag\\ & \left[|\bm{X}'_{1}\bm{X}_{1}|^{-1}\exp\left(\frac{1}{N}\sum_{i=1}^{N}\log(1+\bm{\tilde{\beta}}_{2i}'\bm{X}_2^{'}\bm{X}_1\bm{M}^{-1}\bm{X}_1^{'}\bm{X}_2\bm{\tilde{\beta}}_{2i})\right)\right]_{.}^{\kappa_{MSE}/p}
+%\end{align}
+%\item Trace-based $MSE(L)$ criterion:
+%\begin{align}
+%\label{eq::MSE_L_ms}
+%\mbox{minimise} &\left[\frac{1}{p}\mbox{trace}(\bm{WX}'_{1}\bm{X}_{1})^{-1}F_{1,d;1-\alpha_{LP}}\right]^{\kappa_{LP}}\times \notag\\& \left[\frac{1}{q}\mbox{trace}\left(\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right)^{-1}F_{1,d;1-\alpha_{LoF}}\right]^{\kappa_{LoF}}\times 
+%\notag\\& \left[\frac{1}{p}\mbox{trace}\{(\bm{X}'_{1}\bm{X}_{1})^{-1}+\tau^2\bm{A}\bm{A}'\}\right]^{\kappa_{MSE}}_{.}
+%\end{align}
+%\end{itemize} 
+% 
+%For a blocked experiment:
+%\begin{itemize}
+%\item Determinant-based $MSE(D)$ criterion:
+%\begin{align}
+%\label{eq::MSE_D_B_ms}
+%\mbox{minimise }&\left[\left|(\bm{X}'_{1}\bm{Q}\bm{X}_{1})^{-1}\right|^{1/p}F_{p,d_B;1-\alpha_{DP}}\right]^{\kappa_{DP}} \times \notag \\ &\left[\left|\bm{\tilde{L}}+\frac{\bm{I}_{q}}{\tau^{2}}\right|^{-1/q}F_{q,d_B;1-\alpha_{LoF}}\right]^{\kappa_{LoF}}\times \notag\\ & \left[|\bm{X}'_{1}\bm{QX}_{1}|^{-1}\exp\left(\frac{1}{N}\sum_{i=1}^{N}\log(1+\bm{\tilde{\beta}}_{2i}'\bm{X}_2^{'}\bm{QX}_1\bm{\tilde{M}}^{-1}\bm{X}_1^{'}\bm{QX}_2\bm{\tilde{\beta}}_{2i})\right)\right]_{.}^{\kappa_{MSE}/p}
+%\end{align}
+%\item Trace-based $MSE(L)$ criterion:
+%\begin{align}
+%\label{eq::MSE_L_B_ms}
+%\mbox{minimise }&\left[\frac{1}{p}\mbox{trace}(\bm{WX}'_{1}\bm{Q}\bm{X}_{1})^{-1}F_{1,d_B;1-\alpha_{LP}}\right]^{\kappa_{LP}}\times \notag \\&\left[\frac{1}{q}\mbox{trace}\left(\bm{\tilde{L}}+\frac{\bm{I}_{q}}{\tau^{2}}\right)^{-1}F_{1,d_B;1-\alpha_{LoF}}\right]^{\kappa_{LoF}}\times \notag \\& \left[\frac{1}{p}\mbox{trace}\{(\bm{X}'_{1}\bm{QX}_{1})^{-1}+\tau^2[\bm{\tilde{A}}\bm{\tilde{A}}']_{22}\}\right]^{\kappa_{MSE}}_{.}
+%\end{align}
+%\end{itemize} 
+
+
+

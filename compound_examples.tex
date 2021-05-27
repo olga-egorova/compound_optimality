@@ -1,31 +1,24 @@
-[OE: To be edited]
 
-Here we will study the optimal designs in terms of the criteria (\ref{eq::MSE_D}) and (\ref{eq::MSE_L}) (referred to as $MSE(D)$, $MSE(D)P$ and $MSE(L)$ criteria respectively) in the framework a factorial experiment, with $5$ factors, each is at three levels. The small number of runs ($40$) allows estimation of the full-second order polynomial model ($p=21$), but we assume that the `true' model contains also all third-order terms (linear-by-linear-by-linear and quadratic-by-linear interactions), $q=30$ of them in total.. 
-[Some comparison with other criteria is to be added]
+Here we will study the optimal designs in terms of the criteria (\ref{eq::MSE_DP}) and (\ref{eq::MSE_LP})  in the framework a factorial experiment, with $3$ factors, each is at three levels. The small number of runs ($n=16$) allows estimation of the full-second order polynomial model ($p=10$), but we assume that the extended model, potentially providing a better fit,  contains also all third-order terms (linear-by-linear-by-linear and quadratic-by-linear interactions), $q=30$ of them in total. 
 
-The intercept is a nuisance parameter, and so the criteria are adapted in such a way that the $DP$- and $LP$-components are replaced by $DPs$ and $LPs$. After considering the mean square error matrix (\ref{eq::MSE}) for $p-1$ parameters, in the MSE-based components the full information matrix is replaced by the one excluding the intercept -- $\bm{X}'_{1}\bm{Q}_0\bm{X}_{1}$ (see (\ref{eq::s_infmatrix})), where $\bm{X}_1$ is the model matrix without the intercept, $\bm{Q}_0=\bm{I}_n-\frac{1}{n}\bm{11}'$, and $\bm{\tilde{M}}$ is the full information matrix for the model with the intercept. Otherwise, the procedure of obtaining the $MSE(D)$- and $MSE(L)$-based components remains the same.
-
-Below are expressions of the MSE-based criteria functions that have been amended according to the intercept exclusion from the set of parameters of interest:
+The intercept is a nuisance parameter, and so the criteria are adapted in such a way that the full information matrix in the DP- and LP-components and in the first part of the MSE-based components is replaced by the one excluding the intercept $\bm{M}_0 = \bm{X}^T_{p-1}\bm{Q}_0\bm{X}_{p-1}$, where $\bm{X}_{p-1}$ is the model matrix without the intercept, $\bm{Q}_0=\bm{I}_n-\frac{1}{n}\bm{11}'$. Otherwise the procedure of obtaining the $MSE(D)$- and $MSE(L)$-based components remains the same, and the MSE-based criteria functions that have been amended according to the intercept exclusion are referred to as MSE-DPs and MSE-LPs (similar to DPs and LPs from \cite{GilmourTrinca2012}):
 \begin{align*}
-\mbox{MSE(D): }&\left[\left|\bm{X}'_{1}\bm{Q}_0\bm{X}_{1}\right|^{-1/(p-1)}F_{p-1,d;1-\alpha_{DP}}\right]^{\kappa_{DP}} \times \notag \\ &\left[\left|\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right|^{-1/q}F_{q,d;1-\alpha_{LoF}}\right]^{\kappa_{LoF}}\times \notag\\ & \left[|\bm{X}'_{1}\bm{Q}_0\bm{X}_{1}|^{-1}\exp\left(\frac{1}{N}\sum_{i=1}^{N}\log(1+\bm{\tilde{\beta}}_{2i}'\bm{X}_2^{'}\bm{Q}_{0}\bm{X}_1\bm{\tilde{M}}^{-1}\bm{X}_1^{'}\bm{Q}_{0}\bm{X}_2\bm{\tilde{\beta}}_{2i})\right)\right]_{,}^\frac{\kappa_{MSE}}{(p-1)}
-\end{align*}
-\begin{align*}
-\mbox{MSE(D)P:}&\left[\left|\bm{X}'_{1}\bm{Q}_0\bm{X}_{1}\right|^{-1/(p-1)}F_{p-1,d;1-\alpha_{DP}}\right]^{\kappa_{DP}} \times \notag \\ &\left[\left|\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right|^{-1/q}F_{q,d;1-\alpha_{LoF}}\right]^{\kappa_{LoF}}\times \notag\\ & \left[|\bm{X}'_{1}\bm{Q}_0\bm{X}_{1}|^{-1}\left(1+\tau^2\sum_{i,j=1}^{q}[\bm{X}_2^{'}\bm{Q}_{0}\bm{X}_1\bm{\tilde{M}}^{-1}\bm{X}_1^{'}\bm{Q}_{0}\bm{X}_2]_{(i,j)}\right)\right]_{,}^\frac{\kappa_{MSE}}{(p-1)}\\
-\mbox{MSE(L):} &\left[\frac{1}{p}\mbox{trace}(\bm{WX}'_{1}\bm{Q}_{0}\bm{X}_{1})^{-1}F_{1,d;1-\alpha_{LP}}\right]^{\kappa_{LP}}\times \notag\\& \left[\frac{1}{q}\mbox{trace}\left(\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right)^{-1}F_{1,d;1-\alpha_{LoF}}\right]^{\kappa_{LoF}}\times 
-\notag\\& \left[\frac{1}{p-1}\mbox{trace}\{\bm{\tilde{M}}^{-1}+\tau^2\bm{A}\bm{A}'\}_{22}\right]_{.}^{\kappa_{MSE}}
+\mbox{MSE-DPs:} &\left[\left|\bm{X}^T_{p-1}\bm{Q}_0\bm{X}_{p-1}\right|^{-1/(p-1)}F_{p-1,d;1-\alpha_{DP}}\right]^{\kappa_{DP}} \times \notag \\ &\left[\left|\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right|^{-1/q}F_{q,d;1-\alpha_{LoF}}\right]^{\kappa_{LoF}}\times \notag\\ & \left[|\bm{X}'_{p-1}\bm{Q}_0\bm{X}_{p-1}|^{-1}\exp\left(\mathtt{E}_{\bm{\tilde{\beta}}_q}\log(1+\bm{\tilde{\beta}}_q^T\bm{X}_q^{T}\bm{Q}_0\bm{X}_{p-1}\bm{M}_0^{-1}\bm{X}_{p-1}^{T}\bm{Q}_0\bm{X}_q\bm{\tilde{\beta}}_q) \right)\right]_{,}^{\kappa_{MSE}/(p-1)}\\
+\mbox{MSE-LPs:} &\left[\frac{1}{p-1}\mbox{trace}(\bm{WX}^T_{p-1}\bm{Q}_{0}\bm{X}_{p-1})^{-1}F_{1,d;1-\alpha_{LP}}\right]^{\kappa_{LP}}\times \notag\\& \left[\frac{1}{q}\mbox{trace}\left(\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right)^{-1}F_{1,d;1-\alpha_{LoF}}\right]^{\kappa_{LoF}}\times 
+\notag\\& \left[\frac{1}{p-1}\mbox{trace}[\bm{M}^{-1}+\tau^2\bm{A}\bm{A}^T]_{[p-1, p-1]}\right]_{.}^{\kappa_{MSE}}
 \end{align*}
 
-In the third component of the MSE(L)-criterion the $\{\bm{\tilde{M}}^{-1}+\tau^2\bm{A}\bm{A}'\}_{22}$ stands for the submatrix corresponding to the parameters of interest, i.e.~the first column and the first row are to be excluded. It is worth noting that these criteria are a special case of a blocked experiment framework (with one block), which will be explicitly described in the next chapter.
+In the third component of the MSE-LP-criterion $[\bm{M}^{-1}+\tau^2\bm{A}\bm{A}^T]_{[p-1, p-1]}$ stands for the submatrix corresponding to the parameters of interest, i.e.~the first column and  row removed.
 
-Considering two values of the variance scaling parameter $\tau^2=1$ and $\tau^2=1/q$, for each compound criterion we obtain two sets of optimal designs, given in Tables \ref{tab::MSE(D)_ex1}, \ref{tab::MSE(L)_ex1} and \ref{tab::MSE(D)P_ex1}. 
+Considering two values of the variance scaling parameter $\tau^2=1$ and $\tau^2=1/q$, for each compound criterion we obtain two sets of optimal designs, their summaries are given in Tables \ref{tab::MSE(D)_ex1} and \ref{tab::MSE(L)_ex1}. 
+Every row corresponds to a design that has been obtained as optimal according to the compound criterion defined by the combination of weights $\kappa$-s. We explore the distribution of degrees of freedom between the pure error and lack-of-fit components in the designs and at the optimal designs' efficiencies with respect to the individual criteria that are given in the last columns. 
+%In the case of the $MSE-DP$-optimal designs, in Table \ref{tab::MSE(D)P_ex1}, the difference between their $MSE(D)$-efficiency values and the $MSE(D)$-efficiencies of the corresponding designs in Table \ref{tab::MSE(D)_ex1} indicates how much we lose in terms of the performance when the point prior is used for the $MSE(D)$-component estimation. 
+Optimal designs were obtained using the point exchange algorithm (\cite{Fedorov1972theory}), with $500$ random starts; the MSE(D)-part of the compound criterion was estimated using the MC sampling, and this is the most time consuming part of the computations. When this presents a considerable challenge, we can recommend the previously mentioned alternative of imputing the point prior values of $\bm{\tilde{\beta}_{q}}$. The resulting losses in the efficiencies are quite small, and time savings are substantial -- the illustration on this example is presented in Appendix \ref{appendix::example1}.
 
-The first three columns of the tables contain information about the weight distribution among the criterion components, so that every row corresponds to the design that has been obtained as optimal according to the criterion with the given weights. The next two columns show how the available residual degrees of freedom were allocated between the pure error and lack-of-fit components. Finally, the efficiencies of the resulting designs with respect to the individual criterion components are given in the last columns. In the case of the $MSE(D)P$-optimal designs, in Table \ref{tab::MSE(D)P_ex1}, the difference between their $MSE(D)$-efficiency values and the $MSE(D)$-efficiencies of the corresponding designs in Table \ref{tab::MSE(D)_ex1} indicates how much we lose in terms of the performance when the point prior is used for the $MSE(D)$-component estimation. 
-
-It is worth noting that when this criterion part is being estimated using a stochastic method (MC in this case), despite the error being small, the efficiency values are still approximate. Another disadvantage is the increased time consumption of the algorithm in comparison to the previously considered criteria: with $150$ random starts, it can take up to several days to obtain an $MSE(D)$-optimal design; whilst $MSE(D)P$- and $MSE(L)$-based optimal designs are usually obtained within $4$--$8$ hours, even with $500$ random starts. 
-
+[the Results of the smaller example are in preparation]
 %%% MSE(D) designs, tau^2=1 and tau^2=1/q
 \begin{table}[h]
-\caption{Properties of MSE(D)-optimal designs}
+\caption{Properties of MSE-DP-optimal designs}
 \label{tab::MSE(D)_ex1}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{rrrrrrrrrrrrr}
@@ -56,47 +49,16 @@ It is worth noting that when this criterion part is being estimated using a stoc
 }
 \end{table}
 
-The resulting designs tend to have a lot of the available degrees of freedom allocated to the pure error, except, for example, for the $MSE(D)$-optimal designs (\#$3$). However, for the smaller value of $\tau^2=1/q$ the imbalance is more extreme for the determinant-based criteria, where almost no degrees of freedom are left for lack of fit.
-
-There are no repeated designs for $\tau^2=1$, but for $\tau^2=1/q$, in Table \ref{tab::MSE(D)_ex1}, designs \#$4$, \#$7$ and \#$8$ are the same as the $DP$-optimal design, and have quite large values of other efficiencies, and design \#$9$, although it is different, has quite similar efficiency values. 
-
-The $DP$-optimal design is given in Table \ref{tab::DP_design}; it performs well in terms of the $MSE(D)$-component for both values of $\tau^2$, however, its $LoF(DP)$-efficiency drops by roughly half when the scaling parameter goes from $1/q$ to $1$; also, $LoF(DP)$-optimal designs provide the lowest $DP$-efficiency values (around $40\%$) for any value of $\tau^2$.
-
-\begin{table}[h]
-\centering
-\caption{MSE(D)-criterion, DP-optimal design}
-\label{tab::DP_design}
-\scalebox{0.8}{
-\begin{tabular}{rrrrrr|r|rrrrrr}
-1  & -1 & -1 & -1 & -1 & -1 &  & 21 & 0 & -1 & -1 & 1  & 0  \\
-2  & -1 & -1 & -1 & -1 & -1 &  & 22 & 0 & 0  & 0  & -1 & 1  \\
-3  & -1 & -1 & 0  & 1  & 1  &  & 23 & 0 & 0  & 0  & -1 & 1  \\
-4  & -1 & -1 & 1  & -1 & 1  &  & 24 & 0 & 1  & -1 & 0  & -1 \\
-5  & -1 & -1 & 1  & -1 & 1  &  & 25 & 1 & -1 & -1 & -1 & 1  \\
-6  & -1 & -1 & 1  & 1  & -1 &  & 26 & 1 & -1 & -1 & -1 & 1  \\
-7  & -1 & -1 & 1  & 1  & -1 &  & 27 & 1 & -1 & -1 & 1  & -1 \\
-8  & -1 & 0  & -1 & 0  & 1  &  & 28 & 1 & -1 & -1 & 1  & -1 \\
-9  & -1 & 0  & -1 & 0  & 1  &  & 29 & 1 & -1 & 1  & -1 & -1 \\
-10 & -1 & 1  & -1 & -1 & 1  &  & 30 & 1 & -1 & 1  & -1 & -1 \\
-11 & -1 & 1  & -1 & -1 & 1  &  & 31 & 1 & -1 & 1  & 1  & 1  \\
-12 & -1 & 1  & -1 & 1  & -1 &  & 32 & 1 & -1 & 1  & 1  & 1  \\
-13 & -1 & 1  & -1 & 1  & -1 &  & 33 & 1 & 0  & -1 & -1 & 0  \\
-14 & -1 & 1  & 0  & 0  & 0  &  & 34 & 1 & 1  & -1 & -1 & -1 \\
-15 & -1 & 1  & 0  & 0  & 0  &  & 35 & 1 & 1  & -1 & 1  & 1  \\
-16 & -1 & 1  & 1  & -1 & -1 &  & 36 & 1 & 1  & -1 & 1  & 1  \\
-17 & -1 & 1  & 1  & -1 & -1 &  & 37 & 1 & 1  & 1  & -1 & 1  \\
-18 & -1 & 1  & 1  & 1  & 1  &  & 38 & 1 & 1  & 1  & -1 & 1  \\
-19 & -1 & 1  & 1  & 1  & 1  &  & 39 & 1 & 1  & 1  & 1  & -1 \\
-20 & 0  & -1 & -1 & 1  & 0  &  & 40 & 1 & 1  & 1  & 1  & -1
-\end{tabular}
-}
-\end{table}
-
-As for the trace-based criterion and the optimal designs studied in Table \ref{tab::MSE(L)_ex1}, in general, all of them tend to have larger $LP$- and $MSE(L)$-efficiencies in case of smaller $\tau^2$, i.e. the decreased scale of the potentially missed contamination results in a more easily achievable compromise between the contradicting parts of the criteria (the same happens with the trace-based efficiencies of the MSE determinant-based optimal designs). It is also notable that, as it was observed in the case of generalised criteria, the $LoF(LP)$-optimal design is also $LoF(DP)$-optimal for $\tau^2=1/q$ (design \#$2$ in the corresponding tables).
-
-The $MSE(L)$-component seems to be much more sensitive to the weight allocations than the $MSE(D)$ component. For example, in the case of $\tau^2=1$ some decent efficiency values are gained only when the whole weight is on the `potential terms' criterion components, i.e.~designs \#$3$ and \#$6$. 
-
-It does not seem to work agreeably with the $LoF(LP)$-component either: the $LoF(LP)$-optimal design is $0.00\%$ $LP$- and $MSE(L)$-efficient in the case of $\tau^2=1$, and the efficiencies are close to $0\%$ in the case of smaller $\tau^2$. 
+%The resulting designs tend to have a lot of the available degrees of freedom allocated to the pure error, except, for example, for the $MSE(D)$-optimal designs (\#$3$). However, for the smaller value of $\tau^2=1/q$ the imbalance is more extreme for the determinant-based criteria, where almost no degrees of freedom are left for lack of fit.
+%
+%There are no repeated designs for $\tau^2=1$, but for $\tau^2=1/q$, in Table \ref{tab::MSE(D)_ex1}, designs \#$4$, \#$7$ and \#$8$ are the same as the $DP$-optimal design, and have quite large values of other efficiencies, and design \#$9$, although it is different, has quite similar efficiency values. 
+%
+%
+%As for the trace-based criterion and the optimal designs studied in Table \ref{tab::MSE(L)_ex1}, in general, all of them tend to have larger $LP$- and $MSE(L)$-efficiencies in case of smaller $\tau^2$, i.e. the decreased scale of the potentially missed contamination results in a more easily achievable compromise between the contradicting parts of the criteria (the same happens with the trace-based efficiencies of the MSE determinant-based optimal designs). It is also notable that, as it was observed in the case of generalised criteria, the $LoF-LP$-optimal design is also $LoF-DP$-optimal for $\tau^2=1/q$ (design \#$2$ in the corresponding tables).
+%
+%The $MSE(L)$-component seems to be much more sensitive to the weight allocations than the $MSE(D)$ component. For example, in the case of $\tau^2=1$ some decent efficiency values are gained only when the whole weight is on the `potential terms' criterion components, i.e.~designs \#$3$ and \#$6$. 
+%
+%It does not seem to work agreeably with the $LoF-LP$-component either: the $LoF-LP$-optimal design is $0.00\%$ $LP$- and $MSE(L)$-efficient in the case of $\tau^2=1$, and the efficiencies are close to $0\%$ in the case of smaller $\tau^2$. 
 %% MSE(L) criteria
 \begin{table}[h]
 \caption{Properties of MSE(L)-optimal designs}
@@ -130,44 +92,8 @@ It does not seem to work agreeably with the $LoF(LP)$-component either: the $LoF
 }
 \end{table}
 
-Regarding the designs' performances with respect to the $DP$- and $LP$-components, it can be observed that the designs tend to be quite $DP$-efficient, overall more efficient in the case of $MSE(D)$-efficient designs with smaller $\tau^2$. $DP$-efficient designs are not bad in terms of $LP$-efficiency and vice versa; again, the same cannot be said for the lack-of-fit components and seems not to be true at all for the $MSE$ components, especially, for the $MSE(L)$-optimal design when $\tau^2=1$.
-   
-$LP$- and $MSE(L)$-components seem to be in a conflict, though for $\tau^2=1/q$ $MSE(L)$-efficiency values are stable across the designs, therefore, making it possible to find compromise designs which at least perform not too badly with regard to both of these criterion parts; for example, designs \#$5$ -- \#$7$ are more than $75\%$-efficient (Table \ref{tab::MSE(L)_ex1}).   
+%Regarding the designs' performances with respect to the $DP$- and $LP$-components, it can be observed that the designs tend to be quite $DP$-efficient, overall more efficient in the case of $MSE(D)$-efficient designs with smaller $\tau^2$. $DP$-efficient designs are not bad in terms of $LP$-efficiency and vice versa; again, the same cannot be said for the lack-of-fit components and seems not to be true at all for the $MSE$ components, especially, for the $MSE(L)$-optimal design when $\tau^2=1$.
+%   
+%$LP$- and $MSE(L)$-components seem to be in a conflict, though for $\tau^2=1/q$ $MSE(L)$-efficiency values are stable across the designs, therefore, making it possible to find compromise designs which at least perform not too badly with regard to both of these criterion parts; for example, designs \#$5$ -- \#$7$ are more than $75\%$-efficient (Table \ref{tab::MSE(L)_ex1}).   
 
-Table \ref{tab::MSE(D)P_ex1} provides the performance summary of the designs constructed in the same way as the designs given in Table \ref{tab::MSE(D)_ex1}, but with the point prior of $\bm{\beta}_2=\sigma\tau\bm{1}_q$ used for the estimation of the $MSE(D)$-component of the criterion. This approach allowed reducing the computational times considerably, from as long as $2$ days to just a few hours, with other parameters being equal.
-
-%%% MSE(D) criteria, point prior on beta2 !!!
-\begin{table}[h]
-\caption{Properties of MSE(D)-optimal designs, with point prior}
-\label{tab::MSE(D)P_ex1}
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{rrrrrrrrrrrrrr}
-   & \multicolumn{3}{l}{\textbf{Criteria, $\bm{\tau^2=1}$}} & \multicolumn{2}{l}{\textbf{DoF}} & \multicolumn{7}{l}{\textbf{Efficiency,\%}}                               \\
-   & \textbf{DP}       & \textbf{LoF(DP)}    & \textbf{MSE(D)P}  & \textbf{PE}        & \textbf{LoF}        & \textbf{DP}   & \textbf{LoF(DP)}   & \textbf{MSE(D)}  & \textbf{MSE(D)P} &  \textbf{LP}       & \textbf{LoF(LP)}   & \textbf{MSE(L)}  \\
-1 & 1    & 0    & 0 & \multicolumn{1}{|r}{18} & \multicolumn{1}{r|}{1} & 100.00 & 47.77 & 91.05 & \multicolumn{1}{|r}{90.06} & \multicolumn{1}{|r}{96.38} & 94.92 & 10.70 \\
-2 & 0    & 1    & 0 & \multicolumn{1}{|r}{8} & \multicolumn{1}{r|}{11} & 43.70 & 100.00 & 54.74 & \multicolumn{1}{|r}{53.51} & \multicolumn{1}{|r}{0.75} & 89.99 & 2.08  \\
-3 & 0    & 0    & 1 & \multicolumn{1}{|r}{0} & \multicolumn{1}{r|}{19} & 0.00 & 0.00 & 98.18 & \multicolumn{1}{|r}{100.00} & \multicolumn{1}{|r}{0.00} & 0.00 & 23.72 \\
-4 & 0.5  & 0.5  & 0    & \multicolumn{1}{|r}{11} & \multicolumn{1}{r|}{8} & 78.50 & 87.61 & 88.56 & \multicolumn{1}{|r}{87.04} & \multicolumn{1}{|r}{73.88} & 98.85 & 17.66 \\
-5 & 0.5  & 0    & 0.5  & \multicolumn{1}{|r}{18} & \multicolumn{1}{r|}{1} & 100.00 & 47.77 & 90.70 & \multicolumn{1}{|r}{93.28} & \multicolumn{1}{|r}{96.38} & 94.92 & 10.70 \\
-6 & 0    & 0.5  & 0.5  & \multicolumn{1}{|r}{8} & \multicolumn{1}{r|}{11} & 65.84 & 94.78 & 88.51 & \multicolumn{1}{|r}{88.72} & \multicolumn{1}{|r}{58.15} & 89.54 & 23.63 \\
-7 & 1/3  & 1/3  & 1/3  & \multicolumn{1}{|r}{11} & \multicolumn{1}{r|}{8} & 83.32 & 80.22 & 92.71 & \multicolumn{1}{|r}{94.22} & \multicolumn{1}{|r}{84.52} & 98.34 & 17.21 \\
-8 & 0.5  & 0.25 & 0.25 & \multicolumn{1}{|r}{13} & \multicolumn{1}{r|}{6} & 92.07 & 66.67 & 94.27 & \multicolumn{1}{|r}{94.92} & \multicolumn{1}{|r}{94.02} & 98.91 & 13.88 \\
-9 & 0.25 & 0.5  & 0.25 & \multicolumn{1}{|r}{9} & \multicolumn{1}{r|}{10} & 69.69  & 95.64  & 87.48 & \multicolumn{1}{|r}{86.46}  & \multicolumn{1}{|r}{61.06} & 94.29 & 25.30 \\
- & & & & & & & & & & & & \\
-   & \multicolumn{3}{l}{\textbf{Criteria, $\bm{\tau^2=1/q}$}} & \multicolumn{2}{l}{\textbf{DoF}} & \multicolumn{6}{l}{\textbf{Efficiency,\%}}                               \\
-   & \textbf{DP}       & \textbf{LoF(DP)}    & \textbf{MSE(D)P} & \textbf{PE}        & \textbf{LoF}        & \textbf{DP}   & \textbf{LoF(DP)}   & \textbf{MSE(D)} & \textbf{MSE(D)P} & \textbf{LP}       & \textbf{LoF(LP)}   & \textbf{MSE(L)}  \\
-1 & 1    & 0    & 0    & \multicolumn{1}{|r}{18} & \multicolumn{1}{r|}{1} & 100.00 & 94.41  & 90.60 & \multicolumn{1}{|r}{90.23}  & \multicolumn{1}{|r}{96.42} & 98.36 & 44.94 \\
-2 & 0    & 1    & 0    & \multicolumn{1}{|r}{16} & \multicolumn{1}{r|}{3} & 39.66  & 100.00 & 37.95 & \multicolumn{1}{|r}{37.87}  & \multicolumn{1}{|r}{0.13}  & 100.00 & 0.12  \\
-3 & 0    & 0    & 1    & \multicolumn{1}{|r}{0} & \multicolumn{1}{r|}{19} & 0.00   & 0.00   & 98.30 & \multicolumn{1}{|r}{100.00} & \multicolumn{1}{|r}{0.00}  & 0.00  & 77.96 \\
-4 & 0.5  & 0.5  & 0    & \multicolumn{1}{|r}{18} & \multicolumn{1}{r|}{1}  & 100.00 & 94.41  & 90.60 & \multicolumn{1}{|r}{90.23}  & \multicolumn{1}{|r}{96.42} & 98.36 & 44.94 \\
-5 & 0.5  & 0    & 0.5  & \multicolumn{1}{|r}{18} & \multicolumn{1}{r|}{1} & 100.00 & 94.41  & 90.60 & \multicolumn{1}{|r}{90.23} & \multicolumn{1}{|r}{96.42} & 98.36 & 44.94 \\
-6 & 0    & 0.5  & 0.5  & \multicolumn{1}{|r}{15} & \multicolumn{1}{r|}{4} & 96.16  & 92.23  & 92.85 & \multicolumn{1}{|r}{95.16}  & \multicolumn{1}{|r}{96.19} & 95.04 & 51.06 \\
-7 & 1/3  & 1/3  & 1/3  & \multicolumn{1}{|r}{18} & \multicolumn{1}{r|}{1} & 99.98  & 94.34  & 90.64 & \multicolumn{1}{|r}{93.04}  & \multicolumn{1}{|r}{95.95} & 98.31 & 44.71 \\
-8 & 0.5  & 0.25 & 0.25 & \multicolumn{1}{|r}{18} & \multicolumn{1}{r|}{1} & 99.98  & 94.34  & 90.64 & \multicolumn{1}{|r}{93.04}  & \multicolumn{1}{|r}{95.95} & 98.31 & 44.71 \\
-9 & 0.25 & 0.5  & 0.25 & \multicolumn{1}{|r}{18} & \multicolumn{1}{r|}{1} & 98.84  & 94.72  & 89.71 & \multicolumn{1}{|r}{92.34}  & \multicolumn{1}{|r}{94.92} & 98.59 & 46.43
-\end{tabular}
-}
-\end{table}
-The $MSE(D)$ column contains the estimation of the $MSE(D)$-efficiency based on the MC calculation with the sample size of $1000$. The main observation to be made here is that the resulting designs perform very similarly to the designs seen above, and the maximum loss in the MSE(D)-efficiency does not exceed $2.5\%$ across both values of $\tau^2$; losses in the efficiencies with respect to the $MSE(D)$-optimal designs presented in Table \ref{tab::MSE(D)_ex1} are also very small and do not exceed $3.5\%$.
-
-The observed relationships between the components of the criteria provide some ideas on how the designs obtained as optimal with respect to the various allocations of weights differ, what they have in common, and how the components interact when the weights are reallocated. A compromise can be found between the criterion components corresponding to the properties of the primary terms and the components responsible for the reducing the negative impact from the assumed potential model misspecification. Thereby, the careful choice of the prior parameters ($\tau^2$ in this case) turned out to be of a certain importance as well. 
+The observed relationships between the components of the criteria provide some ideas on how the designs obtained as optimal with respect to the various allocations of weights differ, what they have in common, and how the components interact when the weights are reallocated. A compromise can be found between the criterion components corresponding to the properties of the primary terms and the components responsible for the reducing the negative impact from the assumed potential model misspecification. Thereby, the careful choice of the prior parameters ($\tau^2$ in this case) seems to be of a certain importance as well. 

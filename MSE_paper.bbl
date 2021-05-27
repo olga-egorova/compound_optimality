@@ -1,4 +1,4 @@
-\begin{thebibliography}{28}
+\begin{thebibliography}{31}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \expandafter\ifx\csname url\endcsname\relax
   \def\url#1{\texttt{#1}}\fi
@@ -9,6 +9,10 @@
 Atkinson, A.~C., Donev, A.~N. and Tobias, R.~D. (2007) \emph{Optimum
   Experimental Designs, with SAS}.
 \newblock Oxford University Press.
+
+\bibitem[{Bailey(2008)}]{Bailey2008design}
+Bailey, R.~A. (2008) \emph{Design of Comparative Experiments}, vol.~25.
+\newblock Cambridge University Press.
 
 \bibitem[{Box and Draper(1987)}]{Box1987empirical}
 Box, G.~E.~P. and Draper, N.~R. (1987) \emph{Empirical Model-Building and
@@ -38,6 +42,10 @@ Draper, N.~R. and Smith, H. (1998) \emph{Applied Regression Analysis, 3rd edn}.
 DuMouchel, W. and Jones, B. (1994) A simple {B}ayesian modification of
   {D}-optimal designs to reduce dependence on an assumed model.
 \newblock \emph{Technometrics}, \textbf{36}, 37--47.
+
+\bibitem[{Fedorov(1972)}]{Fedorov1972theory}
+Fedorov, V.~V. (1972) \emph{Theory of Optimal Experiments}.
+\newblock Elsevier.
 
 \bibitem[{Gilmour and Goos(2009)}]{Gilmour2009analysis}
 Gilmour, S.~G. and Goos, P. (2009) Analysis of data from non-orthogonal
@@ -129,6 +137,13 @@ Montepiedra, G. and Fedorov, V.~V. (1997) Minimum bias designs with
   constraints.
 \newblock \emph{Journal of Statistical Planning and Inference}, \textbf{63},
   97--111.
+
+\bibitem[{Myers \emph{et~al.}(2009)Myers, Montgomery and
+  Anderson-Cook}]{Myers2009}
+Myers, R.~H., Montgomery, D.~C. and Anderson-Cook, C.~M. (2009) \emph{Response
+  Surface Methodology: Process and Product Optimization Using Designed
+  Experiments}.
+\newblock John Wiley \& Sons.
 
 \bibitem[{Rudin(1987)}]{Rudin1987real}
 Rudin, W. (1987) \emph{Real and Complex Analysis}.

@@ -1,160 +1,182 @@
 
-We will start by reviewing the `full' model for blocked experiments, similar to (\ref{eq::blocked_model}):
-\begin{align*}
-\bm{Y}=\bm{Z\beta}_{B}+\bm{X}_{1}\bm{\beta}_{1}+\bm{X}_{2}\bm{\beta}_{2}+\bm{\varepsilon}.
-\end{align*}
-Denote the $n\times(b+p)$ model matrix of the block and primary terms by $\tilde{\bm{X}}_{1}=[\bm{Z},\bm{X}_{1}]$, where the columns of $\bm{Z}$ contain block indicators, and the columns of $\bm{X}_{1}$ correspond to primary terms. Let also $\bm{\tilde{\beta}}_1=[\bm{\beta}_{B},\bm{\beta}_{1}]'$ be the joint vector of fixed block effects and primary model terms, and by $\bm{\hat{\tilde{\beta}}}_1$ we denote the vector of the corresponding estimates. It is worth noting that the number of primary terms $p$ does not include the intercept, as it is aliased with the block effects.
+In some experiments, where the number of runs is relatively large, and/or the variability between units is quite high, experimental units are allocated in blocks such that within each block the units are similar in some way, e.g.~the runs carried out within the same day. Such formalisation contributes to 
+controlling the variability by separating variation coming from the difference between blocks and the variability arising from within the blocks \citep{Bailey2008design}.
 
-%The $DP$-, $LP$- and $LoF(DP)$- and $LoF(LP)$-components are derived as was shown in Section \ref{sec::gen_blocked}.
-Then the overall mean square error matrix is
+Under the assumption of additivity of $b$ fixed block effects the polynomial model can be presented as:
+\begin{equation}
+\label{eq::blocked_model}
+\bm{Y}=\bm{Z\beta}_B+\bm{X\beta}+\bm{\varepsilon},
+\end{equation}
+which, in addition to the same terms as in (\ref{eq::primary_model}) comprises $\bm{Z}$ -- the $n\times b$ matrix, such that its $(i,j)^{th}$ element is equal to $1$ if unit $i$ is in block $j$ and to $0$ otherwise, and $\bm{\beta}_B$ is the vector of block effects. 
+
+The full information matrix has the form
+$%\begin{equation*}
+\bm{M_B}=
+\begin{pmatrix}
+\bm{Z}'\bm{Z} & \bm{Z}'\bm{X}\\
+\bm{X}'\bm{Z} & \bm{X}'\bm{X}
+\end{pmatrix}.     
+$%\end{equation*} 
+
+Using the rules of inverting blocked matrices (\citealp{Harville2006matrix}), we can isolate the variance of the polynomial coefficients' estimates:
+\begin{align*}
+\mbox{Var}(\hat{\bm{\beta}})&=\sigma^2(\bm{M_B}^{-1})_{22}=\sigma^2(\bm{X}'\bm{QX}),^{-1}\\
+\mbox{where }&\bm{Q}=\bm{I}-\bm{Z}(\bm{Z}'\bm{Z})^{-1}\bm{Z}'.
+\end{align*}
+The $DP$- and $LP$-criteria become $DP_S$ and $LP_S$ in the context of a blocked experiment, and they can be straightforwardly defined as
+\begin{align}
+\label{eq::DPs_blocked}
+DP_S: &(F_{p,d_B;1-\alpha_{DP}})^{p}\vert (\bm{X}'\bm{Q}\bm{X})^{-1}\vert \rightarrow \mbox{min,}\\
+\label{eq::LPs_blocked}
+LP_S: &F_{1,d_B;1-\alpha_{LP}}\mbox{trace}\{\bm{W}(\bm{X}'\bm{Q}\bm{X})^{-1}\} \rightarrow \mbox{min.}.
+\end{align}
+
+The number of pure error degrees of freedom is now calculated as $d_B=n-\mbox{rank}[\bm{Z}:\bm{T}]$, where $\bm{T}$ is the $n\times t$ matrix whose elements indicate the treatments (\citealp{GilmourTrinca2012}), providing the number of replications after subtracting the ones taken for the estimation of block contrasts.  
+
+To adapt the derivation of the lack-of-fit and MSE-based criteria to the blocked experiments, we start by formulating the model comprising both primary terms and possible contamination in the form of potential terms, now for blocked experiments: 
+\begin{align*}
+\bm{Y}=\bm{Z\beta}_{B}+\bm{X}_{p}\bm{\beta}_{p}+\bm{X}_{q}\bm{\beta}_{q}+\bm{\varepsilon}.
+\end{align*}
+Denote the $n\times(b+p)$ model matrix of the block and primary terms by $\tilde{\bm{X}}_{p}=[\bm{Z},\bm{X}_{p}]$ and let $\bm{\tilde{\beta}}_p=[\bm{\beta}_{B},\bm{\beta}_{p}]'$ be the joint vector of fixed block effects and primary model terms, and by $\bm{\hat{\tilde{\beta}}}_p$ we denote the vector of the corresponding estimates. It is worth noting that the number of primary terms $p$ does not include the intercept, as it is aliased with the block effects.
+
+\subsection{Lack-of-fit criteria}
+The information matrix for the model (\ref{eq::blocked_model}), up to a multiple of $\sigma^2$, is:
+\begin{align*}
+\bm{M_B}=
+\begin{pmatrix}
+\bm{Z}^T\bm{Z} & \bm{Z}^T\bm{X}_{p} & \bm{Z}^T\bm{X}_{q}\\
+\bm{X}^T_{p}\bm{Z} & \bm{X}^T_{p}\bm{X}_{p} & \bm{X}^T_{p}\bm{X}_{q}\\
+\bm{X}^T_{q}\bm{Z} & \bm{X}^T_{q}\bm{X}_{p} & \bm{X}^T_{q}\bm{X}_{q}+\bm{I}_{q}/\tau^2
+\end{pmatrix}
+=
+\begin{pmatrix}
+\bm{\tilde{X}}^T_{p}\bm{\tilde{X}}_{p} & \bm{\tilde{X}}^T_{p}\bm{X}_{q}\\
+\bm{X}^T_{q}\bm{\tilde{X}}_{p} & \bm{X}^T_{q}\bm{X}_{q}+\bm{I}_{q}/\tau^2
+\end{pmatrix}_{.}
+\end{align*} 
+
+Assuming the same normal prior on $\bm{\beta}_q$ $\sim \mathcal{N}(\bm{0}, \tau^2\sigma^2\bm{I}_q)$, we can construct the variance-covariance matrix corresponding to the potential terms, which would be the inverse of the lower right submatrix of $\bm{M_B}$: $\bm{\tilde{\Sigma}}_{qq}=\sigma^2[\bm{M}^{-1}_B]_{22}$.
+\begin{align*}
+\bm{\tilde{\Sigma}}_{qq}&=\sigma^2([\bm{M_B}]_{22}-[\bm{M_B}]_{21}([\bm{M_B}]_{11})^{-1}[\bm{M_B}]_{12})^{-1}\\
+&=\sigma^2(\bm{X}^T_{q}\bm{X}_{q}+\bm{I}_{q}/\tau^2-\bm{X}^T_{q}\bm{\tilde{X}}_{p}(\bm{\tilde{X}}^T_{p}\bm{\tilde{X}}_{p})^{-1}\bm{\tilde{X}}^T_{p}\bm{X}_{q})^{-1}\\&=\sigma^2\left(\bm{\tilde{L}}+\frac{\bm{I}_{q}}{\tau^2}\right), \mbox{ where }\bm{\tilde{L}}=\bm{X}^T_{q}\bm{X}_{q}-\bm{X}^T_{q}\bm{\tilde{X}}_{p}(\bm{\tilde{X}}^T_{p}\bm{\tilde{X}}_{p})^{-1}\bm{\tilde{X}}^T_{p}\bm{X}_{q}.
+\end{align*}
+
+Therefore, the lack-of-fit criteria in (\ref{eq::LoFDP_criterion}) and (\ref{eq::LoFLP_criterion}) are adjusted for blocked experiments by replacing the primary terms matrix $\bm{X}_{p}$ by the extended matrix $\bm{\tilde{X}}_{p}$ and the dispersion matrix $\bm{L}$ -- by $\bm{\tilde{L}}$ as obtained above.
+
+\subsection{MSE-based criteria}
+
+As for the MSE-based measure of the shift in the primary terms estimates, we first consider the overall mean square matrix  
 \begin{align}
 \label{eq::MSE_b}
-\mbox{MSE}(\bm{\hat{\tilde{\beta}}}_1|\bm{\tilde{\beta}})=&\mathtt{E}_{\bm{Y}|\bm{\beta}}[(\bm{\hat{\tilde{\beta}}}_1-\bm{\tilde{\beta}}_1)(\bm{\hat{\tilde{\beta}}}_1-\bm{\tilde{\beta}}_1)'] \notag\\=&\sigma^2(\bm{\tilde{X}}_1^{'}\bm{\tilde{X}}_1)^{-1}+\bm{\tilde{A}}\bm{\beta}_2\bm{\beta}_2'\bm{\tilde{A}}', 
+\mbox{MSE}(\bm{\hat{\tilde{\beta}}}_p|\bm{\tilde{\beta}})=&\mathtt{E}_{\bm{Y}|\bm{\beta}}[(\bm{\hat{\tilde{\beta}}}_p-\bm{\tilde{\beta}}_p)(\bm{\hat{\tilde{\beta}}}_p-\bm{\tilde{\beta}}_p)'] \notag\\=&\sigma^2(\bm{\tilde{X}}_p^{'}\bm{\tilde{X}}_p)^{-1}+\bm{\tilde{A}}\bm{\beta}_q\bm{\beta}_q^T\bm{\tilde{A}}^T, 
 \end{align}
-where $\bm{\tilde{A}}=(\bm{\tilde{X}}_1^{'}\bm{\tilde{X}}_1)^{-1}\bm{\tilde{X}}_1^{'}\bm{X}_2$ is the alias matrix in the case of a blocked experiment.
-
-Now consider the partition of the MSE matrix with respect to block and primary effects:
-\begin{align}
-\label{eq::mse_b_matrix}
-&\mathtt{E}_{\bm{Y}|\bm{\beta}}[(\bm{\hat{\tilde{\beta}}}_1-\bm{\tilde{\beta}}_1)(\bm{\hat{\tilde{\beta}}}_1-\bm{\tilde{\beta}}_1)']= \notag\\ &\mathtt{E}_{\bm{Y}|\bm{\beta}}\{[\hat{\tilde{\beta}}_{11}-\tilde{\beta}_{11},\ldots,
-\hat{\tilde{\beta}}_{1b}-\tilde{\beta}_{1b}, \hat{\tilde{\beta}}_{1 b+1}-\tilde{\beta}_{1 b+1},\ldots, \hat{\tilde{\beta}}_{1 b+p}-\tilde{\beta}_{1 b+p}]\times \notag\\ &[\hat{\tilde{\beta}}_{11}-\tilde{\beta}_{11},\ldots,
-\hat{\tilde{\beta}}_{1b}-\tilde{\beta}_{1b}, \hat{\tilde{\beta}}_{1 b+1}-\tilde{\beta}_{1 b+1},\ldots, \hat{\tilde{\beta}}_{1 b+p}-\tilde{\beta}_{1 b+p}]'\}=\notag\\
-&\mathtt{E}_{\bm{Y}|\bm{\beta}}\{[\bm{\hat{\beta}}_B-\bm{\beta}_B, \bm{\hat{\beta}}_1-\bm{\beta}_1][\bm{\hat{\beta}}_B-\bm{\beta}_B, \bm{\hat{\beta}}_1-\bm{\beta}_1]'\}=\notag\\
-&\begin{bmatrix}
-\mathtt{E}_{\bm{Y}|\bm{\beta}}(\bm{\hat{\beta}}_B-\bm{\beta}_B)(\bm{\hat{\beta}}_B-\bm{\beta}_B)' & \mathtt{E}_{\bm{Y}|\bm{\beta}}(\bm{\hat{\beta}}_B-\bm{\beta}_B)(\bm{\hat{\beta}}_1-\bm{\beta}_1)'\\
-\mathtt{E}_{\bm{Y}|\bm{\beta}}(\bm{\hat{\beta}}_1-\bm{\beta}_1)(\bm{\hat{\beta}}_B-\bm{\beta}_B)' & \mathtt{E}_{\bm{Y}|\bm{\beta}}(\bm{\hat{\beta}}_1-\bm{\beta}_1)(\bm{\hat{\beta}}_1-\bm{\beta}_1)'
-\end{bmatrix}.
-\end{align}
-
-The $[2,2]$-submatrix (bottom-right) represents the entity we are interested in -- the bias of the estimators of the primary terms. Denote it by $\mbox{MSE}(\bm{\hat{\tilde{\beta}}}_1|\bm{\tilde{\beta}})_{22}$. Then the corresponding submatrix of the first summand in (\ref{eq::MSE_b}) is
-\begin{equation*}
-[\sigma^2(\bm{\tilde{X}}_1^{'}\bm{\tilde{X}}_1)^{-1}]_{22}=\sigma^2(\bm{X}'_{1}
-\bm{QX}_{1})^{-1}, \mbox { where } \bm{Q}=\bm{I}-\bm{Z}(\bm{Z}'\bm{Z})^{-1}\bm{Z}'. 
-\end{equation*}
-
-Using the matrix inversion rule for block matrices \citep{Harville2006matrix}:
+with $\bm{\tilde{A}}=(\bm{\tilde{X}}_p^T\bm{\tilde{X}}_p)^{-1}\bm{\tilde{X}}_p^{'T}\bm{X}_q$ being the alias matrix, 
+and its partition with respect to block and primary effects:
 \begin{align*}
-\begin{bmatrix}
-\bm{A} & \bm{B}\\
-\bm{C} & \bm{D}
-\end{bmatrix}
-^{-1}=
-\begin{bmatrix}
-(\bm{A}-\bm{BD}^{-1}\bm{C})^{-1} & -(\bm{A}-\bm{BD}^{-1}\bm{C})^{-1}\bm{BD}^{-1} \\
--\bm{D}^{-1}\bm{C}(\bm{A}-\bm{BD}^{-1}\bm{C})^{-1} & \bm{D}^{-1}+\bm{D}^{-1}\bm{C}(\bm{A}-\bm{BD}^{-1}\bm{C})^{-1}\bm{BD}^{-1}
-\end{bmatrix},
+%\label{eq::mse_b_matrix}
+&\mathtt{E}_{\bm{Y}|\bm{\beta}}[(\bm{\hat{\tilde{\beta}}}_p-\bm{\tilde{\beta}}_p)(\bm{\hat{\tilde{\beta}}}_p-\bm{\tilde{\beta}}_p)^T]= \notag\\ &\mathtt{E}_{\bm{Y}|\bm{\beta}}\{[\hat{\tilde{\beta}}_{p1}-\tilde{\beta}_{p1},\ldots,
+\hat{\tilde{\beta}}_{pb}-\tilde{\beta}_{pb}, \hat{\tilde{\beta}}_{p b+1}-\tilde{\beta}_{p b+1},\ldots, \hat{\tilde{\beta}}_{p b+p}-\tilde{\beta}_{p b+p}]\times \notag\\ &[\hat{\tilde{\beta}}_{p 1}-\tilde{\beta}_{p1},\ldots,
+\hat{\tilde{\beta}}_{pb}-\tilde{\beta}_{pb}, \hat{\tilde{\beta}}_{p b+1}-\tilde{\beta}_{p b+1},\ldots, \hat{\tilde{\beta}}_{p b+p}-\tilde{\beta}_{p b+p}]^T\}=\notag\\
+&\mathtt{E}_{\bm{Y}|\bm{\beta}}\{[\bm{\hat{\beta}}_B-\bm{\beta}_B, \bm{\hat{\beta}}_p-\bm{\beta}_p][\bm{\hat{\beta}}_B-\bm{\beta}_B, \bm{\hat{\beta}}_p-\bm{\beta}_p]^T\}=\notag\\
+&\begin{bmatrix}
+\mathtt{E}_{\bm{Y}|\bm{\beta}}(\bm{\hat{\beta}}_B-\bm{\beta}_B)(\bm{\hat{\beta}}_B-\bm{\beta}_B)^T & \mathtt{E}_{\bm{Y}|\bm{\beta}}(\bm{\hat{\beta}}_B-\bm{\beta}_B)(\bm{\hat{\beta}}_p-\bm{\beta}_p)^T\\
+\mathtt{E}_{\bm{Y}|\bm{\beta}}(\bm{\hat{\beta}}_p-\bm{\beta}_p)(\bm{\hat{\beta}}_B-\bm{\beta}_B)^T & \mathtt{E}_{\bm{Y}|\bm{\beta}}(\bm{\hat{\beta}}_p-\bm{\beta}_p)(\bm{\hat{\beta}}_p-\bm{\beta}_p)^T
+\end{bmatrix}.
 \end{align*}
 
-under the conditions of invertability of $\bm{A}$, $\bm{D}$ and $\bm{A}-\bm{BD}^{-1}\bm{C}$, we now consider $\bm{\tilde{A}}$:
+The part  corresponding to the bias of the primary terms $\bm{\beta}_p$ is the lower right $p \times p$ submatrix, and we can extract it from the MSE expression in (\ref{eq::MSE_b}). The respective submatrix of the first summand  is
+\begin{equation*}
+[\sigma^2(\bm{\tilde{X}}_p^{T}\bm{\tilde{X}}_p)^{-1}]_{22}=\sigma^2(\bm{X}^T_{p}
+\bm{QX}_{p})^{-1}, \mbox { where } \bm{Q}=\bm{I}-\bm{Z}(\bm{Z}^T\bm{Z})^{-1}\bm{Z}^T_{.} 
+\end{equation*}
+
+Using the matrix inversion rule for block matrices \citep{Harville2006matrix}, we now consider $\bm{\tilde{A}}$:
 \begin{align*}
 \bm{\tilde{A}}=&\left(
 \begin{bmatrix}
-\bm{Z}'\\
-\bm{X}'_{1}
+\bm{Z}^T\\
+\bm{X}^T_{p}
 \end{bmatrix}
 \begin{bmatrix}
-\bm{Z} & \bm{X}_{1}
+\bm{Z} & \bm{X}_{p}
 \end{bmatrix}\right)^{-1}
 \begin{bmatrix}
-\bm{Z}'\\
-\bm{X}'_{1}
-\end{bmatrix}\bm{X}_{2}=
+\bm{Z}^T\\
+\bm{X}^T_{p}
+\end{bmatrix}\bm{X}_{q}=
 \begin{pmatrix}
-\bm{Z}'\bm{Z} & \bm{Z}'\bm{X}_{1}\\
-\bm{X}'_{1}\bm{Z} & \bm{X}'_{1}\bm{X}_{1}
+\bm{Z}^T\bm{Z} & \bm{Z}^T\bm{X}_{p}\\
+\bm{X}^T_{p}\bm{Z} & \bm{X}^T_{p}\bm{X}_{p}
 \end{pmatrix}^{-1}
 \begin{bmatrix}
-\bm{Z}'\\
-\bm{X}'_{1}
-\end{bmatrix}\bm{X}_{2}=
+\bm{Z}^T\\
+\bm{X}^T_{p}
+\end{bmatrix}\bm{X}_{q}=
 \\ &
 \begin{bmatrix}
-(\bm{Z}'\bm{PZ})^{-1} & -(\bm{Z}'\bm{PZ})^{-1}\bm{Z}'\bm{X}_{1}(\bm{X}'_{1}\bm{X}_{1})^{-1} \\
--(\bm{X}'_{1}\bm{QX}_{1})^{-1}\bm{X}'_{1}\bm{Z}(\bm{Z}'\bm{Z})^{-1} & (\bm{X}'_{1}\bm{QX}_{1})^{-1}
+(\bm{Z}^T\bm{PZ})^{-1} & -(\bm{Z}^T\bm{PZ})^{-1}\bm{Z}^T\bm{X}_{p}(\bm{X}^T_{p}\bm{X}_{p})^{-1} \\
+-(\bm{X}^T_{p}\bm{QX}_{1})^{-1}\bm{X}^T_{p}\bm{Z}(\bm{Z}^T\bm{Z})^{-1} & (\bm{X}^T_{1}\bm{QX}_{p})^{-1}
 \end{bmatrix}
 \begin{bmatrix}
-\bm{Z}'\\
-\bm{X}'_{1}
-\end{bmatrix}\bm{X}_{2}=\\ &
+\bm{Z}^T\\
+\bm{X}^T_{p}
+\end{bmatrix}\bm{X}_{q}=\\ &
 \begin{bmatrix}
-(\bm{Z}'\bm{PZ})^{-1}\bm{Z}'\bm{PX}_{2}\\
-(\bm{X}'_{1}\bm{QX}_{1})^{-1}\bm{X}'_{1}\bm{QX}_{2}
+(\bm{Z}^T\bm{PZ})^{-1}\bm{Z}^T\bm{PX}_{q}\\
+(\bm{X}^T_{p}\bm{QX}_{1})^{-1}\bm{X}^T_{p}\bm{QX}_{q}
 \end{bmatrix}, 
 \end{align*}
-where $\bm{P}=\bm{I}-\bm{X}_{1}(\bm{X}'_{1}\bm{X}_{1})^{-1}\bm{X}'_{1}$ is symmetric.
-
-Here $\bm{ZZ}'$, $\bm{X}'_{1}\bm{X}_{1}$ and $\bm{Z}'\bm{PZ}$ are all invertible and, therefore, the operations are legitimate. 
-
-Now consider the second summand in (\ref{eq::MSE_b}):
+where $\bm{P}=\bm{I}-\bm{X}_{p}(\bm{X}^T_{p}\bm{X}_{p})^{-1}\bm{X}^T_{p}$; $\bm{ZZ}'$, $\bm{X}'_{1}\bm{X}_{1}$ and $\bm{Z}'\bm{PZ}$ are all invertible and, therefore, the operations are legitimate. Now consider the second summand in (\ref{eq::MSE_b}):
 \begin{align*}
-&\bm{\tilde{A}}\bm{\beta}_2\bm{\beta}_2'\bm{\tilde{A}}'=
+&\bm{\tilde{A}}\bm{\beta}_q\bm{\beta}_q^T\bm{\tilde{A}}^T=
 \begin{bmatrix}
-(\bm{Z}'\bm{PZ})^{-1}\bm{Z}'\bm{PX}_{2}\bm{\beta}_2 \\
-(\bm{X}'_{1}\bm{QX}_{1})^{-1}\bm{X}'_{1}\bm{QX}_{2}\bm{\beta}_2
+(\bm{Z}^T\bm{PZ})^{-1}\bm{Z}^T\bm{PX}_{q}\bm{\beta}_q \\
+(\bm{X}^T_{p}\bm{QX}_{p})^{-1}\bm{X}^T_{p}\bm{QX}_{q}\bm{\beta}_q
 \end{bmatrix}
 \begin{bmatrix}
-\bm{\beta}'_2\bm{X}'_{2}\bm{PZ}(\bm{Z}'\bm{PZ})^{-1} & \bm{\beta}'_2\bm{X}'_{2}\bm{QX}_{1}(\bm{X}'_{1}\bm{QX}_{1})^{-1}
+\bm{\beta}^T_q\bm{X}^T_{2}\bm{PZ}(\bm{Z}^T\bm{PZ})^{-1} & \bm{\beta}^T_q\bm{X}^T_{q}\bm{QX}_{p}(\bm{X}^T_{p}\bm{QX}_{p})^{-1}
 \end{bmatrix}=\\
 &\begin{bmatrix}
-(\bm{Z}'\bm{PZ})^{-1}\bm{Z}'\bm{PX}_{2}\bm{\beta}_2\bm{\beta}'_2\bm{X}'_{2}\bm{PZ}(\bm{Z}'\bm{PZ})^{-1} & (\bm{Z}'\bm{PZ})^{-1}\bm{Z}'\bm{PX}_{2}\bm{\beta}_2\bm{\beta}'_2\bm{X}'_{2}\bm{QX}_{1}(\bm{X}'_{1}\bm{QX}_{1})^{-1} \\
-(\bm{X}'_{1}\bm{QX}_{1})^{-1}\bm{X}'_{1}\bm{QX}_{2}\bm{\beta}_2\bm{\beta}'_2\bm{X}'_{2}\bm{PZ}(\bm{Z}'\bm{PZ})^{-1} & (\bm{X}'_{1}\bm{QX}_{1})^{-1}\bm{X}'_{1}\bm{QX}_{2}\bm{\beta}_2\bm{\beta}'_2\bm{X}'_{2}\bm{QX}_{1}(\bm{X}'_{1}\bm{QX}_{1})^{-1}
+(\bm{Z}^T\bm{PZ})^{-1}\bm{Z}^T\bm{PX}_{q}\bm{\beta}_q\bm{\beta}^T_q\bm{X}^T_{q}\bm{PZ}(\bm{Z}^T\bm{PZ})^{-1} & (\bm{Z}^T\bm{PZ})^{-1}\bm{Z}^T\bm{PX}_{q}\bm{\beta}_q\bm{\beta}^T_q\bm{X}^T_{q}\bm{QX}_{p}(\bm{X}^T_{p}\bm{QX}_{p})^{-1} \\
+(\bm{X}^T_{p}\bm{QX}_{p})^{-1}\bm{X}^T_{p}\bm{QX}_{q}\bm{\beta}_q\bm{\beta}^T_q\bm{X}^T_{q}\bm{PZ}(\bm{Z}^T\bm{PZ})^{-1} & (\bm{X}^T_{p}\bm{QX}_{p})^{-1}\bm{X}^T_{p}\bm{QX}_{q}\bm{\beta}_q\bm{\beta}^T_q\bm{X}^T_{q}\bm{QX}_{p}(\bm{X}^T_{p}\bm{QX}_{p})^{-1}
 \end{bmatrix}.
 \end{align*}
 
-Therefore, the submatrix of (\ref{eq::MSE_b}) corresponding to the primary terms is
+Then the submatrix of (\ref{eq::MSE_b}) corresponding to the primary terms is
 \begin{align}
 \label{eq::mesb_submatrix}
-\mbox{MSE}(\bm{\hat{\tilde{\beta}}}_1|\bm{\tilde{\beta}})_{22}=&\sigma^2(\bm{X}'_{1}\bm{QX}_{1})^{-1}+(\bm{X}'_{1}\bm{QX}_{1})^{-1}\bm{X}'_{1}\bm{QX}_{2}\bm{\beta}_2\bm{\beta}'_2\bm{X}'_{2}\bm{QX}_{1}(\bm{X}'_{1}\bm{QX}_{1})^{-1}=\notag\\& \sigma^2\bm{\tilde{M}}^{-1}+\bm{\tilde{M}}^{-1}\bm{X}'_{1}\bm{QX}_{2}\bm{\beta}_2\bm{\beta}'_2\bm{X}'_{2}\bm{QX}_{1}\bm{\tilde{M}},^{-1}
+\mbox{MSE}(\bm{\hat{\tilde{\beta}}}_p|\bm{\tilde{\beta}})_{pp}=& \sigma^2(\bm{X}^T_{p}\bm{QX}_{p})^{-1}+(\bm{X}^T_{p}\bm{QX}_{p})^{-1}\bm{X}^T_{p}\bm{QX}_{q}\bm{\beta}_q\bm{\beta}^T_q\bm{X}^T_{q}\bm{QX}_{p}(\bm{X}^T_{p}\bm{QX}_{p})^{-1}\notag\\=& \sigma^2\bm{\tilde{M}}^{-1}+\bm{\tilde{M}}^{-1}\bm{X}^T_{p}\bm{QX}_{q}\bm{\beta}_q\bm{\beta}^T_q\bm{X}^T_{q}\bm{QX}_{p}\bm{\tilde{M}},^{-1}
 \end{align}
-where $\bm{\tilde{M}}=\bm{X}'_{1}\bm{QX}_{1}.$
+where $\bm{\tilde{M}}=\bm{X}^T_{p}\bm{QX}_{p}.$
 
-As in the unblocked case (\ref{eq::MSE_det}), we construct the determinant-based criterion function to be minimised as the expectation of the logarithm of the determinant of the submatrix of the MSE matrix which was outlined above. First we see how its determinant looks:
+As in the unblocked case, we first look at the determinant of the corresponding submatrix (\ref{eq::mesb_submatrix}): 
 \begin{align}
 \label{eq::MSE_B_det}
-\det[\mbox{MSE}(\bm{\hat{\tilde{\beta}}}_1|\bm{\tilde{\beta}})_{22}]=&\det[\sigma^2\bm{\tilde{M}}^{-1}+\bm{\tilde{M}}^{-1}\bm{X}'_{1}\bm{QX}_{2}\bm{\beta}_2\bm{\beta}'_2\bm{X}'_{2}\bm{QX}_{1}\bm{\tilde{M}}^{-1}]=\notag\\& \sigma^{2p}\det[\bm{\tilde{M}}^{-1}+\bm{\tilde{M}}^{-1}\bm{X}'_{1}\bm{QX}_{2}\bm{\tilde{\beta}}_2\bm{\tilde{\beta}}'_2\bm{X}'_{2}\bm{QX}_{1}\bm{\tilde{M}}^{-1}]=\notag\\& \sigma^{2p}\det[\bm{\tilde{M}}^{-1}](1+\bm{\tilde{\beta}}'_2\bm{X}'_{2}\bm{QX}'_{1}\bm{\tilde{M}}^{-1}\bm{X}'_{1}\bm{QX}_{2}\bm{\tilde{\beta}}_2).
+\det[\mbox{MSE}(\bm{\hat{\tilde{\beta}}}_p|\bm{\tilde{\beta}})_{pp}]=&\det[\sigma^2\bm{\tilde{M}}^{-1}+\bm{\tilde{M}}^{-1}\bm{X}^T_{p}\bm{QX}_{q}\bm{\beta}_q\bm{\beta}^T_q\bm{X}^T_{q}\bm{QX}_{p}\bm{\tilde{M}}^{-1}]=\notag\\& \sigma^{2p}\det[\bm{\tilde{M}}^{-1}+\bm{\tilde{M}}^{-1}\bm{X}^T_{p}\bm{QX}_{q}\bm{\tilde{\beta}}_q\bm{\tilde{\beta}}^T_q\bm{X}^T_{q}\bm{QX}_{p}\bm{\tilde{M}}^{-1}]=\notag\\& \sigma^{2p}\det[\bm{\tilde{M}}^{-1}](1+\bm{\tilde{\beta}}^T_q\bm{X}^T_{q}\bm{QX}^T_{p}\bm{\tilde{M}}^{-1}\bm{X}^T_{p}\bm{QX}_{q}\bm{\tilde{\beta}}_q).
 \end{align}
 
-The expression in (\ref{eq::MSE_B_det}) is similar to the one we have in the unblocked case (\ref{eq::mse_det_dec}):
-\begin{equation*}
-\sigma^{2p}\det[\bm{M}^{-1}](1+\bm{\tilde{\beta}}_2'\bm{X}_2^{'}\bm{X}_1\bm{M}^{-1}\bm{X}_1^{'}\bm{X}_2\bm{\tilde{\beta}}_2).
-\end{equation*}
-
-The only two differences are the amended, ``blocked'' information matrix $\bm{\tilde{M}}$ for the primary terms, and the presence of matrix $\bm{Q}$ which indicates the inclusion of the blocked effects in the fitted model. The $q$-dimensional random vector $\bm{\tilde{\beta}}_2$, as before, follows $\mathcal{N}(\bm{0},\tau^{2}\bm{I}_{q})$, so that this prior does not depend on the error variance $\sigma_{.}^2$.
-
-Taking the expectation of the logarithm of (\ref{eq::MSE_B_det}) over the set prior distribution is completely identical to the derivations shown on page \pageref{eq::mse_det_dec}; and the $MSE$-component in the determinant criterion is
+The $q$-dimensional random vector $\bm{\tilde{\beta}}_q$, as before, follows $\mathcal{N}(\bm{0},\tau^{2}\bm{I}_{q})$, so that this prior does not depend on the error variance $\sigma_{.}^2$. Next, taking the expectation of the logarithm of (\ref{eq::MSE_B_det}) over the set prior distribution is completely identical to the derivations leading to (\ref{eq::MSE_D}). The $MSE(D)$-component then becomes:
 \begin{equation}
 \label{eq::mse_b_component}
-\log(\det[\bm{\tilde{M}}^{-1}])+\mathtt{E}_{\bm{\tilde{\beta}}_2}\log(1+\bm{\tilde{\beta}}_2'\bm{X}_2^{'}\bm{QX}_1\bm{\tilde{M}}^{-1}\bm{X}_1^{'}\bm{QX}_2\bm{\tilde{\beta}}_2).
+\log(\det[\bm{\tilde{M}}^{-1}])+\mathtt{E}_{\bm{\tilde{\beta}}_2}\log(1+\bm{\tilde{\beta}}_2'\bm{X}_2^{'}\bm{QX}_1\bm{\tilde{M}}^{-1}\bm{X}_1^{'}\bm{QX}_2\bm{\tilde{\beta}}_2)
 \end{equation}
 
-The estimation of the second part of the expression above will be carried out using Monte Carlo sampling, as in the unblocked case. Therefore, the resulting determinant-based compound criterion for a blocked experiments (with the $DP$- and $LoF(DP)$-optimality as the first two components) is
+and the resulting determinant-based compound criterion for a blocked experiments is
 \begin{align}
 \label{eq::MSE_D_B}
-\mbox{minimise }&\left[\left|(\bm{X}'_{1}\bm{Q}\bm{X}_{1})^{-1}\right|^{1/p}F_{p,d_B;1-\alpha_{DP}}\right]^{\kappa_{DP}} \times \notag \\ &\left[\left|\bm{\tilde{L}}+\frac{\bm{I}_{q}}{\tau^{2}}\right|^{-1/q}F_{q,d_B;1-\alpha_{LoF}}\right]^{\kappa_{LoF}}\times \notag\\ & \left[|\bm{X}'_{1}\bm{QX}_{1}|^{-1}\exp\left(\frac{1}{N}\sum_{i=1}^{N}\log(1+\bm{\tilde{\beta}}_{2i}'\bm{X}_2^{'}\bm{QX}_1\bm{\tilde{M}}^{-1}\bm{X}_1^{'}\bm{QX}_2\bm{\tilde{\beta}}_{2i})\right)\right]_{.}^{\kappa_{MSE}/p}
+&\left[\left|(\bm{X}^T_{p}\bm{Q}\bm{X}_{p})^{-1}\right|^{1/p}F_{p,d_B;1-\alpha_{DP}}\right]^{\kappa_{DP}} \times \notag \\ &\left[\left|\bm{\tilde{L}}+\frac{\bm{I}_{q}}{\tau^{2}}\right|^{-1/q}F_{q,d_B;1-\alpha_{LoF}}\right]^{\kappa_{LoF}}\times \\ & \left[|\bm{X}^T_{p}\bm{QX}_{p}|^{-1}\exp\left(\frac{1}{N}\sum_{i=1}^{N}\log(1+\bm{\tilde{\beta}}_{2i}'\bm{X}_q^{T}\bm{QX}_p\bm{\tilde{M}}^{-1}\bm{X}_p^{T}\bm{QX}_q\bm{\tilde{\beta}}_{2i})\right)\right]^{\kappa_{MSE}/p} \longrightarrow \mbox{ min.}\notag
 \end{align}
-We also consider a point prior estimate of the MSE-component as was done in Section \ref{sec::mse_point}: the vector of potential parameters $\bm{\beta}_2$ will be set to $\sigma\tau\bm{1}_q$, so that the scaled version of it incorporated in (\ref{eq::MSE_D_B}) $\bm{\tilde{\beta}}_2$ is equal to $\tau\bm{1}_q$. Then the determinant-based criterion function with the point prior estimate, which is referred to as ``MSE(D)P'', is  
-\begin{align}
-\label{eq::MSE_DP_B}
-\mbox{minimise }&\left[\left|(\bm{X}'_{1}\bm{Q}\bm{X}_{1})^{-1}\right|^{1/p}F_{p,d_B;1-\alpha_{DP}}\right]^{\kappa_{DP}} \times \notag \\ &\left[\left|\bm{\tilde{L}}+\frac{\bm{I}_{q}}{\tau^{2}}\right|^{-1/q}F_{q,d_B;1-\alpha_{LoF}}\right]^{\kappa_{LoF}}\times \notag\\ & \left[|\bm{X}'_{1}\bm{QX}_{1}|^{-1}\left(1+\tau^2\sum_{i,j=1}^{q}[\bm{X}_2^{'}\bm{QX}_1\bm{\tilde{M}}^{-1}\bm{X}_1^{'}\bm{QX}_2]_{(i,j)}\right)\right]_{.}^{\kappa_{MSE}/p}
-\end{align}
- 
-When constructing the trace-based criterion, we take the expectation of the trace of the submatrix of the mean square error matrix, corresponding to the primary terms (\ref{eq::mesb_submatrix}):
+
+Taking the expectation of the trace of (\ref{eq::mesb_submatrix}) makes up the trace-based component criterion:
 \begin{align}
 \label{eq::MSE_B_tr}
-\mathtt{E}_{\beta_2}\mbox{trace}[\mbox{MSE}(\bm{\hat{\tilde{\beta}}}_1|\bm{\tilde{\beta}})_{22}]=& \mbox{trace}[\mathtt{E}_{\beta_2}\mbox{MSE}(\bm{\hat{\tilde{\beta}}}_1|\bm{\tilde{\beta}})_{22}]=\notag\\&\mbox{trace}[\sigma^2\bm{\tilde{M}}^{-1}_{22}+\mathtt{E}_{\beta_2}(\bm{\tilde{A}}\bm{\beta}_2\bm{\beta}_2'\bm{\tilde{A}})_{22}]=\notag \\& \sigma^2\mbox{trace}[\bm{\tilde{M}}^{-1}_{22}+\tau^2\{\bm{\tilde{A}}\bm{\tilde{A}}'\}_{22}]=\notag \\&\sigma^2[\mbox{trace}(\bm{X}'_{1}\bm{QX}_{1})^{-1}+\tau^2\mbox{trace}\{\bm{\tilde{A}}\bm{\tilde{A}}'\}_{22}],
+\mathtt{E}_{\beta_q}\mbox{trace}[\mbox{MSE}(\bm{\hat{\tilde{\beta}}}_p|\bm{\tilde{\beta}})_{pp}]&= \mbox{trace}[\mathtt{E}_{\beta_q}\mbox{MSE}(\bm{\hat{\tilde{\beta}}}_p|\bm{\tilde{\beta}})_{pp}]\notag \\&=\mbox{trace}[\sigma^2\bm{\tilde{M}}^{-1}_{pp}+\mathtt{E}_{\beta_q}(\bm{\tilde{A}}\bm{\beta}_q\bm{\beta}_q^T\bm{\tilde{A}})_{pp}]\notag\\&=  \sigma^2\mbox{trace}[\bm{\tilde{M}}^{-1}_{pp}+\tau^2\{\bm{\tilde{A}}\bm{\tilde{A}}^T\}_{pp}]\notag \\&=\sigma^2[\mbox{trace}(\bm{X}^T_{p}\bm{QX}_{p})^{-1}+\tau^2\mbox{trace}\{\bm{\tilde{A}}\bm{\tilde{A}}^T\}_{pp}].
 \end{align}
 
-where, as in the previous section, $\bm{\tilde{M}}=\bm{X}'_{1}\bm{QX}_{1}$ and $\bm{\tilde{A}}=(\bm{\tilde{X}}_1^{'}\bm{\tilde{X}}_1)^{-1}\bm{\tilde{X}}_1^{'}\bm{X}_2$. 
-
-Only the amended forms of the information and alias matrices make the expression above different from the similar one in the ``unblocked'' case:
-\begin{equation*}
-\sigma^2[\mbox{trace}\{(\bm{X}_1^{'}\bm{X}_1)^{-1}\}+\tau^2\mbox{trace}\bm{A}\bm{A}'].
-\end{equation*}
-
-So the final trace-based compound criterion function for a blocked experiment is
+The $MSE(LP)$-compound criterion for a blocked experiment is
 \begin{align}
 \label{eq::MSE_L_B}
-\mbox{minimise }&\left[\frac{1}{p}\mbox{trace}(\bm{WX}'_{1}\bm{Q}\bm{X}_{1})^{-1}F_{1,d_B;1-\alpha_{LP}}\right]^{\kappa_{LP}}\times \notag \\&\left[\frac{1}{q}\mbox{trace}\left(\bm{\tilde{L}}+\frac{\bm{I}_{q}}{\tau^{2}}\right)^{-1}F_{1,d_B;1-\alpha_{LoF}}\right]^{\kappa_{LoF}}\times \notag \\& \left[\frac{1}{p}\mbox{trace}\{(\bm{X}'_{1}\bm{QX}_{1})^{-1}+\tau^2[\bm{\tilde{A}}\bm{\tilde{A}}']_{22}\}\right]^{\kappa_{MSE}}_{.}
+&\left[\frac{1}{p}\mbox{trace}(\bm{WX}^T_{p}\bm{Q}\bm{X}_{p})^{-1}F_{1,d_B;1-\alpha_{LP}}\right]^{\kappa_{LP}}\times \notag \\&\left[\frac{1}{q}\mbox{trace}\left(\bm{\tilde{L}}+\bm{I}_{q}/\tau^{2}\right)^{-1}F_{1,d_B;1-\alpha_{LoF}}\right]^{\kappa_{LoF}}\times \notag \\& \left[\frac{1}{p}\mbox{trace}\{(\bm{X}^T_{p}\bm{QX}_{p})^{-1}+\tau^2[\bm{\tilde{A}}\bm{\tilde{A}}^T]_{pp}\}\right]^{\kappa_{MSE}} \longrightarrow \mbox{ min.}
 \end{align}
 
-In both criteria $d_B$ stands for the number of pure error degrees of freedom in the case of units gathered into equal-sized blocks. It can be calculated as $d_B=n-\mbox{rank}(\bm{Z}:\bm{T})$ (as in Section \ref{sec::back_blocked}), where $\bm{T}$ is the matrix containing treatment indicators for each of the experimental runs. In other words, the total number of replicates needs to be adjusted for the number of comparisons between blocks that are to be taken into account.
+The probability levels $\alpha$, weights $\kappa$ hold the same meanings as in the unblocked case; and as was noted before, the number of pure error degrees of freedom $d_B$ accounts for the comparisons between blocks.

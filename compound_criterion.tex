@@ -1,5 +1,5 @@
 
-Standard design optimality theory is developed under the assumption that the primary model provides the most proper fit for the data: in many real applications this is quite a strong belief, and in reality we need to take into account at least the possibility that some misspecification is present at the planning stage.
+Standard design optimality theory is developed under the assumption that the primary model (\ref{eq::primary_model}) provides the most proper fit for the data: in many real applications this is quite a strong belief, and in reality we need to take into account at least the possibility that some misspecification is present at the planning stage.
 %In Section \ref{sec::back_misspecification} a brief overview of various types of model misspecification is presented. 
 %Other types of model misspecification (in background)
 
@@ -8,12 +8,12 @@ In this work we consider the case when the fitted polynomial model with $p$ para
 \label{eq::full_model}
 \bm{Y}=\bm{X}_p\bm{\beta}_p+\bm{X}_q\bm{\beta}_q+\bm{\varepsilon},
 \end{equation}
-where $\bm{X}_q$ is an $n\times q$ extension of the primary model matrix containing extra $q$  terms that we refer to as "potential terms" and that represent the fitted model disturbance, with vector $\bm{\beta}_q$ denoting the corresponding parameters. They are not of any inferential interest, and, moreover, not all of them are necessarily estimable when the experiment is relatively small, i.e. $n<p+q$ -- this is the case we mainly consider here. As usually, we do assume independent and normally distributed error terms: $\bm{\varepsilon}\sim \mathcal{N}(\bm{0},\sigma^{2}\bm{I}_{n})$. 
+where $\bm{X}_q$ is an $n\times q$ extension of the primary model matrix containing extra $q$  terms that we refer to as "potential terms" and that represent the fitted model disturbance, with vector $\bm{\beta}_q$ denoting the corresponding parameters. They are not of any inferential interest, and, moreover, not all of them are necessarily estimable when the experiment is relatively small, i.e. $n<p+q$ -- this is the case we mainly consider here. As usually, we do assume independent and normally distributed error terms: $\bm{\varepsilon}\sim \mathcal{N}(\bm{0},\sigma^{2}\bm{I}_{n})$; \highlight{and even though the extended model is believed to potentially better fit for the data, it is not necessarily the one that should be used to obtain the estimates of $\sigma^2$ -- the presence of model contamination is a strong arguement for using the model-independent replicate-based pure error estimate from the full treatment model (\ref{eq::treatment_model}).}
 
-\subsection*{Lack-of-fit criterion}
+\subsection{Lack-of-fit criteria}
  
-Aiming towards controlling the magnitude and scope of the potential terms, we adapt Bayesian approach regarding the full model parameters.  Diffuse prior shall be put on primary terms -- an arbitrary mean and a variance going to infinity, and the prior on potential terms is a normal distribution: $\bm{\beta}_q\sim\mathcal{N}(0,\bm{\Sigma}_{0})$, with the prior variance scaled with respect to the error variation:
-$\bm{\Sigma}_{0}=\sigma^{2}\tau^{2}\bm{I}_{q}$. Then, following the normality in the model (\ref{eq::full_model}), the posterior distribution of the joint vector of  coefficients $\bm{\beta}  = [\bm{\beta}^T_p, \bm{\beta}^T_q]^T$ is (\cite{Koch2007introduction} is multivariate normal \cite{DuMouchel1994}):
+Aiming towards controlling the magnitude and scope of the potential terms, we adapt Bayesian approach regarding the full model parameters, as was done by \cite{DuMouchel1994}.  Diffuse prior shall be put on primary terms -- with an arbitrary mean and a variance going to infinity, and the prior on potential terms is a normal distribution: $\bm{\beta}_q\sim\mathcal{N}(0,\bm{\Sigma}_{0})$, where the prior variance scaled with respect to the error variation:
+$\bm{\Sigma}_{0}=\sigma^{2}\tau^{2}\bm{I}_{q}$. Then, following the normality in model (\ref{eq::full_model}), the posterior distribution of the joint vector of  coefficients $\bm{\beta}  = [\bm{\beta}^T_p, \bm{\beta}^T_q]^T$ is multivariate normal (\cite{Koch2007introduction}):
 \begin{align*}
 \bm{\beta}|\bm{Y} &\sim \mathcal{N}(\bm{b},\bm{\Sigma}), \\
 \mbox{where } \bm{b} = \bm{\Sigma X}^T\bm{Y} &\mbox{ and }  \bm{\Sigma} = \sigma^{2}[\bm{X}^T\bm{X} + \bm{K}/\tau^{2}],^{-1}  \bm{X}=[\bm{X}_p, \bm{X}_q],\\
@@ -23,7 +23,7 @@ $\bm{\Sigma}_{0}=\sigma^{2}\tau^{2}\bm{I}_{q}$. Then, following the normality in
 \end{pmatrix}.
 \end{align*}
 
-The marginal posterior distribution of $\bm{\beta}_q$ is also multivariate normal with mean $\bm{b}_q$ -- the last $q$ elements of $\bm{b}$ and the covariance matrix $\bm{\Sigma}_{qq}$-- the bottom right $q \times q $ submatrix of $\bm{\Sigma}$:
+The marginal posterior distribution of $\bm{\beta}_q$ is also multivariate normal with mean $\bm{b}_q$ -- the last $q$ elements of $\bm{b}$ and the covariance matrix $\bm{\Sigma}_{qq}$, that is the bottom right $q \times q $ submatrix of $\bm{\Sigma}$:
 \begin{align*}
 \bm{\Sigma}_{qq} = \sigma^{2}[(\bm{X}^T\bm{X} +  \bm{K}/\tau^{2})^{-1}]_{[q,q]} &= 
 \sigma^{2}\begin{bmatrix}
@@ -32,90 +32,94 @@ The marginal posterior distribution of $\bm{\beta}_q$ is also multivariate norma
 \end{bmatrix}^{-1}_{[q,q]}\\&=
 \sigma^{2}[\bm{X}^T_q\bm{X}_q+\bm{I}_{q}/\tau^{2}-\bm{X}^T_q\bm{X}_p(\bm{X}^T_p\bm{X}_p)^{-1}\bm{X}^T_p\bm{X}_q]^{-1}\\&=\sigma^{2}\left[\bm{L}+\bm{I}_{q}/\tau^{2}\right],^{-1}
 \end{align*} 
-where $\bm{L} = \bm{X}^T_q\bm{X}_q-\bm{X}^T_q\bm{X}_p(\bm{X}^T_p\bm{X}_p)^{-1}\bm{X}^T_p\bm{X}_q$ is known in model-sensitivity design literature as the ``dispersion matrix'' [references], which provides a point-wise measure of the distance between column vectors of $\bm{X}_q$ and linear subspace defined by the column vectors of the primary model matrix $\bm{X}_p$, that is how well each of the potential terms could be approximated by a linear span of the primary ones [?].
+where $\bm{L} = \bm{X}^T_q\bm{X}_q-\bm{X}^T_q\bm{X}_p(\bm{X}^T_p\bm{X}_p)^{-1}\bm{X}^T_p\bm{X}_q$ is known in model-sensitivity design literature as the ``dispersion matrix'' (e.g. \cite{Goos2005model}), which provides a point-wise measure of the distance between column vectors of $\bm{X}_q$ and linear subspace defined by the column vectors of the primary model matrix $\bm{X}_p$, that is how well each of the potential terms could be approximated by a linear span of the primary ones.
 
-Reducing the primary model's lack-of-fit in the direction of the potential terms can be translated into a criterion function of the design by utilising the posterior distribution for $\bm{\beta}_q$ derived above and constructing a $(1-\alpha)\times100\%$ confidence region for the parameters depending on the model matrices and the variance estimate $s^2$ on $\nu$ degrees of freedom \citep{Draper1998}:
+Reducing the primary model's lack-of-fit in the direction of the potential terms can be translated into a criterion function of the design by utilising the posterior distribution for $\bm{\beta}_q$ derived above and constructing a $(1-\alpha_{LoF})\times100\%$ posterior confidence region which depends on the model matrices and the variance estimate $s^2$ on $\nu$ degrees of freedom \citep{Draper1998}:
 \begin{equation*}
-(\bm{\beta}_{2}-\bm{b}_{2})^{'}(\bm{L}+\bm{I}_{q}/\tau^{2})(\bm{\beta}_{2}-\bm{b}_{2})\leq qs^{2}F_{q,\nu;1-\alpha},
+(\bm{\beta}_{2}-\bm{b}_{2})^{'}(\bm{L}+\bm{I}_{q}/\tau^{2})(\bm{\beta}_{2}-\bm{b}_{2})\leq qs^{2}F_{q,\nu;1-\alpha_{LoF}},
 \end{equation*}
-where $\mathrm{F}_{q,\nu; \alpha}$ is the $\alpha$-quantile of F-distribution with $q$ and $\nu$ degrees of freedom.
-Minimising the volume of the confidence region is equivalent to 
+%where $\mathrm{F}_{q,\nu; \alpha}$ is the $\alpha$-quantile of F-distribution with $q$ and $\nu$ degrees of freedom.
+\highlight{and minimising its volume is equivalent to} 
 \begin{equation}
 \label{eq::LoFDP_criterion}
 \left|\bm{L}+\bm{I}_{q}/\tau^{2}\right|^{-1/q}F_{q,d;1-\alpha_{LoF}} \longrightarrow \mbox{ min, }  
 \end{equation}  
-which we refer to as ``Lack-of-fit DP-criterion'', that is directly related to [1] the lack-of-fit component in the Generalised D-optimality developed by \cite{Goos2005model} -- where the residual number of degrees of freedom $\nu$ does not depend on the design, and [2] DP-optimality \citep{GilmourTrinca2012}, with the F-quantile preserved from $\nu = d$ being the number of replicates in the design. 
+which we refer to as ``Lack-of-fit DP-criterion'', that is directly related to (a) the lack-of-fit component in the Generalised D-optimality developed by \cite{Goos2005model} -- where the residual number of degrees of freedom $\nu$ does not depend on the design, and (b) DP-optimality \citep{GilmourTrinca2012}, with the F-quantile preserved from $\nu = d$ being the number of replicates in the design. 
 
-Another way of formulating a criterion that we consider in this work -- minimising the average of posterior variances of linear functions of $\bm{\beta}_q$ defined by matrix $\bm{J}$, and we define the Lack-of-fit LP-criterion as mean of the squared lengths of the $(1-\alpha)\times100\%$ confidence intervals for these linear functions:
+Another way of formulating a criterion to tackle the lack-of-fit that we consider in this work -- \highlight{minimising the average squared lengths of posterior confidence intervals for linear functions} of $\bm{\beta}_q$ defined by matrix $\bm{J}$, -- and we define the Lack-of-fit LP-criterion as mean of the squared lengths of the $(1-\alpha_{LoF})\times100\%$ posterior confidence intervals for these linear functions:
 \begin{equation}
 \label{eq::LoFLP_criterion}
-\frac{1}{q}\mbox{trace}\left[\bm{JJ}^T\left(\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right)^{-1}\right]F_{1,d;1-\alpha}  \longrightarrow \mbox{ min. } 
+\frac{1}{q}\mbox{trace}\left[\bm{JJ}^T\left(\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right)^{-1}\right]F_{1,d;1-\alpha_{LoF}}  \longrightarrow \mbox{ min. } 
 \end{equation} 
 
-This trace-based criterion is linked to the lack-of-fit part of the Generalised L-optimality \citep{Goos2005model}, and the pure error estimation approach retains the corresponding F-quantile. 
-[Henceforth we mainly consider the case when $\bm{J}$ is the identity matrix, that is we work with the analogue of $AP$-optimality. In other words, the lack-of-fit component in the generalised $AP$-criterion  stands for the minimisation of the $\bm{L}_2$-norm of the $q$-dimensional vector of the posterior confidence intervals' lengths for the potential parameters. ]
+This trace-based criterion is linked to the lack-of-fit part of the Generalised L-optimality \citep{Goos2005model}, and the pure error estimation approach retains the corresponding \highlight{upper point of the F-distribution. Henceforth we mainly consider the case when $\bm{JJ}^T$ is diagonal, and the criterion above is reduced to weighted $AP$-optimality. In other words, the Lack-of-fit  $AP$-criterion stands for the minimisation of the weighted average of the $q$-dimensional vector of the posterior confidence intervals' squared lengths for the potential parameters.}
 
-\subsection*{MSE-based bias criterion}
+\subsection{MSE-based criteria}
 Together with controlling the magnitude of model contamination, it is also desirable to "protect" the quality of inference that is to be drawn through fitting the primary model, from the potential presence of extra terms. 
 % minimise its effect on the primary model inference, that is the quality of paramters' estimates .
-From this point of view, the bias of the parameters' estimates $\hat{\bm{beta}}_p$ would be of substantial interest; a natural way of evaluating their quality is the matrix of  mean square error \citep{FedorovMontepiedra1997} , which is the $\bm{L}_2$-distance between the true and estimated values with respect to the probability distribution measure of $\bm{Y}$ under the assumption of model (\ref{eq::full_model}):
+From this point of view, the bias of the parameters' estimates $\hat{\bm{\beta}}_p$ would be of substantial interest; a natural way of evaluating their quality is the matrix of  mean square error \citep{FedorovMontepiedra1997}, which is the $\mathcal{L}_2$-distance between the true and estimated values with respect to the probability distribution measure of $\bm{Y}$ under the assumption of model (\ref{eq::full_model}):
 \begin{align}
 \label{eq::MSE}
 \mbox{MSE}(\bm{\hat{\beta}}_p|\bm{\beta})=&\mathtt{E}_{\bm{Y}|\bm{\beta}}[(\bm{\hat{\beta}}_p-\bm{\beta}_p)(\bm{\hat{\beta}}_p-\bm{\beta}_p)^T]\notag\\=&\sigma^2(\bm{X}_p^T\bm{X}_p)^{-1}+\bm{A}\bm{\beta}_q\bm{\beta}_q^T\bm{A}^T, 
 \end{align}
 where $\bm{A}=(\bm{X}_p^{T}\bm{X}_p)^{-1}\bm{X}_p^{T}\bm{X}_q$ denotes the $p \times q$ alias matrix, which elements reflect the linearity scale of the relationship between the primary (rows) and potential (columns) terms. 
 
-The determinant-based criterion that would correspond to the overall simultaneous minimisation of the bias above is constructed as log-determinant of the MSE matrix averaged across [?] the values of the full model parameters $\bm{\beta}$:
+We start constructing the determinant-based criterion that would correspond to the overall simultaneous minimisation of the bias above by taking log-determinant of the MSE matrix averaged across the prior distribution for $\bm{\beta}$:
 \begin{equation}
 \label{eq::MSE_det}
-\mathtt{E}_{\bm{\beta}}\log(\det[\mbox{MSE}(\bm{\hat{\beta}}_p|\bm{\beta})]) \longrightarrow \mbox{ min.}
+\exp\{\mathtt{E}_{\bm{\beta}}\log(\det[\mbox{MSE}(\bm{\hat{\beta}}_p|\bm{\beta})])\} \longrightarrow \mbox{ min.}
 \end{equation}
 
-Using the matrix determinant lemma \citep{Harville2006matrix} and setting $\bm{M}=\bm{X}_1^{'}\bm{X}_1$ and $\bm{\tilde{\beta}}_2=\bm{\beta}_2/\sigma,$ the determinant and the applied logarithm in (\ref{eq::MSE_det})) can be decomposed:
-%\begin{equation*}
-%\det[\bm{P}+\bm{uv}']=\det[\bm{P}]\det[1+\bm{v'}\bm{P}^{-1}\bm{u}], 
-%\end{equation*}
-%where $\bm{P}$ is an invertible square matrix and $\bm{u}$, $\bm{v}$ are column vectors, 
-\begin{align}
-\label{eq::mse_det_dec}
-&\det[\mbox{MSE}(\bm{\hat{\beta}}_p|\bm{\beta}_q)]\notag\\&=\det[\sigma^2\bm{M}^{-1}+\bm{M}^{-1}\bm{X}_p^{T}\bm{X}_q\bm{\beta}_q\bm{\beta}_q^T\bm{X}_q^{T}\bm{X}_p\bm{M}^{-1}]\notag\\&=\sigma^{2p}\det[\bm{M}^{-1}+\bm{M}^{-1}\bm{X}_p^{'}\bm{X}_q\bm{\tilde{\beta}}_q\bm{\tilde{\beta}}_q^T\bm{X}_q^{T}\bm{X}_p\bm{M}^{-1}]\notag\\&=\sigma^{2p}\det[\bm{M}^{-1}]\det[1+\bm{\tilde{\beta}}_q^T\bm{X}_q^{T}\bm{X}_p\bm{M}^{-1}\bm{M}\bm{M}^{-1}\bm{X}_p^{T}\bm{X}_q\bm{\tilde{\beta}}_q]\notag\\&=\sigma^{2p}\det[\bm{M}^{-1}](1+\bm{\tilde{\beta}}_q^T\bm{X}_q^{T}\bm{X}_p\bm{M}^{-1}\bm{X}_p^{T}\bm{X}_q\bm{\tilde{\beta}}_q);\\[10pt]
-&\log(\det[\mbox{MSE}(\bm{\hat{\beta}}_p|\bm{\beta}_q)])\notag\\&=p\log\sigma^2+\log(\det[\bm{M}^{-1}])+\log(1+\bm{\tilde{\beta}}_q^T\bm{X}_q^{T}\bm{X}_p\bm{M}^{-1}\bm{X}_p^{T}\bm{X}_q\bm{\tilde{\beta}}_q). 
-\end{align}
-The first summand does not depend on the design, so it will not be included in the criterion; the second one is the $D$-optimality criterion function. Therefore, the criterion in (\ref{eq::MSE_det}) which we refer to becomes
-\begin{equation*}
-\log(\det[\bm{M}^{-1}])+\mathtt{E}_{\bm{\tilde{\beta}}_q}\log(1+\bm{\tilde{\beta}}_q^T\bm{X}_q^{T}\bm{X}_p\bm{M}^{-1}\bm{X}_p^{T}\bm{X}_q\bm{\tilde{\beta}}_q) \longrightarrow min.
-\end{equation*}
-Due to the obvious lack of information regarding $\bm{\tilde{\beta}}_q$, the second term needs to be evaluated numerically. Expressing the prior variance of $\bm{\beta}_q$ as a scaled error variance $\bm{\beta}_q \sim \mathcal{N}(\bm{0},\tau^{2}\sigma^{2}\bm{I}_{q})$ means that $\bm{\tilde{\beta}}_q \sim \mathcal{N}(\bm{0},\tau^{2}\bm{I}_{q})$, and that, quite conveniently, its prior distribution does not depend on the unknown $\sigma.^2$ Then a primitive Monte-Carlo can be used to evaluate that term: drawing a sample of large size $N$ from the prior, and approximating the expectation above by the average across the sampled values of $\bm{\tilde{\beta}}_{q_i},$ $i=1,\dots, N$:
+Using the matrix determinant lemma \citep{Harville2006matrix} and setting $\bm{M}=\bm{X}_p^{T}\bm{X}_p$ and $\bm{\tilde{\beta}}_2=\bm{\beta}_2/\sigma,$ the determinant and the applied logarithm in (\ref{eq::MSE_det}) can be decomposed:
+\begin{align*}
+%\label{eq::mse_det_dec}
+&\det[\mbox{MSE}(\bm{\hat{\beta}}_p|\bm{\beta})]\notag\\&=\det[\sigma^2\bm{M}^{-1}+\bm{M}^{-1}\bm{X}_p^{T}\bm{X}_q\bm{\beta}_q\bm{\beta}_q^T\bm{X}_q^{T}\bm{X}_p\bm{M}^{-1}]\notag\\&=\sigma^{2p}\det[\bm{M}^{-1}+\bm{M}^{-1}\bm{X}_p^{'}\bm{X}_q\bm{\tilde{\beta}}_q\bm{\tilde{\beta}}_q^T\bm{X}_q^{T}\bm{X}_p\bm{M}^{-1}]\notag\\&=\sigma^{2p}\det[\bm{M}^{-1}]\det[1+\bm{\tilde{\beta}}_q^T\bm{X}_q^{T}\bm{X}_p\bm{M}^{-1}\bm{M}\bm{M}^{-1}\bm{X}_p^{T}\bm{X}_q\bm{\tilde{\beta}}_q]\notag\\&=\sigma^{2p}\det[\bm{M}^{-1}](1+\bm{\tilde{\beta}}_q^T\bm{X}_q^{T}\bm{X}_p\bm{M}^{-1}\bm{X}_p^{T}\bm{X}_q\bm{\tilde{\beta}}_q);\\[10pt]
+&\log(\det[\mbox{MSE}(\bm{\hat{\beta}}_p|\bm{\beta})])\notag\\&=p\log\sigma^2+\log(\det[\bm{M}^{-1}])+\log(1+\bm{\tilde{\beta}}_q^T\bm{X}_q^{T}\bm{X}_p\bm{M}^{-1}\bm{X}_p^{T}\bm{X}_q\bm{\tilde{\beta}}_q). 
+\end{align*}
+The first summand does not depend on the design, so it will not be included in the criterion; the second one is the $D$-optimality function. \highlight{Bringing the criterion in (\ref{eq::MSE_det}) to the scale of a single parameter, we obtain the following ``MSE(D)-criterion'':
+\begin{equation}
+\label{eq::MSE_D}
+\vert\bm{X}_p^{T}\bm{X}_p\vert^{-1/p}\exp\{\mathtt{E}_{\bm{\tilde{\beta}}_q}\log(1+\bm{\tilde{\beta}}_q^T\bm{X}_q^{T}\bm{X}_p(\bm{X}_p^{T}\bm{X}_p)^{-1}\bm{X}_p^{T}\bm{X}_q\bm{\tilde{\beta}}_q)\}^{1/p} \longrightarrow \mbox{min}.
+\end{equation}}
+
+Due to the obvious lack of information regarding $\bm{\tilde{\beta}}_q$, the expectation in the second term needs to be evaluated numerically. Expressing the prior variance of $\bm{\beta}_q$ as a scaled error variance $\bm{\beta}_q \sim \mathcal{N}(\bm{0},\tau^{2}\sigma^{2}\bm{I}_{q})$ means that $\bm{\tilde{\beta}}_q \sim \mathcal{N}(\bm{0},\tau^{2}\bm{I}_{q})$, and that, quite conveniently, its prior distribution does not depend on the unknown $\sigma^2.$ Then a primitive Monte-Carlo can be used to evaluate that term: drawing a sample of large size $N$ from the prior, and approximating the expectation above by the average across the sampled values of $\bm{\tilde{\beta}}_{q_i},$ $i=1,\dots, N$:
 \begin{equation*}
 \mathtt{E}_{\bm{\tilde{\beta}}_q}\log(1+\bm{\tilde{\beta}}_q^T\bm{X}_q^{T}\bm{X}_p\bm{M}^{-1}\bm{X}_p^{T}\bm{X}_q\bm{\tilde{\beta}}_q) \approx \frac{1}{N}\sum_{i=1}^{N}\log(1+\bm{\tilde{\beta}}_{q_i}^T\bm{X}_q^{T}\bm{X}_p\bm{M}^{-1}\bm{X}_p^{T}\bm{X}_q\bm{\tilde{\beta}}_{q_i}).
 \end{equation*} 
 
-One of the alternatives to this more computationally demanding approach is to use the point prior for $\bm{\beta}_q$, that is setting  $\bm{\beta}_q=\sigma\tau\bm{1}_q$ (where $\bm{1}_q$ is a $q$-dimensional vector of $1$s), which is the standard deviation  of the initial normal prior. Then $\bm{\tilde{\beta}}_q = \tau\bm{1}_q$ with probability $1$ and the expectation above becomes:
+One of the alternatives to this computationally demanding approach is to use the point prior for $\bm{\beta}_q$, that is setting  $\bm{\beta}_q=\sigma\tau\bm{1}_q$ (where $\bm{1}_q$ is a $q$-dimensional vector of $1$s), which is the standard deviation  of the initial normal prior. Then $\bm{\tilde{\beta}}_q = \tau\bm{1}_q$ with probability $1$ and the expectation above becomes:
 \begin{align*}
 \mathtt{E}_{\bm{\tilde{\beta}}_q}\log(1+\bm{\tilde{\beta}}_q^T\bm{X}_q^{T}\bm{X}_p\bm{M}^{-1}\bm{X}_p^{T}\bm{X}_q\bm{\tilde{\beta}}_q)  &\approx \log(1+\tau^2\bm{1}^T_q\bm{X}_q^{T}\bm{X}_p\bm{M}^{-1}\bm{X}_p^{T}\bm{X}_q\bm{1}_q) \\&=\log(1+\tau^2\sum_{i,j=1}^{q}[\bm{X}_q^{T}\bm{X}_p\bm{M}^{-1}\bm{X}_p^{T}\bm{X}_q][i,j]),
 \end{align*}
-with summation of matrix elements taking less computational time even for large $q$. 
+with summation of matrix elements taking considerably less computational time even for large $q$. 
  
 To infer the trace-based form of the criterion that would minimise the mean squared bias, we use the pseudo-Bayesian approach of setting priors on the model's parameters  to calculating the trace function of the MSE matrix (\ref{eq::MSE}): 
 \begin{align*}
-\mathtt{E}_{\bm{\beta}_q}\mbox{trace}[\mbox{MSE}(\bm{\hat{\beta}}_p\bm{\beta}_q)]&=\mbox{trace}[\mathtt{E}_{\bm{\beta}_q}\mbox{MSE}(\bm{\hat{\beta}}_p|\bm{\beta}_q)]=\\&=\mbox{trace}[\sigma^2(\bm{X}_p^{T}\bm{X}_p)^{-1} + \mathtt{E}_{\bm{\beta}_q}(\bm{A}\bm{\beta}_q\bm{\beta}_q^T\bm{A}^T)]=\\&=\mbox{trace}[\sigma^2(\bm{X}_p^{T}\bm{X}_p)^{-1}+\sigma^2\tau^2\bm{A}\bm{A}^T]=\\&=\sigma^2\mbox{trace}[(\bm{X}_p^{T}\bm{X}_p)^{-1}+\tau^2\bm{A}\bm{A}^T]\\&=\sigma^2[\mbox{trace}\{(\bm{X}_p^{T}\bm{X}_p)^{-1}\}+\tau^2\mbox{trace}\bm{A}\bm{A}^T].
+\mathtt{E}_{\bm{\beta}_q}\mbox{trace}[\mbox{MSE}(\bm{\hat{\beta}}_p\bm{\beta}_q)]&=\mbox{trace}[\mathtt{E}_{\bm{\beta}_q}\mbox{MSE}(\bm{\hat{\beta}}_p|\bm{\beta}_q)]\\&=\mbox{trace}[\sigma^2(\bm{X}_p^{T}\bm{X}_p)^{-1} + \mathtt{E}_{\bm{\beta}_q}(\bm{A}\bm{\beta}_q\bm{\beta}_q^T\bm{A}^T)]\\&=\mbox{trace}[\sigma^2(\bm{X}_p^{T}\bm{X}_p)^{-1}+\sigma^2\tau^2\bm{A}\bm{A}^T]\\&=\sigma^2\mbox{trace}[(\bm{X}_p^{T}\bm{X}_p)^{-1}+\tau^2\bm{A}\bm{A}^T]\\&=\sigma^2[\mbox{trace}\{(\bm{X}_p^{T}\bm{X}_p)^{-1}\}+\tau^2\mbox{trace}\bm{A}\bm{A}^T].
 \end{align*}
 
 The operations of calculating trace and expectation are commutative, hence there is no necessity of any additional numerical evaluations, and in this case of the trace-based criterion using the point prior for $\bm{\beta}_q$ defined earlier would lead to the same resulting function. By minimising the whole function above, we simultaneously minimise both the sum of primary terms' variance and the expected squared norm of the bias vector in the direction of the potential terms. The second part here contains the scaling parameter $\tau^2$ which regulates the magnitude of the potential terms' variation relatively to the error variance.  
  
+We formally define the ``MSE(L)-criterion'' as
+\begin{equation}
+\label{eq::MSE_L}
+\frac{1}{p}\mbox{trace}\{(\bm{X}^T_{p}\bm{X}_{p})^{-1}+\tau^2\bm{A}\bm{A}^T\} \longrightarrow \mbox{ min.}
+\end{equation}
+ 
 \subsection*{Compound criteria}
-The compound criterion is constructed to account for the three main objectives -- precision (or accuracy?) of the primary model parameters, control for the lack-of-fit and minimising the inferential bias from the potential model contamination -- as the weighted product of efficiencies (\ref{eq::compound}) with respect to DP-criterion, and Lack-of-Fit DP functions(\ref{eq::LoFDP_criterion}, \ref{eq::LoFLP_criterion}) and the MSE-based ones. All of them are brought to the scale of efficiencies [?and $\exp$]:
+The compound criterion in a general form is constructed to account for the three main objectives: precision of the primary model parameters, control for the lack-of-fit and minimising the inferential bias from the potential model contamination -- as a weighted product of efficiencies (\ref{eq::compound}) with respect to DP-/LP-criterion, Lack-of-Fit functions(\ref{eq::LoFDP_criterion}, \ref{eq::LoFLP_criterion}), and the MSE-based ones in (\ref{eq::MSE_D}, \ref{eq::MSE_L}). 
 
 \begin{align}
-\label{eq::MSE_D}
-\mbox{minimise }&\left[\left|\bm{X}^T_{p}\bm{X}_{p}\right|^{-1/p}F_{p,d;1-\alpha_{DP}}\right]^{\kappa_{DP}} \times \notag \\ &\left[\left|\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right|^{-1/q}F_{q,d;1-\alpha_{LoF}}\right]^{\kappa_{LoF}}\times \notag\\ & \left[|\bm{X}^T_{p}\bm{X}_{p}|^{-1}\exp\left(\mathtt{E}_{\bm{\tilde{\beta}}_q}\log(1+\bm{\tilde{\beta}}_q^T\bm{X}_q^{T}\bm{X}_p\bm{M}^{-1}\bm{X}_p^{T}\bm{X}_q\bm{\tilde{\beta}}_q) \right)\right]_{.}^{\kappa_{MSE}/p}
+\label{eq::MSE_DP}
+&\left[\left|\bm{X}^T_{p}\bm{X}_{p}\right|^{-1/p}F_{p,d;1-\alpha_{DP}}\right]^{\kappa_{DP}} \times \notag \\ &\left[\left|\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right|^{-1/q}F_{q,d;1-\alpha_{LoF}}\right]^{\kappa_{LoF}}\times \notag\\ & \left[|\bm{X}^T_{p}\bm{X}_{p}|^{-1}\exp\left(\mathtt{E}_{\bm{\tilde{\beta}}_q}\log(1+\bm{\tilde{\beta}}_q^T\bm{X}_q^{T}\bm{X}_p\bm{M}^{-1}\bm{X}_p^{T}\bm{X}_q\bm{\tilde{\beta}}_q) \right)\right]^{\kappa_{MSE}/p} \longrightarrow \mbox{ min.}
 \end{align}
  
-This criterion is later referred to as compound ``MSE-DP-criterion'', where $\alpha_{DP}$ and $\alpha_{LoF}$ denote the confidence intervals' probability levels for the primary $\bm{\beta}_p$ and potential coefficients $\bm{\beta}_q$ -- in the DP and LoF-DP elementary criteria; usually they are set to $0.05$ or $0.01$. As mentioned before, non-negative weights $\kappa_X$ that sum up to $1$ define the compound criterion and are chosen to reflect the experimenter's priorities. 
+This compound criterion is later referred to as compound ``MSE-DP-criterion'', where $\alpha_{DP}$ and $\alpha_{LoF}$ denote the confidence intervals' probability levels for the primary $\bm{\beta}_p$ and potential coefficients $\bm{\beta}_q$ -- in the DP- and LoF-DP elementary criteria accordingly. As mentioned before, non-negative weights $\kappa_X$ that sum up to $1$ define the compound criterion and are chosen to reflect the experimenter's priorities. 
 
-Similarly, we obtain the compound ``MSE-LP-criterion'' by joining the $LP$ criterion with trace-based Lack-of-fit (\ref{eq::LoFLP_criterion})) and MSE components :
+Similarly, we obtain the compound ``MSE-LP-criterion'' by joining the LP criterion with trace-based Lack-of-fit (\ref{eq::LoFLP_criterion})) and MSE components :
 \begin{align}
-\label{eq::MSE_L}
-\mbox{minimise} &\left[\frac{1}{p}\mbox{trace}(\bm{WX}^T_{p}\bm{X}_{p})^{-1}F_{1,d;1-\alpha_{LP}}\right]^{\kappa_{LP}}\times \notag\\& \left[\frac{1}{q}\mbox{trace}\left(\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right)^{-1}F_{1,d;1-\alpha_{LoF}}\right]^{\kappa_{LoF}}\times 
-\notag\\& \left[\frac{1}{p}\mbox{trace}\{(\bm{X}^T_{p}\bm{X}_{p})^{-1}+\tau^2\bm{A}\bm{A}^T\}\right]^{\kappa_{MSE}}_{.}
+\label{eq::MSE_LP} &\left[\frac{1}{p}\mbox{trace}(\bm{WX}^T_{p}\bm{X}_{p})^{-1}F_{1,d;1-\alpha_{LP}}\right]^{\kappa_{LP}}\times \notag\\& \left[\frac{1}{q}\mbox{trace}\left(\bm{L}+\frac{\bm{I}_{q}}{\tau^{2}}\right)^{-1}F_{1,d;1-\alpha_{LoF}}\right]^{\kappa_{LoF}}\times 
+\notag\\& \left[\frac{1}{p}\mbox{trace}\{(\bm{X}^T_{p}\bm{X}_{p})^{-1}+\tau^2\bm{A}\bm{A}^T\}\right]^{\kappa_{MSE}} \longrightarrow \mbox{ min.}
 \end{align}
+
+Confidence levels $\alpha$  play similar role here, but they do not have to be the same as in the determinant-based criterion. Moreover, it would be sensible to take into account the multiple testing corrections, as we are dealing with minimising multiple confidence intervals rather than with a single region's volume. The next subsection explores an illustrative example where optimal designs were searched using the compound optimality criteria constructed above.

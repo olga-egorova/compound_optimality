@@ -1,13 +1,18 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
 \BOOKMARK [1][-]{section.2}{Model-dependent planning}{}% 2
-\BOOKMARK [1][-]{section.3}{Individual criteria construction}{}% 3
-\BOOKMARK [1][-]{section.4}{Restricted randomisation}{}% 4
-\BOOKMARK [2][-]{subsection.4.1}{Response-Surface Methodology for multistratum framework}{section.4}% 5
-\BOOKMARK [2][-]{subsection.4.2}{MSE-based compound criteria for multistratum experiments}{section.4}% 6
-\BOOKMARK [1][-]{section.5}{Examples}{}% 7
-\BOOKMARK [2][-]{subsection.5.1}{Example. Case study}{section.5}% 8
-\BOOKMARK [2][-]{subsection.5.2}{Design search}{section.5}% 9
-\BOOKMARK [2][-]{subsection.5.3}{Results}{section.5}% 10
-\BOOKMARK [1][-]{section.6}{Discussion}{}% 11
-\BOOKMARK [1][-]{section.7}{Acknowledgements}{}% 12
-\BOOKMARK [0][-]{section*.19}{Bibliography}{}% 13
+\BOOKMARK [1][-]{section.3}{Criteria Accounting for Model Uncertainty}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Lack-of-fit criteria}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{MSE-based criteria}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.3}{Example}{section.3}% 6
+\BOOKMARK [1][-]{section.4}{Blocked Experiments}{}% 7
+\BOOKMARK [2][-]{subsection.4.1}{Lack-of-fit criteria}{section.4}% 8
+\BOOKMARK [2][-]{subsection.4.2}{MSE-based criteria}{section.4}% 9
+\BOOKMARK [2][-]{subsection.4.3}{Example. Case study}{section.4}% 10
+\BOOKMARK [1][-]{section.5}{Multistratum Experiments}{}% 11
+\BOOKMARK [2][-]{subsection.5.1}{Split-split-plot optimal design}{section.5}% 12
+\BOOKMARK [1][-]{section.6}{Discussion}{}% 13
+\BOOKMARK [1][-]{section.7}{Acknowledgements}{}% 14
+\BOOKMARK [1][-]{appendix.A}{Appendices}{}% 15
+\BOOKMARK [2][-]{subsection.A.1}{Appendix I}{appendix.A}% 16
+\BOOKMARK [2][-]{subsection.A.2}{Appendix II}{appendix.A}% 17
+\BOOKMARK [2][-]{subsection.A.3}{Appendix III}{appendix.A}% 18
